@@ -1,0 +1,221 @@
+<div class="py-5">
+	<ul class="nav nav-pills nav-justified gap-1 pb-2" id="myTab" role="tablist">
+		<li class="nav-item " role="presentation">
+			<button
+				class="nav-link bg-col navpill-btn  active rounded-pill w-100 d-flex align-items-center justify-content-center gap-2"
+				id="tab1-tab" data-bs-toggle="tab" data-bs-target="#tab1" type="button" role="tab">
+				<i class='fas fa-shopping-bag fs-4'></i><span>سفارش‌ها</span>
+			</button>
+		</li>
+		<li class="nav-item" role="presentation">
+			<button
+				class="nav-link navpill-btn rounded-pill w-100 d-flex align-items-center justify-content-center gap-2"
+				id="tab2-tab" data-bs-toggle="tab" data-bs-target="#tab2" type="button" role="tab">
+				<i class='fas fa-user-friends fs-4'></i>
+
+				<span>کاربران</span>
+			</button>
+		</li>
+		<li class="nav-item" role="presentation">
+			<button
+				class="nav-link navpill-btn rounded-pill w-100 d-flex align-items-center justify-content-center gap-2"
+				id="tab3-tab" data-bs-toggle="tab" data-bs-target="#tab3" type="button" role="tab">
+				<i class='fas fa-clipboard-list fs-4'></i>
+				<span class="d-none d-md-inline-block">درخواست‌های تسویه</span>
+				<span class="d-md-none">مالی</span>
+			</button>
+		</li>
+	</ul>
+
+	<div class="tab-content p-3 border-top mt-3 bg-white" id="myTabContent">
+		<!--tab1content-->
+		<div class="tab-pane fade show active" id="tab1" role="tabpanel">
+			<div class="table-responsive border-0">
+				<table class="table table-striped   text-center mb-0">
+					<!--thead-->
+					<thead class="table-secondary">
+						<tr class="align-middle">
+							<th class="text-nowrap search-header" data-search="true">
+								<div class=" d-flex justify-content-satrt align-items-center">
+									<img src="[@settings->]assets/img/saerchnormal.png" alt="search" width="14"
+										height="14">
+									<span class="mx-1 text-nowrap">شماره سفارش</span>
+									<input type="text" class="form-control search-input d-none "
+										placeholder="جستجو شماره سفارش">
+								</div>
+							</th>
+							<th class="text-nowrap search-header" data-search="true">
+								<div class="d-flex justify-content-satrt align-items-center">
+									<img src="[@settings->]assets/img/saerchnormal.png" alt="search" width="14"
+										height="14">
+									<span class="mx-1 text-nowrap">مشخصات سفارش</span>
+									<input type="text" class="form-control search-input d-none"
+										placeholder="جستجو مشخصات">
+								</div>
+							</th>
+							<th class="text-nowrap search-header" data-search="true">
+								<div class="d-flex justify-content-satrt align-items-center">
+									<img src="[@settings->]assets/img/saerchnormal.png" alt="search" width="14"
+										height="14">
+									<span class="text-nowrap mx-1">نام و نام خانوادگی</span>
+									<input type="text" class="form-control search-input d-none" placeholder="جستجو نام">
+								</div>
+							</th>
+							<th class="text-nowrap"><span>مبلغ [تومان]</span></th>
+							<th class="text-nowrap date-filter" data-filter="true">
+								<div class="dropdown w-100">
+									<button id="sortButton"
+										class="btn w-100 text-center fw-bold dropdown-toggle border-0" type="button"
+										data-bs-toggle="dropdown" aria-expanded="false">
+										تاریخ و زمان تراکنش
+									</button>
+									<ul class="dropdown-menu  text-start">
+										<li><a class="dropdown-item dropitem" href="#" data-value="desc">نمایش به صورت
+												نزولی</a></li>
+										<li><a class="dropdown-item dropitem" href="#" data-value="asc">نمایش به صورت
+												صعودی</a></li>
+									</ul>
+								</div>
+							</th>
+							<th class="text-nowrap">
+								<button id="sortButton" class="btn w-100 text-center fw-bold dropdown-toggle border-0"
+									type="button" data-bs-toggle="dropdown" aria-expanded="false">وضعیت</button>
+								<ul class="dropdown-menu  text-start">
+									<li><a class="dropdown-item dropdownitem" href="#" data-value="reject">تکمیل
+											نشده-پرداخت نشده</a></li>
+									<li><a class="dropdown-item dropdownitem" href="#" data-value="inprogress">در حال
+											پردازش</a></li>
+									<li><a class="dropdown-item dropdownitem" href="#" data-value="inprogress">تکمیل
+											شده-موفق</a></li>
+									<li><a class="dropdown-item dropdownitem" href="#" data-value="inprogress">رد
+											شده</a></li>
+								</ul>
+							</th>
+						</tr>
+					</thead>
+
+					<tbody id="tablesearch">
+						[foreach ([@Objects->list])]
+						<tr class="align-middle" data-item-status="[@Item->Status]" data-item-unix="[@Item->timestamp]">
+							<td>
+								<div class="d-flex align-items-center gap-1">
+									<span>[@Item->orderNumber]</span>
+									[@Item->type]
+								</div>
+							</td>
+							<td>
+								<div class="d-flex align-items-center gap-2">
+									<img src="[@Item->img]" alt="img" width="30" height="30">
+									<div class="d-flex flex-column text-start">
+										<span>[@Item->orderDetails]</span>
+										<span>[@Item->currencyName]</span>
+									</div>
+								</div>
+							</td>
+							<td class="text-primary">[@Item->userFullName]</td>
+							<td>[@Item->price]</td>
+							<td>
+								<div class="d-flex align-items-center justify-content-center gap-1">
+									<span data-timeStamp="true">[@Item->dateandTime]</span>
+									<i class="fas fa-exclamation-circle text-muted"></i>
+								</div>
+							</td>
+							<td>[@Item->StatusText]</td>
+						</tr>
+						[endforeach]
+					</tbody>
+				</table>
+			</div>
+
+		</div>
+		<!--tab2content-->
+		<div class="tab-pane fade" id="tab2" role="tabpanel">
+			<div class="table-responsive">
+				<table class="table table-striped text-center mb-0">
+					<thead class="table-secondary">
+						<tr class="align-middle">
+							<th class="text-nowrap search-header" data-search="true">
+								<div class="d-flex align-items-center">
+									<img src="/assets/img/searchnormal.png" alt="search" width="14" height="14">
+									<span class="mx-2"> کد ملی</span>
+									<input type="text" class="form-control search-input d-none " placeholder="کد ملی">
+								</div>
+							</th>
+							<th class="text-nowrap search-header" data-search="true">
+								<div class="d-flex justify-content-center align-items-center">
+									<img src="/assets/img/searchnormal.png" alt="search" width="14" height="14">
+									<span class="mx-2"> نام و نام‌خانوادگی</span>
+									<input type="text" class="form-control search-input d-none"
+										placeholder="جستجو بر اساس نام">
+								</div>
+							</th>
+							<th class="text-nowrap text-center search-header" data-search="true">
+								<div class="d-flex justify-content-center align-items-center">
+									<img src="/assets/img/searchnormal.png" alt="search" width="14" height="14">
+									<span class="text-nowrap mx-2"> شماره موبایل </span>
+									<input type="text" class="form-control search-input d-none"
+										placeholder="شماره تلفن">
+								</div>
+							</th>
+							<th class="text-nowrap">
+								<span> آخرین فعالیت</span>
+							</th>
+							<th class="text-nowrap">
+								<span>تاریخ ثبت‌ نام</span>
+							</th>
+							<th class="text-nowrap">
+								<span> حساب‌های بانکی</span>
+							</th>
+							<th class="text-nowrap">
+								<span>وضعیت</span>
+							</th>
+						</tr>
+					</thead>
+					<tbody id="tablesearch1">
+						[foreach ([@Objects->allUser])]
+						<tr class="align-middle" data-item-status="[@Item->Status]">
+							<td>
+								<span>[@Item->nationalCode]</span>
+							</td>
+							<td>
+								<span class="text-nowrap text-primary">[@Item->fullName]</span>
+							</td>
+							<td class="text-primary">[@Item->phoneNumber]</td>
+							<td>[@Item->lastActivity]</td>
+							<td>
+								<span>[@Item->signupTime]</span>
+							</td>
+							<td>
+								<span>[@Item->bankAccounts]</span>
+							</td>
+							<td>
+								[if ([@Item->Status] == 1)]
+								<span class="d-flex flex-nowrap justify-content-between align-items-center">
+									در انتظار تایید
+									<i class="fas fa-circle text-warning" style="font-size:5px"></i>
+								</span>
+								[endif]
+								[if ([@Item->Status] == 2)]
+								<span class="d-flex flex-nowrap justify-content-between align-items-center">
+									تایید شده
+									<i class="fas fa-circle text-success" style="font-size:5px"></i>
+								</span>
+								[endif]
+								[if ([@Item->Status] == 3)]
+								<span class="d-flex flex-nowrap justify-content-between align-items-center">
+									رد شده
+									<i class="fas fa-circle text-danger" style="font-size:5px"></i>
+								</span>
+								[endif]
+							</td>
+						</tr>
+						[endforeach]
+					</tbody>
+				</table>
+			</div>
+
+		</div>
+		<div class="tab-pane fade" id="tab3" role="tabpanel">محتوای تب ۳</div>
+	</div>
+
+</div>

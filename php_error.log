@@ -1,0 +1,102 @@
+[13-May-2025 14:36:31 Asia/Tehran] 1747134391
+[13-May-2025 14:42:56 Asia/Tehran] ۳ ماه پیش
+[13-May-2025 14:44:45 Asia/Tehran] ۳ ماه پیش
+
+
+
+
+
+
+ <div class="bg-light d-flex flex-column align-items-center text-center p-4 gap-2">
+            <p class="fw-bold divider-top">چرا پارسی‌پی؟</p>
+            <div class="container mt-5">
+                <div id="multiItemCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <!-- Slide 1 -->
+                        <div class="carousel-item active">
+                            <div class="row row-cols-1 row-cols-sm-1 row-cols-md-3 row-cols-lg-3">
+                                <!--box-1-->
+                                <div class="col col-12">
+                                    <div class="d-flex align-items-center bg-white border rounded-4 gap-2 p-2">
+                                        <img src="./assets/img/address.png" alt="adres" width="50" height="50">
+                                        <div class="d-flex flex-column gap-2 mt-1">
+                                            <span class="fw-bold text-start">آدرس اختصاصی</span>
+                                            <span class="text-start small">آدرس کیف پول ثابت، بدون محدودیت زمانی!</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--box-2-->
+                                <div class="col col-12">
+                                    <div class="d-flex align-items-center bg-white border rounded-4 gap-2 p-2">
+                                        <img src="./assets/img/poshtibani.png" alt="poshtibani" width="50" height="50">
+                                        <div class="d-flex flex-column">
+                                            <span class="fw-bold text-start">پشتیبانی</span>
+                                            <span class="text-start">حتی در تعطیلات هم همراه شماییم!</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <!--box-3-->
+                                <div class="col col-12">
+                                    <div class="d-flex align-items-center bg-white border rounded-4 gap-2 p-2">
+                                        <img src="./assets/img/karmozd.png" alt="karmozd" width="50" height="50">
+                                        <div class="d-flex flex-column gap-2 mt-1">
+                                            <span class="fw-bold text-start">بدون کارمزد</span>
+                                            <span class="text-start">کارمزد ما در معاملات شما صفر است!</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Slide 2 -->
+                        <div class="carousel-item">
+                            <div class="row row-cols-1 row-cols-sm-1 row-cols-md-3 row-cols-lg-3">
+                                <!--box-5-->
+                                <div class="col col-12">
+                                    <div class="d-flex align-items-center bg-white border rounded-4 gap-2 p-2">
+                                        <img src="./assets/img/poshtibani.png" alt="poshtibani" width="50" height="50">
+                                        <div class="d-flex flex-column">
+                                            <span class="fw-bold text-start">پشتیبانی</span>
+                                            <span class="text-start">حتی در تعطیلات هم همراه شماییم!</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--box-6-->
+                                <div class="col col-12">
+                                    <!--box2-->
+                                    <div class="d-flex align-items-center bg-white border rounded-4 gap-2 p-2">
+                                        <img src="./assets/img/karbary.png" alt="emoji" width="50" height="50">
+                                        <div class="d-flex flex-column gap-2 mt-1">
+                                            <span class="fw-bold text-start">کاربری ساده</span>
+                                            <span class="text-start">کنترل پنل ساده اما قدرتمند.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--box-7-->
+                                <div class="col col-12">
+                                    <div class="d-flex align-items-center bg-white border rounded-4 gap-2 p-2">
+                                        <img src="./assets/img/tasvie.png" alt="tasvie" width="50" height="50">
+                                        <div class="d-flex flex-column gap-2 mt-1">
+                                            <span class=" fw-bold text-start">تسویه آنی</span>
+                                            <span class="text-start">تسویه آنی به حساب بانکی شما</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Buttons -->
+                    <button class="carousel-control-prev" type="button" data-bs-target="#multiItemCarousel"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon"></span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#multiItemCarousel"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon"></span>
+                    </button>
+                </div>
+            </div>
+
+        </div>

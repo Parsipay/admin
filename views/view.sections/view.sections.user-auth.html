@@ -1,0 +1,94 @@
+<div class="d-flex flex-grow-1 flex-column"></div>
+<div class="accordion mt-3 w-100" id="accordionExample1" dir="rtl">
+	<div class="accordion-item rounded-5 overflow-hidden border">
+		<h2 class="accordion-header" id="headingOne">
+			<button class="accordion-button rounded-0" type="button" data-bs-toggle="collapse"
+				data-bs-target="#collapseOne1" aria-expanded="true" aria-controls="collapseOne1">
+				<div class="d-flex  justify-contetn-center align-items-center flex-nowrap gap-2 ">
+					<img src="[@settings->]assets/img/ehra.png" alt="مدارک احراز" width="35" height="35" class="d-none d-sm-block">
+					<span class="font-color small text-nowrap">مدارک احراز هویت | </span> 
+					
+					<span class="bg-blue px-2 pt-1 rounded-circle text-primary small">2</span>
+					<span class="font-color small text-nowrap">مورد در انتظار بررسی</span>
+				</div>
+			</button>
+		</h2>
+		<div id="collapseOne1" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+			data-bs-parent="#accordionExample1">
+			<div class="accordion-body bg-white">
+				<div class="table-responsive">
+					<table class="table table-bordered text-center align-middle mb-0">
+						<thead>
+							<tr>
+								<th>نام و نام خانوادگی</th>
+								<th>زمان ارسال فایل</th>
+								<th>مدارک</th>
+							</tr>
+						</thead>
+						<tbody>
+							[foreach ([@Objects->box])]
+							<tr>
+								<td>[@Item->userName]</td>
+								<td>[@Item->timeToSend]</td>
+								<td>
+									<button class="btn btn-outline-primary rounded-4 w-100"
+										data-bs-toggle="modal" data-bs-target="#modal_view_docs">
+										مشاهده مدارک
+									</button>
+								</td>
+							</tr>
+							[endforeach]
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Modal: مشاهده مدارک -->
+<div class="modal fade" id="modal_view_docs" tabindex="-1">
+	<div class="modal-dialog modal-dialog-centered modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<p class="modal-title d-flex align-items-center gap-2 mb-0">
+					<img src="[@settings->]assets/img/ehra.png" alt="cards" width="35" height="35">
+					<span>مدارک کاربر: <span class="text-success">بنفشه ابراهیمی</span></span>
+				</p>
+				<button type="button" class="btn-close ms-auto me-0" data-bs-dismiss="modal"
+					aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<div class="d-flex flex-column align-items-center">
+					<div class="documentBox bg-light w-100 mb-3" style="max-width: 100%; height: 200px;"></div>
+
+					<select class="form-select mt-2 rounded-5 w-100">
+						<option selected>علت وارد شده</option>
+						<option value="1">دلیل عمومی</option>
+						<option value="2">کیفیت پایین</option>
+						<option value="3">عدم وجود برگه</option>
+						<option value="4">عدم تطابق کاربر</option>
+						<option value="5">عدم داشتن کارت ملی</option>
+						<option value="6">عدم مشخص بودن چهره</option>
+						<option value="7">تصویر ادیت شده</option>
+						<option value="8">برگه ناقص</option>
+					</select>
+
+					<input type="text" class="form-control rounded-5 mt-3 text-muted w-100"
+						id="reject-file" placeholder="دلیل رد شدن این فایل ...">
+
+					<div class="d-flex w-100 gap-2 mt-3">
+						<button class="btn btn-success flex-fill rounded-4 text-white">تایید</button>
+						<button class="btn btn-danger flex-fill rounded-4 text-white">عدم تایید</button>
+					</div>
+
+					<button class="btn btn-danger rounded-4 w-100 mt-3 text-white">
+						<img src="[@settings->]assets/img/trash.png" alt="trash" width="24" height="24"> حذف فایل
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
