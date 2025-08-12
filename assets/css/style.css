@@ -201,6 +201,9 @@ body {
   color: white !important;
   background: rgb(100, 185, 241);
 }
+.bordersample{
+  border: 1px solid purple;
+}
 /* ===============================
    Buttons
 ================================= */
@@ -357,3 +360,8 @@ media query
     max-width: 600px;  
   }
 }
+
+
+
+
+

@@ -35,30 +35,41 @@
 					<!--thead-->
 					<thead class="table-secondary">
 						<tr class="align-middle">
-							<th class="text-nowrap search-header" data-search="true">
-								<div class=" d-flex justify-content-satrt align-items-center">
-									<img src="[@settings->]assets/img/saerchnormal.png" alt="search" width="14"
-										height="14">
-									<span class="mx-1 text-nowrap">شماره سفارش</span>
-									<input type="text" class="form-control search-input d-none "
+							<th class="text-nowrap search-header" data-search="true" style="cursor: pointer;">
+								<div class="d-flex flex-column justify-content-start align-items-start">
+									<div id="toggleSearchOrder" class="d-flex align-items-center">
+										<img src="[@settings->]assets/img/saerchnormal.png" alt="search" width="14"
+											height="14">
+										<span class="mx-1 text-nowrap">شماره سفارش</span>
+									</div>
+									<input id="searchOrderNumber" type="text" class="border-none rounded mt-1 d-none"
 										placeholder="جستجو شماره سفارش">
 								</div>
 							</th>
-							<th class="text-nowrap search-header" data-search="true">
-								<div class="d-flex justify-content-satrt align-items-center">
-									<img src="[@settings->]assets/img/saerchnormal.png" alt="search" width="14"
-										height="14">
-									<span class="mx-1 text-nowrap">مشخصات سفارش</span>
-									<input type="text" class="form-control search-input d-none"
-										placeholder="جستجو مشخصات">
+
+
+							<th class="text-nowrap search-header" data-search="true" style="cursor: pointer;">
+								<div class="d-flex flex-column justify-content-start align-items-start">
+									<div id="toggleSearchOrderDetails" class="d-flex align-items-center">
+										<img src="[@settings->]assets/img/saerchnormal.png" alt="search" width="14"
+											height="14">
+										<span class="mx-1 text-nowrap">مشخصات سفارش</span>
+									</div>
+									<input id="searchOrderDetails" type="text" class="border-none rounded  mt-1 d-none"
+										placeholder="جستجو مشخصات (عدد یا اسم)">
 								</div>
 							</th>
-							<th class="text-nowrap search-header" data-search="true">
-								<div class="d-flex justify-content-satrt align-items-center">
-									<img src="[@settings->]assets/img/saerchnormal.png" alt="search" width="14"
-										height="14">
-									<span class="text-nowrap mx-1">نام و نام خانوادگی</span>
-									<input type="text" class="form-control search-input d-none" placeholder="جستجو نام">
+
+							<!-- ستون نام و نام خانوادگی -->
+							<th class="text-nowrap search-header" data-search="true" style="cursor: pointer;">
+								<div class="d-flex flex-column justify-content-start align-items-start">
+									<div id="toggleSearchUserFullName" class="d-flex align-items-center">
+										<img src="[@settings->]assets/img/saerchnormal.png" alt="search" width="14"
+											height="14" />
+										<span class="mx-1 text-nowrap">نام و نام خانوادگی</span>
+									</div>
+									<input id="searchUserFullName" type="text" class="border-0 rounded mt-1 d-none"
+										placeholder="جستجو نام و نام خانوادگی" />
 								</div>
 							</th>
 							<th class="text-nowrap"><span>مبلغ [تومان]</span></th>
@@ -215,7 +226,94 @@
 			</div>
 
 		</div>
-		<div class="tab-pane fade" id="tab3" role="tabpanel">محتوای تب ۳</div>
+		<div class="tab-pane fade" id="tab3" role="tabpanel">
+
+
+			<div class="table-responsive">
+				<table class="table table-striped text-center mb-0">
+					<thead class="table-secondary">
+						<tr class="align-middle">
+							<th class="text-nowrap search-header" data-search="true">
+								<div class="d-flex align-items-center">
+									<img src="/assets/img/searchnormal.png" alt="search" width="14" height="14">
+									<span class="mx-2"> کد ملی</span>
+									<input type="text" class="form-control search-input d-none " placeholder="کد ملی">
+								</div>
+							</th>
+							<th class="text-nowrap search-header" data-search="true">
+								<div class="d-flex justify-content-center align-items-center">
+									<img src="/assets/img/searchnormal.png" alt="search" width="14" height="14">
+									<span class="mx-2"> نام و نام‌خانوادگی</span>
+									<input type="text" class="form-control search-input d-none"
+										placeholder="جستجو بر اساس نام">
+								</div>
+							</th>
+							<th class="text-nowrap text-center search-header" data-search="true">
+								<div class="d-flex justify-content-center align-items-center">
+									<img src="/assets/img/searchnormal.png" alt="search" width="14" height="14">
+									<span class="text-nowrap mx-2"> شماره موبایل </span>
+									<input type="text" class="form-control search-input d-none"
+										placeholder="شماره تلفن">
+								</div>
+							</th>
+							<th class="text-nowrap">
+								<span> آخرین فعالیت</span>
+							</th>
+							<th class="text-nowrap">
+								<span>تاریخ ثبت‌ نام</span>
+							</th>
+							<th class="text-nowrap">
+								<span> حساب‌های بانکی</span>
+							</th>
+							<th class="text-nowrap">
+								<span>وضعیت</span>
+							</th>
+						</tr>
+					</thead>
+					<tbody id="tablesearch1">
+						[foreach ([@Objects->allUser])]
+						<tr class="align-middle" data-item-status="[@Item->Status]">
+							<td>
+								<span>[@Item->nationalCode]</span>
+							</td>
+							<td>
+								<span class="text-nowrap text-primary">[@Item->fullName]</span>
+							</td>
+							<td class="text-primary">[@Item->phoneNumber]</td>
+							<td>[@Item->lastActivity]</td>
+							<td>
+								<span>[@Item->signupTime]</span>
+							</td>
+							<td>
+								<span>[@Item->bankAccounts]</span>
+							</td>
+							<td>
+								[if ([@Item->Status] == 1)]
+								<span class="d-flex flex-nowrap justify-content-between align-items-center">
+									در انتظار تایید
+									<i class="fas fa-circle text-warning" style="font-size:5px"></i>
+								</span>
+								[endif]
+								[if ([@Item->Status] == 2)]
+								<span class="d-flex flex-nowrap justify-content-between align-items-center">
+									تایید شده
+									<i class="fas fa-circle text-success" style="font-size:5px"></i>
+								</span>
+								[endif]
+								[if ([@Item->Status] == 3)]
+								<span class="d-flex flex-nowrap justify-content-between align-items-center">
+									رد شده
+									<i class="fas fa-circle text-danger" style="font-size:5px"></i>
+								</span>
+								[endif]
+							</td>
+						</tr>
+						[endforeach]
+					</tbody>
+				</table>
+			</div>
+
+		</div>
 	</div>
 
 </div>
