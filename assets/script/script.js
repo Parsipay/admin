@@ -1,141 +1,114 @@
-// $(document).ready(function () {
+$(document).ready(function () {
 
+    // =====================
+    // 🔎 Generic Search Function
+    // =====================
+    function toggleSearchInput(toggleBtn, inputSelector, tableId, colIndex) {
+        const $input = $(inputSelector);
+        const $tableBody = $("#" + tableId);
 
-// function sortTableByUnixJQ(order = 'desc') {
-//   let $rows = $("#tablesearch tr").get();
-
-//   $rows.sort(function(a, b) {
-//     let aTime = parseInt($(a).data("item-unix"));
-//     let bTime = parseInt($(b).data("item-unix"));
-//     return order === 'asc' ? aTime - bTime : bTime - aTime;
-//   });
-
-//   $.each($rows, function(index, row) {
-//     $("#tablesearch").append(row);
-//   });
-
-//   updateSortIcons(order);
-// }
-
-// });
-
-document.getElementById('toggleSearchOrder').addEventListener('click', function() {
-    const input = document.getElementById('searchOrderNumber');
-    if (input.classList.contains('d-none')) {
-        input.classList.remove('d-none');
-        input.focus();
-    } else {
-        input.classList.add('d-none');
-        input.value = '';
-        filterTable('');  // خالی کردن فیلتر وقتی input بسته میشه
-    }
-});
-
-document.getElementById('searchOrderNumber').addEventListener('input', function() {
-    filterTable(this.value.trim().toLowerCase());
-});
-
-function filterTable(searchValue) {
-    const rows = document.querySelectorAll('#tablesearch tr');
-    rows.forEach(row => {
-        const orderNumberCell = row.querySelector('td:first-child span');
-        if (orderNumberCell) {
-            const orderNumberText = orderNumberCell.textContent.toLowerCase();
-            if (orderNumberText.includes(searchValue)) {
-                row.style.display = '';
+        // Toggle search input visibility
+        $(toggleBtn).on("click", function (e) {
+            e.stopPropagation();
+            if ($input.hasClass("d-none")) {
+                $input.removeClass("d-none").focus();
             } else {
-                row.style.display = 'none';
+                $input.addClass("d-none").val("");
+                filterTable("", $tableBody, colIndex);
             }
+        });
+
+        // Filter table on input
+        $input.on("input", function () {
+            filterTable($(this).val().trim().toLowerCase(), $tableBody, colIndex);
+        });
+
+        // Prevent closing when clicking inside input
+        $input.on("click", function (e) {
+            e.stopPropagation();
+        });
+
+        // Close input when clicking outside
+        $(document).on("click", function () {
+            if (!$input.hasClass("d-none")) {
+                $input.addClass("d-none").val("");
+                filterTable("", $tableBody, colIndex);
+            }
+        });
+    }
+
+    // =====================
+    // Filter rows by column
+    // =====================
+    function filterTable(value, $tableBody, colIndex) {
+        $tableBody.find("tr").each(function () {
+            const text = $(this).find("td").eq(colIndex).text().toLowerCase();
+            $(this).toggle(text.includes(value));
+        });
+    }
+
+    // =====================
+    // 🔹 Tab 1: Orders
+    // =====================
+    toggleSearchInput("#toggleSearchOrder", "#searchOrderNumber", "tablesearch", 0);
+    toggleSearchInput("#toggleSearchOrderDetails", "#searchOrderDetails", "tablesearch", 1);
+    toggleSearchInput("#toggleSearchUserFullName", "#searchUserFullName", "tablesearch", 2);
+
+    // =====================
+    // 🔹 Tab 2: Users
+    // =====================
+    toggleSearchInput("#toggleSearchNationalCode", "#searchNationalCode", "tablesearchUsers", 0);
+    toggleSearchInput("#toggleSearchPhone", "#searchPhone", "tablesearchUsers", 1);
+    toggleSearchInput("#toggleSearchUserFullName2", "#searchUserFullName2", "tablesearchUsers", 2);
+
+    // =====================
+    // 🔹 Tab 3: Requests
+    // =====================
+    toggleSearchInput("#toggleSearchRequestNumber", "#searchRequestNumber", "tablesearchRequests", 0);
+    toggleSearchInput("#toggleSearchTrackingNumber", "#searchTrackingNumber", "tablesearchRequests", 1);
+    toggleSearchInput("#toggleSearchRequestFullName", "#searchRequestFullName", "tablesearchRequests", 2);
+
+    // =====================
+    // 📅 Sort by Date (using data-item-unix)
+    // =====================
+    $(".dropitem").on("click", function (e) {
+        e.preventDefault();
+        const direction = $(this).data("value"); // "asc" or "desc"
+        const $tableBody = $("#tablesearch");
+
+        // Convert table rows to array for sorting
+        const rowsArray = $tableBody.find("tr").get();
+
+        // Sort rows by data-item-unix attribute
+        rowsArray.sort(function (a, b) {
+            const aUnix = parseInt($(a).data("item-unix"));
+            const bUnix = parseInt($(b).data("item-unix"));
+            return direction === "asc" ? aUnix - bUnix : bUnix - aUnix;
+        });
+
+        // Append sorted rows back to tbody
+        $.each(rowsArray, function (i, row) {
+            $tableBody.append(row);
+        });
+    });
+
+    // =====================
+    // 📌 Filter by Order Status
+    // =====================
+    $(document).on("click", ".dropdownitem", function (e) {
+        e.preventDefault();
+        let selectedStatus = $(this).data("value").trim();
+        const $tableBody = $("#tablesearch");
+
+        if (selectedStatus === "all") {
+            $tableBody.find("tr").show();
+            return;
         }
+
+        $tableBody.find("tr").each(function () {
+            let rowStatus = String($(this).data("item-status")).trim();
+            $(this).toggle(rowStatus === selectedStatus);
+        });
     });
-}
 
-// نمایش و مخفی کردن input مشخصات سفارش
-document.getElementById('toggleSearchOrderDetails').addEventListener('click', function() {
-    const input = document.getElementById('searchOrderDetails');
-    if (input.classList.contains('d-none')) {
-        input.classList.remove('d-none');
-        input.focus();
-    } else {
-        input.classList.add('d-none');
-        input.value = '';
-        filterOrderDetails('');
-    }
 });
-
-// جستجو روی مشخصات سفارش وقتی تایپ میشه
-document.getElementById('searchOrderDetails').addEventListener('input', function() {
-    filterOrderDetails(this.value.trim().toLowerCase());
-});
-
-function filterOrderDetails(searchValue) {
-    const rows = document.querySelectorAll('#tablesearch tr');
-    rows.forEach(row => {
-        // مشخصات سفارش در td دوم (index 1) هست:
-        const amountSpan = row.querySelector('td:nth-child(2) div > div > span:first-child');
-        const currencySpan = row.querySelector('td:nth-child(2) div > div > span:nth-child(2)');
-        let amountText = amountSpan ? amountSpan.textContent.toLowerCase() : '';
-        let currencyText = currencySpan ? currencySpan.textContent.toLowerCase() : '';
-
-        if (amountText.includes(searchValue) || currencyText.includes(searchValue)) {
-            row.style.display = '';
-        } else {
-            row.style.display = 'none';
-        }
-    });
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-  const toggle = document.getElementById('toggleSearchUserFullName');
-  const input = document.getElementById('searchUserFullName');
-  const tableBody = document.getElementById('tablesearch');
-  const colIndex = 2; // ستون سوم (index صفر بیس)
-
-  // تابع فیلتر جدول بر اساس مقدار و ستون مشخص
-  function filterTable(value) {
-    const search = value.toLowerCase();
-    const rows = tableBody.querySelectorAll('tr');
-
-    rows.forEach(row => {
-      const cell = row.querySelector(`td:nth-child(${colIndex + 1})`);
-      const text = cell ? cell.textContent.toLowerCase() : '';
-      row.style.display = text.includes(search) ? '' : 'none';
-    });
-  }
-
-  // نمایش/مخفی کردن input با کلیک روی دکمه
-  toggle.addEventListener('click', function(e) {
-    e.stopPropagation();
-    if (input.classList.contains('d-none')) {
-      input.classList.remove('d-none');
-      input.focus();
-    } else {
-      input.classList.add('d-none');
-      input.value = '';
-      filterTable('');
-    }
-  });
-
-  // وقتی داخل input تایپ می‌کنیم، جدول فیلتر میشه
-  input.addEventListener('input', function() {
-    filterTable(this.value.trim());
-  });
-
-  // جلوگیری از بسته شدن input هنگام کلیک روی خودش
-  input.addEventListener('click', function(e) {
-    e.stopPropagation();
-  });
-
-  // کلیک بیرون input => مخفی شدن input و پاک شدن فیلتر
-  document.addEventListener('click', function() {
-    if (!input.classList.contains('d-none')) {
-      input.classList.add('d-none');
-      input.value = '';
-      filterTable('');
-    }
-  });
-});
-
-
-
-

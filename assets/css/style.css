@@ -1,106 +1,119 @@
+/* ===============================
+   Fonts
+================================= */
 @font-face {
   font-family: dana;
   font-style: normal;
   font-weight: 100;
   src: url(../fonts/eot/dana-thin.eot);
-  src:
+  src: 
     url(../fonts/eot/dana-thin.eot?#iefix) format("embedded-opentype"),
     url(../fonts/woff2/dana-thin.woff2) format("woff2"),
     url(../fonts/woff/dana-thin.woff) format("woff");
 }
+
 @font-face {
   font-family: dana;
   font-style: normal;
   font-weight: 200;
   src: url(../fonts/eot/dana-extralight.eot);
-  src:
+  src: 
     url(../fonts/eot/dana-extralight.eot?#iefix) format("embedded-opentype"),
     url(../fonts/woff2/dana-extralight.woff2) format("woff2"),
     url(../fonts/woff/dana-extralight.woff) format("woff");
 }
+
 @font-face {
   font-family: dana;
   font-style: normal;
   font-weight: 300;
   src: url(../fonts/eot/dana-light.eot);
-  src:
+  src: 
     url(../fonts/eot/dana-light.eot?#iefix) format("embedded-opentype"),
     url(../fonts/woff2/dana-light.woff2) format("woff2"),
     url(../fonts/woff/dana-light.woff) format("woff");
 }
+
 @font-face {
   font-family: dana;
   font-style: normal;
   font-weight: 400;
   src: url(../fonts/eot/dana-regular.eot);
-  src:
+  src: 
     url(../fonts/eot/dana-regular.eot?#iefix) format("embedded-opentype"),
     url(../fonts/woff2/dana-regular.woff2) format("woff2"),
     url(../fonts/woff/dana-regular.woff) format("woff");
 }
+
 @font-face {
   font-family: dana;
   font-style: normal;
   font-weight: 500;
   src: url(../fonts/eot/dana-medium.eot);
-  src:
+  src: 
     url(../fonts/eot/dana-medium.eot?#iefix) format("embedded-opentype"),
     url(../fonts/woff2/dana-medium.woff2) format("woff2"),
     url(../fonts/woff/dana-medium.woff) format("woff");
 }
+
 @font-face {
   font-family: dana;
   font-style: normal;
   font-weight: 600;
   src: url(../fonts/eot/dana-demibold.eot);
-  src:
+  src: 
     url(../fonts/eot/dana-demibold.eot?#iefix) format("embedded-opentype"),
     url(../fonts/woff2/dana-demibold.woff2) format("woff2"),
     url(../fonts/woff/dana-demibold.woff) format("woff");
 }
+
 @font-face {
   font-family: dana;
   font-style: normal;
   font-weight: 700;
   src: url(../fonts/eot/dana-bold.eot);
-  src:
+  src: 
     url(../fonts/eot/dana-bold.eot?#iefix) format("embedded-opentype"),
     url(../fonts/woff2/dana-bold.woff2) format("woff2"),
     url(../fonts/woff/dana-bold.woff) format("woff");
 }
+
 @font-face {
   font-family: dana;
   font-style: normal;
   font-weight: 750;
   src: url(../fonts/eot/dana-ultrabold.eot);
-  src:
+  src: 
     url(../fonts/eot/dana-ultrabold.eot?#iefix) format("embedded-opentype"),
     url(../fonts/woff2/dana-ultrabold.woff2) format("woff2"),
     url(../fonts/woff/dana-ultrabold.woff) format("woff");
 }
+
 @font-face {
   font-family: dana;
   font-style: normal;
   font-weight: 800;
   src: url(../fonts/eot/dana-extrabold.eot);
-  src:
+  src: 
     url(../fonts/eot/dana-extrabold.eot?#iefix) format("embedded-opentype"),
     url(../fonts/woff2/dana-extrabold.woff2) format("woff2"),
     url(../fonts/woff/dana-extrabold.woff) format("woff");
 }
+
 @font-face {
   font-family: dana;
   font-style: normal;
   font-weight: 900;
   src: url(../fonts/eot/dana-black.eot);
-  src:
+  src: 
     url(../fonts/eot/dana-black.eot?#iefix) format("embedded-opentype"),
     url(../fonts/woff2/dana-black.woff2) format("woff2"),
     url(../fonts/woff/dana-black.woff) format("woff");
 }
+
 @font-face {
   font-family: "Roboto-Regular";
-  src:
+  src: 
     local("Roboto-Regular"),
     local(Roboto-Regular),
     url(../fonts/woff2/Roboto-Regular.woff2) format("woff2");
@@ -108,8 +121,9 @@
   font-style: normal;
   font-display: swap;
 }
+
 /* ===============================
-   Base
+   Base Styles
 ================================= */
 body {
   font-family: "dana";
@@ -120,6 +134,9 @@ body {
   box-sizing: border-box;
 }
 
+/* ===============================
+   CSS Variables
+================================= */
 :root {
   --main-purple: #ab4f9e;
   --second-gray: #eff2f5;
@@ -132,121 +149,40 @@ body {
 }
 
 /* ===============================
-   Typography & Colors
+   Colors & Backgrounds
 ================================= */
-.bg-col {
-  background-color: #f8fafd;
-}
-.font-color {
-  color: #616e85 !important;
-}
-.text-gray {
-  color: #dee4ec !important;
-}
-
-.gary-color {
-  background-color: var(--main-gary-element) !important;
-}
-.bg-gary {
-  background-color: var(--second-gray) !important;
-}
-.bg-purple {
-  background-color: var(--main-purple);
-}
-.bg-blue {
-  background: #3861fb26 !important;
-}
-.amount {
-  background-color: #f8f9fa;
-}
-.text-purple {
-  color: #ab4f9e;
-}
-.text-green {
-  color: #16c784;
-}
+.bg-col { background-color: #f8fafd; }
+.font-color { color: #616e85 !important; }
+.text-gray { color: #dee4ec !important; }
+.gary-color { background-color: var(--main-gary-element) !important; }
+.bg-gary { background-color: var(--second-gray) !important; }
+.bg-purple { background-color: var(--main-purple); }
+.bg-blue { background: #3861fb26 !important; }
+.amount { background-color: #f8f9fa; }
+.text-purple { color: #ab4f9e; }
+.text-green { color: #16c784; }
 .opacity-green {
   background: #adeed56b;
-  .bg-tarnsparent {
-    background-color: transparent !important;
-  }
-  .fa-bag-shopping {
-    color: black !important;
-  }
 }
-.opacity-danger {
-  background: #ea39431a;
-}
-.btn-danger:hover {
-  color: white !important;
-  background-color: #ff6565 !important;
-}
-.btn-success:hover {
-  background-color: #16c784;
-}
-/* ===============================
-   Backgrounds with Opacity
-================================= */
+.opacity-green .bg-tarnsparent { background-color: transparent !important; }
+.opacity-green .fa-bag-shopping { color: black !important; }
+.opacity-danger { background: #ea39431a; }
+.bg-opacity-warning { background-color: var(--opacity-warning); }
+.bg-footer { background-color: #0d1421; }
+.opacity-primary { background-color: #3861fb1a; }
 
-.bg-opacity-warning {
-  background-color: var(--opacity-warning);
-}
-.bg-footer {
-  background-color: #0d1421;
-}
-.opacity-primary {
-  background-color: #3861fb1a;
-}
-.btn-primary:hover {
-  color: white !important;
-  background: rgb(100, 185, 241);
-}
-.bordersample{
-  border: 1px solid purple;
-}
 /* ===============================
    Buttons
 ================================= */
+.btn-danger:hover { color: white !important; background-color: #ff6565 !important; }
+.btn-success:hover { background-color: #16c784; }
+.btn-primary:hover { color: white !important; background: rgb(100, 185, 241); }
 
-/* ===============================
-   Utility Classes
-================================= */
-.small {
-  font-size: x-small !important;
-}
-.outline-0 {
-  outline: 0;
-}
-.outline-0:focus {
-  box-shadow: none;
-}
-.ps-7px {
-  padding-inline-start: 20px;
-}
-.gap-24px {
-  gap: 0 7px;
-}
-.min-w-103 {
-  min-width: 103px;
-}
-.justify {
-  text-align: justify;
-}
-
-/* ===============================
-   Lists & Navigation
-================================= */
-table tbody tr:last-child td {
-  border-bottom: none !important;
-}
-/* ===============================
-   Icons
-================================= */
-
+/* Nav Pills */
 .navpill-btn {
   background-color: #fffbff !important;
-  border: 1px solid purple!important;
-  color: #ab4f9e!important;
+  border: 1px solid purple !important;
+  color: #ab4f9e !important;
 }
 button.navpill-btn.active {
   background-color: #ab4f9e !important;
@@ -254,40 +190,36 @@ button.navpill-btn.active {
 }
 
 /* ===============================
-   Input Fields
+   Utility Classes
 ================================= */
-input:not(:placeholder-shown)::placeholder {
-  opacity: 0 !important;
-  transition: opacity 0.2s ease-in-out !important;
-}
-.custom-input::placeholder {
-  color: #999;
-  transition: opacity 0.3s ease-in-out;
-}
+.small { font-size: x-small !important; }
+.outline-0 { outline: 0; }
+.outline-0:focus { box-shadow: none; }
+.ps-7px { padding-inline-start: 20px; }
+.gap-24px { gap: 0 7px; }
+.min-w-103 { min-width: 103px; }
+.justify { text-align: justify; }
+
+/* ===============================
+   Tables
+================================= */
+table tbody tr:last-child td { border-bottom: none !important; }
+
+/* ===============================
+   Inputs
+================================= */
+input:not(:placeholder-shown)::placeholder { opacity: 0 !important; transition: opacity 0.2s ease-in-out !important; }
+.custom-input::placeholder { color: #999; transition: opacity 0.3s ease-in-out; }
 .custom-input:focus::placeholder,
-.custom-input:not(:placeholder-shown)::placeholder {
-  opacity: 0;
-}
-img {
-  opacity: 1 !important;
-  filter: none !important;
-}
+.custom-input:not(:placeholder-shown)::placeholder { opacity: 0; }
 
 /* ===============================
-   Interactive
+   Images
 ================================= */
+img { opacity: 1 !important; filter: none !important; }
 
 /* ===============================
-  backgreound-custom
-================================= */
-
-/* ===============================
-swipper
-================================= */
-
-/* ===============================
-accordion
-
+   Accordion
 ================================= */
 .accordion-button {
   background-color: transparent !important;
@@ -295,73 +227,27 @@ accordion
   box-shadow: none !important;
 }
 
-.accordion-button:not(.collapsed) {
-  background-color: transparent !important;
-  color: #000;
-  box-shadow: none !important;
-}
-.accordion-body {
-  border-top: 2px solid #ddd;
-  padding-top: 10px;
-}
-.accordion-button::after {
-  background-color: rgb(151, 151, 151);
-  border-radius: 50%;
-  padding: 10px;
-  width: 3px!important;
-}
-/* ===============================
-carousel
-================================= */
+.accordion-body { border-top: 2px solid #ddd; padding-top: 10px; }
 
 /* ===============================
-media query
+   Media Queries
 ================================= */
-
 @media (max-width: 576px) {
-}
-@media (max-width: 991.98px) and (min-width: 768px) {
-}
-
-@media (max-width: 900px) {
+  main { width: 100%; min-width: 0; overflow-x: hidden; }
 }
 
-@media (max-width: 576px) {
-  main {
-    width: 100%;
-    min-width: 0;
-    overflow-x: hidden;
-  }
-}html, body {
-    overflow-x: hidden !important;
-  }
+html, body { overflow-x: hidden !important; }
 
-  @media (max-width: 768px) {
-    .table-responsive {
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-    }
-
-    table {
-      min-width: 700px;
-    }
-.resImg{
-  width: 280px!important;
-  height: 152px;
+@media (max-width: 768px) {
+  .table-responsive { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  table { min-width: 700px; }
+  .resImg { width: 280px !important; height: 152px; }
+  .accordion .accordion-button .d-flex { flex-wrap: wrap; }
 }
-    .accordion .accordion-button .d-flex {
-      flex-wrap: wrap;
-    }
-  }
-
 
 @media (min-width: 576px) and (max-width: 870px) {
-  .accordion {
-    max-width: 600px;  
-  }
+  .accordion { max-width: 600px; }
 }
 
-
-
-
-
+@media (max-width: 991.98px) and (min-width: 768px) { }
+@media (max-width: 900px) { }
