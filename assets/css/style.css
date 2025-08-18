@@ -229,6 +229,23 @@ img { opacity: 1 !important; filter: none !important; }
 
 .accordion-body { border-top: 2px solid #ddd; padding-top: 10px; }
 
+
+
+/*accordion button*/
+.neon-btn {
+  padding:0.5rem 1.5rem;
+  border:none; border-radius:30px;
+  background:#2a4ac0; color:#0ff;
+  font-weight:bold; text-shadow:0 0 5px #0ff,0 0 1px #0ff;
+  box-shadow:0 0 2px #0ff,0 0 5px #0ff;
+  transition:0.3s;
+}
+.neon-btn:hover {
+  color:#fff;
+  text-shadow:0 0 1px #0ff,0 0 20px #0ff,0 0 3px #0ff;
+  box-shadow:0 0 2px #0ff,0 0 10px #0ff;
+}
+
 /* ===============================
    Media Queries
 ================================= */

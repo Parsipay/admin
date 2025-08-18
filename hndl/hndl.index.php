@@ -137,9 +137,9 @@ function ProcessRequest($request) {
     $p->allUser = [];
     foreach ($users as [$code, $name, $phone, $lastseen, $banks, $signupTime, $ehraz, $vaziat]) {
         $user = new stdClass();
-        $user->nationalCode = $code;
-        $user->fullName = $name;
-        $user->phoneNumber = $phone;
+        $user->nationalCode = "<span class='d-block text-start'>$code</span>";
+        $user->fullName = "<span class='d-block text-start'>$name</span>";
+        $user->phoneNumber ="<span class='d-block text-start'> $phone</span>";
         $user->lastActivity = biiq_PersianDate::UnixToAgo($lastseen);
         $user->bankAccounts = $banks;
 
@@ -159,10 +159,10 @@ function ProcessRequest($request) {
     $p->allRequests = [];
     foreach ($requests as [$reqNum, $trackNum, $fullName, $amount, $unix, $statusText]) {
         $item = new stdClass();
-        $item->requestNumber = $reqNum;
-        $item->trackingNumber = $trackNum;
-        $item->fullName = $fullName;
-        $item->amount = $amount;
+        $item->requestNumber = "<span class='d-block text-start'>$reqNum</span>";
+        $item->trackingNumber ="<span class='d-block text-start'> $trackNum</span>";
+        $item->fullName = "<span class='d-block text-start'>$fullName</span>";
+        $item->amount = "<span class='d-block text-start'>$amount</span>";
 
         $persianDate = biiq_PersianDate::date("l j F Y", $unix);
         $persianTime = biiq_PersianDate::date("H:i:s", $unix);

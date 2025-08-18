@@ -112,3 +112,5 @@ $(document).ready(function () {
     });
 
 });
+//for menu button
+document.querySelector('.fancy-btn').addEventListener('click', function(){ this.classList.toggle('active'); });
