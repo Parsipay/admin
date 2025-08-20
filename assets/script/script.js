@@ -113,4 +113,41 @@ $(document).ready(function () {
 
 });
 //for menu button
-document.querySelector('.fancy-btn').addEventListener('click', function(){ this.classList.toggle('active'); });
+const fancyBtn = document.querySelector('.fancy-btn');
+if (fancyBtn) {
+    fancyBtn.addEventListener('click', function() { this.classList.toggle('active'); });
+}
+
+$(document).ready(function() {
+
+    // =========================
+    // Sidebar Click => تغییر سکشن پایین
+    // =========================
+    $(".sidebar-link").click(function(e) {
+        e.preventDefault();
+        let target = $(this).data("target"); // user-tab یا tableFinancial
+
+        // همه سکشن‌ها مخفی
+        $("#dynamicContent > .table-section, #dynamicContent > .py-5").hide();
+
+        // نمایش سکشن هدف
+        $("#" + target).show();
+    });
+
+    // =========================
+    // Bootstrap Tabs داخل user-tab
+    // =========================
+    $('#myTab button').on('click', function (e) {
+        e.preventDefault();
+        let tabTrigger = new bootstrap.Tab(this);
+        tabTrigger.show();
+    });
+
+    // Tabs دوم (جدول مالی)
+    $('#myTab2 button').on('click', function (e) {
+        e.preventDefault();
+        let tabTrigger = new bootstrap.Tab(this);
+        tabTrigger.show();
+    });
+
+});

@@ -184,4 +184,84 @@ function ProcessRequest($request) {
         'Canonical' => SITE,
     ];
 }
+
+function FinancialPageReady() {
+    $users = [
+        ["0440202507", "یگانه علیزاده", "09353353167", 1747140621, 2],
+        ["0340202507", "بنفشه ابراهیمی", "093128431937", 1747139421, 1],
+        ["0540202507", "نازنین علیزاده", "09356439532", 1747125021, 3],
+    ];
+
+    $bankAccounts = [
+        ["0440202507", "09353353167", "یگانه علیزاده", "IR940150000184370199152881", 1],
+        ["0340202507", "093128431937", "بنفشه ابراهیمی", "IR940150000184370199152882", 2],
+        ["0540202507", "09356439532", "نازنین علیزاده", "IR940150000184370199152883", 3],
+    ];
+
+    $documents = [
+        ["یگانه علیزاده","شناسنامه","2025-08-20 10:00:00",2],
+        ["بنفشه ابراهیمی","کارت ملی","2025-08-19 09:30:00",1],
+        ["نازنین علیزاده","گواهینامه رانندگی","2025-08-18 12:15:00",3],
+    ];
+
+    $p = new stdClass();
+
+    // -----------------------------
+    // تب 1: کاربران
+    // -----------------------------
+    $p->allUser = [];
+    foreach ($users as [$code, $name, $phone, $signupUnix, $status]) {
+        $user = new stdClass();
+        $user->nationalCode = "<span class='d-block text-start'>$code</span>";
+        $user->fullName = "<span class='d-block text-start'>$name</span>";
+        $user->phoneNumber = "<span class='d-block text-start'>$phone</span>";
+        $user->lastActivity = biiq_PersianDate::UnixToAgo($signupUnix);
+        $user->signupTime = "<span class='d-block text-center'>" . biiq_PersianDate::date("l j F Y", $signupUnix) . " ساعت " . biiq_PersianDate::date("H:i:s", $signupUnix) . "</span>";
+        $user->Status = $status;
+        $p->allUser[] = $user;
+    }
+
+    // -----------------------------
+    // تب 2: حساب بانکی
+    // -----------------------------
+    $p->allBankAccounts = [];
+    foreach ($bankAccounts as [$code, $phone, $name, $account, $status]) {
+        $acc = new stdClass();
+        $acc->nationalCode = "<span class='d-block text-start'>$code</span>";
+        $acc->phoneNumber = "<span class='d-block text-start'>$phone</span>";
+        $acc->fullName = "<span class='d-block text-start'>$name</span>";
+        $acc->accountNumber = "<span class='d-block text-start'>$account</span>";
+        $acc->Status = $status;
+        $p->allBankAccounts[] = $acc;
+    }
+
+    // -----------------------------
+    // تب 3: مدارک احراز هویت
+    // -----------------------------
+    $p->allDocuments = [];
+    foreach ($documents as [$name, $docType, $submitDate, $status]) {
+        $doc = new stdClass();
+        $userCode = "";
+        foreach ($users as [$code, $uname, , , ]) {
+            if ($uname == $name) { $userCode = $code; break; }
+        }
+        $doc->nationalCode = "<span class='d-block text-start'>$userCode</span>";
+        $doc->fullName = "<span class='d-block text-start'>$name</span>";
+        $doc->documentType = "<span class='d-block text-start'>$docType</span>";
+        $doc->submitDate = "<span class='d-block text-center'>" . biiq_PersianDate::date("l j F Y H:i:s", strtotime($submitDate)) . "</span>";
+        $doc->Status = $status;
+        $p->allDocuments[] = $doc;
+    }
+
+    return [
+        'content'   => biiq_Template::Start('pages->financial', true, ['Objects' => $p]),
+        'id'        => 1,
+        'title'     => 'مالی کاربران',
+        'Canonical' => SITE,
+    ];
+}
+
+
+
+
 ?>
