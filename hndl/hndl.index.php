@@ -206,61 +206,54 @@ function FinancialPageReady() {
 
     $p = new stdClass();
 
-    // -----------------------------
-    // تب 1: کاربران
-    // -----------------------------
+    // Tab 1: Users
     $p->allUser = [];
-    foreach ($users as [$code, $name, $phone, $signupUnix, $status]) {
+    foreach ($users as [$code,$name,$phone,$signupUnix,$status]){
         $user = new stdClass();
-        $user->nationalCode = "<span class='d-block text-start'>$code</span>";
-        $user->fullName = "<span class='d-block text-start'>$name</span>";
-        $user->phoneNumber = "<span class='d-block text-start'>$phone</span>";
+        $user->nationalCode = $code;
+        $user->fullName = $name;
+        $user->phoneNumber = $phone;
         $user->lastActivity = biiq_PersianDate::UnixToAgo($signupUnix);
-        $user->signupTime = "<span class='d-block text-center'>" . biiq_PersianDate::date("l j F Y", $signupUnix) . " ساعت " . biiq_PersianDate::date("H:i:s", $signupUnix) . "</span>";
+        $user->signupTime = biiq_PersianDate::date("l j F Y ساعت H:i:s",$signupUnix);
         $user->Status = $status;
         $p->allUser[] = $user;
     }
 
-    // -----------------------------
-    // تب 2: حساب بانکی
-    // -----------------------------
+    // Tab 2: Bank Accounts
     $p->allBankAccounts = [];
-    foreach ($bankAccounts as [$code, $phone, $name, $account, $status]) {
+    foreach ($bankAccounts as [$code,$phone,$name,$account,$status]){
         $acc = new stdClass();
-        $acc->nationalCode = "<span class='d-block text-start'>$code</span>";
-        $acc->phoneNumber = "<span class='d-block text-start'>$phone</span>";
-        $acc->fullName = "<span class='d-block text-start'>$name</span>";
-        $acc->accountNumber = "<span class='d-block text-start'>$account</span>";
+        $acc->nationalCode = $code;
+        $acc->phoneNumber = $phone;
+        $acc->fullName = $name;
+        $acc->accountNumber = $account;
         $acc->Status = $status;
         $p->allBankAccounts[] = $acc;
     }
 
-    // -----------------------------
-    // تب 3: مدارک احراز هویت
-    // -----------------------------
+    // Tab 3: Documents
     $p->allDocuments = [];
-    foreach ($documents as [$name, $docType, $submitDate, $status]) {
+    foreach ($documents as [$name,$docType,$submitDate,$status]){
         $doc = new stdClass();
         $userCode = "";
-        foreach ($users as [$code, $uname, , , ]) {
-            if ($uname == $name) { $userCode = $code; break; }
+        foreach($users as [$code,$uname,,,]){
+            if($uname==$name){$userCode=$code;break;}
         }
-        $doc->nationalCode = "<span class='d-block text-start'>$userCode</span>";
-        $doc->fullName = "<span class='d-block text-start'>$name</span>";
-        $doc->documentType = "<span class='d-block text-start'>$docType</span>";
-        $doc->submitDate = "<span class='d-block text-center'>" . biiq_PersianDate::date("l j F Y H:i:s", strtotime($submitDate)) . "</span>";
+        $doc->nationalCode = $userCode;
+        $doc->fullName = $name;
+        $doc->documentType = $docType;
+        $doc->submitDate = biiq_PersianDate::date("l j F Y H:i:s",strtotime($submitDate));
         $doc->Status = $status;
         $p->allDocuments[] = $doc;
     }
 
     return [
-        'content'   => biiq_Template::Start('pages->financial', true, ['Objects' => $p]),
-        'id'        => 1,
-        'title'     => 'مالی کاربران',
+        'content' => biiq_Template::Start('pages->financial', true, ['Objects'=>$p]),
+        'id' => 1,
+        'title' => 'مالی کاربران',
         'Canonical' => SITE,
     ];
 }
-
 
 
 
