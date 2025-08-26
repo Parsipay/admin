@@ -185,6 +185,8 @@ function ProcessRequest($request) {
     ];
 }
 
+
+
 function FinancialPageReady() {
     $users = [
         ["0440202507", "یگانه علیزاده", "09353353167", 1747140621, 2],
@@ -254,7 +256,5 @@ function FinancialPageReady() {
         'Canonical' => SITE,
     ];
 }
-
-
 
 ?>

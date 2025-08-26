@@ -2,7 +2,6 @@
      Desktop Sidebar (visible on XL and above)
 =============================================== -->
 <aside class="d-none d-xl-block bg-col text-dark p-3">
-
     <!-- Logo and Profile Section -->
     <div class="d-flex flex-column align-items-center border-bottom">
         <img src="[@settings->]assets/img/logo.png" alt="logo" width="200" height="87">
@@ -13,63 +12,59 @@
     </div>
 
     <!-- Dashboard Shortcut -->
-    <div class="d-flex justify-content-center align-items-center bg-white p-2 mt-4 rounded gap-3">
-        <div class="d-flex align-items-center">
-              <a href="#" class="sidebar-link d-flex align-items-center text-decoration-none text-secondary" data-target="tableOrder">
-                  <i class="fas fa-laptop-house font-color"></i>
-                  <span class="fs-5">داشبورد</span>
-            </a>
-        </div>
-    </div>
-
-    <!-- Navigation Menu --> 
-    <ul class="nav flex-column justify-content-start mt-5">
-        <!-- Internal Automation -->
-
-        <!--ااتوماسیون داخلی-->
+        <ul class="nav flex-column justify-content-start mt-5">
         <li class="nav-item mb-3 text-nowrap mt-3">
-            <a href="#" class="sidebar-link d-flex align-items-center text-decoration-none" data-target="user-tab">
-                <i class="far fa-money-bill-alt font-color"></i>
+            <a href="#" class="sidebar-link  text-decoration-none" data-target="tableOrder">
+              <img src="[@settings->]assets/img/home-menu.png" alt="">
+                <span class="font-color fs-5 ms-2"> داشبورد</span>
+            </a>
+        </li>
+
+    <!-- Navigation Menu -->
+    <ul class="nav flex-column justify-content-start">
+        <!-- Internal Automation -->
+        <li class="nav-item mb-3 text-nowrap mt-3">
+            <a href="#" class="sidebar-link text-decoration-none" data-target="user-tab">
+             <img src="[@settings->]assets/img/logo61.png" alt="automation">
                 <span class="font-color fs-5 ms-2"> اتوماسیون داخلی</span>
             </a>
         </li>
-        <!-- مدیریت کاربران و سفارش‌ها -->
+        <!-- Manage users and orders -->
         <li class="nav-item mb-3 text-nowrap mt-3">
-            <a href="#" class="sidebar-link d-flex align-items-center text-decoration-none"
-                data-target="tableFinancial">
-                <img src="[@settings->]assets/img/logo-1.png" alt="logo1" width="18" height="22">
+            <a href="#" class="sidebar-link text-decoration-none" data-target="tableManageUsers">
+                <img src="[@settings->]assets/img/manageUser.png" alt="manageUser" >
                 <span class="font-color fs-5 ms-1">مدیریت کاربران</span>
             </a>
         </li>
 
         <!-- Financial Section -->
         <li class="nav-item mb-3 text-nowrap mt-3">
-            <a class="nav-link text-dark active" href="[@settings->site]">
-                <i class="far fa-money-bill-alt font-color"></i>
+            <a href="#" class="sidebar-link nav-link text-dark" data-target="tablefinance">
+              <img src="[@settings->]assets/img/moneys.svg" alt="moneys">
                 <span class="font-color fs-5 ms-2">مالی</span>
             </a>
         </li>
 
         <!-- Orders -->
         <li class="nav-item mb-3 text-nowrap mt-3">
-            <a class="nav-link text-dark active" href="[@settings->site]">
-                <i class="fas fa-receipt fs-5 font-color"></i>
+            <a class="nav-link text-dark" href="[@settings->site]">
+                <img src="[@settings->]assets/img/receipt-text.svg" alt="orders">
                 <span class="font-color fs-5 ms-2">سفارش‌ها</span>
             </a>
         </li>
 
         <!-- Cryptocurrency -->
         <li class="nav-item mb-3 text-nowrap mt-3">
-            <a class="nav-link text-dark active" href="[@settings->site]">
-                <img src="[@settings->]assets/img/bitcoin-(btc).png" alt="arz" width="18" height="22">
+            <a class="nav-link text-dark" href="[@settings->site]">
+                <img src="[@settings->]assets/img/bitcoin-(btc).png" alt="arz">
                 <span class="font-color fs-5 ms-2">ارز دیجیتال</span>
             </a>
         </li>
 
         <!-- Settings -->
         <li class="nav-item mb-3 text-nowrap mt-3">
-            <a class="nav-link text-dark active" href="[@settings->site]">
-                <img src="[@settings->]assets/img/setting-2 (1).png" alt="setting" width="18" height="22">
+            <a class="nav-link text-dark" href="[@settings->site]">
+                <img src="[@settings->]assets/img/setting-2.png" alt="setting">
                 <span class="font-color fs-5 ms-2">تنظیمات</span>
             </a>
         </li>

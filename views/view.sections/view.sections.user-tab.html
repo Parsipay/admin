@@ -322,10 +322,8 @@
     </div>
   </div>
 </div>
-  <!-- جدول مالی -->
-
-
-<div id="tableFinancial" class="table-section" style="display:none;">
+<!-- manage table -->
+<div id="tableManageUsers" class="table-section" style="display:none;">
   <div class="py-5">
     <!-- Nav tabs -->
     <ul class="nav nav-pills nav-justified gap-1 pb-2" id="myTab2" role="tablist">
@@ -367,11 +365,47 @@
           <table class="table table-striped text-center mb-0">
             <thead class="table-secondary">
               <tr class="align-middle">
-                <th>کد ملی</th>
-                <th>شماره موبایل</th>
-                <th>نام و نام خانوادگی</th>
-                <th>آخرین فعالیت</th>
-                <th>تاریخ ثبت نام</th>
+         <th class="text-nowrap search-header" data-search="true" style="cursor: pointer;">
+                  <div class="d-flex flex-column justify-content-start align-items-start">
+                    <div id="toggleSearchOrder" class="d-flex align-items-center">
+                      <img src="[@settings->]assets/img/saerchnormal.png" alt="search" width="14" height="14">
+                      <span class="mx-1 text-nowrap"> کد ملی</span>
+                    </div>
+                    <input id="searchOrderNumber" type="text" class="border-none rounded mt-1 d-none"
+                      placeholder="Search Order Number">
+                  </div>
+                </th>              
+         <th class="text-nowrap search-header" data-search="true" style="cursor: pointer;">
+                  <div class="d-flex flex-column justify-content-start align-items-start">
+                    <div id="toggleSearchOrder" class="d-flex align-items-center">
+                      <img src="[@settings->]assets/img/saerchnormal.png" alt="search" width="14" height="14">
+                      <span class="mx-1 text-nowrap">شماره موبایل</span>
+                    </div>
+                    <input id="searchOrderNumber" type="text" class="border-none rounded mt-1 d-none"
+                      placeholder="Search Order Number">
+                  </div>
+                </th>             
+         <th class="text-nowrap search-header" data-search="true" style="cursor: pointer;">
+                  <div class="d-flex flex-column justify-content-start align-items-start">
+                    <div id="toggleSearchOrder" class="d-flex align-items-center">
+                      <img src="[@settings->]assets/img/saerchnormal.png" alt="search" width="14" height="14">
+                      <span class="mx-1 text-nowrap">نام و نام خانوادگی </span>
+                    </div>
+                    <input id="searchOrderNumber" type="text" class="border-none rounded mt-1 d-none"
+                      placeholder="Search Order Number">
+                  </div>
+                </th>           
+         <th class="text-nowrap search-header" data-search="true" style="cursor: pointer;">
+                  <div class="d-flex flex-column justify-content-start align-items-start">
+                    <div id="toggleSearchOrder" class="d-flex align-items-center">
+                      <img src="[@settings->]assets/img/saerchnormal.png" alt="search" width="14" height="14">
+                      <span class="mx-1 text-nowrap">اخرین فعالیت </span>
+                    </div>
+                    <input id="searchOrderNumber" type="text" class="border-none rounded mt-1 d-none"
+                      placeholder="Search Order Number">
+                  </div>
+                </th>          
+                      <th>تاریخ ثبت نام</th>
                 <th>وضعیت</th>
               </tr>
             </thead>
@@ -402,76 +436,348 @@
       </div>
 
       <!-- Tab 2: حساب بانکی کاربران -->
-      <div class="tab-pane fade" id="tab2-2" role="tabpanel">
+    <div class="tab-pane fade" id="tab2-2" role="tabpanel">
+  <div class="table-responsive border-0 rounded">
+    <table class="table table-striped text-center mb-0">
+      <thead class="table-secondary">
+        <tr class="align-middle">
+
+          <!-- کد ملی -->
+          <th class="text-nowrap search-header" data-search="true" style="cursor:pointer;">
+            <div class="d-flex flex-column justify-content-start align-items-start">
+              <div id="toggleSearchNationalCodeBank" class="d-flex align-items-center">
+                <img src="[@settings->]assets/img/saerchnormal.png" alt="search" width="14" height="14">
+                <span class="mx-1 text-nowrap">کد ملی</span>
+              </div>
+              <input id="searchNationalCodeBank" type="text" class="border-none rounded mt-1 d-none" placeholder="جستجو کد ملی">
+            </div>
+          </th>
+
+          <!-- شماره موبایل -->
+          <th class="text-nowrap search-header" data-search="true" style="cursor:pointer;">
+            <div class="d-flex flex-column justify-content-start align-items-start">
+              <div id="toggleSearchPhoneBank" class="d-flex align-items-center">
+                <img src="[@settings->]assets/img/saerchnormal.png" alt="search" width="14" height="14">
+                <span class="mx-1 text-nowrap">شماره موبایل</span>
+              </div>
+              <input id="searchPhoneBank" type="text" class="border-none rounded mt-1 d-none" placeholder="جستجو شماره موبایل">
+            </div>
+          </th>
+
+          <!-- نام و نام خانوادگی -->
+          <th class="text-nowrap search-header" data-search="true" style="cursor:pointer;">
+            <div class="d-flex flex-column justify-content-start align-items-start">
+              <div id="toggleSearchFullNameBank" class="d-flex align-items-center">
+                <img src="[@settings->]assets/img/saerchnormal.png" alt="search" width="14" height="14">
+                <span class="mx-1 text-nowrap">نام و نام خانوادگی</span>
+              </div>
+              <input id="searchFullNameBank" type="text" class="border-none rounded mt-1 d-none" placeholder="جستجو نام">
+            </div>
+          </th>
+
+          <!-- بدون سرچ -->
+          <th>اطلاعات حساب</th>
+          <th>وضعیت</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        [foreach ([@Objects->allBankAccounts])]
+        <tr class="align-middle" data-item-status="[@Item->Status]">
+          <td>[@Item->nationalCode]</td>
+          <td class="text-primary">[@Item->phoneNumber]</td>
+          <td>[@Item->fullName]</td>
+          <td>[@Item->accountNumber]</td>
+          <td>
+            [if ([@Item->Status] == 1)]
+              <span class="p-2 bg-blue rounded-5">تکمیل نشده</span>
+            [endif]
+            [if ([@Item->Status] == 2)]
+              <span class="d-flex p-2 opacity-green rounded-5">موفق</span>
+            [endif]
+            [if ([@Item->Status] == 3)]
+              <span class="d-flex p-2 opacity-danger rounded-5">مسدود</span>
+            [endif]
+          </td>
+        </tr>
+        [endforeach]
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+      <!-- Tab 3: مدارک احراز هویت -->
+<div class="tab-pane fade" id="tab3-3" role="tabpanel">
+  <div class="table-responsive border-0 rounded">
+    <table class="table table-striped text-center mb-0">
+      <thead class="table-secondary">
+        <tr class="align-middle">
+
+          <!-- شماره موبایل -->
+          <th class="text-nowrap search-header" data-search="true" style="cursor:pointer;">
+            <div class="d-flex flex-column justify-content-start align-items-start">
+              <div id="toggleSearchPhoneDoc" class="d-flex align-items-center">
+                <img src="[@settings->]assets/img/saerchnormal.png" alt="search" width="14" height="14">
+                <span class="mx-1 text-nowrap">شماره موبایل</span>
+              </div>
+              <input id="searchPhoneDoc" type="text" class="border-none rounded mt-1 d-none" placeholder="جستجو شماره موبایل">
+            </div>
+          </th>
+
+          <!-- نام و نام خانوادگی -->
+          <th class="text-nowrap search-header" data-search="true" style="cursor:pointer;">
+            <div class="d-flex flex-column justify-content-start align-items-start">
+              <div id="toggleSearchFullNameDoc" class="d-flex align-items-center">
+                <img src="[@settings->]assets/img/saerchnormal.png" alt="search" width="14" height="14">
+                <span class="mx-1 text-nowrap">نام و نام خانوادگی</span>
+              </div>
+              <input id="searchFullNameDoc" type="text" class="border-none rounded mt-1 d-none" placeholder="جستجو نام">
+            </div>
+          </th>
+
+          <!-- بدون سرچ -->
+          <th>مدرک</th>
+          <th>تاریخ ارسال</th>
+          <th>وضعیت</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        [foreach ([@Objects->allDocuments])]
+        <tr class="align-middle" data-item-status="[@Item->Status]">
+          <td class="text-primary">[@Item->phoneNumber]</td>
+          <td>[@Item->fullName]</td>
+          <td>[@Item->documentType]</td>
+          <td>[@Item->submitDate]</td>
+          <td>
+            [if ([@Item->Status] == 1)]
+              <span class="p-2 bg-blue rounded-5">تکمیل نشده</span>
+            [endif]
+            [if ([@Item->Status] == 2)]
+              <span class="d-flex p-2 opacity-green rounded-5">موفق</span>
+            [endif]
+            [if ([@Item->Status] == 3)]
+              <span class="d-flex p-2 opacity-danger rounded-5">رد شده</span>
+            [endif]
+          </td>
+        </tr>
+        [endforeach]
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+    </div>
+  </div>
+</div>
+
+<!--tablefiance-->
+<div id="tablefinance" class="table-section" style="display:none;">
+  <div class="py-5">
+    <!-- Nav tabs -->
+    <ul class="nav nav-pills nav-justified gap-1 pb-2" id="myTabFinance" role="tablist">
+      <!-- Tab 1: لیست واریزی‌ها -->
+      <li class="nav-item" role="presentation">
+        <button class="nav-link bg-col navpill-btn active rounded-pill w-100 d-flex align-items-center justify-content-center gap-2"
+          id="tabf-1-tab" data-bs-toggle="tab" data-bs-target="#tabf-1" type="button" role="tab">
+          <i class='fas fa-user-friends fs-4'></i>
+          <span>لیست واریزی‌ها</span>
+        </button>
+      </li>
+
+      <!-- Tab 2: افزایش اعتبار -->
+      <li class="nav-item" role="presentation">
+        <button class="nav-link navpill-btn rounded-pill w-100 d-flex align-items-center justify-content-center gap-2"
+          id="tabf-2-tab" data-bs-toggle="tab" data-bs-target="#tabf-2" type="button" role="tab">
+          <i class='fas fa-university fs-4'></i>
+          <span>افزایش اعتبار</span>
+        </button>
+      </li>
+
+      <!-- Tab 3: صف تسویه -->
+      <li class="nav-item" role="presentation">
+        <button class="nav-link navpill-btn rounded-pill w-100 d-flex align-items-center justify-content-center gap-2"
+          id="tabf-3-tab" data-bs-toggle="tab" data-bs-target="#tabf-3" type="button" role="tab">
+          <i class='fas fa-clipboard-list fs-4'></i>
+          <span class="d-none d-md-inline-block">صف تسویه</span>
+        </button>
+      </li>
+    </ul>
+
+    <!-- Tab Content -->
+    <div class="tab-content p-3 border-top mt-3 mb-0 bg-white" id="myTabContentFinance">
+
+      <!-- Tab 1: لیست واریزی‌ها -->
+      <div class="tab-pane fade show active" id="tabf-1" role="tabpanel">
         <div class="table-responsive border-0 rounded">
           <table class="table table-striped text-center mb-0">
             <thead class="table-secondary">
               <tr class="align-middle">
-                <th>کد ملی</th>
-                <th>شماره موبایل</th>
-                <th>نام و نام خانوادگی</th>
+
+                <!-- شناسه واریز -->
+                <th class="search-header" data-search="true" style="cursor:pointer;">
+                  <div class="d-flex flex-column align-items-start">
+                    <div id="toggleSearchDepositId" class="d-flex align-items-center">
+                      <img src="[@settings->]assets/img/saerchnormal.png" width="14" height="14">
+                      <span class="mx-1">شناسه واریز</span>
+                    </div>
+                    <input id="searchDepositId" type="text" class="border-none rounded mt-1 d-none" placeholder="جستجو">
+                  </div>
+                </th>
+
+                <!-- شماره موبایل -->
+                <th class="search-header" data-search="true">
+                  <div class="d-flex flex-column align-items-start">
+                    <div id="toggleSearchDepositPhone" class="d-flex align-items-center">
+                      <img src="[@settings->]assets/img/saerchnormal.png" width="14" height="14">
+                      <span class="mx-1">شماره موبایل</span>
+                    </div>
+                    <input id="searchDepositPhone" type="text" class="border-none rounded mt-1 d-none" placeholder="جستجو">
+                  </div>
+                </th>
+
+                <!-- نام و نام خانوادگی -->
+                <th class="search-header" data-search="true">
+                  <div class="d-flex flex-column align-items-start">
+                    <div id="toggleSearchDepositName" class="d-flex align-items-center">
+                      <img src="[@settings->]assets/img/saerchnormal.png" width="14" height="14">
+                      <span class="mx-1">نام و نام خانوادگی</span>
+                    </div>
+                    <input id="searchDepositName" type="text" class="border-none rounded mt-1 d-none" placeholder="جستجو">
+                  </div>
+                </th>
+
                 <th>اطلاعات حساب</th>
+                <th>مبلغ</th>
                 <th>وضعیت</th>
               </tr>
             </thead>
             <tbody>
-              [foreach ([@Objects->allBankAccounts])]
-              <tr class="align-middle" data-item-status="[@Item->Status]">
-                <td>[@Item->nationalCode]</td>
-                <td class="text-primary">[@Item->phoneNumber]</td>
-                <td>[@Item->fullName]</td>
-                <td>[@Item->accountNumber]</td>
-                <td>
-                  [if ([@Item->Status] == 1)]
-                    <span class="p-2 bg-blue rounded-5">تکمیل نشده</span>
-                  [endif]
-                  [if ([@Item->Status] == 2)]
-                    <span class="d-flex p-2 opacity-green rounded-5">موفق</span>
-                  [endif]
-                  [if ([@Item->Status] == 3)]
-                    <span class="d-flex p-2 opacity-danger rounded-5">مسدود</span>
-                  [endif]
-                </td>
+              <!-- داده نمونه -->
+              <tr>
+                <td>0013152343</td>
+                <td class="text-primary">09128431937</td>
+                <td class="text-primary">بنفشه ابراهیمی</td>
+                <td>IR940150000184370199152881</td>
+                <td>449,358,200</td>
+                <td><span class="d-flex p-2 opacity-green rounded-5">موفق</span></td>
               </tr>
-              [endforeach]
             </tbody>
           </table>
         </div>
       </div>
 
-      <!-- Tab 3: مدارک احراز هویت -->
-      <div class="tab-pane fade" id="tab3-3" role="tabpanel">
+      <!-- Tab 2: افزایش اعتبار -->
+      <div class="tab-pane fade" id="tabf-2" role="tabpanel">
         <div class="table-responsive border-0 rounded">
           <table class="table table-striped text-center mb-0">
             <thead class="table-secondary">
               <tr class="align-middle">
-                <th>شماره موبایل</th>
-                <th>نام و نام خانوادگی</th>
-                <th>مدرک</th>
-                <th>تاریخ ارسال</th>
+
+                <!-- شناسه تراکنش -->
+                <th class="search-header" data-search="true">
+                  <div class="d-flex flex-column align-items-start">
+                    <div id="toggleSearchCreditId" class="d-flex align-items-center">
+                      <img src="[@settings->]assets/img/saerchnormal.png" width="14" height="14">
+                      <span class="mx-1">شناسه تراکنش</span>
+                    </div>
+                    <input id="searchCreditId" type="text" class="border-none rounded mt-1 d-none" placeholder="جستجو">
+                  </div>
+                </th>
+
+                <!-- شماره موبایل -->
+                <th class="search-header" data-search="true">
+                  <div class="d-flex flex-column align-items-start">
+                    <div id="toggleSearchCreditPhone" class="d-flex align-items-center">
+                      <img src="[@settings->]assets/img/saerchnormal.png" width="14" height="14">
+                      <span class="mx-1">شماره موبایل</span>
+                    </div>
+                    <input id="searchCreditPhone" type="text" class="border-none rounded mt-1 d-none" placeholder="جستجو">
+                  </div>
+                </th>
+
+                <!-- نام و نام خانوادگی -->
+                <th class="search-header" data-search="true">
+                  <div class="d-flex flex-column align-items-start">
+                    <div id="toggleSearchCreditName" class="d-flex align-items-center">
+                      <img src="[@settings->]assets/img/saerchnormal.png" width="14" height="14">
+                      <span class="mx-1">نام و نام خانوادگی</span>
+                    </div>
+                    <input id="searchCreditName" type="text" class="border-none rounded mt-1 d-none" placeholder="جستجو">
+                  </div>
+                </th>
+
+                <th>مقدار افزایش</th>
                 <th>وضعیت</th>
               </tr>
             </thead>
             <tbody>
-              [foreach ([@Objects->allDocuments])]
-              <tr class="align-middle" data-item-status="[@Item->Status]">
-                <td class="text-primary">[@Item->phoneNumber]</td>
-                <td>[@Item->fullName]</td>
-                <td>[@Item->documentType]</td>
-                <td>[@Item->submitDate]</td>
-                <td>
-                  [if ([@Item->Status] == 1)]
-                    <span class="p-2 bg-blue rounded-5">تکمیل نشده</span>
-                  [endif]
-                  [if ([@Item->Status] == 2)]
-                    <span class="d-flex p-2 opacity-green rounded-5">موفق</span>
-                  [endif]
-                  [if ([@Item->Status] == 3)]
-                    <span class="d-flex p-2 opacity-danger rounded-5">رد شده</span>
-                  [endif]
-                </td>
+              <tr>
+                <td>TX001</td>
+                <td class="text-primary">09128431937</td>
+                <td class="text-primary">بنفشه ابراهیمی</td>
+                <td>50,000,000</td>
+                <td><span class="d-flex p-2 opacity-green rounded-5">موفق</span></td>
               </tr>
-              [endforeach]
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Tab 3: صف تسویه -->
+      <div class="tab-pane fade" id="tabf-3" role="tabpanel">
+        <div class="table-responsive border-0 rounded">
+          <table class="table table-striped text-center mb-0">
+            <thead class="table-secondary">
+              <tr class="align-middle">
+
+                <!-- شماره تراکنش -->
+                <th class="search-header" data-search="true">
+                  <div class="d-flex flex-column align-items-start">
+                    <div id="toggleSearchSettleId" class="d-flex align-items-center">
+                      <img src="[@settings->]assets/img/saerchnormal.png" width="14" height="14">
+                      <span class="mx-1">شماره تراکنش</span>
+                    </div>
+                    <input id="searchSettleId" type="text" class="border-none rounded mt-1 d-none" placeholder="جستجو">
+                  </div>
+                </th>
+
+                <!-- شماره موبایل -->
+                <th class="search-header" data-search="true">
+                  <div class="d-flex flex-column align-items-start">
+                    <div id="toggleSearchSettlePhone" class="d-flex align-items-center">
+                      <img src="[@settings->]assets/img/saerchnormal.png" width="14" height="14">
+                      <span class="mx-1">شماره موبایل</span>
+                    </div>
+                    <input id="searchSettlePhone" type="text" class="border-none rounded mt-1 d-none" placeholder="جستجو">
+                  </div>
+                </th>
+
+                <!-- نام و نام خانوادگی -->
+                <th class="search-header" data-search="true">
+                  <div class="d-flex flex-column align-items-start">
+                    <div id="toggleSearchSettleName" class="d-flex align-items-center">
+                      <img src="[@settings->]assets/img/saerchnormal.png" width="14" height="14">
+                      <span class="mx-1">نام و نام خانوادگی</span>
+                    </div>
+                    <input id="searchSettleName" type="text" class="border-none rounded mt-1 d-none" placeholder="جستجو">
+                  </div>
+                </th>
+
+                <th>مبلغ</th>
+                <th>وضعیت</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>SET001</td>
+                <td class="text-primary">09128431937</td>
+                <td class="text-primary">بنفشه ابراهیمی</td>
+                <td>100,000,000</td>
+                <td><span class="d-flex p-2 opacity-green rounded-5">موفق</span></td>
+              </tr>
             </tbody>
           </table>
         </div>
@@ -480,6 +786,7 @@
     </div>
   </div>
 </div>
+
 
 
 </div>

@@ -3,39 +3,47 @@ $(document).ready(function () {
     // =====================
     // 🔎 Generic Search Function
     // =====================
-    function toggleSearchInput(toggleBtn, inputSelector, tableId, colIndex) {
-        const $input = $(inputSelector);
-        const $tableBody = $("#" + tableId);
+ // =====================
+    // 🔎 Generic Search Handler
+    // =====================
+    $(document).on("click", ".toggle-search", function(e) {
+        e.stopPropagation();
 
-        // Toggle search input visibility
-        $(toggleBtn).on("click", function (e) {
-            e.stopPropagation();
-            if ($input.hasClass("d-none")) {
-                $input.removeClass("d-none").focus();
-            } else {
-                $input.addClass("d-none").val("");
-                filterTable("", $tableBody, colIndex);
-            }
-        });
+        let $btn = $(this);
+        let $input = $($btn.data("input"));
+        let $tableBody = $("#" + $btn.data("table"));
+        let colIndex = $btn.data("col");
 
-        // Filter table on input
-        $input.on("input", function () {
+        // Toggle input visibility
+        if ($input.hasClass("d-none")) {
+            $input.removeClass("d-none").focus();
+        } else {
+            $input.addClass("d-none").val("");
+            filterTable("", $tableBody, colIndex);
+        }
+
+        // سرچ زنده
+        $input.off("input").on("input", function() {
             filterTable($(this).val().trim().toLowerCase(), $tableBody, colIndex);
         });
+    });
 
-        // Prevent closing when clicking inside input
-        $input.on("click", function (e) {
-            e.stopPropagation();
-        });
+    // Prevent closing when clicking inside input
+    $(document).on("click", "input", function(e) {
+        e.stopPropagation();
+    });
 
-        // Close input when clicking outside
-        $(document).on("click", function () {
+    // Close input when clicking خارج
+    $(document).on("click", function() {
+        $("input").each(function() {
+            let $input = $(this);
             if (!$input.hasClass("d-none")) {
                 $input.addClass("d-none").val("");
-                filterTable("", $tableBody, colIndex);
+                let tableId = $input.closest(".table-section").find("tbody").attr("id");
+                filterTable("", $("#" + tableId), $input.closest(".search-header").index());
             }
         });
-    }
+    });
 
     // =====================
     // Filter rows by column
@@ -47,50 +55,9 @@ $(document).ready(function () {
         });
     }
 
-    // =====================
-    // 🔹 Tab 1: Orders
-    // =====================
-    toggleSearchInput("#toggleSearchOrder", "#searchOrderNumber", "tablesearch", 0);
-    toggleSearchInput("#toggleSearchOrderDetails", "#searchOrderDetails", "tablesearch", 1);
-    toggleSearchInput("#toggleSearchUserFullName", "#searchUserFullName", "tablesearch", 2);
 
-    // =====================
-    // 🔹 Tab 2: Users
-    // =====================
-    toggleSearchInput("#toggleSearchNationalCode", "#searchNationalCode", "tablesearchUsers", 0);
-    toggleSearchInput("#toggleSearchPhone", "#searchPhone", "tablesearchUsers", 1);
-    toggleSearchInput("#toggleSearchUserFullName2", "#searchUserFullName2", "tablesearchUsers", 2);
 
-    // =====================
-    // 🔹 Tab 3: Requests
-    // =====================
-    toggleSearchInput("#toggleSearchRequestNumber", "#searchRequestNumber", "tablesearchRequests", 0);
-    toggleSearchInput("#toggleSearchTrackingNumber", "#searchTrackingNumber", "tablesearchRequests", 1);
-    toggleSearchInput("#toggleSearchRequestFullName", "#searchRequestFullName", "tablesearchRequests", 2);
 
-    // =====================
-    // 📅 Sort by Date (using data-item-unix)
-    // =====================
-    $(".dropitem").on("click", function (e) {
-        e.preventDefault();
-        const direction = $(this).data("value"); // "asc" or "desc"
-        const $tableBody = $("#tablesearch");
-
-        // Convert table rows to array for sorting
-        const rowsArray = $tableBody.find("tr").get();
-
-        // Sort rows by data-item-unix attribute
-        rowsArray.sort(function (a, b) {
-            const aUnix = parseInt($(a).data("item-unix"));
-            const bUnix = parseInt($(b).data("item-unix"));
-            return direction === "asc" ? aUnix - bUnix : bUnix - aUnix;
-        });
-
-        // Append sorted rows back to tbody
-        $.each(rowsArray, function (i, row) {
-            $tableBody.append(row);
-        });
-    });
 
     // =====================
     // 📌 Filter by Order Status
@@ -150,4 +117,14 @@ $(document).ready(function() {
         tabTrigger.show();
     });
 
+
+
+    //aside
+      $(".sidebar-link, .nav-link").on("click", function(e){
+            e.preventDefault();
+            $(".sidebar-link, .nav-link").removeClass("active");
+            $(this).addClass("active");
+        });
 });
+
+
