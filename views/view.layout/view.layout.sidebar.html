@@ -11,61 +11,34 @@
         <hr>
     </div>
 
-    <!-- Dashboard Shortcut -->
-        <ul class="nav flex-column justify-content-start mt-5">
-        <li class="nav-item mb-3 text-nowrap mt-3">
-            <a href="#" class="sidebar-link  text-decoration-none" data-target="tableOrder">
-              <img src="[@settings->]assets/img/home-menu.png" alt="">
-                <span class="font-color fs-5 ms-2"> داشبورد</span>
-            </a>
-        </li>
-
     <!-- Navigation Menu -->
-    <ul class="nav flex-column justify-content-start">
-        <!-- Internal Automation -->
+    <ul class="nav flex-column justify-content-start mt-5">
+        <!-- Dashboard -->
         <li class="nav-item mb-3 text-nowrap mt-3">
-            <a href="#" class="sidebar-link text-decoration-none" data-target="user-tab">
-             <img src="[@settings->]assets/img/logo61.png" alt="automation">
-                <span class="font-color fs-5 ms-2"> اتوماسیون داخلی</span>
+            <a href="[@settings->site]" class="nav-link text-dark" data-target="tableOrder">
+                <img src="[@settings->]assets/img/home-menu.png" alt="">
+                <span class="font-color fs-5 ms-2">داشبورد</span>
             </a>
         </li>
-        <!-- Manage users and orders -->
+        <!-- Manage users -->
         <li class="nav-item mb-3 text-nowrap mt-3">
-            <a href="#" class="sidebar-link text-decoration-none" data-target="tableManageUsers">
-                <img src="[@settings->]assets/img/manageUser.png" alt="manageUser" >
+            <a href="[@settings->site]user-management/" class="nav-link text-dark">
+                <i class="fa fa-users"></i>
                 <span class="font-color fs-5 ms-1">مدیریت کاربران</span>
             </a>
         </li>
-
-        <!-- Financial Section -->
-        <li class="nav-item mb-3 text-nowrap mt-3">
-            <a href="#" class="sidebar-link nav-link text-dark" data-target="tablefinance">
-              <img src="[@settings->]assets/img/moneys.svg" alt="moneys">
-                <span class="font-color fs-5 ms-2">مالی</span>
-            </a>
-        </li>
-
         <!-- Orders -->
         <li class="nav-item mb-3 text-nowrap mt-3">
-            <a class="nav-link text-dark" href="[@settings->site]">
+            <a href="[@settings->site]orders/" class="nav-link text-dark">
                 <img src="[@settings->]assets/img/receipt-text.svg" alt="orders">
-                <span class="font-color fs-5 ms-2">سفارش‌ها</span>
+                <span class="font-color fs-5 ms-2">سفارشات</span>
             </a>
         </li>
-
-        <!-- Cryptocurrency -->
+        <!-- Financial Section -->
         <li class="nav-item mb-3 text-nowrap mt-3">
-            <a class="nav-link text-dark" href="[@settings->site]">
-                <img src="[@settings->]assets/img/bitcoin-(btc).png" alt="arz">
-                <span class="font-color fs-5 ms-2">ارز دیجیتال</span>
-            </a>
-        </li>
-
-        <!-- Settings -->
-        <li class="nav-item mb-3 text-nowrap mt-3">
-            <a class="nav-link text-dark" href="[@settings->site]">
-                <img src="[@settings->]assets/img/setting-2.png" alt="setting">
-                <span class="font-color fs-5 ms-2">تنظیمات</span>
+            <a href="[@settings->site]transactions/" class="nav-link text-dark">
+                <img src="[@settings->]assets/img/moneys.svg" alt="moneys">
+                <span class="font-color fs-5 ms-2">مالی</span>
             </a>
         </li>
     </ul>

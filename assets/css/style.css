@@ -400,3 +400,7 @@ body {
 }
 @media (max-width: 900px) {
 }
+.table-responsive {
+  overflow-x: auto; 
+  overflow-y: hidden; 
+  max-height: 500px;}

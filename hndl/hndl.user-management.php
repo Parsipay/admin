@@ -251,12 +251,11 @@ function FinancialPageReady() {
 
     // Return payload
     return [
-        'content'   => biiq_Template::Start('pages->FinancialPageReady', true, ['Objects' => $payload]),
+        'content'   => biiq_Template::Start('pages->user-management', true, ['Objects' => $payload]),
         'id'        => 1,
-        'title'     => 'مالی کاربران',
-        'Canonical' => SITE,
+        'title'     => 'مدیریت کاربران',
+        'Canonical' => SITE.'user-management/'
     ];
 }
-
 
 ?>

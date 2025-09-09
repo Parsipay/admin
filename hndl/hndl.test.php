@@ -1,43 +1,14 @@
 <?php
 function ProcessRequest($request){
-    $page = new stdClass();
-    //test inja
 
-    $page->Time = date("Y/m/d");
-    $page->mohtava = "contentest";  
-    
-    $page->Jafar = "sdkasdhakjsd";
-    $page->Jafar = "sdkasdhakjsd";
-    $page->Jafar2 = "0000000";
-    $page->Jafar = "sdkasdhakjsd";
-    $page->Jafar3 = "12313123";
-    $page->Jafar = "sdkasdhakjsd";
-    $page->Jafar = "sdkasdhakjsd";
-    $page->Jafar = "sdkasdhakjsd";
-    $page->Jafar = "sdkasdhakjsd";
-    $page->dates  = date("Y-m-d h:i:sa", $d);
 
-    $page->Teams = [
-        ["ThisIsKey" => "ThisIsValue", "Name" => "Shayan"],
-        ["ThisIsKey" => "ThisIsValue", "Name" => "Banafshe"],
-        ["ThisIsKey" => "ThisIsValue3", "Name" => "Yegane"],
-        ["ThisIsKey" => "ThisIsValue", "Name" => "Jafaaaari"],
-        ["ThisIsKey" => "ThisIsValue", "Name" => "Heesam"],
+
+
+    return [
+        'content'   => biiq_Template::Start('pages->user-management', true, ['Objects' => $payload]),
+        'id'        => 1,
+        'title'     => 'مدیریت کاربران',
+        'Canonical' => SITE.'user-management/'
     ];
-
-
-    
-
-
-    
-    $page->UserCount = 1600;
-    $pp = array(
-        'content' => biiq_Template::Start('test->test', true, ['Objects' => $page]),
-        'id'    => 0,
-        'title' => 'گیفت آپ | ربات تبدیل ووچر',
-        'Canonical' => SITE,
-    );
-    return $pp;
 }
-?> 
-
+?>

@@ -1,0 +1,54 @@
+ <div id="tablefinance" class="table-section">
+    <div class="table-responsive border-0 rounded">
+        <table class="table table-striped text-center mb-0">
+            <thead class="table-secondary">
+                <tr class="align-middle">
+
+                    <!-- شناسه واریز -->
+                    <th class="search-header" data-search="true" style="cursor:pointer;">
+                    <div class="d-flex flex-column align-items-start">
+                        <div id="toggleSearchDepositId" class="d-flex align-items-center">
+                        <img src="[@settings->]assets/img/saerchnormal.png" width="14" height="14">
+                        <span class="mx-1 text-center">شناسه واریز</span>
+                        </div>
+                        <input id="searchDepositId" type="text" class="border-none rounded mt-1 d-none"
+                        placeholder="جستجو">
+                    </div>
+                    </th>
+
+
+                    <!-- نام و نام خانوادگی -->
+                    <th class="search-header" data-search="true">
+                    <div class="d-flex flex-column align-items-start">
+                        <div id="toggleSearchDepositName" class="d-flex align-items-center">
+                        <img src="[@settings->]assets/img/saerchnormal.png" width="14" height="14">
+                        <span class="mx-1 text-center">کاربر</span>
+                        </div>
+                        <input id="searchDepositName" type="text" class="border-none rounded mt-1 d-none"
+                        placeholder="جستجو">
+                    </div>
+                    </th>
+
+                    <th class="text-start">اطلاعات حساب</th>
+                    <th class="text-start">مبلغ</th>
+                    <th class="text-start">وضعیت</th>
+                </tr>
+            </thead>
+            <tbody>
+                [foreach ([@Objects->Carts])]
+                    <tr>
+                        <td class="text-start">[@Item->ID]</td>
+                        <td class="text-primary text-start">
+                            <a href="[@settings->site]users/[@Item->UserID]/">
+                                [@Item->User]
+                            </a>
+                        </td>
+                        <td class="text-start">[@Item->Shaba]</td>
+                        <td class="text-start">[@Item->Price]</td>
+                        <td class="text-start"><span class="d-flex p-2 opacity-green rounded-5">[@Item->Status]</span></td>
+                    </tr>
+                [endforeach]
+            </tbody>
+        </table>
+    </div>
+  </div>

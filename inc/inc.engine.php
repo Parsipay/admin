@@ -108,6 +108,14 @@ class biiq_Engine{
     public static function OutputBuffer_PostProcessor($buffer){
         return Trimmer($buffer);
     }
+
+
+    // Helpers
+    public static function maskCard($num) {// this function should move to a library that is about Cards.
+        $len = strlen($num);
+        if ($len <= 10) return str_repeat("*", $len); // fallback for very short numbers
+        return substr($num, 0, 6) . str_repeat("*", $len - 10) . substr($num, -4);
+    }
 }
 
 ?>

@@ -1,0 +1,40 @@
+{
+  "orders": [
+    {
+      "orderNumber": "10232336263#",
+      "type": "خرید",
+      "typeClass": "opacity-green",
+      "img": "/assets/img/usdt.png",
+      "orderDetails": "197.3499",
+      "currencyName": "USDT (تتر)",
+      "userFullName": "بنفشه ابراهیمی",
+      "price": "۴۴,۹۳۵,۶۰۰",
+      "priceClass": "text-success",
+      "dateandTime": "جمعه 19 اردیبهشت 1404<br>ساعت 11:17:18",
+      "statusText": "تکمیل نشده",
+      "statusClass": "text-info"
+    }
+  ],
+  "users": [
+    {
+      "nationalCode": "0440202507",
+      "phoneNumber": "09353353167",
+      "fullName": "یگانه علیزاده",
+      "lastActivity": "2 روز قبل",
+      "signupTime": "جمعه 19 اردیبهشت 1404",
+      "Status": 2,
+      "StatusText": "<span class='d-flex p-2 justify-content-start align-items-center opacity-green rounded-5'>موفق</span>"
+    }
+  ],
+  "requests": [
+    {
+      "requestNumber": "15495319",
+      "trackingNumber": "835565",
+      "fullName": "یگانه علیزاده",
+      "amount": "۴۴,۹۳۵,۶۰۰",
+      "dateandTime": "جمعه 19 اردیبهشت 1404<br>ساعت 11:17:18",
+      "statusClass": "text-info",
+      "statusText": "مشاهده رسید"
+    }
+  ]
+}
