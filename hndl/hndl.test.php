@@ -1,7 +1,7 @@
 <?php
 function ProcessRequest($request){
 
-
+  $payload = new stdClass();
 
 
     return [

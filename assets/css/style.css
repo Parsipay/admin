@@ -206,7 +206,7 @@ body {
 /*========aside======*/
 .sidebar-link.active,
 .nav-link.active {
-  background-color: #fff !important;
+  background-color: #ab4f9e !important;
   border-radius: 8px;
 }
 
@@ -226,7 +226,7 @@ body {
 }
 
 .sidebar-link.active {
-  background-color: #fff;
+  background-color:#ab4f9e;
   color: #000;
 }
 
@@ -249,16 +249,7 @@ body {
   background: rgb(100, 185, 241);
 }
 
-/* Nav Pills */
-.navpill-btn {
-  background-color: #fffbff !important;
-  border: 1px solid purple !important;
-  color: #ab4f9e !important;
-}
-button.navpill-btn.active {
-  background-color: #ab4f9e !important;
-  color: #fffdfd !important;
-}
+
 
 /* ===============================
    Utility Classes
@@ -403,4 +394,37 @@ body {
 .table-responsive {
   overflow-x: auto; 
   overflow-y: hidden; 
-  max-height: 500px;}
+  max-height: 500px;}.search-wrapper {
+    position: relative;
+    display: inline-block;
+}
+/*search input*/
+.search-wrapper {
+    position: relative;
+    display: inline-block;
+}
+.search-input {
+    position: absolute;
+    top: 100%;
+    left: 1;
+    width: 180px;
+    padding: 2px 8px;
+    font-size: 0.85rem;
+    display: none;
+    z-index: 1000;
+    background-color: #fff;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+.search-input.show {
+    display: block;
+}
+.search-icon {
+    cursor: pointer;
+    color: #6c757d;
+}
+.search-wrapper:hover .search-icon {
+    color: #0d6efd;
+}
+

@@ -1,54 +1,188 @@
- <div id="tablefinance" class="table-section">
-    <div class="table-responsive border-0 rounded">
-        <table class="table table-striped text-center mb-0">
+<div class=" py-5" style="min-height: 80vh;">
+
+    <!-- Nav Pills -->
+    <ul class="nav nav-pills nav-justified gap-1 pb-3" id="financeTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link text-purple active rounded-pill" data-bs-toggle="pill" data-bs-target="#deposits"
+                type="button" role="tab">لیست واریزی‌ها</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link text-purple rounded-pill" data-bs-toggle="pill" data-bs-target="#credits"
+                type="button" role="tab">افزایش اعتبار</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link text-purple rounded-pill" data-bs-toggle="pill" data-bs-target="#settlements"
+                type="button" role="tab">صف تسویه</button>
+        </li>
+    </ul>
+
+    <!-- Tab Content -->
+    <div class="tab-content">
+        <!-- Deposits -->
+        <div class="tab-pane fade show active" id="deposits" role="tabpanel">
+            <div class="table-responsive shadow-sm rounded-3 bg-white p-3">
+                <table class="table table-striped table-hover align-middle text-center mb-0 searchable-table">
+                    <thead class="table-secondary">
+                        <tr>
+                            <th class="text-start">
+                                <div class="search-wrapper d-flex align-items-center">
+                                    <i class="fas fa-search search-icon me-1" data-column="0"
+                                        style="cursor:pointer;"></i>
+                                    <input type="text" class="search-input form-control form-control-sm"
+                                        placeholder="جستجو..." />
+                                    <span>شماره درخواست</span>
+                                </div>
+                            </th>
+                            <th class="text-start">
+                                <div class="search-wrapper d-flex align-items-center">
+                                    <i class="fas fa-search search-icon me-1" data-column="0"
+                                        style="cursor:pointer;"></i>
+                                    <input type="text" class="search-input form-control form-control-sm"
+                                        placeholder="جستجو..." />
+                                    <span>شماره پیگیری</span>
+                                </div>
+                            </th>
+                            <th class="text-start">کاربر</th>
+                            <th class="text-start">مبلغ</th>
+                            <th class="text-start sortable" data-column="4" style="cursor:pointer">
+                                تاریخ تراکنش <i class="fas fa-sort"></i>
+                            </th>
+                            <th class="text-start">وضعیت <i class="fas fa-sort"></i></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        [foreach ([@Objects->Deposits])]
+                        <tr>
+                            <td class="text-start fw-semibold">[@Item->ID]<i class="far fa-copy ms-1 text-primary"></i>
+                            </td>
+                            <td class="text-start fw-semibold">[@Item->trackingNumber]<i
+                                    class="far fa-copy ms-1 text-primary"></i></td>
+                            <td class="text-primary text-start">
+                                <a href="[@settings->site]users/[@Item->UserID]/" class="text-decoration-none">
+                                    [@Item->User]
+                                </a>
+                            </td>
+                            <td class="text-start fw-bold">[@Item->Price]</td>
+                            <td class="text-start" data-timestamp="[@Item->UnixTimestamp]">[@Item->persianDate]</td>
+
+                            <td class="text-start">
+                                <span class="badge px-3 py-2 rounded-pill [@Item->StatusColor]">
+                                    [@Item->Status]
+                                </span>
+                            </td>
+                        </tr>
+                        [endforeach]
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Credits -->
+        <div class="tab-pane fade" id="credits" role="tabpanel">
+            <div class="table-responsive shadow-sm rounded-3 bg-white p-3">
+                <table class="table table-striped table-hover align-middle text-center mb-0 searchable-table">
+                    <thead class="table-secondary">
+                        <tr>
+                            <th class="text-start">
+                                <div class="search-wrapper d-flex align-items-center">
+                                    <i class="fas fa-search search-icon me-1" data-column="0"
+                                        style="cursor:pointer;"></i>
+                                    <input type="text" class="search-input form-control form-control-sm"
+                                        placeholder="جستجو..." />
+                                    <span>شناسه واریز </span>
+                                </div>
+                            </th>
+                            <th class="text-start">
+                                <div class="search-wrapper d-flex align-items-center">
+                                    <i class="fas fa-search search-icon me-1" data-column="0"
+                                        style="cursor:pointer;"></i>
+                                    <input type="text" class="search-input form-control form-control-sm"
+                                        placeholder="جستجو..." />
+                                    <span>شماره موبایل </span>
+                                </div>
+                            </th>
+                            <th class="text-start">کاربر</th>
+                            <th class="text-start"> اطلاعات حساب<i class="fas fa-sort ms-1"></i></th>
+                            <th class="text-start">مبلغ<i class=" fas fa-sort ms-1"></i></th>
+                            <th class="text-start">
+                                <div class="search-wrapper d-flex align-items-center">
+                                    <i class="fas fa-search search-icon me-1" data-column="0"
+                                        style="cursor:pointer;"></i>
+                                    <input type="text" class="search-input form-control form-control-sm"
+                                        placeholder="جستجو..." />
+                                    <span>شماره پیگیری</span>
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        [foreach ([@Objects->Credits])]
+                        <tr>
+                            <td class="text-start fw-semibold">[@Item->ID]</td>
+                            <td class="text-start fw-semibold">[@Item->trackingNumber]</td>
+                            <td class="text-primary text-start">
+                                <a href="[@settings->site]users/[@Item->UserID]/" class="text-decoration-none">
+                                    [@Item->User]
+                                </a>
+                            </td>
+                            <td class="text-start d-flex align-items-center">
+                                <img src="[@Item->BankImage]" alt="بانک" width="30" height="30" class="me-2">
+                                <span>[@Item->bankData]</span>
+                            </td>
+                            <td class="text-start fw-bold">[@Item->price]</td>
+                            <td class="text-start"><span class="  px-3 py-2 rounded-pill">[@Item->trackingNumber]</span>
+                            </td>
+                        </tr>
+                        [endforeach]
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+   <!-- Settlements -->
+<!-- Settlements -->
+<!-- Settlements -->
+<div class="tab-pane fade" id="settlements" role="tabpanel">
+    <div class="table-responsive shadow-sm rounded-3 bg-white p-3">
+        <table class="table table-striped table-hover align-middle text-center mb-0 searchable-table">
             <thead class="table-secondary">
-                <tr class="align-middle">
-
-                    <!-- شناسه واریز -->
-                    <th class="search-header" data-search="true" style="cursor:pointer;">
-                    <div class="d-flex flex-column align-items-start">
-                        <div id="toggleSearchDepositId" class="d-flex align-items-center">
-                        <img src="[@settings->]assets/img/saerchnormal.png" width="14" height="14">
-                        <span class="mx-1 text-center">شناسه واریز</span>
-                        </div>
-                        <input id="searchDepositId" type="text" class="border-none rounded mt-1 d-none"
-                        placeholder="جستجو">
-                    </div>
-                    </th>
-
-
-                    <!-- نام و نام خانوادگی -->
-                    <th class="search-header" data-search="true">
-                    <div class="d-flex flex-column align-items-start">
-                        <div id="toggleSearchDepositName" class="d-flex align-items-center">
-                        <img src="[@settings->]assets/img/saerchnormal.png" width="14" height="14">
-                        <span class="mx-1 text-center">کاربر</span>
-                        </div>
-                        <input id="searchDepositName" type="text" class="border-none rounded mt-1 d-none"
-                        placeholder="جستجو">
-                    </div>
-                    </th>
-
-                    <th class="text-start">اطلاعات حساب</th>
+                <tr>
+                    <th class="text-start">شناسه واریز</th>
+                    <th class="text-start">زمان</th>
+                    <th class="text-start">کاربر</th>
                     <th class="text-start">مبلغ</th>
                     <th class="text-start">وضعیت</th>
+                    <th class="text-start">مشخصات</th>
                 </tr>
             </thead>
             <tbody>
-                [foreach ([@Objects->Carts])]
-                    <tr>
-                        <td class="text-start">[@Item->ID]</td>
-                        <td class="text-primary text-start">
-                            <a href="[@settings->site]users/[@Item->UserID]/">
-                                [@Item->User]
-                            </a>
-                        </td>
-                        <td class="text-start">[@Item->Shaba]</td>
-                        <td class="text-start">[@Item->Price]</td>
-                        <td class="text-start"><span class="d-flex p-2 opacity-green rounded-5">[@Item->Status]</span></td>
-                    </tr>
+                [foreach ([@Objects->Settlements])]
+                <tr>
+                    <td class="text-start fw-semibold">[@Item->ID]</td>
+                    <td class="text-start fw-semibold"
+                        data-timestamp="[@Item->UnixTimestamp]"
+                        data-persian-date="[@Item->persianDate]">
+                        [@Item->persianDate]
+                    </td>
+                    <td class="text-primary text-start">
+                        <a href="[@settings->site]users/[@Item->UserID]/" class="text-decoration-none">
+                            [@Item->User]
+                        </a>
+                    </td>
+                    <td class="text-start fw-bold">[@Item->Price]</td>
+                    <td class="text-start">
+                        <span class="text-warning px-3 py-2 rounded-pill">[@Item->Status]</span>
+                    </td>
+                    <td class="text-start">
+                        <span class="badge text-primary px-3 py-2 rounded-pill">[@Item->properies]</span>
+                    </td>
+                </tr>
                 [endforeach]
             </tbody>
         </table>
     </div>
-  </div>
+</div>
+
+
+    </div>
+</div>

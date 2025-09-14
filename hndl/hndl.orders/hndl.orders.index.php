@@ -21,7 +21,7 @@ function ProcessRequest($request){
     return [
         'content'   => biiq_Template::Start('orders->index', true, ['Objects' => $p]),
         'id'        => 1,
-        'title'     => 'سفارش ها',
+        'title'     => 'مالی ',
         'Canonical' => SITE.'orders/'
     ];
 }
