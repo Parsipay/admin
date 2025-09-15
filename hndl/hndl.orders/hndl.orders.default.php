@@ -24,7 +24,7 @@ echo "inja bayad sabte sefaresh beshe";
         'content' => biiq_Template::Start('orders->default', true, ['Objects' => $page]),
         'id' => 0,
         'title' => $page->Title,
-        'Canonical' => SITE,
+        'Canonical' => SITE.'orders/',
     );
     return $page;
 }
