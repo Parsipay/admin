@@ -437,3 +437,267 @@
     [previous:Exception:private] => 
 )
 
+[16-Sep-2025 16:41:38 Asia/Tehran] DateMalformedStringException Object
+(
+    [message:protected] => Failed to parse time string (@) at position 0 (@): Unexpected character
+    [string:Exception:private] => 
+    [code:protected] => 0
+    [file:protected] => C:\www\inc\inc.persiandate.php
+    [line:protected] => 18
+    [trace:Exception:private] => Array
+        (
+            [0] => Array
+                (
+                    [file] => C:\www\inc\inc.persiandate.php
+                    [line] => 18
+                    [function] => __construct
+                    [class] => DateTime
+                    [type] => ->
+                )
+
+            [1] => Array
+                (
+                    [file] => C:\www\hndl\hndl.manage\hndl.manage.index.php
+                    [line] => 14
+                    [function] => date
+                    [class] => biiq_PersianDate
+                    [type] => ::
+                )
+
+            [2] => Array
+                (
+                    [file] => C:\www\inc\inc.handler.php
+                    [line] => 145
+                    [function] => ProcessRequest
+                )
+
+            [3] => Array
+                (
+                    [file] => C:\www\inc\inc.handler.php
+                    [line] => 87
+                    [function] => Process
+                    [class] => biiq_Handler
+                    [type] => ->
+                )
+
+            [4] => Array
+                (
+                    [file] => C:\www\inc\inc.engine.php
+                    [line] => 12
+                    [function] => __construct
+                    [class] => biiq_Handler
+                    [type] => ->
+                )
+
+            [5] => Array
+                (
+                    [file] => C:\www\index.php
+                    [line] => 126
+                    [function] => __construct
+                    [class] => biiq_Engine
+                    [type] => ->
+                )
+
+        )
+
+    [previous:Exception:private] => 
+)
+
+[16-Sep-2025 16:41:39 Asia/Tehran] DateMalformedStringException Object
+(
+    [message:protected] => Failed to parse time string (@) at position 0 (@): Unexpected character
+    [string:Exception:private] => 
+    [code:protected] => 0
+    [file:protected] => C:\www\inc\inc.persiandate.php
+    [line:protected] => 18
+    [trace:Exception:private] => Array
+        (
+            [0] => Array
+                (
+                    [file] => C:\www\inc\inc.persiandate.php
+                    [line] => 18
+                    [function] => __construct
+                    [class] => DateTime
+                    [type] => ->
+                )
+
+            [1] => Array
+                (
+                    [file] => C:\www\hndl\hndl.manage\hndl.manage.index.php
+                    [line] => 14
+                    [function] => date
+                    [class] => biiq_PersianDate
+                    [type] => ::
+                )
+
+            [2] => Array
+                (
+                    [file] => C:\www\inc\inc.handler.php
+                    [line] => 145
+                    [function] => ProcessRequest
+                )
+
+            [3] => Array
+                (
+                    [file] => C:\www\inc\inc.handler.php
+                    [line] => 87
+                    [function] => Process
+                    [class] => biiq_Handler
+                    [type] => ->
+                )
+
+            [4] => Array
+                (
+                    [file] => C:\www\inc\inc.engine.php
+                    [line] => 12
+                    [function] => __construct
+                    [class] => biiq_Handler
+                    [type] => ->
+                )
+
+            [5] => Array
+                (
+                    [file] => C:\www\index.php
+                    [line] => 126
+                    [function] => __construct
+                    [class] => biiq_Engine
+                    [type] => ->
+                )
+
+        )
+
+    [previous:Exception:private] => 
+)
+
+[16-Sep-2025 16:41:39 Asia/Tehran] DateMalformedStringException Object
+(
+    [message:protected] => Failed to parse time string (@) at position 0 (@): Unexpected character
+    [string:Exception:private] => 
+    [code:protected] => 0
+    [file:protected] => C:\www\inc\inc.persiandate.php
+    [line:protected] => 18
+    [trace:Exception:private] => Array
+        (
+            [0] => Array
+                (
+                    [file] => C:\www\inc\inc.persiandate.php
+                    [line] => 18
+                    [function] => __construct
+                    [class] => DateTime
+                    [type] => ->
+                )
+
+            [1] => Array
+                (
+                    [file] => C:\www\hndl\hndl.manage\hndl.manage.index.php
+                    [line] => 14
+                    [function] => date
+                    [class] => biiq_PersianDate
+                    [type] => ::
+                )
+
+            [2] => Array
+                (
+                    [file] => C:\www\inc\inc.handler.php
+                    [line] => 145
+                    [function] => ProcessRequest
+                )
+
+            [3] => Array
+                (
+                    [file] => C:\www\inc\inc.handler.php
+                    [line] => 87
+                    [function] => Process
+                    [class] => biiq_Handler
+                    [type] => ->
+                )
+
+            [4] => Array
+                (
+                    [file] => C:\www\inc\inc.engine.php
+                    [line] => 12
+                    [function] => __construct
+                    [class] => biiq_Handler
+                    [type] => ->
+                )
+
+            [5] => Array
+                (
+                    [file] => C:\www\index.php
+                    [line] => 126
+                    [function] => __construct
+                    [class] => biiq_Engine
+                    [type] => ->
+                )
+
+        )
+
+    [previous:Exception:private] => 
+)
+
+[16-Sep-2025 17:07:39 Asia/Tehran] DateMalformedStringException Object
+(
+    [message:protected] => Failed to parse time string (@) at position 0 (@): Unexpected character
+    [string:Exception:private] => 
+    [code:protected] => 0
+    [file:protected] => C:\www\inc\inc.persiandate.php
+    [line:protected] => 18
+    [trace:Exception:private] => Array
+        (
+            [0] => Array
+                (
+                    [file] => C:\www\inc\inc.persiandate.php
+                    [line] => 18
+                    [function] => __construct
+                    [class] => DateTime
+                    [type] => ->
+                )
+
+            [1] => Array
+                (
+                    [file] => C:\www\hndl\hndl.orders\hndl.orders.index.php
+                    [line] => 14
+                    [function] => date
+                    [class] => biiq_PersianDate
+                    [type] => ::
+                )
+
+            [2] => Array
+                (
+                    [file] => C:\www\inc\inc.handler.php
+                    [line] => 145
+                    [function] => ProcessRequest
+                )
+
+            [3] => Array
+                (
+                    [file] => C:\www\inc\inc.handler.php
+                    [line] => 87
+                    [function] => Process
+                    [class] => biiq_Handler
+                    [type] => ->
+                )
+
+            [4] => Array
+                (
+                    [file] => C:\www\inc\inc.engine.php
+                    [line] => 12
+                    [function] => __construct
+                    [class] => biiq_Handler
+                    [type] => ->
+                )
+
+            [5] => Array
+                (
+                    [file] => C:\www\index.php
+                    [line] => 126
+                    [function] => __construct
+                    [class] => biiq_Engine
+                    [type] => ->
+                )
+
+        )
+
+    [previous:Exception:private] => 
+)
+
