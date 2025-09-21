@@ -146,6 +146,7 @@ body {
   --opacity-success: #d0f4e6;
   --opacity-warning: rgba(255, 207, 104, 0.356);
   --main-gary-element: #f8fafd;
+   --bg-col: #f8fafd;
 }
 
 /* ===============================
@@ -428,3 +429,13 @@ body {
     color: #0d6efd;
 }
 
+
+
+/*for table tr color*/
+.searchable-table tbody tr:nth-child(even) td {
+  background-color: var(--bg-col) !important; 
+}
+
+table thead th {
+     background: var(--color-text-background-gray-light, #EFF2F5)!important; 
+}

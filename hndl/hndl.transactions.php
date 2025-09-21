@@ -2,15 +2,10 @@
 function ProcessRequest($request){
     $page = new stdClass();
 
-    // =======================
-    // مرتب‌سازی تراکنش‌ها
-    // =======================
-    // مقدار sortOrder می‌تواند 'asc' یا 'desc' باشد
-    $sortOrder = 'desc'; // 'asc' برای صعودی، 'desc' برای نزولی
-
-    // =======================
-    // لیست واریزی‌ها
-    // =======================
+    // Sort transactions
+    // sortOrder can be 'asc' or 'desc'
+    $sortOrder = 'desc'; // 'asc' for ascending, 'desc' for descending
+    // Deposits list
     $page->Deposits = [
         [
             "ID" => "e3140202507",
@@ -44,9 +39,7 @@ function ProcessRequest($request){
         ]
     ];
 
-    // =======================
-    // افزایش اعتبار
-    // =======================
+    // Credit increases
 $page->Credits = [
     [
         "ID" => "1C340202507",
@@ -85,10 +78,7 @@ $page->Credits = [
         "trackingNumber" => "۲۲۳۶۷۸۱۶۷۰۷۸",
     ],
 ];
-
-    // =======================
-    // صف تسویه
-    // =======================
+    // Settlement queue
     $page->Settlements = [
         [
             "ID" => "S540202507",
@@ -122,9 +112,7 @@ $page->Credits = [
         ],
     ];
 
-    // =======================
-    // مرتب‌سازی براساس UnixTimestamp
-    // =======================
+    // Sort by UnixTimestamp
     $sortFunction = function($a, $b) use ($sortOrder) {
         return ($sortOrder === 'asc') 
             ? $a['UnixTimestamp'] <=> $b['UnixTimestamp'] 
@@ -135,9 +123,7 @@ $page->Credits = [
     usort($page->Credits, $sortFunction);
     usort($page->Settlements, $sortFunction);
 
-    // =======================
-    // فقط برای لیست واریزی‌ها رنگ وضعیت
-    // =======================
+    // Status colors only for deposits
     foreach ($page->Deposits as &$Item) {
         $status = trim($Item["Status"]);
         if ($status === "مشاهده رسید") {

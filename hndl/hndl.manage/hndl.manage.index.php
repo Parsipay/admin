@@ -9,8 +9,8 @@ function ProcessRequest($request)
     }
 
     $page = new stdClass();
-    //data for accordion
-    $UnixTimestamp = 1616301000; //baarye mesal ye tarikh o zadam dar asl bayad chandd ta bashe
+    // data for accordion
+    $UnixTimestamp = 1616301000; // example timestamp, in reality there should be multiple
     $page->docList = [
         [
             "user" => "بنفشه ابراهیمی",
@@ -40,7 +40,7 @@ function ProcessRequest($request)
     ];
 
 
-    // لیست واریزی‌ها
+    // deposits list
     $page->userList = [
         [
             "nationalCode" => "0013152343",
@@ -107,7 +107,7 @@ function ProcessRequest($request)
             "details" => "تایید شده",
         ],
     ];
-    //List of authentication documents  
+    // List of authentication documents  
     $page->authentication = [
         [
             "nationalCode" => "0013152343",
@@ -147,10 +147,10 @@ foreach ($page->authentication as &$Item) {
         $Item["StatusColor"] = "text-danger";
     }
 }
-unset($Item); // برای جلوگیری از باگ‌های بعدی
+unset($Item); // prevent possible bugs later
 
 
-    // فقط برای لیست واریزی‌ها رنگ وضعیت
+    // only for deposits list - status colors
     foreach ($page->orderList as &$Item) {
         $status = trim($Item["Status"]);
         if ($status === "موفق") {
@@ -177,7 +177,7 @@ unset($Item); // برای جلوگیری از باگ‌های بعدی
             $Item["StatusColor"] = "text-danger";
         }
     }
-    unset($Item); // خیلی مهمه برای جلوگیری از باگ‌های احتمالی
+    unset($Item); // important to prevent possible bugs
     foreach ($page->requestList as &$Item) {
         $status = trim($Item["Status"]);
 
@@ -189,7 +189,7 @@ unset($Item); // برای جلوگیری از باگ‌های بعدی
             $Item["StatusColor"] = "text-danger";
         }
     }
-    unset($Item); // خیلی مهمه برای جلوگیری از باگ‌های احتمالی
+    unset($Item); // important to prevent possible bugs
 
     return [
         'content'   => biiq_Template::Start('manage->index', true, ['Objects' => $page]),
