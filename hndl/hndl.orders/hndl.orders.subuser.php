@@ -3,9 +3,10 @@ function ProcessRequest($request)
 {
     $page = new stdClass();
 
-    $page->orderList = [
+
+ $page->orderList = [
         [
-            "numberOrder" => "0013152343",
+            "numberOrder" => "111111111111111111111",
             "OrderDetails" => "09128431937",
             "User" => "یگانه علیزاده",
             "UserID" => 16,
@@ -36,10 +37,10 @@ function ProcessRequest($request)
         ],
     ];
 
-    //List of request
+ //List of request
     $page->requestList = [
         [
-            "requestCode" => "0013152343",
+            "requestCode" => "5555555555555555555555555555555555555",
             "trackingNumber" => "0293564635",
             "User" => "بنفشه ابراهیمی",
             "UserID" => 22,
@@ -49,7 +50,7 @@ function ProcessRequest($request)
             "Status" => "مشاهده رسید",
         ],
         [
-            "requestCode" => "0013152343",
+            "requestCode" => "55555555555555555555555555555555",
             "trackingNumber" => "0293564635",
             "User" => "بنفشه ابراهیمی",
             "UserID" => 23,
@@ -59,7 +60,7 @@ function ProcessRequest($request)
             "Status" => "  مشاهده رسید",
         ],
         [
-            "requestCode" => "0013152343",
+            "requestCode" => "3333333333333333333333",
             "trackingNumber" => "0293564635",
             "User" => "بنفشه ابراهیمی",
             "UserID" => 24,
@@ -104,8 +105,9 @@ function ProcessRequest($request)
             "Status" => "تکمیل نشده",
         ],
     ];
+  
 
-
+    // فقط برای لیست واریزی‌ها رنگ وضعیت
     foreach ($page->orderList as &$Item) {
         $status = trim($Item["Status"]);
         if ($status === "موفق") {
@@ -118,37 +120,37 @@ function ProcessRequest($request)
     }
     unset($Item);
 
-    foreach ($page->userList as &$Item) {
-        $status = trim($Item["Status"]);
-        if ($status === "موفق") {
-            $Item["StatusColor"] = "text-success";
-        } elseif ($status === "تکمیل نشده") {
-            $Item["StatusColor"] = "text-primary";
-        } elseif ($status === "در انتظار تایید") {
-            $Item["StatusColor"] = "text-warning";
-        } else {
-            $Item["StatusColor"] = "text-danger";
-        }
+foreach($page->userList as &$Item) {
+    $status = trim($Item["Status"]);
+    if ($status === "موفق") {
+        $Item["StatusColor"] = "text-success";
+    } elseif ($status === "تکمیل نشده") {
+        $Item["StatusColor"] = "text-primary";
+    } elseif ($status === "در انتظار تایید") {
+        $Item["StatusColor"] = "text-warning";
+    } else {
+        $Item["StatusColor"] = "text-danger";
     }
-    unset($Item);
+}
+unset($Item); // خیلی مهمه برای جلوگیری از باگ‌های احتمالی
 
-    foreach ($page->requestList as &$Item) {
-        $status = trim($Item["Status"]);
-        if ($status === "مشاهده رسید") {
-            $Item["StatusColor"] = "text-primary";
-        } elseif ($status === "تکمیل نشده") {
-            $Item["StatusColor"] = "text-primary";
-        } elseif ($status === "در صف تسویه") {
-            $Item["StatusColor"] = "text-warning";
-        } else {
-            $Item["StatusColor"] = "text-danger";
-        }
+foreach($page->requestList as &$Item) {
+    $status = trim($Item["Status"]);
+    if ($status === "مشاهده رسید") {
+        $Item["StatusColor"] = "text-primary";
+    } elseif ($status === "تکمیل نشده") {
+        $Item["StatusColor"] = "text-primary";
+    } elseif ($status === "در صف تسویه") {
+        $Item["StatusColor"] = "text-warning";
+    } else {
+        $Item["StatusColor"] = "text-danger";
     }
+}
     unset($Item);
     return [
-        'content'   => biiq_Template::Start('orders->index', true, ['Objects' => $page]),
+        'content'   => biiq_Template::Start('subuser->index', true, ['Objects' => $page]),
         'id'        => 1,
         'title'     => 'مالی',
-        'Canonical' => SITE . 'orders/'
+        'Canonical' => SITE . 'subuser/'
     ];
 }

@@ -14,16 +14,16 @@
             <div class="d-flex flex-column mt-2">
                 <div class="d-flex justify-content-start gap-5 ">
                     <span>وضعیت ثبت نام:</span>
-                    <span class="text-danger">تایید نشده</span>
+                    <span class="text-danger">[@CurrentUser->Status]</span>
                 </div>
                 <div class="d-flex justify-content-start gap-4 my-2">
                     <span>وضعیت احراز هویت:</span>
-                    <span class="text-warning"> در انتظار تایید</span>
+                    <span class="text-warning">[@CurrentUser->SelfieStatus]</span>
                 </div>
                 <div class="d-flex flex-column bg-white rounded p-2">
                     <div class="d-flex justify-content-between">
                         <span>سقف خرید:</span>
-                        <span>100 میلیون تومان</span>
+                        <span>[@CurrentUser->maximumPurchase]</span>
                     </div>
                     <div class="progress my-2">
                         <div class="progress-bar bg-primary" role="progressbar" style="width: 50%;" aria-valuenow="50"
@@ -33,7 +33,7 @@
                     </div>
                     <div class="d-flex justify-content-between">
                         <span> خرید امروز:</span>
-                        <span> 58،256،000 تومان </span>
+                        <span> [@CurrentUser->buyToday]</span>
                     </div>
                 </div>
                 <div class="d-flex justify-content-between mt-4">
@@ -42,7 +42,7 @@
                         <i class="fas fa-robot  me-2 font-color"></i>
                     </div>
                     <div class="d-flex justify-content-start">
-                        <span>12 دقیقه پیش</span>
+                        <span>[@CurrentUser->lastTime]</span>
                         <i class="fas fa-clock ms-2 font-color"></i>
 
                     </div>
@@ -58,14 +58,14 @@
                 <div class="d-flex flex-column gap-2 flex-fill">
                     <span>تلفن همراه</span>
                     <div class="d-flex bg-white align-items-center p-2 rounded">
-                        <span class="flex-grow-1">09356439532</span>
+                        <span class="flex-grow-1">[@CurrentUser->phoneNumber]</span>
                         <i class="fas fa-copy ms-2 font-color"></i>
                     </div>
                 </div>
                 <div class="d-flex flex-column gap-2 flex-fill">
                     <span>شناسه کاربری</span>
                     <div class="d-flex bg-white align-items-center p-2 rounded">
-                        <span class="flex-grow-1">12345</span>
+                        <span class="flex-grow-1">[@CurrentUser->userNumber]</span>
                         <i class="fas fa-users ms-2 font-color"></i>
                     </div>
                 </div>
@@ -76,14 +76,14 @@
                 <div class="d-flex flex-column gap-2 flex-fill">
                     <span>شناسه کاربری</span>
                     <div class="d-flex bg-white align-items-center p-2 rounded">
-                        <span class="flex-grow-1">1245</span>
+                        <span class="flex-grow-1">[@CurrentUser->userNumber]</span>
                         <i class="fas fa-copy ms-2 font-color"></i>
                     </div>
                 </div>
                 <div class="d-flex flex-column gap-2 flex-fill">
                     <span>معرفی کرده</span>
                     <div class="d-flex bg-white align-items-center p-2 rounded">
-                        <span class="flex-grow-1">2</span>
+                        <span class="flex-grow-1">[@CurrentUser->introduced]</span>
                         <i class="fas fa-user ms-2 font-color"></i>
                     </div>
                 </div>
@@ -94,14 +94,14 @@
                 <div class="d-flex flex-column gap-2 flex-fill">
                     <span>کد ملی</span>
                     <div class="d-flex bg-white align-items-center p-2 rounded">
-                        <span class="flex-grow-1">0440202507</span>
+                        <span class="flex-grow-1">[@CurrentUser->nationalCode]</span>
                         <i class="fas fa-ellipsis-v ms-2 font-color"></i>
                     </div>
                 </div>
                 <div class="d-flex flex-column gap-2 flex-fill">
                     <span>اعتبار هدیه</span>
                     <div class="d-flex bg-white align-items-center p-2 rounded">
-                        <span class="flex-grow-1">200 هزار تومان</span>
+                        <span class="flex-grow-1">[@CurrentUser->GiftCredit]</span>
                         <i class="fas fa-gift ms-2 font-color"></i>
                     </div>
                 </div>
@@ -112,14 +112,14 @@
                 <div class="d-flex flex-column gap-2 flex-fill">
                     <span>تاریخ تولد</span>
                     <div class="d-flex bg-white align-items-center p-2 rounded">
-                        <span class="flex-grow-1">1370/06/06</span>
+                        <span class="flex-grow-1">[@CurrentUser->birthday]</span>
                         <i class="fas fa-cake ms-2 font-color"></i>
                     </div>
                 </div>
                 <div class="d-flex flex-column gap-2 flex-fill">
                     <span>IP Address</span>
                     <div class="d-flex bg-white align-items-center p-2 rounded">
-                        <span class="flex-grow-1">5.126.16.37</span>
+                        <span class="flex-grow-1">[@CurrentUser->ipAddress]</span>
                         <i class="fas fa-users ms-2 font-color"></i>
                     </div>
                 </div>
@@ -153,156 +153,16 @@
         <div class="tab-content">
             <!-- userOrderList -->
             <div class="tab-pane fade show active" id="deposits" role="tabpanel">
-                <div class="table-responsive  rounded-3 bg-white p-3">
-                    <table class="table  table-hover rounded-3 align-middle text-center mb-0 searchable-table">
-                        <thead class="rounded-top-5">
-                            <tr class="">
-                                <th class="text-start py-3">
-                                    <div class="search-wrapper d-flex align-items-center">
-                                        <i class="fas fa-search search-icon me-1" data-column="0"
-                                            style="cursor:pointer;"></i>
-                                        <input type="text" class="search-input form-control form-control-sm"
-                                            placeholder="جستجو..." />
-                                        <span> درخواست</span>
-                                    </div>
-                                </th>
-                                <th class="text-start py-3">
-                                    <span> مبلغ</span>
-
-                                </th>
-                                <th class="text-start sortable py-3" data-column="4" style="cursor:pointer">
-                                    زمان و تاریخ تراکنش <i class="fas fa-sort"></i>
-                                </th>
-                                <th class="text-start py-3">توضیحات <i class="fas fa-sort"></i></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            [foreach ([@Objects->userorderList])]
-                            <tr>
-                                <td class="text-start fw-semibold py-4">[@Item->request]
-                                </td>
-                                <td class="text-start fw-semibold">[@Item->price]
-                                </td>
-                                <td class="text-start" data-timestamp="[@Item->UnixTimestamp]">[@Item->persianDate]</td>
-                                <td class="text-start text-primary">
-                                    [@Item->comments]
-                                </td>
-                            </tr>
-                            [endforeach]
-                        </tbody>
-                    </table>
-                </div>
+              [@import->orders->table]
             </div>
             <!-- user tranactions -->
             <div class="tab-pane fade" id="credits" role="tabpanel">
-                <div class="table-responsive shadow-sm rounded-3  p-3">
-                    <table class="table  table-hover align-middle text-center mb-0 searchable-table">
-                        <thead class="custom-thead" >
-                            <tr>
-                                <th class="text-start py-3">
-                                    <div class="search-wrapper d-flex align-items-center">
-                                        <i class="fas fa-search search-icon me-1" data-column="0"
-                                            style="cursor:pointer;"></i>
-                                        <input type="text" class="search-input form-control form-control-sm"
-                                            placeholder="جستجو..." />
-                                        <span> کد ملی </span>
-                                    </div>
-                                </th>
-                                <th class="text-start py-3">
-                                    <div class="search-wrapper d-flex align-items-center">
-                                        <i class="fas fa-search search-icon me-1" data-column="0"
-                                            style="cursor:pointer;"></i>
-                                        <input type="text" class="search-input form-control form-control-sm"
-                                            placeholder="جستجو..." />
-                                        <span>شماره موبایل </span>
-                                    </div>
-                                </th>
-                                <th class="text-start py-3">کاربر</th>
-                                <th class="text-start py-3">
-                                    <div class="search-wrapper d-flex align-items-center">
-                                        <i class="fas fa-search search-icon me-1" data-column="0"
-                                            style="cursor:pointer;"></i>
-                                        <input type="text" class="search-input form-control form-control-sm"
-                                            placeholder="جستجو..." />
-                                        <span> اطلاعات حساب</span>
-                                    </div>
-                                </th>
-                                <th class="text-start py-3">جزییات وضعیت<i class=" fas fa-sort ms-1"></i></th>
-
-                            </tr>
-                        </thead>
-                        <tbody>
-                            [foreach ([@Objects->userTransactions])]
-                            <tr>
-                                <td class="text-start fw-semibold py-4 ">[@Item->nationalCode]</td>
-                                <td class="text-start fw-semibold">[@Item->phoneNumber]</td>
-                                <td class="text-primary text-start">
-                                    <a href="[@settings->site]users/[@Item->UserID]/" class="text-decoration-none">
-                                        [@Item->User]
-                                    </a>
-                                </td>
-                                <td class="text-start">
-                                    [@Item->bankInfo]
-                                </td>
-
-                                <td class="text-start">
-                                    <span class="px-3 rounded-pill text-success">
-                                        [@Item->detailsStatus]
-                                    </span>
-                                    <i class="fas fa-check-circle text-success ms-2"></i>
-                                    <i class="fas fa-times-circle text-danger ms-1"></i>
-                                </td>
-                            </tr>
-                            [endforeach]
-                        </tbody>
-                    </table>
-                </div>
+                [@import->orders->tableuserlist]
             </div>
             <!--authentication-->
             <div class="tab-pane fade" id="settlements" role="tabpanel">
-                <div class="table-responsive shadow-sm rounded-3 p-3">
-                    <table class="table table-hover align-middle text-center mb-0 searchable-table">
-                        <thead class="custom-thead"style="background-color:#0d6efd; color:white;">
-                            <tr>
-                                <th class="text-start py-3">
-                                    <div class="search-wrapper d-flex align-items-center">
-                                        <i class="fas fa-search search-icon me-1" data-column="0"
-                                            style="cursor:pointer;"></i>
-                                        <input type="text" class="search-input form-control form-control-sm"
-                                            placeholder="جستجو..." />
-                                        <span> درخواست </span>
-                                    </div>
-                                </th>
+             [@import->orders->tablerequestlist]
 
-                                <th class="text-start py-3">مبلغ</th>
-                                <th class="text-center py-3">زمان و تاریخ تراکنش <i class="fas fa-sort ms-1"></i></th>
-                                <th class="text-start py-3">توضیحات</th>
-
-                            </tr>
-                        </thead>
-                        <tbody>
-                            [foreach ([@Objects->userAuthentication])]
-                            <tr >
-                                <td class="text-start py-4">
-                                   # [@Item->request] 
-                                    <span class="p-1 rounded [@Item->extraReqcolor]">
-                                        [@Item->extraReq]
-                                    </span>
-                                </td>
-                                <td class="text-start ">[@Item->price]
-                                </td>
-
-                                <td class="text-center "><span>[@Item->timeAgo]</span></td>
-                                <td class="text-start text-primary">
-
-                                    [@Item->comments]
-
-                </div>
-                </td>
-                </tr>
-                [endforeach]
-                </tbody>
-                </table>
             </div>
         </div>
 

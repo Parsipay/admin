@@ -1,0 +1,52 @@
+<div class="table-responsive rounded-3 bg-white p-3">
+    <table class="table  table-hover align-middle text-center mb-0 searchable-table">
+        <thead>
+            <tr>
+                <th class="text-start py-3">
+                    <div class="search-wrapper d-flex align-items-center">
+                        <i class="fas fa-search search-icon me-1" data-column="0" style="cursor:pointer;"></i>
+                        <input type="text" class="search-input form-control form-control-sm" placeholder="جستجو..." />
+                        <span> کد ملی </span>
+                    </div>
+                </th>
+                <th class="text-start py-3">
+                    <div class="search-wrapper d-flex align-items-center">
+                        <i class="fas fa-search search-icon me-1" data-column="0" style="cursor:pointer;"></i>
+                        <input type="text" class="search-input form-control form-control-sm" placeholder="جستجو..." />
+                        <span>شماره موبایل </span>
+                    </div>
+                </th>
+                <th class="text-start py-3">کاربر</th>
+                <th class="text-start py-3">
+                    آخرین فعالیت
+                </th>
+                <th class="text-start py-3"> تاریخ ثبت‌نام<i class=" fas fa-sort ms-1"></i></th>
+                <th class="text-start py-3"> وضعیت<i class=" fas fa-sort ms-1"></i></th>
+            </tr>
+        </thead>
+        <tbody>
+            [foreach ([@Objects->userList])]
+            <tr>
+                <td class="text-start fw-semibold">[@Item->nationalCode]</td>
+                <td class="text-start fw-semibold">[@Item->phoneNumber]</td>
+                <td class="text-primary text-start">
+                    <a href="[@settings->site]users/[@Item->UserID]/" class="text-decoration-none">
+                        [@Item->User]
+                    </a>
+                </td>
+                <td class="text-start fw-semibold">[@Item->lastActivity]</td>
+                <td class="text-start" data-timestamp="[@Item->UnixTimestamp]">[@Item->persianDate]</td>
+                <td class="text-start">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span class="px-3 py-2 rounded-pill [@Item->StatusColor]">
+                            [@Item->Status]
+                        </span>
+                        <i class="fas fa-ellipsis-v text-secondary ms-2" style="cursor:pointer;"></i>
+                    </div>
+                </td>
+
+            </tr>
+            [endforeach]
+        </tbody>
+    </table>
+</div>

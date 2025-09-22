@@ -15,26 +15,7 @@ function ProcessRequest($request)
     }
 
     //timeAgoWithPersianDate  
-    function timeAgoWithPersianDate($timestamp)
-    {
-        $diff = time() - $timestamp;
 
-        if ($diff < 60) {
-            $text = $diff . " ثانیه پیش";
-        } elseif ($diff < 3600) {
-            $text = floor($diff / 60) . " دقیقه پیش";
-        } elseif ($diff < 86400) {
-            $text = floor($diff / 3600) . " ساعت پیش";
-        } elseif ($diff < 2592000) { 
-            $text = floor($diff / 86400) . " روز پیش";
-        } elseif ($diff < 31536000) {   
-            $text = floor($diff / 2592000) . " ماه پیش";
-        } else {
-            $text = floor($diff / 31536000) . " سال پیش";
-        }
-        $exactDate = biiq_PersianDate::date("l j F Y - H:i", $timestamp);
-        return $text .  "<br>" . $exactDate;
-    }
 
     //Load user $SelectedUserID
     $page->profileBox = [
@@ -47,77 +28,146 @@ function ProcessRequest($request)
     ];
 
 
-    $page->userorderList = [
+    $page->orderList = [
         [
-            "request"    => "132313556458",
-            "price"      => 44568051,
-            "persianDate" => "12 اسفند",
-            "comments"   => "مشاهده رسید"
+            "numberOrder" => "20232336263# <span class='opacity-green px-1 rounded-3 text-green'>خرید</span>",
+            "OrderDetails" => '
+             <div class="d-flex justify-content-start">
+             <img src="../../assets/img/usdt.png" alt="btc" class="me-2" style="width:24px;height:24px;">
+             <div class="d-flex flex-column">
+             <span>19788</span>
+             <span>USDT (تتر)</span>
+             </div>
+            </div>',
+            "User" => "یگانه علیزاده",
+            "UserID" => 16,
+            "price" => "445609806",
+            "UnixTimestamp" => 111111,
+            "persianDate" => biiq_PersianDate::date("l j F Y - H:i", 11111111),
+            "Status" => "
+             <div class='d-flex justify-content-between'>
+             <span class='opacity-green text-green py-1  px-2 rounded me-4'>
+            موفق<i class='fas fa-check-circle text-green ms-1'></i> 
+            </span>
+           <span class='text-primary'>مشاهده </span>
+        </div>",
         ],
         [
-            "request"    => "132313556458",
-            "price"      => 44568051,
-            "persianDate" => "12 اسفند",
-            "comments"   => "مشاهده رسید"
+            "numberOrder" => "20232336263# <span class='bg-blue px-1 rounded-3 text-primary'>فروش</span>",
+            "OrderDetails" => '
+             <div class="d-flex justify-content-start">
+             <img src="../../assets/img/usdt.png" alt="btc" class="me-2" style="width:24px;height:24px;">
+             <div class="d-flex flex-column">
+             <span>19788</span>
+             <span>USDT (تتر)</span>
+             </div>
+            </div>',
+            "User" => " بنفشه ابراهیمی",
+            "UserID" => 16,
+            "price" => "445609806",
+            "UnixTimestamp" => 111111,
+            "persianDate" => biiq_PersianDate::date("l j F Y - H:i", 11111111),
+            "Status" => "
+             <div class='d-flex justify-content-between'>
+             <span class='bg-opacity-warning py-1 text-warning px-2 rounded me-4'>
+           در انتظار تایید <i class='fas fa-stopwatch text-warning'></i>   
+            </span>
+           <span class='text-primary'>مشاهده </span>
+        </div>",
         ],
         [
-            "request"    => "132313556458",
-            "price"      => 44568051,
-            "persianDate" => "12 اسفند",
-            "comments"   => "مشاهده رسید"
-        ]
+            "numberOrder" => "20232336263# <span class='opacity-danger px-1 rounded-3 text-danger'>فروش</span>",
+            "OrderDetails" => '
+             <div class="d-flex justify-content-start">
+             <img src="../../assets/img/usdt.png" alt="btc" class="me-2" style="width:24px;height:24px;">
+             <div class="d-flex flex-column">
+             <span>19788</span>
+             <span>USDT (تتر)</span>
+             </div>
+            </div>',
+            "User" => " کیمیا خلج",
+            "UserID" => 16,
+            "price" => "445609806",
+            "UnixTimestamp" => 111111,
+            "persianDate" => biiq_PersianDate::date("l j F Y - H:i", 11111111),
+            "Status" => "
+             <div class='d-flex justify-content-between'>
+             <span class='opacity-danger text-danger py-1  px-2 rounded me-4'>
+             ناموفق <i class='fas fa-ban text-danger'></i>   
+            </span>
+           <span class='text-primary ms-5'>مشاهده </span>
+        </div>",
+        ],
     ];
 
-    $page->userTransactions = [
+
+    $page->userList = [
         [
-            "nationalCode"    => "132313556458",
-            "phoneNumber"      => "0935646956",
-            "User" => "یگانه علیزاده ",
-            "bankInfo" => "صادرات",
-            "detailsStatus"   => "مشاهده رسید"
+            "nationalCode" => "************************",
+            "phoneNumber" => "09128431937",
+            "User" => "یگانه علیزاده",
+            "UserID" => 19,
+            "lastActivity" => "2 ماه پیش",
+            "UnixTimestamp" => 11111111,
+            "persianDate" => biiq_PersianDate::date("l j F Y - H:i", 1111111),
+            "Status" => " مسدود",
         ],
         [
-            "nationalCode"    => "132313556458",
-            "phoneNumber"      => "0935646956",
-            "User" => "یگانه علیزاده ",
-            "bankInfo" => "صادرات",
-            "detailsStatus"   => "مشاهده رسید"
+            "nationalCode" => "*********************",
+            "phoneNumber" => "09128431937",
+            "User" => "یگانه علیزاده",
+            "UserID" => 20,
+            "lastActivity" => "2 ماه پیش",
+            "UnixTimestamp" => 33333333,
+            "persianDate" => biiq_PersianDate::date("l j F Y - H:i", 333333333),
+            "Status" => " موفق",
         ],
         [
-            "nationalCode"    => "132313556458",
-            "phoneNumber"      => "0935646956",
-            "User" => "یگانه علیزاده ",
-            "bankInfo" => "صادرات",
-            "detailsStatus"   => "مشاهده رسید"
+            "nationalCode" => "*****************",
+            "phoneNumber" => "09128431937",
+            "User" => "یگانه علیزاده",
+            "UserID" => 21,
+            "lastActivity" => "2 ماه پیش",
+
+            "UnixTimestamp" => 4444444444,
+            "persianDate" => biiq_PersianDate::date("l j F Y - H:i", 4444444444),
+            "Status" => "تکمیل نشده",
         ],
     ];
 
-    $page->userAuthentication = [
+    $page->requestList = [
         [
-            "request" => "154678952",
-            "extraReq" => "درخواست تسویه - تسویه شده {IR360560611828005651602601}",
-            "price" => "5697875",
-            "timeAgo" => timeAgoWithPersianDate(1615301000),
-            "comments" => "مشاهده رسید"
+            "requestCode" => "test",
+            "trackingNumber" => "0293564635",
+            "User" => "بنفشه ابراهیمی",
+            "UserID" => 22,
+            "price" => " 65665454546",
+            "UnixTimestamp" => 9999999999,
+            "persianDate" => biiq_PersianDate::date("l j F Y - H:i", 88888888),
+            "Status" => "مشاهده رسید",
         ],
-
         [
-            "request" => "154678952",
-            "extraReq" => "درخواست تسویه - لغو شده {IR360560611828005651602601}",
-            "price" => "5697875",
-            "timeAgo" => timeAgoWithPersianDate(1615301000),
-            "comments" => "مشاهده رسید"
+            "requestCode" => "test",
+            "trackingNumber" => "0293564635",
+            "User" => "بنفشه ابراهیمی",
+            "UserID" => 23,
+            "price" => "مشاهده مدارک",
+            "UnixTimestamp" => 777777777,
+            "persianDate" => biiq_PersianDate::date("l j F Y - H:i", 33333333),
+            "Status" => "  مشاهده رسید",
         ],
-
         [
-            "request" => "154678952",
-            "extraReq" => "افزایش اعتبار - فروش {۲۰۲۳۲۷۳۸۰۳۰}",
-            "price" => "5697875",
-            "timeAgo" => timeAgoWithPersianDate(1615301000),
-            "comments" => "مشاهده رسید"
+            "requestCode" => "test",
+            "trackingNumber" => "0293564635",
+            "User" => "بنفشه ابراهیمی",
+            "UserID" => 24,
+            "price" => "مشاهده مدارک",
+            "UnixTimestamp" => 1616301000,
+            "persianDate" => biiq_PersianDate::date("l j F Y - H:i", 1616301000),
+            "Status" => "در  صف تسویه",
         ],
-
     ];
+
     foreach ($page->userAuthentication as &$Item) {
         $extraReq = trim($Item["extraReq"]);
 
@@ -134,12 +184,28 @@ function ProcessRequest($request)
     unset($Item); // جلوگیری از مشکلات بعدی
     // prevent possible bugs later
 
-    //$page->User = biiq_User::GetByID($SelectedUserID);
+    //$page->CurrentUser = biiq_User::GetByID($SelectedUserID);
+    $page->CurrentUser = $page; //Delete me later
+    $page->CurrentUser = [
+        'Status' => "تایید شده",
+        'SelfieStatus' => 'ارسال نشده',
+        'maximumPurchase' => "صد هزار تومن",
+        'buyToday' => " 28،256،000 تومان",
+        'lastTime' => "10 دقیقه پیش",
+        'phoneNumber' => '09356458975',
+        'userNumber' => '56789',
+        'introduced' => '  2 نفر ',
+        'nationalCode' => '0013152343',
+        'GiftCredit' => '500 هزار تومن',
+        'birthday' => '1370/06/06',
+        'ipAddress' => '4.126.16.37'
+    ];
+
 
 
     $page->Title = "  مدیریت کاربران ";
     $page = array(
-        'content' => biiq_Template::Start('manage->default', true, ['Objects' => $page]),
+        'content' => biiq_Template::Start('manage->default', true, ['Objects' => $page, 'CurrentUser' => $page->CurrentUser]),
         'id' => 0,
         'title' => $page->Title,
         'Canonical' => SITE . 'manage/',
