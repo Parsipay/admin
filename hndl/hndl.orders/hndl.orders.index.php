@@ -12,7 +12,7 @@ function ProcessRequest($request)
             "price" => "445609806",
             "UnixTimestamp" => 111111,
             "persianDate" => biiq_PersianDate::date("l j F Y - H:i", 11111111),
-            "Status" => "موفق ",
+            "Status" => "موفق",
         ],
         [
             "numberOrder" => "0013152343",
@@ -21,8 +21,8 @@ function ProcessRequest($request)
             "UserID" => 17,
             "price" => "445609806",
             "UnixTimestamp" => 11111111,
-            "persianDate" => biiq_PersianDate::date("l j F Y - H:i", 555555555),
-            "Status" => "در انتظار تایید ",
+            "persianDate" => biiq_PersianDate::date("l j F Y", 555555555),
+            "Status" => "در انتظار تایید",
         ],
         [
             "numberOrder" => "0013152343",
@@ -32,7 +32,7 @@ function ProcessRequest($request)
             "price" => "445609806",
             "UnixTimestamp" => 9999999,
             "persianDate" => biiq_PersianDate::date("l j F Y - H:i", 99999999),
-            "Status" => "  ناموفق ",
+            "Status" => "ناموفق",
         ],
     ];
 
@@ -105,19 +105,13 @@ function ProcessRequest($request)
         ],
     ];
 
-
     foreach ($page->orderList as &$Item) {
         $status = trim($Item["Status"]);
-        if ($status === "موفق") {
-            $Item["StatusColor"] = "text-success";
-        } elseif ($status === "در انتظار تایید") {
-            $Item["StatusColor"] = "text-warning";
-        } else {
-            $Item["StatusColor"] = "text-danger";
-        }
+        if ($status === "موفق") $Item["StatusColor"] = "text-success";
+        elseif ($status === "در انتظار تایید") $Item["StatusColor"] = "text-warning";
+        else $Item["StatusColor"] = "text-danger";
     }
     unset($Item);
-
     foreach ($page->userList as &$Item) {
         $status = trim($Item["Status"]);
         if ($status === "موفق") {

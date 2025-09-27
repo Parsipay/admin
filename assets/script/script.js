@@ -70,3 +70,57 @@ if (fancyBtn) {
 
 }
 
+   // ------------------ Donut Chart ------------------
+    var chart1 = echarts.init(document.getElementById('chart1'));
+    chart1.setOption({
+        tooltip: { trigger: 'item' },
+        legend: {
+            orient: 'vertical',
+            left: 'left',
+            data: ['کاربران فعال','کاربران تکمیل نشده','کاربران آنلاین','کاربران جدید']
+        },
+        series: [{
+            name: 'کاربران',
+            type: 'pie',
+            radius: ['65%', '85%'], // دایره توخالی
+            avoidLabelOverlap: false,
+            label: { show: false, position: 'center' },
+            emphasis: {
+                label: {
+                    show: true,
+                    fontSize: 16,
+                    fontWeight: 'bold',
+                    formatter: 'تعداد کل کاربران:\n45000 نفر'
+                }
+            },
+            labelLine: { show: false },
+            data: [
+                { value: 15000, name: 'کاربران فعال', itemStyle:{color:'#3366ff'} },
+                { value: 10000, name: 'کاربران تکمیل نشده', itemStyle:{color:'#ff9966'} },
+                { value: 12000, name: 'کاربران آنلاین', itemStyle:{color:'#00cc66'} },
+                { value: 8000, name: 'کاربران جدید', itemStyle:{color:'#9933cc'} }
+            ]
+        }]
+    });
+
+    // ------------------ Bar Chart ------------------
+    var chart2 = echarts.init(document.getElementById('chart2'));
+    chart2.setOption({
+        tooltip: {},
+        xAxis: {
+            type: 'category',
+            data: ['TRX TO USDT', 'USDT', 'TRX', 'Kucoin', 'UUSD']
+        },
+        yAxis: { type: 'value' },
+        series: [{
+            type: 'bar',
+            data: [
+                { value: 9000, itemStyle:{color:'#00cc66'} },
+                { value: 3000, itemStyle:{color:'#ff9966'} },
+                { value: 12000, itemStyle:{color:'#3366ff'} },
+                { value: 2000, itemStyle:{color:'#ff3333'} },
+                { value: 8000, itemStyle:{color:'#3366ff'} }
+            ],
+            barWidth: '40%'
+        }]
+    });

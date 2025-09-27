@@ -62,7 +62,7 @@ function ProcessRequest($request)
              <span>USDT (تتر)</span>
              </div>
             </div>',
-            "User" => " بنفشه ابراهیمی",
+            "User" => "  یگانه علیزاده",
             "UserID" => 16,
             "price" => "445609806",
             "UnixTimestamp" => 111111,
@@ -85,7 +85,7 @@ function ProcessRequest($request)
              <span>USDT (تتر)</span>
              </div>
             </div>',
-            "User" => " کیمیا خلج",
+            "User" => " یگانه علیزاده",
             "UserID" => 16,
             "price" => "445609806",
             "UnixTimestamp" => 111111,
@@ -167,6 +167,35 @@ function ProcessRequest($request)
             "Status" => "در  صف تسویه",
         ],
     ];
+    $page->er = [
+    [
+        "nationalCode" => "0013152343",
+        "phoneNumber"  => "09128431937",
+        "User"         => "یگانه علیزاده",
+        "UserID"       => 19,
+        "documents"    => "مدرک شناسایی",
+        "Status"       => "مسدود",
+        "StatusColor"  => "bg-danger text-white",
+    ],
+    [
+        "nationalCode" => "0013152343",
+        "phoneNumber"  => "09128431937",
+        "User"         => "یگانه علیزاده",
+        "UserID"       => 20,
+        "documents"    => "کارت ملی",
+        "Status"       => "موفق",
+        "StatusColor"  => "bg-success text-white",
+    ],
+    [
+        "nationalCode" => "0013152343",
+        "phoneNumber"  => "09128431937",
+        "User"         => "یگانه علیزاده",
+        "UserID"       => 21,
+        "documents"    => "مدرک ناقص",
+        "Status"       => "تکمیل نشده",
+        "StatusColor"  => "bg-warning text-dark",
+    ],
+];
 
     foreach ($page->userAuthentication as &$Item) {
         $extraReq = trim($Item["extraReq"]);
