@@ -70,6 +70,25 @@ if (fancyBtn) {
 
 }
 
+
+//sorted status for ordered lists
+ $(".filter-status").on("click", function () {
+        let selected = $(this).data("status").trim();
+
+        $("tbody tr").each(function () {
+            let statusEl = $(this).find(".status-text");
+            if (statusEl.length === 0) return;
+
+            let status = statusEl.text().trim();
+
+            if (selected === "all" || status === selected) {
+                $(this).show();
+            } else {
+                $(this).hide();
+            }
+        });
+    });
+
    // ------------------ Donut Chart ------------------
     var chart1 = echarts.init(document.getElementById('chart1'));
     chart1.setOption({
@@ -124,3 +143,4 @@ if (fancyBtn) {
             barWidth: '40%'
         }]
     });
+
