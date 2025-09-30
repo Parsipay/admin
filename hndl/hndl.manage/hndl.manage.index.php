@@ -41,38 +41,68 @@ function ProcessRequest($request)
 
 
     // deposits list
-    $page->userList = [
-        [
-            "nationalCode" => "0013152343",
-            "phoneNumber" => "09128431937",
-            "User" => "یگانه علیزاده",
-            "UserID" => 9,
-            "UnixTimestamp" => 1616301000,
-            "lastActivity" => "2 ماه پیش",
-            "persianDate" => biiq_PersianDate::date("l j F Y - H:i", 1616301000),
-            "Status" => "مسدود ",
-        ],
-        [
-            "nationalCode" => "0013152343",
-            "phoneNumber" => "09128431937",
-            "User" => "یگانه علیزاده",
-            "UserID" => 10,
-            "UnixTimestamp" => 1616301000,
-            "lastActivity" => "2 ماه پیش",
-            "persianDate" => biiq_PersianDate::date("l j F Y - H:i", 1616301000),
-            "Status" => " موفق",
-        ],
-        [
-            "nationalCode" => "0013152343",
-            "phoneNumber" => "09128431937",
-            "User" => "یگانه علیزاده",
-            "UserID" => 11,
-            "UnixTimestamp" => 1616301000,
-            "lastActivity" => "2 ماه پیش",
-            "persianDate" => biiq_PersianDate::date("l j F Y - H:i", 1616301000),
-            "Status" => " تکمیل نشده",
-        ],
-    ];
+$page->userList = [
+    [
+        "nationalCode" => "0013152343",
+        "phoneNumber" => "09128431937",
+        "User" => "یگانه علیزاده",
+        "UserID" => 9,
+        "UnixTimestamp" => 6365897855,
+        "persianDate" => biiq_PersianDate::date("l j F Y - H:i", 665150314),
+        "Status" => "مسدود",
+    ],
+    [
+        "nationalCode" => "0013152343",
+        "phoneNumber" => "09128431937",
+        "User" => "یگانه علیزاده",
+        "UserID" => 10,
+        "UnixTimestamp" => 1756301000,
+        "persianDate" => biiq_PersianDate::date("l j F Y - H:i", 45468892),
+        "Status" => "موفق",
+    ],
+    [
+        "nationalCode" => "0013152343",
+        "phoneNumber" => "09128431937",
+        "User" => "یگانه علیزاده",
+        "UserID" => 11,
+        "UnixTimestamp" => 1616301000,
+        "persianDate" => biiq_PersianDate::date("l j F Y - H:i", 18978752),
+        "Status" => "تکمیل نشده",
+    ],
+];
+       $sortOrder = 'desc'; 
+           $sortOrder = $_GET['sort'] ?? 'desc';
+    usort($page->userList, function ($a, $b) use ($sortOrder) {
+        if ($sortOrder === 'asc') {
+            return $a['UnixTimestamp'] <=> $b['UnixTimestamp']; // قدیمی به جدید
+        } else {
+            return $b['UnixTimestamp'] <=> $a['UnixTimestamp']; // جدید به قدیم
+        }
+    });
+
+// حالا فقط محاسبه lastActivity خودکار
+foreach ($page->userList as &$Item) {
+    $timestamp = $Item['UnixTimestamp'];
+    $now = time();
+    $diff = $now - $timestamp;
+
+    if ($diff < 60) {
+        $Item['lastActivity'] = 'لحظاتی پیش';
+    } elseif ($diff < 3600) {
+        $minutes = floor($diff / 60);
+        $Item['lastActivity'] = $minutes . ' دقیقه پیش';
+    } elseif ($diff < 86400) {
+        $hours = floor($diff / 3600);
+        $Item['lastActivity'] = $hours . ' ساعت پیش';
+    } elseif ($diff < 2592000) {
+        $days = floor($diff / 86400);
+        $Item['lastActivity'] = $days . ' روز پیش';
+    } else {
+        $months = floor($diff / 2592000);
+        $Item['lastActivity'] = $months . ' ماه پیش';
+    }
+}
+unset($Item);
 
 
 
@@ -133,18 +163,26 @@ function ProcessRequest($request)
             "documents" => "مشاهده مدارک",
             "Status" => "تکمیل نشده",
         ],
+        [
+            "nationalCode" => "0013152343",
+            "phoneNumber" => "09128431937",
+            "User" => "یگانه علیزاده",
+            "UserID" => 17,
+            "documents" => "مشاهده مدارک",
+            "Status" => " رد شده",
+        ],
     ];
 
 foreach ($page->authentication as &$Item) {
     $status = trim($Item["Status"]);
-    if ($status === "موفق") {
-        $Item["StatusColor"] = "text-success";
+    if ($status === "تایید شده") {
+        $Item["StatusColor"] = "text-success opacity-green";
     } elseif ($status === "در انتظار تایید") {
-        $Item["StatusColor"] = "text-warning";
+        $Item["StatusColor"] = "text-warning bg-opacity-warning";
     } elseif ($status === "تکمیل نشده") {
-        $Item["StatusColor"] = "text-primary";
+        $Item["StatusColor"] = "text-primary bg-blue";
     } else {
-        $Item["StatusColor"] = "text-danger";
+        $Item["StatusColor"] = "text-danger bg-red";
     }
 }
 unset($Item); // prevent possible bugs later
@@ -168,13 +206,13 @@ unset($Item); // prevent possible bugs later
     foreach ($page->userList as &$Item) {
         $status = trim($Item["Status"]);
         if ($status === "موفق") {
-            $Item["StatusColor"] = "text-success";
+            $Item["StatusColor"] = "text-success opacity-green";
         } elseif ($status === "تکمیل نشده") {
-            $Item["StatusColor"] = "text-primary";
+            $Item["StatusColor"] = "text-primary bg-blue";
         } elseif ($status === "در انتظار تایید") {
             $Item["StatusColor"] = "text-warning";
         } else {
-            $Item["StatusColor"] = "text-danger";
+            $Item["StatusColor"] = "text-danger bg-red";
         }
     }
     unset($Item); // important to prevent possible bugs

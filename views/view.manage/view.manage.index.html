@@ -159,16 +159,19 @@
     <!-- Nav Pills -->
     <ul class="nav nav-pills nav-justified gap-1  border-bottom border-muted" id="financeTab" role="tablist">
         <li class="nav-item" role="presentation">
-            <button class="nav-link text-purple active rounded-pill" data-bs-toggle="pill" data-bs-target="#deposits"
-                type="button" role="tab">لیست کاربران</button>
+            <button class="nav-link text-purple active rounded-pill py-3" data-bs-toggle="pill"
+                data-bs-target="#deposits" type="button" role="tab">لیست کاربران<i class="fas fa-users ms-2"></i>
+            </button>
         </li>
         <li class="nav-item" role="presentation">
-            <button class="nav-link text-purple rounded-pill" data-bs-toggle="pill" data-bs-target="#credits"
-                type="button" role="tab"> حساب بانکی کاربران</button>
+            <button class="nav-link text-purple rounded-pill py-3" data-bs-toggle="pill" data-bs-target="#credits"
+                type="button" role="tab">
+                حساب بانکی کاربران <i class="fas fa-university ms-2"></i></button>
         </li>
         <li class="nav-item" role="presentation">
-            <button class="nav-link text-purple rounded-pill" data-bs-toggle="pill" data-bs-target="#settlements"
-                type="button" role="tab">لیست مدارک احراز هویت </button>
+            <button class="nav-link text-purple rounded-pill py-3" data-bs-toggle="pill" data-bs-target="#settlements"
+                type="button" role="tab">لیست مدارک احراز هویت <i class="fas fa-id-card ms-2"></i>
+            </button>
         </li>
     </ul>
 
@@ -182,8 +185,8 @@
                         <tr>
                             <th class="text-start py-3">
                                 <div class="search-wrapper d-flex align-items-center">
-                                    <i class="fas fa-search search-icon me-1" data-column="0"
-                                        style="cursor:pointer;"></i>
+                                    <i class="fas fa-search search-icon me-2 small text-primary bg-blue rounded-circle p-1"
+                                        data-column="0" style="cursor:pointer;"></i>
                                     <input type="text" class="search-input form-control form-control-sm"
                                         placeholder="جستجو..." />
                                     <span>کد ملی</span>
@@ -191,8 +194,8 @@
                             </th>
                             <th class="text-start py-3">
                                 <div class="search-wrapper d-flex align-items-center">
-                                    <i class="fas fa-search search-icon me-1" data-column="0"
-                                        style="cursor:pointer;"></i>
+                                    <i class="fas fa-search search-icon me-2 small text-primary bg-blue rounded-circle p-1"
+                                        data-column="0" style="cursor:pointer;"></i>
                                     <input type="text" class="search-input form-control form-control-sm"
                                         placeholder="جستجو..." />
                                     <span>شماره موبایل</span>
@@ -200,10 +203,28 @@
                             </th>
                             <th class="text-start py-3">کاربر</th>
                             <th class="text-start py-3">اخرین فعالیت</th>
-                            <th class="text-start sortable py-3" data-column="4" style="cursor:pointer">
-                                تاریخ ثبت‌نام <i class="fas fa-sort"></i>
+                            <th class="text-start sortable py-3" style="cursor:pointer">
+                                زمان و تاریخ تراکنش
+                                <a href="?sort=desc" class="text-decoration-none text-muted">⇣</a>
+                                <a href="?sort=asc" class="text-decoration-none text-muted">⇡</a>
                             </th>
-                            <th class="text-start py-3">وضعیت <i class="fas fa-sort"></i></th>
+                            <th class="text-start py-3">
+                                وضعیت
+                                <div class="dropdown d-inline">
+                                    <i class="fas fa-sort  ms-1" data-bs-toggle="dropdown" style="cursor:pointer;"></i>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item filter-status" data-status="موفق">موفق</a></li>
+                                        <li><a class="dropdown-item filter-status" data-status="مسدود">مسدود</a></li>
+                                        <li><a class="dropdown-item filter-status" data-status="تکمیل نشده">تکمیل
+                                                نشده</a>
+                                        </li>
+                                        <li>
+                                            <hr class="dropdown-divider">
+                                        </li>
+                                        <li><a class="dropdown-item filter-status" data-status="all">همه</a></li>
+                                    </ul>
+                                </div>
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -219,9 +240,12 @@
                             <td class="text-start fw-semibold">[@Item->lastActivity]</td>
                             <td class="text-start" data-timestamp="[@Item->UnixTimestamp]">[@Item->persianDate]</td>
                             <td class="text-start">
-                                <span class="badge px-3 py-2 rounded-pill [@Item->StatusColor]">
-                                    [@Item->Status]
-                                </span>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="px-3 py-2 rounded-pill  status-text [@Item->StatusColor]">
+                                        [@Item->Status]
+                                    </span>
+                                    <i class="fas fa-ellipsis-v text-secondary ms-2" style="cursor:pointer;"></i>
+                                </div>
                             </td>
                         </tr>
                         [endforeach]
@@ -237,8 +261,8 @@
                         <tr class="p-2">
                             <th class="text-start py-3">
                                 <div class="search-wrapper d-flex align-items-center">
-                                    <i class="fas fa-search search-icon me-1" data-column="0"
-                                        style="cursor:pointer;"></i>
+                                    <i class="fas fa-search search-icon me-2 text-primary bg-blue p-1 rounded-circle"
+                                        data-column="0" style="cursor:pointer;"></i>
                                     <input type="text" class="search-input form-control form-control-sm"
                                         placeholder="جستجو..." />
                                     <span> کد ملی </span>
@@ -246,8 +270,8 @@
                             </th>
                             <th class="text-start py-3">
                                 <div class="search-wrapper d-flex align-items-center">
-                                    <i class="fas fa-search search-icon me-1" data-column="0"
-                                        style="cursor:pointer;"></i>
+                                    <i class="fas fa-search search-icon  me-2 text-primary bg-blue p-1 rounded-circle"
+                                        data-column="0" style="cursor:pointer;"></i>
                                     <input type="text" class="search-input form-control form-control-sm"
                                         placeholder="جستجو..." />
                                     <span>شماره موبایل </span>
@@ -256,8 +280,8 @@
                             <th class="text-start py-3">کاربر</th>
                             <th class="text-start py-3">
                                 <div class="search-wrapper d-flex align-items-center">
-                                    <i class="fas fa-search search-icon me-1" data-column="0"
-                                        style="cursor:pointer;"></i>
+                                    <i class="fas fa-search search-icon  me-2 text-primary bg-blue p-1 rounded-circle"
+                                        data-column="0" style="cursor:pointer;"></i>
                                     <input type="text" class="search-input form-control form-control-sm"
                                         placeholder="جستجو..." />
                                     <span> اطلاعات حساب</span>
@@ -278,16 +302,20 @@
                                 </a>
                             </td>
                             <td class="text-start">
-                                <img src="[@Item->BankImage]" alt="بانک" width="30" height="30" class="me-2">
                                 <span>[@Item->bankInfo]</span>
+                                <img src="[@Item->BankImage]" alt="بانک" width="30" height="30" class="ms-2">
                             </td>
 
                             <td class="text-start">
-                                <span class="px-3 py-2 rounded-pill text-success">
-                                    [@Item->details]
-                                </span>
-                                <i class="fas fa-check-circle text-success ms-2"></i>
-                                <i class="fas fa-times-circle text-danger ms-1"></i>
+                                <div class="d-flex justify-content-between">
+                                    <span class="px-3 py-2 rounded-pill text-success opacity-green">
+                                        [@Item->details]
+                                    </span>
+                                    <div>
+                                        <i class="far fa-check-square text-green ms-2"></i>
+                                        <i class="far fa-times-square text-danger ms-1"></i>
+                                    </div>
+                                </div>
                             </td>
 
                         </tr>
@@ -304,7 +332,7 @@
                         <tr>
                             <th class="text-start py-3">
                                 <div class="search-wrapper d-flex align-items-center">
-                                    <i class="fas fa-search search-icon me-1" data-column="0"
+                                    <i class="fas fa-search search-icon me-2 text-primary bg-blue p-1 rounded-circle" data-column="0"
                                         style="cursor:pointer;"></i>
                                     <input type="text" class="search-input form-control form-control-sm"
                                         placeholder="جستجو..." />
@@ -313,7 +341,7 @@
                             </th>
                             <th class="text-start py-3">
                                 <div class="search-wrapper d-flex align-items-center">
-                                    <i class="fas fa-search search-icon me-1" data-column="0"
+                                    <i class="fas fa-search search-icon me-2 text-primary bg-blue p-1 rounded-circle" data-column="0"
                                         style="cursor:pointer;"></i>
                                     <input type="text" class="search-input form-control form-control-sm"
                                         placeholder="جستجو..." />
@@ -322,8 +350,24 @@
                             </th>
                             <th class="text-start py-3">کاربر</th>
                             <th class="text-start py-3">مدارک <i class="fas fa-sort ms-1"></i></th>
-                            <th class="text-start py-3">وضعیت <i class="fas fa-sort ms-1"></i></th>
-
+         <th class="text-start py-3">
+                                وضعیت
+                                <div class="dropdown d-inline">
+                                    <i class="fas fa-sort  ms-1" data-bs-toggle="dropdown" style="cursor:pointer;"></i>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item filter-status" data-status="تایید شده"></a>تایید شده</li>
+                                        <li><a class="dropdown-item filter-status" data-status="رد شده">رد شده</a></li>
+                                        <li><a class="dropdown-item filter-status" data-status="در انتظار تایید">در انتظار تایید</a></li>
+                                        <li><a class="dropdown-item filter-status" data-status="تکمیل نشده">تکمیل
+                                                نشده</a>
+                                        </li>
+                                        <li>
+                                            <hr class="dropdown-divider">
+                                        </li>
+                                        <li><a class="dropdown-item filter-status" data-status="all">همه</a></li>
+                                    </ul>
+                                </div>
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -340,7 +384,7 @@
                             <td class="text-start fw-bold">[@Item->documents]</td>
                             <td class="text-start">
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <span class="px-3 py-2 rounded-pill [@Item->StatusColor]">
+                                    <span class="px-3 py-2 rounded-pill status-text [@Item->StatusColor]">
                                         [@Item->Status]
                                     </span>
                                     <i class="fas fa-ellipsis-v text-secondary ms-2" style="cursor:pointer;"></i>

@@ -14,8 +14,10 @@
                 <th class="text-start py-3"> مشخصات سفارش</th>
                 <th class="text-start py-3">کاربر</th>
                 <th class="text-start py-3"> مبلغ</th>
-                <th class="text-start sortable py-3" data-column="4" style="cursor:pointer">
-                    زمان و تاریخ تراکنش <i class="fas fa-sort"></i>
+                <th class="text-start sortable py-3" style="cursor:pointer">
+                    زمان و تاریخ تراکنش
+                    <a href="?sort=desc" class="text-decoration-none text-muted">⇣</a>
+                    <a href="?sort=asc" class="text-decoration-none text-muted">⇡</a>
                 </th>
                 <th class="text-start py-3">
                     وضعیت
@@ -38,22 +40,23 @@
         <tbody>
             [foreach ([@Objects->orderList])]
             <tr>
-                <td class="text-start fw-semibold">[@Item->numberOrder]</td>
-                <td class="text-start fw-semibold">[@Item->OrderDetails]</td>
+                <td class="text-start">[@Item->numberOrder]</td>
+                <td class="text-start">[@Item->OrderDetails]</td>
                 <td class="text-start "><a href="[@settings->site]manage/[@Item->UserID]/">
                         [@Item->User]
                     </a></td>
-                <td class="text-start fw-semibold">[@Item->price]</td>
+                <td class="text-start">[@Item->price]</td>
                 <td class="text-start" data-timestamp="[@Item->UnixTimestamp]">[@Item->persianDate]</td>
                 <td class="text-start">
                     <div class="d-flex justify-content-between align-items-center">
                         <span class="px-3 py-2 rounded-pill status-text [@Item->StatusColor]">
                             [@Item->Status]
                         </span>
+                        <a href="#">مشاهده رسید</a>
                     </div>
                 </td>
 
-</tr>
+            </tr>
 </div>
 
 [endforeach]

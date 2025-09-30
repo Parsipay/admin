@@ -1,6 +1,12 @@
 <?php
-function ProcessRequest($request){
+function ProcessRequest($request)
+{
     $page = new stdClass();
+    //function seprate money
+    function separateThousands($number)
+    {
+        return number_format((int)$number);
+    }
 
     // Sort transactions
     // sortOrder can be 'asc' or 'desc'
@@ -14,7 +20,7 @@ function ProcessRequest($request){
             "UserID" => 2,
             "UnixTimestamp" => 1616301000,
             "persianDate" => biiq_PersianDate::date("l j F Y - H:i", 1616301000),
-            "Price" => 750000,
+            "Price" => separateThousands(750000),
             "Status" => "مشاهده رسید"
         ],
         [
@@ -24,7 +30,7 @@ function ProcessRequest($request){
             "UserID" => 3,
             "UnixTimestamp" => 1659787500,
             "persianDate" => biiq_PersianDate::date("l j F Y - H:i", 1659787500),
-            "Price" => 1200000,
+            "Price" => separateThousands(750000),
             "Status" => "مشاهده رسید"
         ],
         [
@@ -34,50 +40,57 @@ function ProcessRequest($request){
             "UserID" => 4,
             "UnixTimestamp" => 1659787600,
             "persianDate" => biiq_PersianDate::date("l j F Y - H:i", 1659787600),
-            "Price" => 900000,
+            "Price" => separateThousands(750000),
             "Status" => "در صف تسویه"
         ]
     ];
-
+    $sortOrder = $_GET['sort'] ?? 'desc';
+    usort($page->Deposits, function ($a, $b) use ($sortOrder) {
+        if ($sortOrder === 'asc') {
+            return $a['UnixTimestamp'] <=> $b['UnixTimestamp']; // قدیمی به جدید
+        } else {
+            return $b['UnixTimestamp'] <=> $a['UnixTimestamp']; // جدید به قدیم
+        }
+    });
     // Credit increases
-$page->Credits = [
-    [
-        "ID" => "1C340202507",
-        "phoneNumber"=>"09356439532",
-        "User" => "یگانه علیزاده",
-        "UserID" => 4,
-        "UnixTimestamp" => 1704126600,
-        "persianDate" => biiq_PersianDate::date("l j F Y - H:i", 1704126600),
-        "bankData" => "IR940150000184370199152881",
-        "BankImage" => "../assets/img/ansar.png",
-        "price" =>"266565",
-        "trackingNumber" => "۷۲۳۶۷۸۱۶۷۰۷۸",
-    ],
-    [
-        "ID" => "2C340202507",
-        "phoneNumber"=>"09126589832",
-        "User" => " بنفشه ابراهیمی",
-        "UserID" => 5,
-        "UnixTimestamp" => 3704126600,
-        "persianDate" => biiq_PersianDate::date("l j F Y - H:i", 1704126600),
-        "bankData" => "IR940150000184370199152881",
-        "price" =>"56565",
-        "BankImage" => "../assets/img/dey.png",
-        "trackingNumber" => "۶۲۳۶۷۸۱۶۷۰۷۸",
-    ],
-    [
-        "ID" => "3C340202507",
-        "phoneNumber"=>"09116589832",
-        "User" => "مریم ماهور",
-        "UserID" => 6,
-        "UnixTimestamp" => 6704126600,
-        "persianDate" => biiq_PersianDate::date("l j F Y - H:i", 1704126600),
-        "bankData" => "IR940150000184370199152881",
-        "price" =>"56565",
-        "BankImage" => "../assets/img/blu.png",
-        "trackingNumber" => "۲۲۳۶۷۸۱۶۷۰۷۸",
-    ],
-];
+    $page->Credits = [
+        [
+            "ID" => "1C340202507",
+            "phoneNumber" => "09356439532",
+            "User" => "یگانه علیزاده",
+            "UserID" => 4,
+            "UnixTimestamp" => 1704126600,
+            "persianDate" => biiq_PersianDate::date("l j F Y - H:i", 1704126600),
+            "bankData" => "IR940150000184370199152881",
+            "BankImage" => "../assets/img/ansar.png",
+            "price" => separateThousands(12356598711),
+            "trackingNumber" => "۷۲۳۶۷۸۱۶۷۰۷۸",
+        ],
+        [
+            "ID" => "2C340202507",
+            "phoneNumber" => "09126589832",
+            "User" => " بنفشه ابراهیمی",
+            "UserID" => 5,
+            "UnixTimestamp" => 3704126600,
+            "persianDate" => biiq_PersianDate::date("l j F Y - H:i", 1704126600),
+            "bankData" => "IR940150000184370199152881",
+            "price" => separateThousands(36598971321),
+            "BankImage" => "../assets/img/dey.png",
+            "trackingNumber" => "۶۲۳۶۷۸۱۶۷۰۷۸",
+        ],
+        [
+            "ID" => "3C340202507",
+            "phoneNumber" => "09116589832",
+            "User" => "مریم ماهور",
+            "UserID" => 6,
+            "UnixTimestamp" => 6704126600,
+            "persianDate" => biiq_PersianDate::date("l j F Y - H:i", 1704126600),
+            "bankData" => "IR940150000184370199152881",
+            "price" => separateThousands(658721321),
+            "BankImage" => "../assets/img/blu.png",
+            "trackingNumber" => "۲۲۳۶۷۸۱۶۷۰۷۸",
+        ],
+    ];
     // Settlement queue
     $page->Settlements = [
         [
@@ -85,27 +98,27 @@ $page->Credits = [
             "persianDate" => biiq_PersianDate::date("l j F Y - H:i", 1724126600),
             "UnixTimestamp" => 1724126600,
             "User" => "یگانه علیزاده",
-            "Price" => 450000,
+            "price" => separateThousands(658721321),
             "UserID" => 7,
             "Status" => "در صف تسویه",
             "properies" => "مشاهده عملیات"
         ],
-       [
+        [
             "ID" => "S540202507",
             "UnixTimestamp" => 1724126600,
             "persianDate" => biiq_PersianDate::date("l j F Y - H:i", 1724126600),
             "User" => "یگانه علیزاده",
-            "Price" => 450000,
+            "price" => separateThousands(658721321),
             "UserID" => 8,
             "Status" => "در صف تسویه",
             "properies" => "مشاهده عملیات"
         ],
-       [
+        [
             "ID" => "S540202507",
             "UnixTimestamp" => 2724126600,
             "persianDate" => biiq_PersianDate::date("l j F Y - H:i", 1724126600),
             "User" => "یگانه علیزاده",
-            "Price" => 450000,
+           "price" => separateThousands(658721321),
             "UserID" => 9,
             "Status" => "در صف تسویه",
             "properies" => "مشاهده عملیات"
@@ -113,9 +126,9 @@ $page->Credits = [
     ];
 
     // Sort by UnixTimestamp
-    $sortFunction = function($a, $b) use ($sortOrder) {
-        return ($sortOrder === 'asc') 
-            ? $a['UnixTimestamp'] <=> $b['UnixTimestamp'] 
+    $sortFunction = function ($a, $b) use ($sortOrder) {
+        return ($sortOrder === 'asc')
+            ? $a['UnixTimestamp'] <=> $b['UnixTimestamp']
             : $b['UnixTimestamp'] <=> $a['UnixTimestamp'];
     };
 
@@ -140,7 +153,6 @@ $page->Credits = [
         'content'   => biiq_Template::Start('transactions->index', true, ['Objects' => $page]),
         'id'        => 1,
         'title'     => 'مالی',
-        'Canonical' => SITE.'transactions/'
+        'Canonical' => SITE . 'transactions/'
     ];
 }
-?>

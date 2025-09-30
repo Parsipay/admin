@@ -173,6 +173,9 @@ body {
 .bg-blue {
   background: #3861fb26 !important;
 }
+.bg-red{
+  background-color: rgba(255, 0, 0, 0.137)!important;
+}
 .amount {
   background-color: #f8f9fa;
 }

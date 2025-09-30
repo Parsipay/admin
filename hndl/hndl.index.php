@@ -60,7 +60,7 @@ function ProcessRequest($request)
     // Orders
     $p->orderList = [
         [
-            "numberOrder" => "0013152343",
+            "numberOrder" => "1013152343",
             "OrderDetails" => "09128431937",
             "User" => "یگانه علیزاده",
             "UserID" => 16,
@@ -70,7 +70,7 @@ function ProcessRequest($request)
             "Status" => "موفق ",
         ],
         [
-            "numberOrder" => "0013152343",
+            "numberOrder" => "2013152343",
             "OrderDetails" => "09128431937",
             "User" => " بنفشه ابراهیمی",
             "UserID" => 17,
@@ -80,7 +80,7 @@ function ProcessRequest($request)
             "Status" => "در انتظار تایید ",
         ],
         [
-            "numberOrder" => "0013152343",
+            "numberOrder" => "3013152343",
             "OrderDetails" => "09128431937",
             "User" => " بنفشه ابراهیمی",
             "UserID" => 18,
@@ -90,11 +90,20 @@ function ProcessRequest($request)
             "Status" => "  ناموفق ",
         ],
     ];
+    //for sort desc or asc date and time
+    $sortOrder = $_GET['sort'] ?? 'desc';
+    usort($p->orderList, function ($a, $b) use ($sortOrder) {
+        if ($sortOrder === 'asc') {
+            return $a['UnixTimestamp'] <=> $b['UnixTimestamp']; // قدیمی به جدید
+        } else {
+            return $b['UnixTimestamp'] <=> $a['UnixTimestamp']; // جدید به قدیم
+        }
+    });
 
     // Users
     $p->userList = [
         [
-            "nationalCode" => "0013152343",
+            "nationalCode" => "2356897845",
             "phoneNumber" => "09128431937",
             "User" => "یگانه علیزاده",
             "UserID" => 19,
@@ -106,7 +115,7 @@ function ProcessRequest($request)
         [
             "nationalCode" => "0013152343",
             "phoneNumber" => "09128431937",
-            "User" => "یگانه علیزاده",
+            "User" => " بنفشه ابراهیمی",
             "UserID" => 20,
             "lastActivity" => "2 ماه پیش",
             "UnixTimestamp" => 33333333,
@@ -116,28 +125,21 @@ function ProcessRequest($request)
         [
             "nationalCode" => "0013152343",
             "phoneNumber" => "09128431937",
-            "User" => "یگانه علیزاده",
+            "User" => " مونا مارامی",
             "UserID" => 21,
             "lastActivity" => "2 ماه پیش",
-
             "UnixTimestamp" => 4444444444,
             "persianDate" => biiq_PersianDate::date("l j F Y - H:i", 4444444444),
             "Status" => "تکمیل نشده",
         ],
     ];
-foreach($p->userList as &$user){
-    $status = trim($user["Status"]);
-    if($status === "مسدود"){
-        $user["StatusColor"] = "red";
-    } elseif($status === "موفق"){
-        $user["StatusColor"] = "green";
-    } elseif($status === "تکمیل نشده"){
-        $user["StatusColor"] = "blue";
-    } else{
-        $user["StatusColor"] = "transparent"; // حالت پیش‌فرض
-    }
-}
-unset($user);
+    $sortOrder = $_GET['sort'] ?? 'desc';
+
+    usort($p->userList, function ($a, $b) use ($sortOrder) {
+        return $sortOrder === 'asc' ? $a['UnixTimestamp'] <=> $b['UnixTimestamp']
+            : $b['UnixTimestamp'] <=> $a['UnixTimestamp'];
+    });
+
     // Financial Requests
     $p->requestList = [
         [
@@ -145,7 +147,7 @@ unset($user);
             "trackingNumber" => "0293564635",
             "User" => "بنفشه ابراهیمی",
             "UserID" => 22,
-            "price" => " 65665454546",
+            "price" =>  separateThousands(65665454546),
             "UnixTimestamp" => 9999999999,
             "persianDate" => biiq_PersianDate::date("l j F Y - H:i", 88888888),
             "Status" => "مشاهده رسید",
@@ -155,7 +157,7 @@ unset($user);
             "trackingNumber" => "0293564635",
             "User" => "بنفشه ابراهیمی",
             "UserID" => 23,
-            "price" => "مشاهده مدارک",
+            "price" => separateThousands(65665454546),
             "UnixTimestamp" => 777777777,
             "persianDate" => biiq_PersianDate::date("l j F Y - H:i", 33333333),
             "Status" => "  مشاهده رسید",
@@ -165,13 +167,18 @@ unset($user);
             "trackingNumber" => "0293564635",
             "User" => "بنفشه ابراهیمی",
             "UserID" => 24,
-            "price" => "مشاهده مدارک",
+            "price" => separateThousands(65665454546),
             "UnixTimestamp" => 1616301000,
             "persianDate" => biiq_PersianDate::date("l j F Y - H:i", 1616301000),
             "Status" => "در  صف تسویه",
         ],
     ];
+    $sortOrder = $_GET['sort'] ?? 'desc';
 
+    usort($p->requestList, function ($a, $b) use ($sortOrder) {
+        return $sortOrder === 'asc' ? $a['UnixTimestamp'] <=> $b['UnixTimestamp']
+            : $b['UnixTimestamp'] <=> $a['UnixTimestamp'];
+    });
     $p->TopBox = [
         ['Link' => "#", "Icon" => "home", "Title" => "پیغام‌ها", "Subtitle" => "12 تیکت | 5 اتوماسیون"],
         ['Link' => "#", "Icon" => "gear", "Title" => "تنظیمات", "Subtitle" => "2 سفارش در حال پردازش"],
@@ -180,11 +187,29 @@ unset($user);
         ['Link' => "#", "Icon" => "id-card", "Title" => "مدارک احراز", "Subtitle" => "2 مورد در حال انتظار"],
     ];
 
+    //////////////////////////////////////////////////////////////////conditions////////////////////////////////////////////////////////////////////////////
+    //condition for orderlist' status
     foreach ($p->orderList as &$Item) {
         $status = trim($Item["Status"]);
-        if ($status === "موفق") $Item["StatusColor"] = "text-success";
-        elseif ($status === "در انتظار تایید") $Item["StatusColor"] = "text-warning";
-        else $Item["StatusColor"] = "text-danger";
+        if ($status === "موفق") $Item["StatusColor"] = "text-success opacity-green";
+        elseif ($status === "در انتظار تایید") $Item["StatusColor"] = "text-warning bg-opacity-warning ";
+        else $Item["StatusColor"] = "text-danger opacity-danger";
+    }
+    unset($Item);
+
+    //condition for userlist's status
+    foreach ($p->userList as &$Item) {
+        $status = trim($Item["Status"]);
+        if ($status === "موفق") $Item["StatusColor"] = "text-success opacity-green ";
+        elseif ($status === "تکمیل نشده") $Item["StatusColor"] = "text-primary bg-blue";
+        else $Item["StatusColor"] = "text-danger opacity-danger";
+    }
+    unset($Item);
+
+    foreach ($p->requestList as &$Item) {
+        $status = trim($Item["Status"]);
+        if ($status === "مشاهده رسید") $Item["StatusColor"] = "text-primary ";
+        else $Item["StatusColor"] = "text-warning";
     }
     unset($Item);
 
@@ -201,5 +226,3 @@ unset($user);
 // ============================================
 // FEKR KONAM BAYAD INARO AK KNAM INA DG HICH JA ESTEFADE NEMISHE
 // ============================================
-
-
