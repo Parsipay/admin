@@ -151,3 +151,21 @@ document.getElementById('sortDesc')?.addEventListener('click', function(e){
     url.searchParams.set('sort', 'desc');
     window.location = url.toString();
 });
+
+
+
+
+$(function () {
+    // تاریخ میلادی
+    const today = new Date();
+    const optionsEn = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    const gregorian = today.toLocaleDateString('en-US', optionsEn);
+
+    // تاریخ شمسی
+    const optionsFa = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    const persian = today.toLocaleDateString('fa-IR', optionsFa);
+
+    // نمایش در صفحه
+    $("#shamsi").text("تاریخ شمسی: " + persian);
+    $("#miladi").text("تاریخ میلادی: " + gregorian);
+});

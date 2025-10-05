@@ -3,16 +3,17 @@
     <!-- Nav Pills -->
     <ul class="nav nav-pills nav-justified gap-1 pb-3" id="financeTab" role="tablist">
         <li class="nav-item" role="presentation">
-            <button class="nav-link text-purple active rounded-pill" data-bs-toggle="pill" data-bs-target="#deposits"
-                type="button" role="tab">لیست واریزی‌ها</button>
+            <button class="nav-link text-purple active rounded-pill py-3" data-bs-toggle="pill" data-bs-target="#deposits"
+                type="button" role="tab">لیست واریزی‌ها <i class="fas fa-arrow-down ms-2"></i></button>
         </li>
         <li class="nav-item" role="presentation">
-            <button class="nav-link text-purple rounded-pill" data-bs-toggle="pill" data-bs-target="#credits"
-                type="button" role="tab">افزایش اعتبار</button>
+            <button class="nav-link text-purple rounded-pill py-3" data-bs-toggle="pill" data-bs-target="#credits"
+                type="button" role="tab">افزایش اعتبار<i class="fas fa-plus-circle ms-2"></i></button>
         </li>
         <li class="nav-item" role="presentation">
-            <button class="nav-link text-purple rounded-pill" data-bs-toggle="pill" data-bs-target="#settlements"
-                type="button" role="tab">صف تسویه</button>
+            <button class="nav-link text-purple rounded-pill py-3" data-bs-toggle="pill" data-bs-target="#settlements"
+                type="button" role="tab">صف تسویه     <i class="fas fa-hand-holding-usd ms-2"></i>
+</button>
         </li>
     </ul>
 
@@ -194,7 +195,7 @@
                                     [@Item->User]
                                 </a>
                             </td>
-                            <td class="text-start">[@Item->Price]</td>
+                            <td class="text-start">[@Item->price]</td>
                             <td class="text-start">
                                 <span class="text-warning px-3 py-2 rounded-pill">[@Item->Status]</span>
                             </td>
