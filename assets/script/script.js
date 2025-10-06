@@ -169,3 +169,21 @@ $(function () {
     $("#shamsi").text("تاریخ شمسی: " + persian);
     $("#miladi").text("تاریخ میلادی: " + gregorian);
 });
+
+
+
+   document.querySelectorAll('.message-item').forEach(item => {
+        item.addEventListener('click', () => {
+            // بستن باکس های باز شده قبلی
+            document.querySelectorAll('.ticket-reply').forEach(r => r.classList.add('d-none'));
+            // باز کردن باکس همین پیام
+            item.querySelector('.ticket-reply').classList.remove('d-none');
+        });
+    });  document.querySelectorAll('.message-item').forEach(item => {
+        item.addEventListener('click', () => {
+            // بستن باکس های باز شده قبلی
+            document.querySelectorAll('.ticket-reply').forEach(r => r.classList.add('d-none'));
+            // باز کردن باکس همین پیام
+            item.querySelector('.ticket-reply').classList.remove('d-none');
+        });
+    });

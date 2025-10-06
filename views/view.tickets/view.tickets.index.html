@@ -1,6 +1,7 @@
 <div class="d-flex flex-column mt-3 w-100">
     <!-- ردیف بالا: تاریخ و جستجو -->
-    <div class="d-flex flex-column flex-lg-row justify-content-between align-items-center w-100 bg-col p-4 rounded gap-3">
+    <div
+        class="d-flex flex-column flex-lg-row justify-content-between align-items-center w-100 bg-col p-4 rounded gap-3">
         <!-- ستون تاریخ -->
         <div class="d-flex flex-column gap-2 mt-2 text-start">
             <span class="d-block fw-bold font-color">[@dateandtime->persianDate]</span>
@@ -10,7 +11,7 @@
         <div class="w-lg-auto">
             <div class="input-group flex-row-reverse bg-white rounded p-1">
                 <input type="text" class="form-control border-0 border-start font-color"
-                       placeholder="جستجو در سفارشات...">
+                    placeholder="جستجو در سفارشات...">
                 <button class="btn btn-white" type="button">
                     <i class="fas fa-search font-color"></i>
                 </button>
@@ -24,29 +25,31 @@
     <ul class="nav nav-pills nav-justified gap-1 pb-3 border-bottom border-muted" id="financeTab" role="tablist">
         <li class="nav-item" role="presentation">
             <button class="nav-link text-purple active rounded-pill py-3" data-bs-toggle="pill"
-                    data-bs-target="#deposits" type="button" role="tab">پیغام‌ها <i class="fas fa-envelope-open ms-2"></i></button>
+                data-bs-target="#allMessages" type="button" role="tab">پیغام‌ها <i
+                    class="fas fa-envelope-open ms-2"></i></button>
         </li>
         <li class="nav-item" role="presentation">
-            <button class="nav-link text-purple rounded-pill py-3" data-bs-toggle="pill" data-bs-target="#credits"
-                    type="button" role="tab">خوانده نشده <i class="fas fa-envelope-open ms-2"></i></button>
+            <button class="nav-link text-purple rounded-pill py-3" data-bs-toggle="pill" data-bs-target="#unread"
+                type="button" role="tab">خوانده نشده <i class="fas fa-envelope-open ms-2"></i></button>
         </li>
         <li class="nav-item" role="presentation">
-            <button class="nav-link text-purple rounded-pill py-3" data-bs-toggle="pill" data-bs-target="#settlements"
-                    type="button" role="tab">در حال پیگیری<i class="fas fa-spinner fa-spin ms-2"></i></button>
+            <button class="nav-link text-purple rounded-pill py-3" data-bs-toggle="pill" data-bs-target="#pending"
+                type="button" role="tab">در حال پیگیری <i class="fas fa-spinner fa-spin ms-2"></i></button>
         </li>
         <li class="nav-item" role="presentation">
-            <button class="nav-link text-purple rounded-pill py-3" data-bs-toggle="pill" data-bs-target="#identity-docs"
-                    type="button" role="tab">مدارک احراز هویت <i class="fas fa-exclamation-circle ms-2"></i></button>
+            <button class="nav-link text-purple rounded-pill py-3" data-bs-toggle="pill" data-bs-target="#completed"
+                type="button" role="tab">تکمیل شده‌ها <i class="fas fa-check-circle ms-2"></i></button>
         </li>
     </ul>
 
     <!-- Tab Content -->
     <div class="tab-content">
-        <!-- تب پیام‌ها -->
-        <div class="tab-pane fade show active" id="deposits" role="tabpanel">
+        <!-- تب اول: همه پیام‌ها -->
+        <div class="tab-pane fade show active" id="allMessages" role="tabpanel">
             <div class="d-flex flex-column bg-col gap-2 p-3 mt-4">
                 [foreach ([@Objects->users])]
-                <div class="d-flex flex-column bg-white p-3">
+                <div class="d-flex flex-column bg-white p-3 ticket-card"
+                    onclick="this.querySelector('.ticket-reply').classList.toggle('d-none')">
                     <div class="d-flex justify-content-between p-3 border-bottom">
                         <div class="d-flex gap-2">
                             <img src="[@Item->img]" alt="user" width="30" height="30" class="ms-2">
@@ -57,28 +60,199 @@
                         </div>
                         <span><i class="fa-solid fa-ellipsis-vertical"></i></span>
                     </div>
-                    <div class="d-flex justify-content-between p-3 px-3">
+                    <div class="d-flex justify-content-between align-items-end p-3 px-3">
                         <span class="fw-bold">[@Item->statusIcon] [@Item->msg]</span>
-                        <span>جمعه 24 اسفند ماه 1403 | ساعت 18:21</span>
+                        <div class="text-end">[@Item->statusLabel]</div>
+                    </div>
+                    <!-- فرم پاسخ ادمین مخفی -->
+                    <div class="ticket-reply mt-2 d-none border rounded p-3 bg-col">
+                        <!-- تاریخ و زمان بالا سمت چپ -->
+                        <div class="d-flex justify-content-end mb-2">
+                            <small class="text-muted">جمعه 24 اسفند 1403 | ساعت 18:21</small>
+                        </div>
+
+                        <!-- textarea پاسخ -->
+                        <textarea class="form-control mb-2 bg-col border-0" rows="2" placeholder="پاسخ به کاربر..."></textarea>
+
+                        <!-- دکمه ارسال -->
+                        <div class="d-flex justify-content-between align-items-center">
+                            <button class="btn btn-outline-secondary">ارسال پاسخ</button>
+
+                            <!-- آیکن‌های ادیت، دیلیت، کپی -->
+                            <div class="d-flex gap-2">
+                                <button type="button" class="btn btn-sm font-color " title="ویرایش">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button type="button" class="btn btn-sm font-color " title="حذف">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                                <button type="button" class="btn btn-sm font-color" title="کپی">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 [endforeach]
             </div>
         </div>
 
-        <!-- تب خوانده نشده -->
-        <div class="tab-pane fade" id="credits" role="tabpanel">
-            تب دوم
+        <!-- تب دوم: خوانده نشده -->
+        <div class="tab-pane fade" id="unread" role="tabpanel">
+            <div class="d-flex flex-column bg-col gap-2 p-3 mt-4">
+                [foreach ([@Objects->unreadUsers])]
+                <div class="d-flex flex-column bg-white p-3 ticket-card"
+                    onclick="this.querySelector('.ticket-reply').classList.toggle('d-none')">
+                    <div class="d-flex justify-content-between p-3 border-bottom">
+                        <div class="d-flex gap-2">
+                            <img src="[@Item->img]" alt="user" width="30" height="30" class="ms-2">
+                            <div class="d-flex flex-column gap-2">
+                                <span class="fw-bold">[@Item->name]</span>
+                                <span class="font-color">[@Item->level]</span>
+                            </div>
+                        </div>
+                        <span><i class="fa-solid fa-ellipsis-vertical"></i></span>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-end p-3 px-3">
+                        <span class="fw-bold">[@Item->statusIcon] [@Item->msg]</span>
+                        <div class="text-end">[@Item->statusLabel]</div>
+                    </div>
+                  <div class="ticket-reply mt-2 d-none border rounded p-3 bg-col">
+                        <!-- تاریخ و زمان بالا سمت چپ -->
+                        <div class="d-flex justify-content-end mb-2">
+                            <small class="text-muted">جمعه 24 اسفند 1403 | ساعت 18:21</small>
+                        </div>
+
+                        <!-- textarea پاسخ -->
+                        <textarea class="form-control mb-2 bg-col border-0" rows="2" placeholder="پاسخ به کاربر..."></textarea>
+
+                        <!-- دکمه ارسال -->
+                        <div class="d-flex justify-content-between align-items-center">
+                            <button class="btn btn-outline-secondary">ارسال پاسخ</button>
+
+                            <!-- آیکن‌های ادیت، دیلیت، کپی -->
+                            <div class="d-flex gap-2">
+                                <button type="button" class="btn btn-sm font-color " title="ویرایش">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button type="button" class="btn btn-sm font-color " title="حذف">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                                <button type="button" class="btn btn-sm font-color" title="کپی">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                [endforeach]
+            </div>
         </div>
 
-        <!-- تب در حال پیگیری -->
-        <div class="tab-pane fade" id="settlements" role="tabpanel">
-            تب سوم
+        <!-- تب سوم: در حال پیگیری -->
+        <div class="tab-pane fade" id="pending" role="tabpanel">
+            <div class="d-flex flex-column bg-col gap-2 p-3 mt-4">
+                [foreach ([@Objects->pendingUsers])]
+                <div class="d-flex flex-column bg-white p-3 ticket-card"
+                    onclick="this.querySelector('.ticket-reply').classList.toggle('d-none')">
+                    <div class="d-flex justify-content-between p-3 border-bottom">
+                        <div class="d-flex gap-2">
+                            <img src="[@Item->img]" alt="user" width="30" height="30" class="ms-2">
+                            <div class="d-flex flex-column gap-2">
+                                <span class="fw-bold">[@Item->name]</span>
+                                <span class="font-color">[@Item->level]</span>
+                            </div>
+                        </div>
+                        <span><i class="fa-solid fa-ellipsis-vertical"></i></span>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-end p-3 px-3">
+                        <span class="fw-bold">[@Item->statusIcon] [@Item->msg]</span>
+                        <div class="text-end">[@Item->statusLabel]</div>
+                    </div>
+                 <div class="ticket-reply mt-2 d-none border rounded p-3 bg-col">
+                        <!-- تاریخ و زمان بالا سمت چپ -->
+                        <div class="d-flex justify-content-end mb-2">
+                            <small class="text-muted">جمعه 24 اسفند 1403 | ساعت 18:21</small>
+                        </div>
+
+                        <!-- textarea پاسخ -->
+                        <textarea class="form-control mb-2 bg-col border-0" rows="2" placeholder="پاسخ به کاربر..."></textarea>
+
+                        <!-- دکمه ارسال -->
+                        <div class="d-flex justify-content-between align-items-center">
+                            <button class="btn btn-outline-secondary">ارسال پاسخ</button>
+
+                            <!-- آیکن‌های ادیت، دیلیت، کپی -->
+                            <div class="d-flex gap-2">
+                                <button type="button" class="btn btn-sm font-color " title="ویرایش">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button type="button" class="btn btn-sm font-color " title="حذف">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                                <button type="button" class="btn btn-sm font-color" title="کپی">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                [endforeach]
+            </div>
         </div>
 
-        <!-- تب مدارک احراز هویت -->
-        <div class="tab-pane fade" id="identity-docs" role="tabpanel">
-            تب چهارم
+        <!-- تب چهارم: تکمیل شده‌ها -->
+        <div class="tab-pane fade" id="completed" role="tabpanel">
+            <div class="d-flex flex-column bg-col gap-2 p-3 mt-4">
+                [foreach ([@Objects->doneUsers])]
+                <div class="d-flex flex-column bg-white p-3 ticket-card"
+                    onclick="this.querySelector('.ticket-reply').classList.toggle('d-none')">
+                    <div class="d-flex justify-content-between p-3 border-bottom">
+                        <div class="d-flex gap-2">
+                            <img src="[@Item->img]" alt="user" width="30" height="30" class="ms-2">
+                            <div class="d-flex flex-column gap-2">
+                                <span class="fw-bold">[@Item->name]</span>
+                                <span class="font-color">[@Item->level]</span>
+                            </div>
+                        </div>
+                        <span><i class="fa-solid fa-ellipsis-vertical"></i></span>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-end p-3 px-3">
+                        <span class="fw-bold">[@Item->statusIcon] [@Item->msg]</span>
+                        <div class="text-end">[@Item->statusLabel]</div>
+                    </div>
+
+                    <div class="ticket-reply mt-2 d-none border rounded p-3 bg-col">
+                        <!-- تاریخ و زمان بالا سمت چپ -->
+                        <div class="d-flex justify-content-end mb-2">
+                            <small class="text-muted">جمعه 24 اسفند 1403 | ساعت 18:21</small>
+                        </div>
+
+                        <!-- textarea پاسخ -->
+                        <textarea class="form-control mb-2 bg-col border-0" rows="2" placeholder="پاسخ به کاربر..."></textarea>
+
+                        <!-- دکمه ارسال -->
+                        <div class="d-flex justify-content-between align-items-center">
+                            <button class="btn btn-outline-secondary">ارسال پاسخ</button>
+
+                            <!-- آیکن‌های ادیت، دیلیت، کپی -->
+                            <div class="d-flex gap-2">
+                                <button type="button" class="btn btn-sm font-color " title="ویرایش">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button type="button" class="btn btn-sm font-color " title="حذف">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                                <button type="button" class="btn btn-sm font-color" title="کپی">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                [endforeach]
+            </div>
         </div>
     </div>
 </div>
