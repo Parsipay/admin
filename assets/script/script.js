@@ -1,9 +1,9 @@
 $(document).ready(function () {
     // ---------- Search ----------
     $(".search-icon").click(function(e){
-        e.stopPropagation(); // جلوگیری از بسته شدن فوری
+        e.stopPropagation();
         var input = $(this).siblings(".search-input");
-        $(".search-input").not(input).removeClass("show"); // بقیه input ها بسته شوند
+        $(".search-input").not(input).removeClass("show");
         input.toggleClass("show").focus();
     });
 
@@ -82,6 +82,23 @@ $(document).ready(function () {
             alert("کپی نشد ❌");
         });
     });
+
+    // ---------- تاریخ شمسی و میلادی ----------
+    const today = new Date();
+    const optionsEn = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    const gregorian = today.toLocaleDateString('en-US', optionsEn);
+    const optionsFa = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    const persian = today.toLocaleDateString('fa-IR', optionsFa);
+    $("#shamsi").text("تاریخ شمسی: " + persian);
+    $("#miladi").text("تاریخ میلادی: " + gregorian);
+
+    // ---------- Ticket Reply ----------
+    $(".ticket-card").on("click", function(e) {
+        if ($(e.target).closest("button, textarea, i").length) return;
+        const replyBox = $(this).find(".ticket-reply");
+        $(".ticket-reply").not(replyBox).slideUp(200);
+        replyBox.slideToggle(200);
+    });
 });
 
 // ---------- ECharts ----------
@@ -151,39 +168,3 @@ document.getElementById('sortDesc')?.addEventListener('click', function(e){
     url.searchParams.set('sort', 'desc');
     window.location = url.toString();
 });
-
-
-
-
-$(function () {
-    // تاریخ میلادی
-    const today = new Date();
-    const optionsEn = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    const gregorian = today.toLocaleDateString('en-US', optionsEn);
-
-    // تاریخ شمسی
-    const optionsFa = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    const persian = today.toLocaleDateString('fa-IR', optionsFa);
-
-    // نمایش در صفحه
-    $("#shamsi").text("تاریخ شمسی: " + persian);
-    $("#miladi").text("تاریخ میلادی: " + gregorian);
-});
-
-
-
-   document.querySelectorAll('.message-item').forEach(item => {
-        item.addEventListener('click', () => {
-            // بستن باکس های باز شده قبلی
-            document.querySelectorAll('.ticket-reply').forEach(r => r.classList.add('d-none'));
-            // باز کردن باکس همین پیام
-            item.querySelector('.ticket-reply').classList.remove('d-none');
-        });
-    });  document.querySelectorAll('.message-item').forEach(item => {
-        item.addEventListener('click', () => {
-            // بستن باکس های باز شده قبلی
-            document.querySelectorAll('.ticket-reply').forEach(r => r.classList.add('d-none'));
-            // باز کردن باکس همین پیام
-            item.querySelector('.ticket-reply').classList.remove('d-none');
-        });
-    });

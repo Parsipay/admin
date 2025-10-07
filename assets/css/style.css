@@ -454,33 +454,6 @@ table thead th {
     }
 
 
-    .ticket-reply {
-    display: none!important; /* مخفی کردن فرم در حالت نرمال */
+.ticket-reply {
+  display: none;
 }
-
-   .ticket-reply {
-            background: #f9f9f9;
-            border-radius: 12px;
-            padding: 1rem;
-            margin-top: .5rem;
-        }
-        .ticket-reply-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #dee2e6;
-            padding-bottom: .5rem;
-            margin-bottom: .5rem;
-        }
-        .ticket-reply-icons i {
-            margin-right: 10px;
-            cursor: pointer;
-            color: #6f42c1;
-        }
-        .message-item {
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-        .message-item:hover {
-            background: #f1f1f1;
-        }
