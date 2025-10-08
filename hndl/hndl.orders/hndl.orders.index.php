@@ -2,7 +2,16 @@
 function ProcessRequest($request)
 {
     $page = new stdClass();
+    // === Current Date & Time ===
+    $today = new DateTime();
+    $today->modify('+1 hour');
+    $page->dateandtime = [
+        'persianDate' => biiq_PersianDate::date("l j F Y"),
+        'otherDate'   => $today->format("Y/m/d"),
+        'time'        => $today->format("H:i")
+    ];
 
+    
     // --- Helper functions ---
     $maskCard = fn($num) =>
         (strlen($num) <= 10)
@@ -149,7 +158,7 @@ function ProcessRequest($request)
 
     // --- Return page data ---
     return [
-        'content'   => biiq_Template::Start('orders->index', true, ['Objects' => $page]),
+        'content'   => biiq_Template::Start('orders->index', true, ['Objects' => $page,'dateandtime' => $page->dateandtime]),
         'id'        => 1,
         'title'     => 'مالی',
         'Canonical' => SITE . 'orders/'

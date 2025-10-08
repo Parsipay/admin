@@ -21,6 +21,15 @@ function ProcessRequest($request)
         return number_format((int)$number);
     }
 
+    $today = new DateTime();
+    $today->modify('+1 hour');
+    $page->dateandtime = [
+        'persianDate' => biiq_PersianDate::date("l j F Y"),
+        'otherDate'   => $today->format("Y/m/d"),
+        'time'        => $today->format("H:i")
+    ];
+
+
     //Load user $SelectedUserID
     $page->profileBox = [
         "registrationStatus" => "تایید شده",
@@ -367,7 +376,7 @@ unset($Item);
 
     $page->Title = "  مدیریت کاربران ";
     $page = array(
-        'content' => biiq_Template::Start('manage->default', true, ['Objects' => $page, 'CurrentUser' => $page->CurrentUser]),
+        'content' => biiq_Template::Start('manage->default', true, ['Objects' => $page, 'CurrentUser' => $page->CurrentUser,'dateandtime'=>$page->dateandtime]),
         'id' => 0,
         'title' => $page->Title,
         'Canonical' => SITE . 'manage/',

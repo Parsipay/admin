@@ -3,6 +3,19 @@ function ProcessRequest($request)
 {
     $page = new stdClass();
 
+
+
+
+    // === Current Date & Time ===
+    $today = new DateTime();
+    $today->modify('+1 hour');
+    $page->dateandtime = [
+        'persianDate' => biiq_PersianDate::date("l j F Y"),
+        'otherDate'   => $today->format("Y/m/d"),
+        'time'        => $today->format("H:i")
+    ];
+
+    
     // --- Helper: format number with thousands separator ---
     $separateThousands = fn($n) => number_format((int)$n);
 
@@ -18,7 +31,7 @@ function ProcessRequest($request)
         [
             "ID" => "e3140202507",
             "trackingNumber" => "ATRK1001",
-            "User" => "یگانه علیزاده",
+            "User" => "یگانه علیdزاده",
             "UserID" => 2,
             "UnixTimestamp" => 1616301000,
             "persianDate" => biiq_PersianDate::date("l j F Y - H:i", 1616301000),
@@ -139,7 +152,8 @@ function ProcessRequest($request)
 
     // --- Final output ---
     return [
-        'content'   => biiq_Template::Start('transactions->index', true, ['Objects' => $page]),
+        'content'   => biiq_Template::Start('transactions->index', true, ['Objects' => $page, 'dateandtime' => $page->dateandtime]
+),
         'id'        => 1,
         'title'     => 'مالی',
         'Canonical' => SITE . 'transactions/'

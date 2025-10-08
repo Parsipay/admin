@@ -1,6 +1,9 @@
 <?php
 function ProcessRequest($request)
 {
+
+    
+
     // Helper: Mask card number except first 6 and last 4 digits
     function maskCard($num)
     {
@@ -11,6 +14,14 @@ function ProcessRequest($request)
     }
 
     $page = new stdClass();
+    // === Current Date & Time ===
+    $today = new DateTime();
+    $today->modify('+1 hour');
+    $page->dateandtime = [
+        'persianDate' => biiq_PersianDate::date("l j F Y"),
+        'otherDate'   => $today->format("Y/m/d"),
+        'time'        => $today->format("H:i")
+    ];
 
     // --- Accordion documents list ---
     $timestamp = 1616301000;
@@ -191,7 +202,7 @@ function ProcessRequest($request)
 
     // --- Final output ---
     return [
-        'content'   => biiq_Template::Start('manage->index', true, ['Objects' => $page]),
+        'content'   => biiq_Template::Start('manage->index', true, ['Objects' => $page,'dateandtime' => $page->dateandtime]),
         'id'        => 1,
         'title'     => 'مالی',
         'Canonical' => SITE . 'manage/'

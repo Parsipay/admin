@@ -1,26 +1,5 @@
-<div class="d-flex flex-column mt-3 w-100">
-    <!-- empty row -->
-    <div
-        class="d-flex flex-column flex-lg-row justify-content-between align-items-center w-100 bg-col p-4 rounded gap-3">
-        <!-- ستون اول: تاریخ -->
-        <div class="d-flex flex-column  gap-2 mt-2 text-start">
-            <span class="d-block fw-bold font-color">[@CurrentUser->persianDate]</span>
-            <span class="d-block fw-bold">[@CurrentUser->otherDate]</span>
-        </div>
-        <!-- ستون دوم: باکس جستجو -->
-        <div class="w-lg-auto">
-            <div class="input-group flex-row-reverse bg-white rounded  p-1">
-                <input type="text" class="form-control border-0 border-start font-color"
-                    placeholder="جستجو در سفارشات...">
-                <button class="btn btn-white " type="button">
-                    <i class="fas fa-search font-color"></i>
-                </button>
-            </div>
-        </div>
-    </div>
-
-
-    <!-- main content -->
+<div>[@import->dateandtime->index]</div>
+<div class="d-flex flex-column mt-3 w-100">    <!-- main content -->
     <div class="d-flex flex-column flex-lg-row justify-content-center gap-3 my-5 w-100">
         <!-- profile side -->
         <div class="d-flex flex-column bg-col px-4 py-2 rounded w-100 w-lg-5">
