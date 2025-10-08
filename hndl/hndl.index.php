@@ -18,51 +18,30 @@ function ProcessRequest($request)
     }
 
 
-    $cards = [
-        ["یگانه علیزاده", "ملی", "IR820540102680020817909002", "5022291077470837"],
-        ["بنفشه ابراهیمی", "سامان", "IR350170000000000000123456", "5894631804760130"],
-        ["نازنین علیزاده", "پاسارگاد", "IR460120000000123456789012", "6104337900001234"],
-        ["زهرا نوری", "تجارت", "IR780180000000000000987654", "6219861000001234"],
-    ];
 
     // -----------------------------
     // Authentication messages
     // -----------------------------
-    $boxMessages = [
-        ["بنفشه ابراهیمی", "1747014000"],
-        ["یگانه علیزاده", "1745714000"],
-        ["مریم ماهور", "1717136540"]
-    ];
+
 
 
     $p = new stdClass();
 
-    // Cards
-    $p->Cards = [];
-    foreach ($cards as [$name, $bank, $shaba, $cardNumber]) {
-        $obj = new stdClass();
-        $obj->UserName   = $name;
-        $obj->BankName   = $bank;
-        $obj->Shaba      = maskCard($shaba);
-        $obj->MaskedCard = maskCard($cardNumber);
-        $p->Cards[]      = $obj;
-    }
-
-    // Messages Box
-    $p->box = [];
-    foreach ($boxMessages as [$user, $time]) {
-        $msg = new stdClass();
-        $msg->userName   = $user;
-        $msg->timeToSend = biiq_PersianDate::UnixToAgo($time);
-        $p->box[] = $msg;
-    }
+    // === Current Date & Time ===
+    $today = new DateTime();
+    $today->modify('+1 hour');
+    $p->dateandtime = [
+        'persianDate' => biiq_PersianDate::date("l j F Y"),
+        'otherDate'   => $today->format("Y/m/d"),
+        'time'        => $today->format("H:i")
+    ];
 
     // Orders
     $p->orderList = [
         [
             "numberOrder" => "1013152343",
             "OrderDetails" => "09128431937",
-            "User" => "یگانه علیزاده",
+            "User" => "یگانه علیfffزاده",
             "UserID" => 16,
             "price" => separateThousands(16520897),
             "UnixTimestamp" => 111111,
@@ -72,7 +51,7 @@ function ProcessRequest($request)
         [
             "numberOrder" => "2013152343",
             "OrderDetails" => "09128431937",
-            "User" => " بنفشه ابراهیمی",
+            "User" => " بffffنفشه ابراهیمی",
             "UserID" => 17,
             "price" => separateThousands(22000000),
             "UnixTimestamp" => 11111111,
@@ -105,7 +84,7 @@ function ProcessRequest($request)
         [
             "nationalCode" => "2356897845",
             "phoneNumber" => "09128431937",
-            "User" => "یگانه علیزاده",
+            "User" => "یگddانه علیزاده",
             "UserID" => 19,
             "lastActivity" => "2 ماه پیش",
             "UnixTimestamp" => 11111111,
@@ -215,7 +194,7 @@ function ProcessRequest($request)
 
     // Return payload to template
     return [
-        'content'   => biiq_Template::Start('pages->index', true, ['Objects' => $p]),
+        'content'   => biiq_Template::Start('pages->index', true, ['Objects' => $p,'dateandtime'=>$p->dateandtime]),
         'id'        => 0,
         'title'     => 'صفحه اصلی',
         'Canonical' => SITE,
