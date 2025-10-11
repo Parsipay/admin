@@ -457,3 +457,23 @@ table thead th {
 .ticket-reply {
   display: none;
 }
+
+
+   /* فقط حذف یه قسمت از بردر بالا */
+    .profile-box {
+      padding-top: 60px;
+      position: relative; /* جا برای عنوان بالای باکس */
+    }
+
+    /* بریدگی و نوشته داخلش */
+    .profile-title {
+      position: absolute;
+      top: -13px;
+      right: 15%;
+      transform: translateX(50%);
+      background-color: white;
+      padding: 0 12px;
+      font-weight: 500;
+      font-size: 15px;
+    }
+    

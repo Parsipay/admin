@@ -99,7 +99,7 @@ $(document).ready(function () {
         $(".ticket-reply").not(replyBox).slideUp(200);
         replyBox.slideToggle(200);
     });
-});
+
 
 // ---------- ECharts ----------
 var chart1 = echarts.init(document.getElementById('chart1'));
@@ -154,6 +154,24 @@ chart2.setOption({
         barWidth: '40%'
     }]
 });
+
+
+    // ---------- Profile Image Upload ----------
+$('#profileInput').on('change', function(e){
+        const file = e.target.files[0];
+        if(!file) return;
+
+        const reader = new FileReader();
+
+        reader.onload = function(event){
+            // اضافه کردن timestamp برای جلوگیری از cache مرورگر
+            $('#profileImg').attr('src', event.target.result + '?' + new Date().getTime());
+        };
+
+        reader.readAsDataURL(file);
+    });
+});
+
 
 // ---------- Sort Asc / Desc ----------
 document.getElementById('sortAsc')?.addEventListener('click', function(e){

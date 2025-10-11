@@ -1,0 +1,52 @@
+<div>[@import->dateandtime->index]</div>
+
+
+<div class="container  mt-5">
+  <div class="row g-5 justify-content-center">
+    
+<!-- ستون اول: تغییرات پروفایل -->
+<div class="col-md-6 col-sm-12">
+  <div class="profile-box bg-white text-center p-4 border border-light rounded ">
+    <span class="profile-title font-color fw-bold d-block mb-3">
+      <i class="fas fa-user me-2 text-purple"></i>تغییرات پروفایل
+    </span>
+
+    <div class="d-inline-block position-relative mb-4">
+      <img id="profileImg" src="../../assets/img/profile.png"
+           class="rounded-circle border border-2 border-white shadow"
+           style="width:120px; height:120px; object-fit:cover;" alt="profile">
+
+      <!-- آیکن مداد بالا سمت راست -->
+      <div class="position-absolute top-0 end-0 translate-middle bg-light border rounded-circle p-2 text-purple"
+           style="cursor:pointer;">
+        <label for="profileInput" class="m-0" style="cursor:pointer;">
+          <i class="fas fa-pencil"></i>
+        </label>
+        <input type="file" id="profileInput" class="d-none" accept="image/*">
+      </div>
+    </div>
+
+    <button class="btn btn-primary w-100 mt-5">ذخیره‌ی تغییرات</button>
+  </div>
+</div>
+
+
+    <!-- ستون دوم: تغییر کلمه عبور -->
+    <div class="col-md-6 col-sm-12">
+      <div class="profile-box bg-white text-center p-4 border border-light rounded d-flex flex-column">
+        <span class="profile-title font-color fw-bold d-block mb-3">
+          <i class="fas fa-key text-purple"></i> تغییر کلمه عبور
+        </span>
+
+        <!-- می‌تونی فرم یا ورودی‌ها رو اینجا بزاری -->
+<input type="text" placeholder="کلمه عبور جدید" class="form-control">
+<input type="text" placeholder=" تکرار کلمه عبور جدید" class="form-control my-4">
+<input type="text" placeholder="عبارت داخل تصویر" class="form-control">
+
+        <button class="btn btn-primary w-100 mt-4">ذخیره‌ی تغییرات</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
