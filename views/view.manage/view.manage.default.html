@@ -1,8 +1,21 @@
+<!-- ==============================
+     MAIN CONTENT
+============================== -->
 <div>[@import->dateandtime->index]</div>
-<div class="d-flex flex-column mt-3 w-100">    <!-- main content -->
+
+<div class="d-flex flex-column mt-3 w-100">
+
+    <!-- ==============================
+         MAIN ROW (PROFILE + DATA)
+    ============================== -->
     <div class="d-flex flex-column flex-lg-row justify-content-center gap-3 my-5 w-100">
-        <!-- profile side -->
+
+        <!-- ==============================
+             PROFILE SIDE
+        ============================== -->
         <div class="d-flex flex-column bg-col px-4 py-2 rounded w-100 w-lg-5">
+
+            <!-- Profile header -->
             <div class="d-flex justify-content-center p-3 border-bottom">
                 <div class="rounded-circle bg-purple p-4"></div>
                 <div class="d-flex flex-column justify-start-center align-items-center ms-3">
@@ -10,14 +23,20 @@
                     <small class="text-muted">کاربر طلایی</small>
                 </div>
             </div>
+
+            <!-- Registration status -->
             <div class="d-flex justify-content-start gap-5 mt-2 flex-wrap">
                 <span>وضعیت ثبت نام:</span>
                 <span class="text-danger">[@CurrentUser->Status]</span>
             </div>
+
+            <!-- Identity verification status -->
             <div class="d-flex justify-content-start gap-4 my-2 flex-wrap">
                 <span>وضعیت احراز هویت:</span>
                 <span class="text-warning">[@CurrentUser->SelfieStatus]</span>
             </div>
+
+            <!-- Purchase info box -->
             <div class="d-flex flex-column bg-white rounded p-2 mt-2">
                 <div class="d-flex justify-content-between">
                     <span>سقف خرید:</span>
@@ -32,6 +51,8 @@
                     <span>[@CurrentUser->buyToday]</span>
                 </div>
             </div>
+
+            <!-- Last activity & robots -->
             <div class="d-flex justify-content-between mt-4 flex-wrap">
                 <div class="d-flex justify-content-start gap-2">
                     <i class="fas fa-robot font-color"></i>
@@ -44,9 +65,12 @@
             </div>
         </div>
 
-        <!-- data side -->
+        <!-- ==============================
+             DATA SIDE
+        ============================== -->
         <div class="d-flex flex-column bg-col rounded p-3 w-100 w-lg-6">
-            <!-- first row -->
+
+            <!-- First row: Phone & User ID -->
             <div class="d-flex gap-3 flex-wrap">
                 <div class="d-flex flex-column gap-2 flex-fill">
                     <span>تلفن همراه</span>
@@ -64,7 +88,7 @@
                 </div>
             </div>
 
-            <!-- دومین ردیف -->
+            <!-- Second row: User ID & Introduced by -->
             <div class="d-flex gap-3 mt-3 flex-wrap">
                 <div class="d-flex flex-column gap-2 flex-fill">
                     <span>شناسه کاربری</span>
@@ -82,7 +106,7 @@
                 </div>
             </div>
 
-            <!-- سومین ردیف -->
+            <!-- Third row: National Code & Gift Credit -->
             <div class="d-flex gap-3 mt-3 flex-wrap">
                 <div class="d-flex flex-column gap-2 flex-fill">
                     <span>کد ملی</span>
@@ -100,7 +124,7 @@
                 </div>
             </div>
 
-            <!-- چهارمین ردیف -->
+            <!-- Fourth row: Birthday & IP -->
             <div class="d-flex gap-3 mt-3 flex-wrap">
                 <div class="d-flex flex-column gap-2 flex-fill">
                     <span>تاریخ تولد</span>
@@ -117,59 +141,65 @@
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
 
-
+<!-- ==============================
+     FINANCE TABS
+============================== -->
 <div class="py-5" style="min-height: 80vh;">
+
     <!-- Nav Pills -->
     <ul class="nav nav-pills nav-justified gap-1 pb-3 border-bottom border-muted" id="financeTab" role="tablist">
         <li class="nav-item" role="presentation">
-            <button class="nav-link text-purple active rounded-pill py-3" data-bs-toggle="pill" data-bs-target="#deposits"
+            <button class="nav-link text-purple active rounded-pill py-3 d-flex justify-content-center align-items-center" data-bs-toggle="pill" data-bs-target="#deposits"
                 type="button" role="tab"> لیست سفارشات <i class="fas fa-shopping-cart ms-2"></i></button>
         </li>
         <li class="nav-item" role="presentation">
-            <button class="nav-link text-purple rounded-pill py-3" data-bs-toggle="pill" data-bs-target="#credits"
+            <button class="nav-link text-purple rounded-pill py-3 d-flex justify-content-center align-items-center" data-bs-toggle="pill" data-bs-target="#credits"
                 type="button" role="tab">  تراکنش های مالی <i class="fas fa-exchange-alt ms-2"></i></button>
         </li>
         <li class="nav-item" role="presentation">
-            <button class="nav-link text-purple rounded-pill py-3" data-bs-toggle="pill" data-bs-target="#settlements"
+            <button class="nav-link text-purple rounded-pill py-3 d-flex justify-content-center align-items-center" data-bs-toggle="pill" data-bs-target="#settlements"
                 type="button" role="tab">اطلاعات حساب کاربری <i class="fas fa-credit-card ms-2"></i></button>
         </li>
         <li class="nav-item" role="presentation">
-            <button class="nav-link text-purple rounded-pill py-3" data-bs-toggle="pill" data-bs-target="#identity-docs"
+            <button class="nav-link text-purple rounded-pill py-3 d-flex justify-content-center align-items-center" data-bs-toggle="pill" data-bs-target="#identity-docs"
                 type="button" role="tab"> مدارک احراز هویت <i class="fas fa-id-card ms-2"></i></button>
         </li>
     </ul>
 
     <!-- Tab Content -->
     <div class="tab-content">
-        <!-- userOrderList -->
+
+        <!-- ==============================
+             USER ORDER LIST
+        ============================== -->
         <div class="tab-pane fade show active" id="deposits" role="tabpanel">
             [@import->orders->table]
         </div>
 
-
-
-        <!-- user transactions -->
+        <!-- ==============================
+             USER TRANSACTIONS
+        ============================== -->
         <div class="tab-pane fade" id="credits" role="tabpanel">
             <div class="table-responsive rounded-3 bg-white p-3">
                 <table class="table table-hover align-middle text-center mb-0 searchable-table">
-                    <thead class="">
+                    <thead>
                         <tr>
                             <th class="text-start py-3">
                                 <div class="search-wrapper d-flex align-items-center">
-                                    <i class="fas fa-search search-icon me-1" data-column="0"
-                                        style="cursor:pointer;"></i>
-                                    <input type="text" class="search-input form-control form-control-sm"
-                                        placeholder="جستجو..." />
+                                    <i class="fas fa-search search-icon me-1" data-column="0" style="cursor:pointer;"></i>
+                                    <input type="text" class="search-input form-control form-control-sm" placeholder="جستجو..." />
                                     <span>درخواست</span>
                                 </div>
                             </th>
                             <th class="text-start py-3">مبلغ</th>
                             <th class="text-start sortable py-3" style="cursor:pointer">
-                                زمان و تاریخ تراکنش <a href="?sort=desc" class="text-decoration-none text-muted">⇣</a>
+                                زمان و تاریخ تراکنش
+                                <a href="?sort=desc" class="text-decoration-none text-muted">⇣</a>
                                 <a href="?sort=asc" class="text-decoration-none text-muted">⇡</a>
                             </th>
                             <th class="text-start py-3">توضیحات</th>
@@ -189,42 +219,35 @@
             </div>
         </div>
 
-
-
-        <!-- authentication -->
+        <!-- ==============================
+             ACCOUNT INFO / SETTLEMENTS
+        ============================== -->
         <div class="tab-pane fade" id="settlements" role="tabpanel">
             <div class="table-responsive rounded-3 bg-white p-3">
                 <table class="table table-hover align-middle text-center mb-0 searchable-table">
-                    <thead class="">
+                    <thead>
                         <tr>
                             <th class="text-start py-3">#</th>
                             <th class="text-start py-3">
                                 <div class="search-wrapper d-flex align-items-center">
-                                    <i class="fas fa-search search-icon me-2  text-primary bg-blue rounded-circle"
-                                        data-column="0" style="cursor:pointer;"></i>
-                                    <input type="text" class="search-input form-control form-control-sm"
-                                        placeholder="جستجو..." />
+                                    <i class="fas fa-search search-icon me-2 text-primary bg-blue rounded-circle" data-column="0" style="cursor:pointer;"></i>
+                                    <input type="text" class="search-input form-control form-control-sm" placeholder="جستجو..." />
                                     <span class="text-center">شماره شبا</span>
                                 </div>
                             </th>
                             <th class="text-start py-3">
-                                <i class="fas fa-search search-icon me-2  text-primary bg-blue rounded-circle"
-                                    data-column="0" style="cursor:pointer;"></i>
-                                <input type="text" class="search-input form-control form-control-sm"
-                                    placeholder="جستجو..." />
+                                <i class="fas fa-search search-icon me-2 text-primary bg-blue rounded-circle" data-column="0" style="cursor:pointer;"></i>
+                                <input type="text" class="search-input form-control form-control-sm" placeholder="جستجو..." />
                                 <span>شماره کارت</span>
                             </th>
-                            <th class="text-center py-3"> بانک</th>
-
-                            <th class="text-start py-3">جزییات وضعیت <div class="dropdown d-inline">
-                                    <i class="fas fa-sort  ms-1" data-bs-toggle="dropdown" style="cursor:pointer;"></i>
+                            <th class="text-center py-3">بانک</th>
+                            <th class="text-start py-3">جزییات وضعیت
+                                <div class="dropdown d-inline">
+                                    <i class="fas fa-sort ms-1" data-bs-toggle="dropdown" style="cursor:pointer;"></i>
                                     <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item filter-status" data-status="تایید شده">تایید شده</a>
-                                        </li>
+                                        <li><a class="dropdown-item filter-status" data-status="تایید شده">تایید شده</a></li>
                                         <li><a class="dropdown-item filter-status" data-status="رد شده">رد شده</a></li>
-                                        <li>
-                                            <hr class="dropdown-divider">
-                                        </li>
+                                        <li><hr class="dropdown-divider"></li>
                                         <li><a class="dropdown-item filter-status" data-status="all">همه</a></li>
                                     </ul>
                                 </div>
@@ -235,27 +258,18 @@
                         [foreach ([@Objects->accountInfo])]
                         <tr>
                             <td class="text-start">[@Item->id]</td>
-                            <td class="text-start">[@Item->shebaNumber]<i class="far fa-copy text-primary ms-1"
-                                    style="cursor:pointer"></i></td>
-                            <td class="text-start">[@Item->cartNumber]<i class="far fa-copy text-primary ms-1"
-                                    style="cursor:pointer"></i></td>
-                            <td class="text-start"><img src="[@Item->bank]" alt="بانک" width="28" height="25"
-                                    class="ms-2"></td>
+                            <td class="text-start">[@Item->shebaNumber]<i class="far fa-copy text-primary ms-1" style="cursor:pointer"></i></td>
+                            <td class="text-start">[@Item->cartNumber]<i class="far fa-copy text-primary ms-1" style="cursor:pointer"></i></td>
+                            <td class="text-start"><img src="[@Item->bank]" alt="بانک" width="28" height="25" class="ms-2"></td>
                             <td class="text-start">
                                 <div class="d-flex justify-content-between align-items-center gap-2">
-                                    <span
-                                        class="px-3 py-2 rounded-pill d-inline-block status-text [@Item->StatusColor]">
-                                        [@Item->details]
-                                    </span>
-                                    <!-- بلاک مخصوص آیکون‌ها -->
+                                    <span class="px-3 py-2 rounded-pill d-inline-block status-text [@Item->StatusColor]">[@Item->details]</span>
                                     <div class="d-flex justify-content-start gap-1">
                                         <i class="fas fa-check-circle text-green" style="cursor:pointer;"></i>
                                         <i class="fas fa-times-circle text-danger" style="cursor:pointer;"></i>
                                     </div>
                                 </div>
                             </td>
-
-
                         </tr>
                         [endforeach]
                     </tbody>
@@ -263,19 +277,18 @@
             </div>
         </div>
 
-
-
-
-        <!-- identity docs -->
+        <!-- ==============================
+             IDENTITY DOCUMENTS
+        ============================== -->
         <div class="tab-pane fade" id="identity-docs" role="tabpanel">
             <div class="table-responsive rounded-3 bg-white p-3">
                 <table class="table table-hover align-middle text-center mb-0 searchable-table">
-                    <thead class="">
+                    <thead>
                         <tr>
-                            <th class="text-start py-3"> توضیحات</th>
-                            <th class="text-start py-3"> زمان ارسال مدرک</th>
-                            <th class="text-start py-3"> وضعیت</th>
-                            <th class="text-start py-3">جزییات </th>
+                            <th class="text-start py-3">توضیحات</th>
+                            <th class="text-start py-3">زمان ارسال مدرک</th>
+                            <th class="text-start py-3">وضعیت</th>
+                            <th class="text-start py-3">جزییات</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -284,15 +297,10 @@
                             <td class="text-start">[@Item->description]</td>
                             <td class="text-start" data-timestamp="[@Item->UnixTimestamp]">[@Item->persianDate]</td>
                             <td class="text-start">
-                                <span class="px-3 py-2 rounded-pill d-inline-block status-text [@Item->StatusColor]">
-                                    [@Item->status]
-                                </span>
+                                <span class="px-3 py-2 rounded-pill d-inline-block status-text [@Item->StatusColor]">[@Item->status]</span>
                             </td>
-
                             <td class="text-start">
-                                <span class="px-3 py-2 me-3 rounded-pill bg-blue text-primary">
-                                    [@Item->details]
-                                </span>
+                                <span class="px-3 py-2 me-3 rounded-pill bg-blue text-primary">[@Item->details]</span>
                                 <i class='far fa-times-circle text-red me-1'></i>
                                 <i class='far fa-check-circle text-green me-1'></i>
                             </td>
@@ -303,8 +311,5 @@
             </div>
         </div>
 
-
-
     </div>
-</div>
 </div>

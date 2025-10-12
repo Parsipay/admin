@@ -1,30 +1,37 @@
 <?php
 function ProcessRequest($request)
 {
+    // -----------------------------
+    // Utility Functions
+    // -----------------------------
 
-    //mask number for bank carts
+    // Mask sensitive parts of card numbers
     function maskCard($num)
     {
         $len = strlen($num);
-        if ($len <= 10) return str_repeat("*", $len); // fallback for very short numbers
+        if ($len <= 10) return str_repeat("*", $len); // fallback for short numbers
         return substr($num, 0, 6) . str_repeat("*", $len - 10) . substr($num, -4);
     }
 
-
-    //function seprate money
+    // Format numbers with thousand separators
     function separateThousands($number)
     {
         return number_format((int)$number);
     }
 
-
+    // Generic function to sort arrays by UnixTimestamp
+    function sortByTimestamp(array &$list, string $order = 'desc')
+    {
+        usort($list, function ($a, $b) use ($order) {
+            return $order === 'asc'
+                ? $a['UnixTimestamp'] <=> $b['UnixTimestamp']
+                : $b['UnixTimestamp'] <=> $a['UnixTimestamp'];
+        });
+    }
 
     // -----------------------------
-    // Authentication messages
+    // Initialize Payload
     // -----------------------------
-
-
-
     $p = new stdClass();
 
     // === Current Date & Time ===
@@ -36,7 +43,9 @@ function ProcessRequest($request)
         'time'        => $today->format("H:i")
     ];
 
-    // Orders
+    // -----------------------------
+    // Orders List
+    // -----------------------------
     $p->orderList = [
         [
             "numberOrder" => "1013152343",
@@ -46,40 +55,33 @@ function ProcessRequest($request)
             "price" => separateThousands(16520897),
             "UnixTimestamp" => 111111,
             "persianDate" => biiq_PersianDate::date("l j F Y - H:i", 11111111),
-            "Status" => "موفق ",
+            "Status" => "موفق",
         ],
         [
             "numberOrder" => "2013152343",
             "OrderDetails" => "09128431937",
-            "User" => " بffffنفشه ابراهیمی",
+            "User" => "بنفشه ابراهیمی",
             "UserID" => 17,
             "price" => separateThousands(22000000),
             "UnixTimestamp" => 11111111,
             "persianDate" => biiq_PersianDate::date("l j F Y - H:i", 555555555),
-            "Status" => "در انتظار تایید ",
+            "Status" => "در انتظار تایید",
         ],
         [
             "numberOrder" => "3013152343",
             "OrderDetails" => "09128431937",
-            "User" => " بنفشه ابراهیمی",
+            "User" => "بنفشه ابراهیمی",
             "UserID" => 18,
             "price" => separateThousands(12500000),
             "UnixTimestamp" => 9999999,
             "persianDate" => biiq_PersianDate::date("l j F Y - H:i", 99999999),
-            "Status" => "  ناموفق ",
+            "Status" => "ناموفق",
         ],
     ];
-    //for sort desc or asc date and time
-    $sortOrder = $_GET['sort'] ?? 'desc';
-    usort($p->orderList, function ($a, $b) use ($sortOrder) {
-        if ($sortOrder === 'asc') {
-            return $a['UnixTimestamp'] <=> $b['UnixTimestamp']; // قدیمی به جدید
-        } else {
-            return $b['UnixTimestamp'] <=> $a['UnixTimestamp']; // جدید به قدیم
-        }
-    });
 
-    // Users
+    // -----------------------------
+    // Users List
+    // -----------------------------
     $p->userList = [
         [
             "nationalCode" => "2356897845",
@@ -89,22 +91,22 @@ function ProcessRequest($request)
             "lastActivity" => "2 ماه پیش",
             "UnixTimestamp" => 11111111,
             "persianDate" => biiq_PersianDate::date("l j F Y - H:i", 1111111),
-            "Status" => " مسدود",
+            "Status" => "مسدود",
         ],
         [
             "nationalCode" => "0013152343",
             "phoneNumber" => "09128431937",
-            "User" => " بنفشه ابراهیمی",
+            "User" => "بنفشه ابراهیمی",
             "UserID" => 20,
             "lastActivity" => "2 ماه پیش",
             "UnixTimestamp" => 33333333,
             "persianDate" => biiq_PersianDate::date("l j F Y - H:i", 333333333),
-            "Status" => " موفق",
+            "Status" => "موفق",
         ],
         [
             "nationalCode" => "0013152343",
             "phoneNumber" => "09128431937",
-            "User" => " مونا مارامی",
+            "User" => "مونا مارامی",
             "UserID" => 21,
             "lastActivity" => "2 ماه پیش",
             "UnixTimestamp" => 4444444444,
@@ -112,21 +114,17 @@ function ProcessRequest($request)
             "Status" => "تکمیل نشده",
         ],
     ];
-    $sortOrder = $_GET['sort'] ?? 'desc';
 
-    usort($p->userList, function ($a, $b) use ($sortOrder) {
-        return $sortOrder === 'asc' ? $a['UnixTimestamp'] <=> $b['UnixTimestamp']
-            : $b['UnixTimestamp'] <=> $a['UnixTimestamp'];
-    });
-
+    // -----------------------------
     // Financial Requests
+    // -----------------------------
     $p->requestList = [
         [
             "requestCode" => "0013152343",
             "trackingNumber" => "0293564635",
             "User" => "بنفشه ابراهیمی",
             "UserID" => 22,
-            "price" =>  separateThousands(65665454546),
+            "price" => separateThousands(65665454546),
             "UnixTimestamp" => 9999999999,
             "persianDate" => biiq_PersianDate::date("l j F Y - H:i", 88888888),
             "Status" => "مشاهده رسید",
@@ -139,7 +137,7 @@ function ProcessRequest($request)
             "price" => separateThousands(65665454546),
             "UnixTimestamp" => 777777777,
             "persianDate" => biiq_PersianDate::date("l j F Y - H:i", 33333333),
-            "Status" => "  مشاهده رسید",
+            "Status" => "مشاهده رسید",
         ],
         [
             "requestCode" => "0013152343",
@@ -149,15 +147,22 @@ function ProcessRequest($request)
             "price" => separateThousands(65665454546),
             "UnixTimestamp" => 1616301000,
             "persianDate" => biiq_PersianDate::date("l j F Y - H:i", 1616301000),
-            "Status" => "در  صف تسویه",
+            "Status" => "در صف تسویه",
         ],
     ];
+
+    // -----------------------------
+    // Sorting all lists by UnixTimestamp
+    // -----------------------------
     $sortOrder = $_GET['sort'] ?? 'desc';
 
-    usort($p->requestList, function ($a, $b) use ($sortOrder) {
-        return $sortOrder === 'asc' ? $a['UnixTimestamp'] <=> $b['UnixTimestamp']
-            : $b['UnixTimestamp'] <=> $a['UnixTimestamp'];
-    });
+    sortByTimestamp($p->orderList, $sortOrder);
+    sortByTimestamp($p->userList, $sortOrder);
+    sortByTimestamp($p->requestList, $sortOrder);
+
+    // -----------------------------
+    // Top Box Items
+    // -----------------------------
     $p->TopBox = [
         ['Link' => "#", "Icon" => "home", "Title" => "پیغام‌ها", "Subtitle" => "12 تیکت | 5 اتوماسیون"],
         ['Link' => "#", "Icon" => "gear", "Title" => "تنظیمات", "Subtitle" => "2 سفارش در حال پردازش"],
@@ -166,42 +171,42 @@ function ProcessRequest($request)
         ['Link' => "#", "Icon" => "id-card", "Title" => "مدارک احراز", "Subtitle" => "2 مورد در حال انتظار"],
     ];
 
-    //////////////////////////////////////////////////////////////////conditions////////////////////////////////////////////////////////////////////////////
-    //condition for orderlist' status
+    // -----------------------------
+    // Status Color Conditions
+    // -----------------------------
+    // Orders
     foreach ($p->orderList as &$Item) {
         $status = trim($Item["Status"]);
         if ($status === "موفق") $Item["StatusColor"] = "text-success opacity-green";
-        elseif ($status === "در انتظار تایید") $Item["StatusColor"] = "text-warning bg-opacity-warning ";
+        elseif ($status === "در انتظار تایید") $Item["StatusColor"] = "text-warning bg-opacity-warning";
         else $Item["StatusColor"] = "text-danger opacity-danger";
     }
     unset($Item);
 
-    //condition for userlist's status
+    // Users
     foreach ($p->userList as &$Item) {
         $status = trim($Item["Status"]);
-        if ($status === "موفق") $Item["StatusColor"] = "text-success opacity-green ";
+        if ($status === "موفق") $Item["StatusColor"] = "text-success opacity-green";
         elseif ($status === "تکمیل نشده") $Item["StatusColor"] = "text-primary bg-blue";
         else $Item["StatusColor"] = "text-danger opacity-danger";
     }
     unset($Item);
 
+    // Financial Requests
     foreach ($p->requestList as &$Item) {
         $status = trim($Item["Status"]);
-        if ($status === "مشاهده رسید") $Item["StatusColor"] = "text-primary ";
+        if ($status === "مشاهده رسید") $Item["StatusColor"] = "text-primary";
         else $Item["StatusColor"] = "text-warning";
     }
     unset($Item);
 
+    // -----------------------------
     // Return payload to template
+    // -----------------------------
     return [
-        'content'   => biiq_Template::Start('pages->index', true, ['Objects' => $p,'dateandtime'=>$p->dateandtime]),
+        'content'   => biiq_Template::Start('pages->index', true, ['Objects' => $p, 'dateandtime' => $p->dateandtime]),
         'id'        => 0,
         'title'     => 'صفحه اصلی',
         'Canonical' => SITE,
     ];
 }
-
-
-// ============================================
-// FEKR KONAM BAYAD INARO AK KNAM INA DG HICH JA ESTEFADE NEMISHE
-// ============================================

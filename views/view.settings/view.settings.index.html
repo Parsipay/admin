@@ -1,52 +1,70 @@
 <div>[@import->dateandtime->index]</div>
 
-
-<div class="container  mt-5">
+<div class="container mt-5">
   <div class="row g-5 justify-content-center">
-    
-<!-- ستون اول: تغییرات پروفایل -->
+
+    <!-- Column 1: Profile Changes -->
 <div class="col-md-6 col-sm-12">
-  <div class="profile-box bg-white text-center p-4 border border-light rounded ">
-    <span class="profile-title font-color fw-bold d-block mb-3">
-      <i class="fas fa-user me-2 text-purple"></i>تغییرات پروفایل
+  <div class="profile-box bg-white text-center p-4 border border-light rounded">
+    <span class="profile-title font-color  d-block mb-3">
+      <i class="fas fa-user me-2 text-purple"></i>تغییرات پروفایل کاربر
     </span>
 
-    <div class="d-inline-block position-relative mb-4">
-      <img id="profileImg" src="../../assets/img/profile.png"
-           class="rounded-circle border border-2 border-white shadow"
-           style="width:120px; height:120px; object-fit:cover;" alt="profile">
+    <!-- Form for upload -->
+    <form id="profileForm" enctype="multipart/form-data">
+      <div class="d-inline-block position-relative mb-4">
+        <img id="profileImg" src="../../assets/img/profile.png"
+             class="rounded-circle border border-2 border-white shadow"
+             style="width:120px; height:120px; object-fit:cover;" alt="profile">
 
-      <!-- آیکن مداد بالا سمت راست -->
-      <div class="position-absolute top-0 end-0 translate-middle bg-light border rounded-circle p-2 text-purple"
-           style="cursor:pointer;">
-        <label for="profileInput" class="m-0" style="cursor:pointer;">
-          <i class="fas fa-pencil"></i>
-        </label>
-        <input type="file" id="profileInput" class="d-none" accept="image/*">
+        <!-- Edit icon (top-right on the image) -->
+        <div class="position-absolute top-0 end-0 translate-middle bg-light border rounded-circle p-2 text-purple"
+             style="cursor:pointer;">
+          <label for="profileInput" class="m-0" style="cursor:pointer;">
+            <i class="fas fa-pencil"></i>
+          </label>
+          <input type="file" id="profileInput" name="profile" class="d-none" accept="image/*">
+        </div>
       </div>
-    </div>
 
-    <button class="btn btn-primary w-100 mt-5">ذخیره‌ی تغییرات</button>
+      <button type="submit" class="btn btn-primary w-100 mt-5">ذخیره تغییرات</button>
+      <div class="text-danger mt-2" id="uploadError"></div>
+    </form>
   </div>
 </div>
 
+<div class="col-md-6 col-sm-12">
+  <form class="password-form profile-box bg-white text-start p-4 border border-light rounded d-flex flex-column">
+    <span class="profile-title font-color d-block mb-3">
+      <i class="fas fa-key text-purple"></i> تغییر رمز عبور
+    </span>
 
-    <!-- ستون دوم: تغییر کلمه عبور -->
-    <div class="col-md-6 col-sm-12">
-      <div class="profile-box bg-white text-center p-4 border border-light rounded d-flex flex-column">
-        <span class="profile-title font-color fw-bold d-block mb-3">
-          <i class="fas fa-key text-purple"></i> تغییر کلمه عبور
-        </span>
-
-        <!-- می‌تونی فرم یا ورودی‌ها رو اینجا بزاری -->
-<input type="text" placeholder="کلمه عبور جدید" class="form-control">
-<input type="text" placeholder=" تکرار کلمه عبور جدید" class="form-control my-4">
-<input type="text" placeholder="عبارت داخل تصویر" class="form-control">
-
-        <button class="btn btn-primary w-100 mt-4">ذخیره‌ی تغییرات</button>
-      </div>
+    <!-- Input group: New password -->
+    <div class="input-group mb-3">
+      <input type="password" class="form-control password-input" placeholder="رمز عبور جدید">
+      <span class="input-group-text bg-light toggle-password" style="cursor:pointer;">
+        <i class="fa-solid fa-eye eye-icon"></i>
+      </span>
     </div>
+
+    <!-- Input group: Repeat new password -->
+    <div class="input-group mb-3">
+      <input type="password" class="form-control password-input" placeholder="تکرار رمز عبور جدید">
+      <span class="input-group-text bg-light toggle-password" style="cursor:pointer;">
+        <i class="fa-solid fa-eye eye-icon"></i>
+      </span>
+    </div>
+
+    <!-- Input group: Captcha -->
+    <div class="input-group mb-4">
+      <input type="text" class="form-control" id="captcha-input" placeholder="عبارت داخل تصویر">
+      <span class="input-group-text bg-light" id="captcha">3110</span>
+    </div>
+
+    <button type="submit" class="btn btn-primary w-100 mt-2">ذخیره تغییرات</button>
+    <div class="text-danger mt-2 error-message fw-bold"></div>
+  </form>
+</div>
 
   </div>
 </div>
-

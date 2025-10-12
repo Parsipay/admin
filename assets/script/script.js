@@ -157,20 +157,40 @@ chart2.setOption({
 
 
     // ---------- Profile Image Upload ----------
-$('#profileInput').on('change', function(e){
-        const file = e.target.files[0];
+// وقتی فایل انتخاب شد، همون لحظه آپلود شود
+    $('#profileInput').on('change', function(){
+        const file = this.files[0];
         if(!file) return;
 
-        const reader = new FileReader();
+        const formData = new FormData();
+        formData.append('profile', file);
 
-        reader.onload = function(event){
-            // اضافه کردن timestamp برای جلوگیری از cache مرورگر
-            $('#profileImg').attr('src', event.target.result + '?' + new Date().getTime());
-        };
-
-        reader.readAsDataURL(file);
+        $.ajax({
+            url: 'upload.php',
+            type: 'POST',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function(res){
+                const data = JSON.parse(res);
+                if(data.success){
+                    $('#profileImg').attr('src', data.path + '?' + new Date().getTime());
+                    $('#profileError').text('');
+                } else {
+                    $('#profileError').text(data.error);
+                }
+            },
+            error: function(){
+                $('#profileError').text('خطا در آپلود فایل.');
+            }
+        });
     });
-});
+
+    // دکمه ذخیره اختیاری برای اعمال تغییرات دیگر
+    $('#saveProfileBtn').on('click', function(){
+        alert('تغییرات ذخیره شد!');
+    });
+ });
 
 
 // ---------- Sort Asc / Desc ----------
@@ -186,3 +206,56 @@ document.getElementById('sortDesc')?.addEventListener('click', function(e){
     url.searchParams.set('sort', 'desc');
     window.location = url.toString();
 });
+
+
+
+
+
+
+  // ---------- Toggle Password Visibility ----------
+  $(".toggle-password").on("click", function() {
+    const $input = $(this).siblings(".password-input");
+    const $icon = $(this).find(".eye-icon");
+    if ($input.attr("type") === "password") {
+      $input.attr("type", "text");
+      $icon.removeClass("fa-eye").addClass("fa-eye-slash");
+    } else {
+      $input.attr("type", "password");
+      $icon.removeClass("fa-eye-slash").addClass("fa-eye");
+    }
+  });
+
+  // Toggle password visibility
+  $(".toggle-password").click(function(){
+    const $input = $(this).siblings(".password-input");
+    const $icon = $(this).find(".eye-icon");
+    $input.attr("type", $input.attr("type")==="password"?"text":"password");
+    $icon.toggleClass("fa-eye fa-eye-slash");
+  });
+
+  // Form submit
+  $(".password-form").on("submit", function(e){
+    e.preventDefault();
+    const $inputs = $(this).find(".password-input");
+    const $new = $inputs.eq(0), $repeat = $inputs.eq(1);
+    const $captchaInput = $(this).find("#captcha-input");
+    const captchaVal = $(this).find("#captcha").val().trim();
+    const $error = $(this).find(".error-message");
+
+    $captchaInput.removeClass("is-invalid"); // Reset previous error
+
+    if(!$new.val().trim() || !$repeat.val().trim()) return $error.text("رمز عبور نمی‌تواند خالی باشد 🔴"), $new.focus();
+    if($new.val() !== $repeat.val()) return $error.text("رمز عبور با تکرارش مطابقت ندارد 🔴"), $repeat.focus();
+    if($captchaInput.val().trim() !== captchaVal) {
+      $error.text("Captcha اشتباه است 🔴");
+      $captchaInput.addClass("is-invalid").focus();
+      return;
+    }
+
+    $error.text("");
+    this.submit();
+  });
+
+
+
+

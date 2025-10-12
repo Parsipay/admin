@@ -1,142 +1,22 @@
-/* ===============================
-   Fonts
-================================= */
-@font-face {
-  font-family: dana;
-  font-style: normal;
-  font-weight: 100;
-  src: url(../fonts/eot/dana-thin.eot);
-  src:
-    url(../fonts/eot/dana-thin.eot?#iefix) format("embedded-opentype"),
-    url(../fonts/woff2/dana-thin.woff2) format("woff2"),
-    url(../fonts/woff/dana-thin.woff) format("woff");
-}
+/* ==============================================
+   1️⃣ FONT DEFINITIONS
+============================================== */
+@font-face { font-family: dana; font-style: normal; font-weight: 100; src: url(../fonts/eot/dana-thin.eot); src: url(../fonts/eot/dana-thin.eot?#iefix) format("embedded-opentype"), url(../fonts/woff2/dana-thin.woff2) format("woff2"), url(../fonts/woff/dana-thin.woff) format("woff"); }
+@font-face { font-family: dana; font-style: normal; font-weight: 200; src: url(../fonts/eot/dana-extralight.eot); src: url(../fonts/eot/dana-extralight.eot?#iefix) format("embedded-opentype"), url(../fonts/woff2/dana-extralight.woff2) format("woff2"), url(../fonts/woff/dana-extralight.woff) format("woff"); }
+@font-face { font-family: dana; font-style: normal; font-weight: 300; src: url(../fonts/eot/dana-light.eot); src: url(../fonts/eot/dana-light.eot?#iefix) format("embedded-opentype"), url(../fonts/woff2/dana-light.woff2) format("woff2"), url(../fonts/woff/dana-light.woff) format("woff"); }
+@font-face { font-family: dana; font-style: normal; font-weight: 400; src: url(../fonts/eot/dana-regular.eot); src: url(../fonts/eot/dana-regular.eot?#iefix) format("embedded-opentype"), url(../fonts/woff2/dana-regular.woff2) format("woff2"), url(../fonts/woff/dana-regular.woff) format("woff"); }
+@font-face { font-family: dana; font-style: normal; font-weight: 500; src: url(../fonts/eot/dana-medium.eot); src: url(../fonts/eot/dana-medium.eot?#iefix) format("embedded-opentype"), url(../fonts/woff2/dana-medium.woff2) format("woff2"), url(../fonts/woff/dana-medium.woff) format("woff"); }
+@font-face { font-family: dana; font-style: normal; font-weight: 600; src: url(../fonts/eot/dana-demibold.eot); src: url(../fonts/eot/dana-demibold.eot?#iefix) format("embedded-opentype"), url(../fonts/woff2/dana-demibold.woff2) format("woff2"), url(../fonts/woff/dana-demibold.woff) format("woff"); }
+@font-face { font-family: dana; font-style: normal; font-weight: 700; src: url(../fonts/eot/dana-bold.eot); src: url(../fonts/eot/dana-bold.eot?#iefix) format("embedded-opentype"), url(../fonts/woff2/dana-bold.woff2) format("woff2"), url(../fonts/woff/dana-bold.woff) format("woff"); }
+@font-face { font-family: dana; font-style: normal; font-weight: 750; src: url(../fonts/eot/dana-ultrabold.eot); src: url(../fonts/eot/dana-ultrabold.eot?#iefix) format("embedded-opentype"), url(../fonts/woff2/dana-ultrabold.woff2) format("woff2"), url(../fonts/woff/dana-ultrabold.woff) format("woff"); }
+@font-face { font-family: dana; font-style: normal; font-weight: 800; src: url(../fonts/eot/dana-extrabold.eot); src: url(../fonts/eot/dana-extrabold.eot?#iefix) format("embedded-opentype"), url(../fonts/woff2/dana-extrabold.woff2) format("woff2"), url(../fonts/woff/dana-extrabold.woff) format("woff"); }
+@font-face { font-family: dana; font-style: normal; font-weight: 900; src: url(../fonts/eot/dana-black.eot); src: url(../fonts/eot/dana-black.eot?#iefix) format("embedded-opentype"), url(../fonts/woff2/dana-black.woff2) format("woff2"), url(../fonts/woff/dana-black.woff) format("woff"); }
+@font-face { font-family: "Roboto-Regular"; src: local("Roboto-Regular"), local(Roboto-Regular), url(../fonts/woff2/Roboto-Regular.woff2) format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
 
-@font-face {
-  font-family: dana;
-  font-style: normal;
-  font-weight: 200;
-  src: url(../fonts/eot/dana-extralight.eot);
-  src:
-    url(../fonts/eot/dana-extralight.eot?#iefix) format("embedded-opentype"),
-    url(../fonts/woff2/dana-extralight.woff2) format("woff2"),
-    url(../fonts/woff/dana-extralight.woff) format("woff");
-}
 
-@font-face {
-  font-family: dana;
-  font-style: normal;
-  font-weight: 300;
-  src: url(../fonts/eot/dana-light.eot);
-  src:
-    url(../fonts/eot/dana-light.eot?#iefix) format("embedded-opentype"),
-    url(../fonts/woff2/dana-light.woff2) format("woff2"),
-    url(../fonts/woff/dana-light.woff) format("woff");
-}
-
-@font-face {
-  font-family: dana;
-  font-style: normal;
-  font-weight: 400;
-  src: url(../fonts/eot/dana-regular.eot);
-  src:
-    url(../fonts/eot/dana-regular.eot?#iefix) format("embedded-opentype"),
-    url(../fonts/woff2/dana-regular.woff2) format("woff2"),
-    url(../fonts/woff/dana-regular.woff) format("woff");
-}
-
-@font-face {
-  font-family: dana;
-  font-style: normal;
-  font-weight: 500;
-  src: url(../fonts/eot/dana-medium.eot);
-  src:
-    url(../fonts/eot/dana-medium.eot?#iefix) format("embedded-opentype"),
-    url(../fonts/woff2/dana-medium.woff2) format("woff2"),
-    url(../fonts/woff/dana-medium.woff) format("woff");
-}
-
-@font-face {
-  font-family: dana;
-  font-style: normal;
-  font-weight: 600;
-  src: url(../fonts/eot/dana-demibold.eot);
-  src:
-    url(../fonts/eot/dana-demibold.eot?#iefix) format("embedded-opentype"),
-    url(../fonts/woff2/dana-demibold.woff2) format("woff2"),
-    url(../fonts/woff/dana-demibold.woff) format("woff");
-}
-
-@font-face {
-  font-family: dana;
-  font-style: normal;
-  font-weight: 700;
-  src: url(../fonts/eot/dana-bold.eot);
-  src:
-    url(../fonts/eot/dana-bold.eot?#iefix) format("embedded-opentype"),
-    url(../fonts/woff2/dana-bold.woff2) format("woff2"),
-    url(../fonts/woff/dana-bold.woff) format("woff");
-}
-
-@font-face {
-  font-family: dana;
-  font-style: normal;
-  font-weight: 750;
-  src: url(../fonts/eot/dana-ultrabold.eot);
-  src:
-    url(../fonts/eot/dana-ultrabold.eot?#iefix) format("embedded-opentype"),
-    url(../fonts/woff2/dana-ultrabold.woff2) format("woff2"),
-    url(../fonts/woff/dana-ultrabold.woff) format("woff");
-}
-
-@font-face {
-  font-family: dana;
-  font-style: normal;
-  font-weight: 800;
-  src: url(../fonts/eot/dana-extrabold.eot);
-  src:
-    url(../fonts/eot/dana-extrabold.eot?#iefix) format("embedded-opentype"),
-    url(../fonts/woff2/dana-extrabold.woff2) format("woff2"),
-    url(../fonts/woff/dana-extrabold.woff) format("woff");
-}
-
-@font-face {
-  font-family: dana;
-  font-style: normal;
-  font-weight: 900;
-  src: url(../fonts/eot/dana-black.eot);
-  src:
-    url(../fonts/eot/dana-black.eot?#iefix) format("embedded-opentype"),
-    url(../fonts/woff2/dana-black.woff2) format("woff2"),
-    url(../fonts/woff/dana-black.woff) format("woff");
-}
-
-@font-face {
-  font-family: "Roboto-Regular";
-  src:
-    local("Roboto-Regular"),
-    local(Roboto-Regular),
-    url(../fonts/woff2/Roboto-Regular.woff2) format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-/* ===============================
-   Base Styles
-================================= */
-body {
-  font-family: "dana";
-  font-size: 13px;
-  line-height: 1;
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
-
-/* ===============================
-   CSS Variables
-================================= */
+/* ==============================================
+   2️⃣ VARIABLES
+============================================== */
 :root {
   --main-purple: #ab4f9e;
   --second-gray: #eff2f5;
@@ -145,79 +25,51 @@ body {
   --opacity-danger: #fbd7d9;
   --opacity-success: #d0f4e6;
   --opacity-warning: rgba(255, 207, 104, 0.356);
-  --main-gary-element: #f8fafd;
-   --bg-col: #f8fafd;
+  --main-gray-element: #f8fafd;
+  --bg-col: #f8fafd;
 }
 
-/* ===============================
-   Colors & Backgrounds
-================================= */
-.bg-col {
-  background-color: #f8fafd;
-}
-.font-color {
-  color: #616e85 !important;
-}
-.text-gray {
-  color: #dee4ec !important;
-}
-.gary-color {
-  background-color: var(--main-gary-element) !important;
-}
-.bg-gary {
-  background-color: var(--second-gray) !important;
-}
-.bg-purple {
-  background-color: var(--main-purple);
-}
-.bg-blue {
-  background: #3861fb26 !important;
-}
-.bg-red{
-  background-color: rgba(255, 0, 0, 0.137)!important;
-}
-.text-red{
-  color:rgb(231, 38, 38)!important;
-}
-.amount {
-  background-color: #f8f9fa;
-}
-.text-purple {
-  color: #ab4f9e;
-}
-.text-green {
-  color: #16c784;
-}
-.opacity-green {
-  background: #adeed56b;
-}
-.opacity-green .bg-tarnsparent {
-  background-color: transparent !important;
-}
-.opacity-green .fa-bag-shopping {
-  color: black !important;
-}
-.opacity-danger {
-  background: #ea39431a;
-}
-.bg-opacity-warning {
-  background-color: var(--opacity-warning);
-}
-.bg-footer {
-  background-color: #0d1421;
-}
-.opacity-primary {
-  background-color: #3861fb1a;
+
+/* ==============================================
+   3️⃣ BASE STYLES
+============================================== */
+html, body { overflow-x: hidden !important; }
+body {
+  font-family: "dana";
+  font-size: 13px;
+  line-height: 1;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/*========aside======*/
-.sidebar-link.active,
-.nav-link.active {
-  background-color: #ab4f9e !important;
-  border-radius: 8px;
-}
 
-.sidebar-link {
+/* ==============================================
+   4️⃣ COLORS & BACKGROUNDS
+============================================== */
+.bg-col { background-color: var(--bg-col); }
+.font-color { color: #616e85 !important; }
+.text-gray { color: #dee4ec !important; }
+.gary-color { background-color: var(--main-gray-element) !important; }
+.bg-gary { background-color: var(--second-gray) !important; }
+.bg-purple { background-color: var(--main-purple); }
+.bg-blue { background: #3861fb26 !important; }
+.bg-red { background-color: rgba(255, 0, 0, 0.137) !important; }
+.text-red { color: rgb(231, 38, 38) !important; }
+.text-purple { color: #ab4f9e; }
+.text-green { color: #16c784; }
+.opacity-green { background: #adeed56b; }
+.opacity-danger { background: #ea39431a; }
+.bg-opacity-warning { background-color: var(--opacity-warning); }
+.bg-footer { background-color: #0d1421; }
+.opacity-primary { background-color: #3861fb1a; }
+
+
+/* ==============================================
+   5️⃣ NAVIGATION & SIDEBAR
+============================================== */
+.sidebar-link,
+.nav-link {
   display: flex;
   align-items: center;
   text-decoration: none;
@@ -225,110 +77,19 @@ body {
   border-radius: 8px;
   color: #333;
 }
-
-.sidebar-link img {
-  width: 20px;
-  height: 20px;
-  margin-left: 8px;
-}
-
-.sidebar-link.active {
-  background-color:#ab4f9e;
-  color: #000;
-}
-
-.nav-item {
-  margin-bottom: 10px;
-}
-
-/* ===============================
-   Buttons
-================================= */
-.btn-danger:hover {
-  color: white !important;
-  background-color: #ff6565 !important;
-}
-.btn-success:hover {
-  background-color: #16c784;
-}
-.btn-primary:hover {
-  color: white !important;
-  background: rgb(100, 185, 241);
-}
+.sidebar-link img { width: 20px; height: 20px; margin-left: 8px; }
+.sidebar-link.active,
+.nav-link.active { background-color: var(--main-purple) !important; color: #000; }
+.nav-item { margin-bottom: 10px; }
 
 
+/* ==============================================
+   6️⃣ BUTTONS
+============================================== */
+.btn-danger:hover { background-color: #ff6565 !important; color: white !important; }
+.btn-success:hover { background-color: #16c784; }
+.btn-primary:hover { color: white !important; background: rgb(100, 185, 241); }
 
-/* ===============================
-   Utility Classes
-================================= */
-.small {
-  font-size: x-small !important;
-}
-.outline-0 {
-  outline: 0;
-}
-.outline-0:focus {
-  box-shadow: none;
-}
-.ps-7px {
-  padding-inline-start: 20px;
-}
-.gap-24px {
-  gap: 0 7px;
-}
-.min-w-103 {
-  min-width: 103px;
-}
-.justify {
-  text-align: justify;
-}
-
-/* ===============================
-   Tables
-================================= */
-table tbody tr:last-child td {
-  border-bottom: none !important;
-}
-
-/* ===============================
-   Inputs
-================================= */
-input:not(:placeholder-shown)::placeholder {
-  opacity: 0 !important;
-  transition: opacity 0.2s ease-in-out !important;
-}
-.custom-input::placeholder {
-  color: #999;
-  transition: opacity 0.3s ease-in-out;
-}
-.custom-input:focus::placeholder,
-.custom-input:not(:placeholder-shown)::placeholder {
-  opacity: 0;
-}
-
-/* ===============================
-   Images
-================================= */
-img {
-  opacity: 1 !important;
-  filter: none !important;
-}
-
-/* ===============================
-   Accordion
-================================= */
-.accordion-button {
-  background-color: transparent !important;
-  color: #000;
-  box-shadow: none !important;
-}
-
-.accordion-body {
-  border-top: 2px solid #ddd;
-  padding-top: 10px;
-}
-
-/*accordion button*/
 .neon-btn {
   padding: 0.5rem 1.5rem;
   border: none;
@@ -336,144 +97,126 @@ img {
   background: #2a4ac0;
   color: #0ff;
   font-weight: bold;
-  text-shadow:
-    0 0 5px #0ff,
-    0 0 1px #0ff;
-  box-shadow:
-    0 0 2px #0ff,
-    0 0 5px #0ff;
+  text-shadow: 0 0 5px #0ff, 0 0 1px #0ff;
+  box-shadow: 0 0 2px #0ff, 0 0 5px #0ff;
   transition: 0.3s;
 }
 .neon-btn:hover {
   color: #fff;
-  text-shadow:
-    0 0 1px #0ff,
-    0 0 20px #0ff,
-    0 0 3px #0ff;
-  box-shadow:
-    0 0 2px #0ff,
-    0 0 10px #0ff;
+  text-shadow: 0 0 1px #0ff, 0 0 20px #0ff;
+  box-shadow: 0 0 2px #0ff, 0 0 10px #0ff;
 }
 
-/* ===============================
-   Media Queries
-================================= */
-@media (max-width: 576px) {
-  main {
-    width: 100%;
-    min-width: 0;
-    overflow-x: hidden;
-  }
+
+/* ==============================================
+   7️⃣ TABLES
+============================================== */
+table tbody tr:last-child td { border-bottom: none !important; }
+
+table:not(.accordion table) thead th {
+  background: var(--color-text-background-gray-light, #eff2f5) !important;
+}
+table:not(.accordion table) thead th:first-child { border-top-right-radius: 30px !important; }
+table:not(.accordion table) thead th:last-child { border-top-left-radius: 30px !important; }
+
+.searchable-table tbody tr:nth-child(even) td {
+  background-color: var(--bg-col) !important;
 }
 
-html,
-body {
-  overflow-x: hidden !important;
+
+/* ==============================================
+   8️⃣ INPUTS & FORMS
+============================================== */
+input:not(:placeholder-shown)::placeholder { opacity: 0 !important; transition: opacity 0.2s ease-in-out !important; }
+.custom-input::placeholder { color: #999; transition: opacity 0.3s ease-in-out; }
+.custom-input:focus::placeholder,
+.custom-input:not(:placeholder-shown)::placeholder { opacity: 0; }
+
+
+/* ==============================================
+   9️⃣ SEARCH FIELD
+============================================== */
+.search-wrapper { position: relative; display: inline-block; }
+.search-input {
+  position: absolute; top: 100%; left: 1;
+  width: 180px; padding: 2px 8px; font-size: 0.85rem;
+  display: none; z-index: 1000;
+  background-color: #fff;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
 }
+.search-input.show { display: block; }
+.search-icon { cursor: pointer; color: #6c757d; }
+.search-wrapper:hover .search-icon { color: #0d6efd; }
+
+
+/* ==============================================
+   🔟 ACCORDION
+============================================== */
+.accordion-button {
+  background-color: transparent !important;
+  color: #000;
+  box-shadow: none !important;
+}
+.accordion-body {
+  border-top: 2px solid #ddd;
+  padding-top: 10px;
+}
+
+
+/* ==============================================
+   11️⃣ PROFILE BOX
+============================================== */
+.profile-box {
+  padding-top: 60px;
+  position: relative;
+}
+.profile-title {
+  position: absolute;
+  top: -13px;
+  right: 15%;
+  transform: translateX(50%);
+  background-color: white;
+  padding: 0 12px;
+  font-weight: 500;
+  font-size: 15px;
+}
+
+
+/* ==============================================
+   12️⃣ UTILITY CLASSES
+============================================== */
+.small { font-size: x-small !important; }
+.outline-0 { outline: 0; }
+.outline-0:focus { box-shadow: none; }
+.ps-7px { padding-inline-start: 20px; }
+.gap-24px { gap: 0 7px; }
+.min-w-103 { min-width: 103px; }
+.justify { text-align: justify; }
+.amount { background-color: #f8f9fa; }
+
+
+/* ==============================================
+   13️⃣ RESPONSIVE STYLES
+============================================== */
+.table-responsive { overflow-x: auto; overflow-y: hidden; max-height: 500px; }
 
 @media (max-width: 768px) {
-  .table-responsive {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-  table {
-    min-width: 700px;
-  }
-  .resImg {
-    width: 280px !important;
-    height: 152px;
-  }
-  .accordion .accordion-button .d-flex {
-    flex-wrap: wrap;
-  }
+  .table-responsive { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  table { min-width: 700px; }
+  .resImg { width: 280px !important; height: 152px; }
+  .accordion .accordion-button .d-flex { flex-wrap: wrap; }
 }
-
+@media (max-width: 576px) {
+  main { width: 100%; min-width: 0; overflow-x: hidden; }
+}
 @media (min-width: 576px) and (max-width: 870px) {
-  .accordion {
-    max-width: 600px;
-  }
-}
-
-@media (max-width: 991.98px) and (min-width: 768px) {
-}
-@media (max-width: 900px) {
-}
-.table-responsive {
-  overflow-x: auto; 
-  overflow-y: hidden; 
-  max-height: 500px;}.search-wrapper {
-    position: relative;
-    display: inline-block;
-}
-/*search input*/
-.search-wrapper {
-    position: relative;
-    display: inline-block;
-}
-.search-input {
-    position: absolute;
-    top: 100%;
-    left: 1;
-    width: 180px;
-    padding: 2px 8px;
-    font-size: 0.85rem;
-    display: none;
-    z-index: 1000;
-    background-color: #fff;
-    border: 1px solid #ced4da;
-    border-radius: 4px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-}
-.search-input.show {
-    display: block;
-}
-.search-icon {
-    cursor: pointer;
-    color: #6c757d;
-}
-.search-wrapper:hover .search-icon {
-    color: #0d6efd;
+  .accordion { max-width: 600px; }
 }
 
 
-
-/*for table tr color*/
-.searchable-table tbody tr:nth-child(even) td {
-  background-color: var(--bg-col) !important; 
-}
-
-table thead th {
-     background: var(--color-text-background-gray-light, #EFF2F5)!important; 
-}
-  table  thead th:first-child {
-      border-top-right-radius: 30px!important;
-    }
-
-    thead th:last-child {
-      border-top-left-radius: 30px!important;
-    }
-
-
-.ticket-reply {
-  display: none;
-}
-
-
-   /* فقط حذف یه قسمت از بردر بالا */
-    .profile-box {
-      padding-top: 60px;
-      position: relative; /* جا برای عنوان بالای باکس */
-    }
-
-    /* بریدگی و نوشته داخلش */
-    .profile-title {
-      position: absolute;
-      top: -13px;
-      right: 15%;
-      transform: translateX(50%);
-      background-color: white;
-      padding: 0 12px;
-      font-weight: 500;
-      font-size: 15px;
-    }
-    
+/* ==============================================
+   14️⃣ TICKET REPLIES
+============================================== */
+.ticket-reply { display: none; }

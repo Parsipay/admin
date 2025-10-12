@@ -11,7 +11,6 @@ function ProcessRequest($request)
         'time'        => $today->format("H:i")
     ];
 
-
     // === Return Template Data ===
     return [
         'content'   => biiq_Template::Start('settings->index', true, [
