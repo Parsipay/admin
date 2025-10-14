@@ -154,11 +154,20 @@ function ProcessRequest($request)
     // -----------------------------
     // Sorting all lists by UnixTimestamp
     // -----------------------------
-    $sortOrder = $_GET['sort'] ?? 'desc';
+// $sortOrder = $_GET['sort'] ?? 'desc';
+// $activeTab = $_GET['tab'] ?? 'deposits';
 
-    sortByTimestamp($p->orderList, $sortOrder);
-    sortByTimestamp($p->userList, $sortOrder);
-    sortByTimestamp($p->requestList, $sortOrder);
+// switch ($activeTab) {
+//     case 'deposits':
+//         sortByTimestamp($p->orderList, $sortOrder);
+//         break;
+//     case 'credits':
+//         sortByTimestamp($p->userList, $sortOrder);
+//         break;
+//     case 'settlements':
+//         sortByTimestamp($p->requestList, $sortOrder);
+//         break;
+// }
 
     // -----------------------------
     // Top Box Items

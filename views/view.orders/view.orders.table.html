@@ -3,10 +3,10 @@
     <table class="table  table-hover align-middle text-center mb-0 searchable-table">
         <thead>
             <tr>
-                <th class="text-start py-3">
+                <th class=" text-start py-3">
                     <div class="search-wrapper d-flex align-items-center">
-                        <i class="fas fa-search search-icon me-1 text-primary opacity-primary rounded-3"
-                            data-column="0" style="cursor:pointer;"></i>
+                        <i class="fas fa-search search-icon me-1 text-primary opacity-primary rounded-3" data-column="0"
+                            style="cursor:pointer;"></i>
                         <input type="text" class="search-input form-control form-control-sm" placeholder="جستجو" />
                         <span>شماره سفارش‌ها </span>
                     </div>
@@ -14,11 +14,14 @@
                 <th class="text-start py-3"> مشخصات سفارش</th>
                 <th class="text-start py-3">کاربر</th>
                 <th class="text-start py-3"> مبلغ</th>
-                <th class="text-start sortable py-3" style="cursor:pointer">
-                    زمان و تاریخ تراکنش
-                    <a href="?sort=desc" class="text-decoration-none text-muted">⇣</a>
-                    <a href="?sort=asc" class="text-decoration-none text-muted">⇡</a>
-                </th>
+          <th class="text-start sortable py-3">
+  <div class="d-flex align-items-center gap-2">
+      <span>زمان و تاریخ تراکنش</span>
+      <i class="fas fa-sort sort-toggle ms-2" data-order="desc" style="cursor:pointer"></i>
+  </div>
+</th>
+
+
                 <th class="text-start py-3">
                     وضعیت
                     <div class="dropdown d-inline">

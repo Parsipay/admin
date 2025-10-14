@@ -220,3 +220,10 @@ input:not(:placeholder-shown)::placeholder { opacity: 0 !important; transition: 
    14️⃣ TICKET REPLIES
 ============================================== */
 .ticket-reply { display: none; }
+
+
+/*============= sort icon for date and time=======*/
+.sort-margin i {
+  margin-top: -50px !important;
+  display: block!important;
+}
