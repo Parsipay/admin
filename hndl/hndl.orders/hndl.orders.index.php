@@ -2,7 +2,7 @@
 function ProcessRequest($request)
 {
     $page = new stdClass();
-    // === Current Date & Time ===
+
     $today = new DateTime();
     $today->modify('+1 hour');
     $page->dateandtime = [
@@ -11,19 +11,16 @@ function ProcessRequest($request)
         'time'        => $today->format("H:i")
     ];
 
-    
-    // --- Helper functions ---
-    $maskCard = fn($num) =>
-        (strlen($num) <= 10)
-            ? str_repeat('*', strlen($num))
-            : substr($num, 0, 6) . str_repeat('*', strlen($num) - 10) . substr($num, -4);
-
     $separateThousands = fn($n) => number_format((int)$n);
 
-    // --- Order list ---
     $page->orderList = [
         [
-            "numberOrder" => "1013152343",
+            "numberOrder" => "
+            <div class='d-flex align-items-center justify-content-center'>
+                <input type='checkbox' class='form-check-input me-2'>
+                <span>20232336263#</span>
+                <span class='ms-2 text-success'>خرید</span>
+            </div>",
             "OrderDetails" => "09128431937",
             "User" => "یگانه علیزاده",
             "UserID" => 16,
@@ -33,7 +30,12 @@ function ProcessRequest($request)
             "Status" => "موفق"
         ],
         [
-            "numberOrder" => "2013152343",
+            "numberOrder" => "
+            <div class='d-flex align-items-center justify-content-center'>
+                <input type='checkbox' class='form-check-input me-2'>
+                <span>2013152343#</span>
+                <span class='ms-2 text-danger'>فروش</span>
+            </div>",
             "OrderDetails" => "09128431937",
             "User" => "بنفشه ابراهیمی",
             "UserID" => 17,
@@ -43,7 +45,12 @@ function ProcessRequest($request)
             "Status" => "در انتظار تایید"
         ],
         [
-            "numberOrder" => "3013152343",
+            "numberOrder" => "
+            <div class='d-flex align-items-center justify-content-center'>
+                <input type='checkbox' class='form-check-input me-2'>
+                <span>3013152343#</span>
+                <span class='ms-2 text-success'>خرید</span>
+            </div>",
             "OrderDetails" => "09128431937",
             "User" => "بنفشه ابراهیمی",
             "UserID" => 18,
@@ -54,81 +61,22 @@ function ProcessRequest($request)
         ],
     ];
 
+    // --- Filter by Buy/Sell ---
+    $buySellFilter = $_GET['buySellFilter'] ?? ''; // 'خرید' یا 'فروش'
+    if ($buySellFilter !== '') {
+        $page->orderList = array_filter($page->orderList, function($order) use ($buySellFilter) {
+            // فقط متن خرید/فروش رو جدا کن
+            preg_match('/>(خرید|فروش)</u', $order['numberOrder'], $matches);
+            return isset($matches[1]) && $matches[1] === $buySellFilter;
+        });
+    }
+
     // --- Sort order list by date (asc/desc) ---
     $sortOrder = $_GET['sort'] ?? 'desc';
-    $sortFunc = fn($a, $b) =>
-        ($sortOrder === 'asc')
-            ? $a['UnixTimestamp'] <=> $b['UnixTimestamp']
-            : $b['UnixTimestamp'] <=> $a['UnixTimestamp'];
+    $sortFunc = fn($a, $b) => ($sortOrder === 'asc')
+        ? $a['UnixTimestamp'] <=> $b['UnixTimestamp']
+        : $b['UnixTimestamp'] <=> $a['UnixTimestamp'];
     usort($page->orderList, $sortFunc);
-
-    // --- Request list ---
-    $page->requestList = [
-        [
-            "requestCode" => "0013152343",
-            "trackingNumber" => "0293564635",
-            "User" => "بنفشه ابراهیمی",
-            "UserID" => 22,
-            "price" => $separateThousands(65665454546),
-            "UnixTimestamp" => 9999999999,
-            "persianDate" => biiq_PersianDate::date("l j F Y - H:i", 88888888),
-            "Status" => "مشاهده رسید"
-        ],
-        [
-            "requestCode" => "0013152343",
-            "trackingNumber" => "0293564635",
-            "User" => "بنفشه ابراهیمی",
-            "UserID" => 23,
-            "price" => $separateThousands(65665454546),
-            "UnixTimestamp" => 777777777,
-            "persianDate" => biiq_PersianDate::date("l j F Y - H:i", 33333333),
-            "Status" => "مشاهده رسید"
-        ],
-        [
-            "requestCode" => "0013152343",
-            "trackingNumber" => "0293564635",
-            "User" => "بنفشه ابراهیمی",
-            "UserID" => 24,
-            "price" => $separateThousands(65665454546),
-            "UnixTimestamp" => 1616301000,
-            "persianDate" => biiq_PersianDate::date("l j F Y - H:i", 1616301000),
-            "Status" => "در صف تسویه"
-        ],
-    ];
-
-    // --- User list ---
-    $page->userList = [
-        [
-            "nationalCode" => "2356897845",
-            "phoneNumber" => "09128431937",
-            "User" => "یگانه علیزاده",
-            "UserID" => 19,
-            "lastActivity" => "2 ماه پیش",
-            "UnixTimestamp" => 11111111,
-            "persianDate" => biiq_PersianDate::date("l j F Y - H:i", 1111111),
-            "Status" => "مسدود"
-        ],
-        [
-            "nationalCode" => "0013152343",
-            "phoneNumber" => "09128431937",
-            "User" => "بنفشه ابراهیمی",
-            "UserID" => 20,
-            "lastActivity" => "2 ماه پیش",
-            "UnixTimestamp" => 33333333,
-            "persianDate" => biiq_PersianDate::date("l j F Y - H:i", 333333333),
-            "Status" => "موفق"
-        ],
-        [
-            "nationalCode" => "0013152343",
-            "phoneNumber" => "09128431937",
-            "User" => "مونا مارامی",
-            "UserID" => 21,
-            "lastActivity" => "2 ماه پیش",
-            "UnixTimestamp" => 4444444444,
-            "persianDate" => biiq_PersianDate::date("l j F Y - H:i", 4444444444),
-            "Status" => "تکمیل نشده"
-        ],
-    ];
 
     // --- Assign colors by status ---
     foreach ($page->orderList as &$item) {
@@ -140,27 +88,11 @@ function ProcessRequest($request)
     }
     unset($item);
 
-    foreach ($page->userList as &$item) {
-        $item["StatusColor"] = match (trim($item["Status"])) {
-            "موفق" => "text-success opacity-green",
-            "تکمیل نشده" => "text-primary bg-blue",
-            default => "text-danger opacity-danger"
-        };
-    }
-    unset($item);
-
-    foreach ($page->requestList as &$item) {
-        $item["StatusColor"] = (trim($item["Status"]) === "مشاهده رسید")
-            ? "text-primary"
-            : "text-warning";
-    }
-    unset($item);
-
-    // --- Return page data ---
     return [
-        'content'   => biiq_Template::Start('orders->index', true, ['Objects' => $page,'dateandtime' => $page->dateandtime]),
+        'content'   => biiq_Template::Start('orders->index', true, ['Objects' => $page, 'dateandtime' => $page->dateandtime]),
         'id'        => 1,
         'title'     => 'مالی',
         'Canonical' => SITE . 'orders/'
     ];
 }
+

@@ -227,3 +227,56 @@ input:not(:placeholder-shown)::placeholder { opacity: 0 !important; transition: 
   margin-top: -50px !important;
   display: block!important;
 }
+
+
+
+
+.filter-box {
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+      padding: 20px;
+      max-width: 550px;
+      margin: 50px auto;
+      display: flex;
+      flex-direction: row;
+      gap: 20px;
+    }
+
+    .calendar-side {
+      flex: 2;
+    }
+
+    .options-side {
+      flex: 1;
+      border-right: 1px solid #eee;
+      padding-right: 15px;
+    }
+
+    .options-side button {
+      display: block;
+      width: 100%;
+      background: transparent;
+      border: none;
+      text-align: right;
+      padding: 8px 0;
+      color: #555;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .options-side button:hover {
+      color: #007bff;
+    }
+
+    .apply-btn {
+      width: 100%;
+      background-color: #4f46e5;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 10px;
+      margin-top: 10px;
+    }
+
+        .pd-custom-buttons { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 5px; }
