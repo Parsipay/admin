@@ -366,6 +366,11 @@ $("#buySellFilter").on("change", function() {
         });
     });
   
+
+
+// ====== Charts (ECharts) Initialization ======
+
+
 }); // end of document.ready
 
 
@@ -373,3 +378,80 @@ $("#buySellFilter").on("change", function() {
 
 
 
+$(window).on('load', function() {
+    // ===== Donut Chart =====
+    var chart1 = echarts.init(document.getElementById('chart1'));
+    var option1 = {
+        title: { text: 'درصد دارایی‌ها', left: 'center' },
+        tooltip: { trigger: 'item', formatter: '{b}: {d}%' },
+        legend: { bottom: 0 },
+        series: [{
+            name: 'Assets',
+            type: 'pie',
+            radius: ['45%', '70%'],
+            avoidLabelOverlap: false,
+            itemStyle: { borderRadius: 8, borderColor: '#fff', borderWidth: 2 },
+            label: { show: false },
+            emphasis: { label: { show: true, fontSize: 16, fontWeight: 'bold' } },
+            data: [
+                { value: 40, name: 'بیت‌کوین' },
+                { value: 25, name: 'اتریوم' },
+                { value: 20, name: 'تتر' },
+                { value: 15, name: 'سایر' }
+            ]
+        }]
+    };
+    chart1.setOption(option1);
+
+       // ===== Line chart (chart2) =====
+var chart2 = echarts.init(document.getElementById('chart2'));
+
+    var option2 = {
+        tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+        legend: { data: ['Sales', 'Revenue'], top: 'top' },
+        xAxis: {
+            type: 'category',
+            data: ['جمعه', 'پنج شنبه', 'چهارشنبه', 'سه شنبه ', 'دوشنبه', 'یک‌شنبه', 'شنبه']
+        },
+        yAxis: { type: 'value' },
+        series: [
+            {
+                name: 'Sales',
+                type: 'bar',
+                data: [120, 200, 150, 80, 70, 110, 130],
+                barGap: 0, // فاصله بین ستون‌ها در یک دسته
+                itemStyle: { color: '#5470C6' }
+            },
+            {
+                name: 'Revenue',
+                type: 'bar',
+                data: [90, 180, 120, 60, 50, 100, 120],
+                itemStyle: { color: '#FF994D' }
+            }
+        ]
+    };
+
+    chart2.setOption(option2);
+    // ===== Responsive Resize =====
+    $(window).on('resize', function() {
+        chart1.resize();
+        chart2.resize();
+    });
+});
+
+
+
+
+///for login
+  const loginDiv = document.getElementById('loginDiv');
+  const dashboard = document.getElementById('dashboardContent');
+
+  document.getElementById('loginForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    // حذف کامل div لاگین
+    loginDiv.remove();
+
+    // نمایش داشبورد
+    dashboard.style.display = 'block';
+  });

@@ -50,7 +50,7 @@ function ProcessRequest($request)
         [
             "numberOrder" => "1013152343",
             "OrderDetails" => "09128431937",
-            "User" => "یگانه علیfffزاده",
+            "User" => "یگانه علیزاده ",
             "UserID" => 16,
             "price" => separateThousands(16520897),
             "UnixTimestamp" => 111111,
@@ -86,7 +86,7 @@ function ProcessRequest($request)
         [
             "nationalCode" => "2356897845",
             "phoneNumber" => "09128431937",
-            "User" => "یگddانه علیزاده",
+            "User" => "یگانه علیزاده",
             "UserID" => 19,
             "lastActivity" => "2 ماه پیش",
             "UnixTimestamp" => 11111111,

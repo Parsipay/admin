@@ -64,7 +64,7 @@ function ProcessRequest($request)
     // --- Filter by Buy/Sell ---
     $buySellFilter = $_GET['buySellFilter'] ?? ''; // 'خرید' یا 'فروش'
     if ($buySellFilter !== '') {
-        $page->orderList = array_filter($page->orderList, function($order) use ($buySellFilter) {
+        $page->orderList = array_filter($page->orderList, function ($order) use ($buySellFilter) {
             // فقط متن خرید/فروش رو جدا کن
             preg_match('/>(خرید|فروش)</u', $order['numberOrder'], $matches);
             return isset($matches[1]) && $matches[1] === $buySellFilter;
@@ -95,4 +95,3 @@ function ProcessRequest($request)
         'Canonical' => SITE . 'orders/'
     ];
 }
-
