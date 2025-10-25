@@ -442,7 +442,7 @@ var chart2 = echarts.init(document.getElementById('chart2'));
 
 
 
-///for login
+
   const loginDiv = document.getElementById('loginDiv');
   const dashboard = document.getElementById('dashboardContent');
 

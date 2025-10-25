@@ -1,0 +1,70 @@
+/* ==============================================
+   14️⃣ back REPLIES
+============================================== */
+
+/* ==============================================
+   14️⃣ TICKET REPLIES
+============================================== *//* بک‌گراند تصویر */
+/*.login-background {
+  position: fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  display:flex; justify-content:center; align-items:center;
+  background: url('../img/purple-465931.jpg') no-repeat center center!important;
+  background-size: cover;
+  z-index: 9999;
+}
+
+/* کارت با حالت شیشه‌ای */
+.login-card.glass {
+  width: 360px;
+  padding: 2rem;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.15); /* شفافیت */
+  backdrop-filter: blur(10px); /* تاری شیشه‌ای */
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+  animation: fadeIn 1s ease;
+}
+
+/* فیلدها */
+.form-control {
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.4);
+  background: rgba(255,255,255,0.2);
+  color: #fff;
+  padding: 0.75rem 1rem;
+  transition: 0.3s;
+}
+.form-control::placeholder {
+  color: rgba(255,255,255,0.7);
+}
+.form-control:focus {
+  border-color: #fff;
+  box-shadow: 0 0 10px rgba(255,255,255,0.5);
+  background: rgba(255,255,255,0.25);
+  outline: none;
+  color: #fff;
+}
+
+/* دکمه ورود */
+.btn-primary {
+  background: rgba(255,255,255,0.25);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 0.75rem 1rem;
+  backdrop-filter: blur(5px);
+  transition: 0.3s;
+}
+.btn-primary:hover {
+  background: rgba(255,255,255,0.4);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* انیمیشن ورود کارت */
+@keyframes fadeIn {
+  0% {opacity:0; transform: translateY(-20px);}
+  100% {opacity:1; transform: translateY(0);}
+}
