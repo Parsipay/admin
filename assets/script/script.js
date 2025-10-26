@@ -454,4 +454,4 @@ var chart2 = echarts.init(document.getElementById('chart2'));
 
     // نمایش داشبورد
     dashboard.style.display = 'block';
-  });
+  }); 
