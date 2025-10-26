@@ -1,9 +1,7 @@
-
-
-<!-- Login Div -->
-<div id="loginDiv" class="login-background">
+<!-- ✅ LOGIN PAGE -->
+<div id="loginDiv" class="login-background d-flex justify-content-center align-items-center vh-100">
   <div class="login-card glass">
-    <h5 class="text-center mb-4">ورود به پنل</h5>
+    <h5 class="text-center mb-4 mt-0 text-light">ورود به پنل</h5>
     <form id="loginForm">
       <div class="form-group mb-3">
         <input type="text" class="form-control" id="loginUsername" name="username" placeholder="نام کاربری" required>
@@ -14,93 +12,101 @@
       <div class="form-group mb-3">
         <input type="password" class="form-control" id="loginOtp" name="otp" placeholder="کد یکبار مصرف" required>
       </div>
-      <button type="submit" class="btn btn-primary w-100">ورود</button>
+
+      <button type="submit" class="btn btn-login w-100">ورود</button>
     </form>
   </div>
+  <!-- Canvas for stars -->
+  <canvas id="stars"></canvas>
 </div>
 
-
+<!-- ✅ DASHBOARD PAGE -->
 <div id="dashboardContent" style="display:none;">
-<div>[@import->dateandtime->index]</div>
-<div class="row g-3 my-5">
+  
+  <!-- Logout Button -->
+  <div class="text-end m-3">
+    <button onclick="logout()" class="btn btn-danger btn-sm px-3">خروج</button>
+  </div>
+
+  <div>[@import->dateandtime->index]</div>
+
+  <div class="row g-3 my-5">
+
     <!-- System status -->
     <div class="col-12 col-md-9 col-lg-2">
-        <div class="d-flex flex-column gap-3 h-100">
-            [foreach ([@Objects->TopBox])]
-            <div class="bg-col rounded-5">
-                <div class="d-flex flex-column justify-content-between py-2 px-3 text-center">
-                    <a href="[@settings->site][@Item->Link]" class="nav-link text-dark">
-                        <i class="fa fa-[@Item->Icon] font-color me-2"></i>
-                        <span class="font-color">[@Item->Title]</span>
-                    </a>
-                    <p class="text-primary mb-0 small mt-2 text-start ">[@Item->Subtitle]</p>
-                </div>
-            </div>
-            [endforeach]
+      <div class="d-flex flex-column gap-3 h-100">
+        [foreach ([@Objects->TopBox])]
+        <div class="bg-col rounded-5">
+          <div class="d-flex flex-column justify-content-between py-2 px-3 text-center">
+            <a href="[@settings->site][@Item->Link]" class="nav-link text-dark">
+              <i class="fa fa-[@Item->Icon] font-color me-2"></i>
+              <span class="font-color">[@Item->Title]</span>
+            </a>
+            <p class="text-primary mb-0 small mt-2 text-start ">[@Item->Subtitle]</p>
+          </div>
         </div>
+        [endforeach]
+      </div>
     </div>
-<!-- Bar chart with 2 series -->
-<div class="col-12 col-md-12 col-lg-5">
-    <div class="d-flex align-items-center justify-content-center bg-white rounded shadow-sm h-100"
-         style="min-height:280px;">
+
+    <!-- Bar chart -->
+    <div class="col-12 col-md-12 col-lg-5">
+      <div class="d-flex align-items-center justify-content-center bg-white rounded shadow-sm h-100"
+           style="min-height:280px;">
         <div id="chart2" style="width:100%; height:100%;"></div>
+      </div>
     </div>
-</div>
 
     <!-- Donut Chart -->
     <div class="col-12 col-md-12 col-lg-5">
-        <div class="d-flex align-items-center justify-content-center bg-white rounded shadow-sm h-100"
-            style="min-height:280px;">
-            <div id="chart1" style="width:100%; height:100%;"></div>
-        </div>
+      <div class="d-flex align-items-center justify-content-center bg-white rounded shadow-sm h-100"
+           style="min-height:280px;">
+        <div id="chart1" style="width:100%; height:100%;"></div>
+      </div>
     </div>
-</div>
 
-<div class="my-5" style="min-height: 80vh;">
-    <!-- Nav Pills -->
+  </div>
+
+
+  <!-- ✅ Tabs Section -->
+  <div class="my-5" style="min-height: 80vh;">
     <ul class="nav nav-pills nav-justified gap-1 pb-4 mt-5 border-bottom border-muted" id="financeTab" role="tablist">
-        <li class="nav-item" role="presentation">
-            <button class="nav-link  active rounded-pill py-3 d-flex align-items-center justify-content-center"
-                data-bs-toggle="pill" data-bs-target="#deposits" type="button" role="tab">
-                <i class="fas fa-shopping-cart me-2"></i>
-                <span>لیست سفارش‌ها</span>
-            </button>
-        </li>
 
-        <li class="nav-item" role="presentation">
-            <button class="nav-link  rounded-pill py-3 d-flex align-items-center justify-content-center"
-                data-bs-toggle="pill" data-bs-target="#credits" type="button" role="tab">
-                <i class="fas fa-users me-2"></i>
-                <span>لیست کاربران</span>
-            </button>
-        </li>
+      <li class="nav-item">
+        <button class="nav-link active rounded-pill py-3"
+                data-bs-toggle="pill" data-bs-target="#deposits">
+          <i class="fas fa-shopping-cart me-2"></i> لیست سفارش‌ها
+        </button>
+      </li>
 
-        <li class="nav-item" role="presentation">
-            <button class="nav-link  rounded-pill py-3 d-flex align-items-center justify-content-center"
-                data-bs-toggle="pill" data-bs-target="#settlements" type="button" role="tab">
-                <i class="fa-regular fa-rectangle-list me-2"></i>
-                <span>لیست درخواست‌های تسویه</span>
-            </button>
-        </li>
+      <li class="nav-item">
+        <button class="nav-link rounded-pill py-3"
+                data-bs-toggle="pill" data-bs-target="#credits">
+          <i class="fas fa-users me-2"></i> لیست کاربران
+        </button>
+      </li>
+
+      <li class="nav-item">
+        <button class="nav-link rounded-pill py-3"
+                data-bs-toggle="pill" data-bs-target="#settlements">
+          <i class="fa-regular fa-rectangle-list me-2"></i> لیست درخواست‌های تسویه
+        </button>
+      </li>
+
     </ul>
 
-
-    <!-- Tab Content -->
     <div class="tab-content">
-        <!-- orderList -->
-        <div class="tab-pane fade show active" id="deposits" role="tabpanel">
-            [@import->orders->table]
-        </div>
-        <!-- usersList -->
-        <div class="tab-pane fade" id="credits" role="tabpanel">
-            [@import->orders->tableuserlist]
-
-        </div>
-        <!--requestList-->
-        <div class="tab-pane fade" id="settlements" role="tabpanel">
-            [@import->orders->tablerequestlist]
-
-        </div>
+      <div class="tab-pane fade show active" id="deposits">
+        [@import->orders->table]
+      </div>
+      <div class="tab-pane fade" id="credits">
+        [@import->orders->tableuserlist]
+      </div>
+      <div class="tab-pane fade" id="settlements">
+        [@import->orders->tablerequestlist]
+      </div>
     </div>
-</div>
+
+  </div>
+
 </div>

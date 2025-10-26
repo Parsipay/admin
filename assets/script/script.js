@@ -455,3 +455,108 @@ var chart2 = echarts.init(document.getElementById('chart2'));
     // نمایش داشبورد
     dashboard.style.display = 'block';
   }); 
+
+
+
+
+
+
+
+    // Check login state on page load
+  window.addEventListener("load", () => {
+    const isLoggedIn = localStorage.getItem("loggedIn");
+
+    if (isLoggedIn === "true") {
+      showDashboard();
+    } else {
+      showLogin();
+    }
+  });
+
+
+  // Handle login submit
+  document.getElementById("loginForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const user = document.getElementById("loginUsername").value;
+    const pass = document.getElementById("loginPassword").value;
+    const otp = document.getElementById("loginOtp").value;
+
+    // ✅ به API واقعی وصل می‌کنی بعدا، فعلا تستی قبول میکنه
+    if (user && pass && otp) {
+      localStorage.setItem("loggedIn", "true");
+      showDashboard();
+    }
+  });
+
+
+  // Show only dashboard
+  function showDashboard() {
+    document.getElementById("loginDiv").style.display = "none";
+    document.getElementById("dashboardContent").style.display = "block";
+  }
+
+  // Show only login page
+  function showLogin() {
+    document.getElementById("loginDiv").style.display = "flex";
+    document.getElementById("dashboardContent").style.display = "none";
+  }
+
+  // ✅ Logout function
+  function logout() {
+    localStorage.removeItem("loggedIn");
+    location.reload();
+  }
+
+
+
+// ستاره‌ها
+const canvas = document.getElementById('stars');
+const ctx = canvas.getContext('2d');
+let w = canvas.width = window.innerWidth;
+let h = canvas.height = window.innerHeight;
+
+const stars = [];
+const numStars = 250;
+
+// ایجاد ستاره‌ها
+for(let i=0; i<numStars; i++){
+  stars.push({
+    x: Math.random()*w,
+    y: Math.random()*h,
+    radius: Math.random()*1.5+0.5,
+    alpha: Math.random(),
+    speedX: (Math.random()-1)*0.05, // سرعت حرکت افقی ریز
+    speedY: (Math.random()-2)*0.02  // سرعت حرکت عمودی ریز
+  });
+}
+
+// رسم و انیمیشن
+function animateStars(){
+  ctx.clearRect(0,0,w,h);
+  stars.forEach(star => {
+    // چشمک زدن سریع
+    star.alpha += (Math.random()-0.5)*0.15;
+    if(star.alpha <0) star.alpha=0;
+    if(star.alpha>1) star.alpha=1;
+
+
+
+
+
+    // رسم ستاره
+    ctx.beginPath();
+    ctx.arc(star.x, star.y, star.radius, 0, Math.PI*2);
+    ctx.fillStyle = `rgba(255,255,255,${star.alpha})`;
+    ctx.fill();
+  });
+  requestAnimationFrame(animateStars);
+}
+
+animateStars();
+
+// ریسایز صفحه
+window.addEventListener('resize',()=>{
+  w = canvas.width = window.innerWidth;
+  h = canvas.height = window.innerHeight;
+});
