@@ -194,66 +194,6 @@ $(document).ready(function () {
 });
 
 
-// $("#persian-date").persianDatepicker({
-//     format: 'YYYY/MM/DD',
-//     initialValue: false,
-//     autoClose: true,
-//     calendarType: 'persian',
-//     toolbox: {
-//       calendarSwitch: { enabled: false },
-//       todayButton: { enabled: true, text: { fa: "امروز" } },
-//       submitButton: { enabled: true, text: { fa: "تأیید" } }
-//     }
-//   });
-
-
-//   var pdp = $("#persian-date").persianDatepicker({
-//     format: 'YYYY/MM/DD',
-//     initialValue: false,
-//     autoClose: true,
-//     calendarType: 'persian',
-//     observer: true,
-//     toolbox: {
-//       calendarSwitch: { enabled: false },
-//       todayButton: { enabled: true, text: { fa: "امروز" } },
-//       submitButton: { enabled: true, text: { fa: "تأیید" } }
-//     },
-//     onShow: function(inst) {
-//       // اضافه کردن دکمه‌های Quick Filter فقط یک بار
-//       if (!$("#startWeekBtn").length) {
-//         var custom = `
-//           <div class="pd-custom-buttons">
-//             <button type="button" id="todayBtn" class="btn btn-sm btn-outline-primary">امروز</button>
-//             <button type="button" id="startWeekBtn" class="btn btn-sm btn-outline-primary">ابتدای هفته</button>
-//             <button type="button" id="startMonthBtn" class="btn btn-sm btn-outline-primary">ابتدای ماه</button>
-//             <button type="button" id="startYearBtn" class="btn btn-sm btn-outline-primary">ابتدای سال</button>
-//           </div>
-//         `;
-//         $(this).find(".pwt-date").after(custom);
-
-//         $("#todayBtn").on("click", function() {
-//           var now = new persianDate();
-//           $("#persian-date").val(now.format('YYYY/MM/DD'));
-//           pdp.hide();
-//         });
-//         $("#startWeekBtn").on("click", function() {
-//           var now = new persianDate();
-//           $("#persian-date").val(now.startOf('week').format('YYYY/MM/DD'));
-//           pdp.hide();
-//         });
-//         $("#startMonthBtn").on("click", function() {
-//           var now = new persianDate();
-//           $("#persian-date").val(now.startOf('month').format('YYYY/MM/DD'));
-//           pdp.hide();
-//         });
-//         $("#startYearBtn").on("click", function() {
-//           var now = new persianDate();
-//           $("#persian-date").val(now.startOf('year').format('YYYY/MM/DD'));
-//           pdp.hide();
-//         });
-//       }
-//     }
-//   });
   // وقتی input کلیک شد، modal باز بشه
  var calendarModal = new bootstrap.Modal(document.getElementById('calendarModal'));
   $("#persian-date").on("click", function(){
@@ -368,7 +308,6 @@ $("#buySellFilter").on("change", function() {
   
 
 
-// ====== Charts (ECharts) Initialization ======
 
 
 }); // end of document.ready
@@ -378,6 +317,69 @@ $("#buySellFilter").on("change", function() {
 
 
 
+
+
+
+//login form
+  // وقتی فرم لاگین ارسال شد
+  $("#loginForm").on("submit", function(e) {
+    e.preventDefault(); // جلوگیری از ارسال واقعی فرم
+
+    const username = $("#loginUsername").val().trim();
+    const password = $("#loginPassword").val().trim();
+    const $forgotMsg = $("#forgotMsg");
+
+    // چک شماره و رمز
+    if(username === "09356439532" && password === "12345") {
+      // موفقیت: نمایش داشبورد
+      $("#loginDiv").fadeOut(300, function() {
+        $("#dashboardContent").fadeIn(300);
+      });
+    } else {
+      // خطا: پیام هشدار
+      alert("شماره یا رمز عبور اشتباه است ❌");
+    }
+
+    // اگر فراموشی رمز انتخاب شده بود، پیام نمایش داده شود
+    if($("#forgotPassword").is(":checked")) {
+      $forgotMsg.show();
+    } else {
+      $forgotMsg.hide();
+    }
+  });
+
+//bakground loginform
+ const numStars = 200; // تعداد ستاره‌ها
+  const $bg = $(".login-background");
+
+  for (let i = 0; i < numStars; i++) {
+    const size = Math.random() * 2 + 1; // اندازه ستاره
+    const left = Math.random() * 100;   // درصد افقی
+    const top = Math.random() * 100;    // درصد عمودی
+    const duration = Math.random() * 2 + 1; // سرعت چشمک زدن
+
+    const $star = $("<div class='star'></div>").css({
+      width: size + "px",
+      height: size + "px",
+      left: left + "%",
+      top: top + "%",
+      animationDuration: duration + "s",
+      opacity: Math.random()
+    });
+
+    $bg.append($star);
+  }
+
+  // انیمیشن تصادفی چشمک زدن
+  setInterval(function() {
+    $(".star").each(function() {
+      if (Math.random() > 0.5) {
+        $(this).fadeTo(Math.random() * 1000 + 500, Math.random());
+      }
+    });
+  }, 500);
+
+///inja be bad js shod chon kar nemikone harkari mikonam
 $(window).on('load', function() {
     // ===== Donut Chart =====
     var chart1 = echarts.init(document.getElementById('chart1'));
@@ -438,20 +440,3 @@ var chart2 = echarts.init(document.getElementById('chart2'));
         chart2.resize();
     });
 });
-
-
-
-
-
-  const loginDiv = document.getElementById('loginDiv');
-  const dashboard = document.getElementById('dashboardContent');
-
-  document.getElementById('loginForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-
-    // حذف کامل div لاگین
-    loginDiv.remove();
-
-    // نمایش داشبورد
-    dashboard.style.display = 'block';
-  }); 

@@ -183,7 +183,17 @@ input:not(:placeholder-shown)::placeholder { opacity: 0 !important; transition: 
   font-size: 15px;
 }
 
-
+.profile-titles{
+    position: absolute;
+  top: -3px;
+  right: 50%;
+  transform: translateX(50%);
+  background-color: rgb(7,7,31);
+  padding: 10px 12px;
+  font-weight: 500;
+  font-size: 15px;
+  border-top-color: rgb(7,7,31)!important;
+}
 /* ==============================================
    12️⃣ UTILITY CLASSES
 ============================================== */
@@ -287,42 +297,59 @@ input:not(:placeholder-shown)::placeholder { opacity: 0 !important; transition: 
         
 
 
-/* ==============================================
-   14️⃣ back REPLIES
-============================================== */
-
-/* ==============================================
-   14️⃣ TICKET REPLIES
-============================================== *//* بک‌گراند تصویر */
-/* فقط مخصوص صفحه لاگین */
-.login-background .login-card {
-  width: 360px;
-  padding: 2rem;
-  border-radius: 20px;
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
-  animation: fadeIn 1s ease;
-}
-
-/* بک‌گراند تصویر */
+/* ----------------------------------------------
+   1️⃣ بکگراند کل صفحه - آسمان شب با ستاره
+----------------------------------------------- */
 .login-background {
   position: fixed;
-  top:0; left:0;
-  width:100%; height:100%;
-  display:flex; justify-content:center; align-items:center;
-  background: url('../img/purple-465931.jpg') no-repeat center center!important;
-  background-size: cover;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(ellipse at bottom, #0b0c2b 0%, #05051a 100%);
+  overflow: hidden;
   z-index: 9999;
 }
 
-/* فیلدها فقط در صفحه لاگین */
+/* ستاره‌ها */
+.star {
+  position: absolute;
+  border-radius: 50%;
+  background: white;
+  opacity: 0.8;
+  animation: twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle {
+  0% { opacity: 0.1; transform: scale(0.5);}
+  50% { opacity: 0.8; transform: scale(1);}
+  100% { opacity: 0.2; transform: scale(0.7);}
+}
+
+/* ----------------------------------------------
+   2️⃣ فرم شیشه‌ای
+----------------------------------------------- */
+.login-background .login-card {
+  position: relative;
+  width: 360px;
+  padding: 2rem;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.116);
+  backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.151);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+  color: #fff;
+  animation: fadeIn 1s ease;
+  z-index: 1; /* بالای ستاره‌ها */
+}
+
+/* فیلدهای فرم */
 .login-background .form-control {
   border-radius: 12px;
   border: 1px solid rgba(255,255,255,0.4);
-  background: rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.15);
   color: #fff;
   padding: 0.75rem 1rem;
   transition: 0.3s;
@@ -338,22 +365,23 @@ input:not(:placeholder-shown)::placeholder { opacity: 0 !important; transition: 
   color: #fff;
 }
 
-/* دکمه ورود یونیک */
+/* دکمه ورود */
 .login-background .btn-login {
-  background: rgba(255,255,255,0.25);
+  background: rgba(255,255,255,0.2);
   color: #fff;
   border: none;
   border-radius: 12px;
   padding: 0.75rem 1rem;
   backdrop-filter: blur(5px);
   transition: 0.3s;
+  cursor: pointer;
 }
 .login-background .btn-login:hover {
-  background: rgba(255,255,255,0.4);
+  background: rgba(255,255,255,0.35);
   box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
 
-/* انیمیشن */
+/* انیمیشن فرم */
 @keyframes fadeIn {
   0% {opacity:0; transform: translateY(-20px);}
   100% {opacity:1; transform: translateY(0);}
