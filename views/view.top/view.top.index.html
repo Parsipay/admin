@@ -1,88 +1,65 @@
-
-
 <!-- ✅ DASHBOARD PAGE -->
-  
-
-
-  <div>[@import->dateandtime->index]</div>
-
-  <div class="row g-3 my-5">
-
-    <!-- System status -->
-    <div class="col-12 col-md-9 col-lg-2">
-      <div class="d-flex flex-column gap-3 h-100">
-        [foreach ([@Objects->TopBox])]
-        <div class="bg-col rounded-5">
-          <div class="d-flex flex-column justify-content-between py-2 px-3 text-center">
-            <a href="[@settings->site][@Item->Link]" class="nav-link text-dark">
-              <i class="fa fa-[@Item->Icon] font-color me-2"></i>
-              <span class="font-color">[@Item->Title]</span>
-            </a>
-            <p class="text-primary mb-0 small mt-2 text-start ">[@Item->Subtitle]</p>
-          </div>
+<div>[@import->dateandtime->index]</div>
+<div class="row g-3 my-5">
+  <!-- System status -->
+  <div class="col-12 col-md-9 col-lg-2">
+    <div class="d-flex flex-column gap-3 h-100">
+      [foreach ([@Objects->TopBox])]
+      <div class="bg-col rounded-5">
+        <div class="d-flex flex-column justify-content-between py-2 px-3 text-center">
+          <a href="[@settings->site][@Item->Link]" class="nav-link text-dark">
+            <i class="fa fa-[@Item->Icon] font-color me-2"></i>
+            <span class="font-color">[@Item->Title]</span>
+          </a>
+          <p class="text-primary mb-0 small mt-2 text-start ">[@Item->Subtitle]</p>
         </div>
-        [endforeach]
       </div>
+      [endforeach]
     </div>
-
-    <!-- Bar chart -->
-    <div class="col-12 col-md-12 col-lg-5">
-      <div class="d-flex align-items-center justify-content-center bg-white rounded shadow-sm h-100"
-           style="min-height:280px;">
-        <div id="chart2" style="width:100%; height:100%;"></div>
-      </div>
-    </div>
-
-    <!-- Donut Chart -->
-    <div class="col-12 col-md-12 col-lg-5">
-      <div class="d-flex align-items-center justify-content-center bg-white rounded shadow-sm h-100"
-           style="min-height:280px;">
-        <div id="chart1" style="width:100%; height:100%;"></div>
-      </div>
-    </div>
-
   </div>
-
-
-  <!-- ✅ Tabs Section -->
-  <div class="my-5" style="min-height: 80vh;">
-    <ul class="nav nav-pills nav-justified gap-1 pb-4 mt-5 border-bottom border-muted" id="financeTab" role="tablist">
-
-      <li class="nav-item">
-        <button class="nav-link active rounded-pill py-3"
-                data-bs-toggle="pill" data-bs-target="#deposits">
-          <i class="fas fa-shopping-cart me-2"></i> لیست سفارش‌ها
-        </button>
-      </li>
-
-      <li class="nav-item">
-        <button class="nav-link rounded-pill py-3"
-                data-bs-toggle="pill" data-bs-target="#credits">
-          <i class="fas fa-users me-2"></i> لیست کاربران
-        </button>
-      </li>
-
-      <li class="nav-item">
-        <button class="nav-link rounded-pill py-3"
-                data-bs-toggle="pill" data-bs-target="#settlements">
-          <i class="fa-regular fa-rectangle-list me-2"></i> لیست درخواست‌های تسویه
-        </button>
-      </li>
-
-    </ul>
-
-    <div class="tab-content">
-      <div class="tab-pane fade show active" id="deposits">
-        [@import->orders->table]
-      </div>
-      <div class="tab-pane fade" id="credits">
-        [@import->orders->tableuserlist]
-      </div>
-      <div class="tab-pane fade" id="settlements">
-        [@import->orders->tablerequestlist]
-      </div>
+  <!-- Bar chart -->
+  <div class="col-12 col-md-12 col-lg-5">
+    <div class="d-flex align-items-center justify-content-center bg-white rounded shadow-sm h-100"
+      style="min-height:280px;">
+      <div id="chart2" style="width:100%; height:100%;"></div>
     </div>
-
   </div>
-
-
+  <!-- Donut Chart -->
+  <div class="col-12 col-md-12 col-lg-5">
+    <div class="d-flex align-items-center justify-content-center bg-white rounded shadow-sm h-100"
+      style="min-height:280px;">
+      <div id="chart1" style="width:100%; height:100%;"></div>
+    </div>
+  </div>
+</div>
+<!-- ✅ Tabs Section -->
+<div class="my-5" style="min-height: 80vh;">
+  <ul class="nav nav-pills nav-justified gap-1 pb-4 mt-5 border-bottom border-muted" id="financeTab" role="tablist">
+    <li class="nav-item">
+      <button class="nav-link active rounded-pill py-3" data-bs-toggle="pill" data-bs-target="#deposits">
+        <i class="fas fa-shopping-cart me-2"></i> لیست سفارش‌ها
+      </button>
+    </li>
+    <li class="nav-item">
+      <button class="nav-link rounded-pill py-3" data-bs-toggle="pill" data-bs-target="#credits">
+        <i class="fas fa-users me-2"></i> لیست کاربران
+      </button>
+    </li>
+    <li class="nav-item">
+      <button class="nav-link rounded-pill py-3" data-bs-toggle="pill" data-bs-target="#settlements">
+        <i class="fa-regular fa-rectangle-list me-2"></i> لیست درخواست‌های تسویه
+      </button>
+    </li>
+  </ul>
+  <div class="tab-content">
+    <div class="tab-pane fade show active" id="deposits">
+      [@import->orders->table]
+    </div>
+    <div class="tab-pane fade" id="credits">
+      [@import->orders->tableuserlist]
+    </div>
+    <div class="tab-pane fade" id="settlements">
+      [@import->orders->tablerequestlist]
+    </div>
+  </div>
+</div>

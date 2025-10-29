@@ -1,136 +1,126 @@
-
-
 <!-- Login Div -->
 <div id="loginDiv" class="login-background">
   <div class="login-card glass">
-<form id="loginForm">
-  <span class="profile-titles rounded border d-block mb-3">
-    <i class="fas fa-user text-purple me-2"></i>
-  فرم ورود
-  </span>
+    <form id="loginForm">
+      <span class="profile-titles rounded border d-block mb-3">
+       
+         دسترسی به حساب کاربری
+      </span>
 
-  <div class="form-group mb-3 mt-3">
-    <input type="text" class="form-control" id="loginUsername" name="username" placeholder="نام کاربری" required>
-  </div>
-  <div class="form-group mb-3">
-    <input type="password" class="form-control" id="loginPassword" name="password" placeholder="رمز عبور" required>
-  </div>
-<!-- چک‌باکس‌ها در یک ردیف -->
-<div class="d-flex justify-content-between mb-3">
-  <div class="form-check">
-    <input class="form-check-input" type="checkbox" id="rememberMe">
-    <label class="form-check-label text-white mt-1" for="rememberMe">
-      مرا به خاطر بسپار
-    </label>
-  </div>
-  <div class="form-check">
-    <input class="form-check-input" type="checkbox" id="forgotPassword">
-    <label class="form-check-label text-white mt-1" for="forgotPassword">
-      فراموشی رمز عبور
-    </label>
-  </div>
-</div>
-
-<!-- پیام فراموشی رمز عبور -->
-<div id="forgotMsg" class="text-warning mb-3" style="display:none;">
-  لطفاً روی لینک بازیابی رمز عبور کلیک کنید: <a href="#" class="text-info">بازیابی رمز</a>
-</div>
-
-
-<button type="submit" class="btn btn-primary w-100 mb-2">ورود</button>
-
-<div class="text-center mt-2">
-  <small class="text-white">
-    حساب کاربری ندارید؟ 
-    <a href="#" class="text-info text-decoration-none">اینجا بسازید</a>
-  </small>
-</div>
-</form>
+      <div class="form-group mb-3 mt-3">
+        <input type="text" class="form-control" id="loginUsername" name="username" placeholder=" شماره موبایل خود را وارد کنید" required>
+      </div>
+      <div class="form-group mb-3">
+        <input type="password" class="form-control" id="loginPassword" name="password" placeholder="رمز عبور" required>
+      </div>
+      <div class="d-flex justify-content-between mb-3">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="rememberMe">
+          <label class="form-check-label text-white mt-1" for="rememberMe">
+            مرا به خاطر بسپار
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="forgotPassword">
+          <label class="form-check-label text-white mt-1" for="forgotPassword">
+            فراموشی رمز عبور
+          </label>
+        </div>
+      </div>
+      <div id="forgotMsg" class="text-warning mb-3" style="display:none;">
+        لطفاً روی لینک بازیابی رمز عبور کلیک کنید: <a href="#" class="text-info">بازیابی رمز</a>
+      </div>
+      <button type="submit" class="btn btn-primary w-100 mb-2"> ورود از طریق پیامک </button>
+      <div class="text-center mt-2">
+        <small class="text-white">
+          حساب کاربری ندارید؟
+          <a href="#" class="text-info text-decoration-none">اینجا بسازید</a>
+        </small>
+      </div>
+    </form>
   </div>
 </div>
-
-
 <div id="dashboardContent" style="display:none;">
-<div>[@import->dateandtime->index]</div>
-<div class="row g-3 my-5">
+  <div>[@import->dateandtime->index]</div>
+  <div class="row g-3 my-5">
     <!-- System status -->
     <div class="col-12 col-md-9 col-lg-2">
-        <div class="d-flex flex-column gap-3 h-100">
-            [foreach ([@Objects->TopBox])]
-            <div class="bg-col rounded-5">
-                <div class="d-flex flex-column justify-content-between py-2 px-3 text-center">
-                    <a href="[@settings->site][@Item->Link]" class="nav-link text-dark">
-                        <i class="fa fa-[@Item->Icon] font-color me-2"></i>
-                        <span class="font-color">[@Item->Title]</span>
-                    </a>
-                    <p class="text-primary mb-0 small mt-2 text-start ">[@Item->Subtitle]</p>
-                </div>
-            </div>
-            [endforeach]
+      <div class="d-flex flex-column gap-3 h-100">
+        [foreach ([@Objects->TopBox])]
+        <div class="bg-col rounded-5">
+          <div class="d-flex flex-column justify-content-between py-2 px-3 text-center">
+            <a href="[@settings->site][@Item->Link]" class="nav-link text-dark">
+              <i class="fa fa-[@Item->Icon] font-color me-2"></i>
+              <span class="font-color">[@Item->Title]</span>
+            </a>
+            <p class="text-primary mb-0 small mt-2 text-start ">[@Item->Subtitle]</p>
+          </div>
         </div>
+        [endforeach]
+      </div>
     </div>
-<!-- Bar chart with 2 series -->
-<div class="col-12 col-md-12 col-lg-5">
-    <div class="d-flex align-items-center justify-content-center bg-white rounded shadow-sm h-100"
-         style="min-height:280px;">
-       <img src="../../assets/img/Frame11.png" alt="">
+    <!-- Bar chart with 2 series -->
+    <div class="col-12 col-md-12 col-lg-5">
+      <div class="d-flex align-items-center justify-content-center bg-white rounded shadow-sm h-100"
+        style="min-height:280px;">
+        <img src="../../assets/img/Frame11.png" alt="">
+      </div>
     </div>
-</div>
 
     <!-- Donut Chart -->
     <div class="col-12 col-md-12 col-lg-5">
-        <div class="d-flex align-items-center justify-content-center bg-white rounded shadow-sm h-100"
-            style="min-height:280px;">
-       <img src="../../assets/img/Frame3.png" alt="">
-        </div>
+      <div class="d-flex align-items-center justify-content-center bg-white rounded shadow-sm h-100"
+        style="min-height:280px;">
+        <img src="../../assets/img/Frame3.png" alt="">
+      </div>
     </div>
-</div>
+  </div>
 
-<div class="my-5" style="min-height: 80vh;">
+  <div class="my-5" style="min-height: 80vh;">
     <!-- Nav Pills -->
     <ul class="nav nav-pills nav-justified gap-1 pb-4 mt-5 border-bottom border-muted" id="financeTab" role="tablist">
-        <li class="nav-item" role="presentation">
-            <button class="nav-link  active rounded-pill py-3 d-flex align-items-center justify-content-center"
-                data-bs-toggle="pill" data-bs-target="#deposits" type="button" role="tab">
-                <i class="fas fa-shopping-cart me-2"></i>
-                <span>لیست سفارش‌ها</span>
-            </button>
-        </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link  active rounded-pill py-3 d-flex align-items-center justify-content-center"
+          data-bs-toggle="pill" data-bs-target="#deposits" type="button" role="tab">
+          <i class="fas fa-shopping-cart me-2"></i>
+          <span>لیست سفارش‌ها</span>
+        </button>
+      </li>
 
-        <li class="nav-item" role="presentation">
-            <button class="nav-link  rounded-pill py-3 d-flex align-items-center justify-content-center"
-                data-bs-toggle="pill" data-bs-target="#credits" type="button" role="tab">
-                <i class="fas fa-users me-2"></i>
-                <span>لیست کاربران</span>
-            </button>
-        </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link  rounded-pill py-3 d-flex align-items-center justify-content-center"
+          data-bs-toggle="pill" data-bs-target="#credits" type="button" role="tab">
+          <i class="fas fa-users me-2"></i>
+          <span>لیست کاربران</span>
+        </button>
+      </li>
 
-        <li class="nav-item" role="presentation">
-            <button class="nav-link  rounded-pill py-3 d-flex align-items-center justify-content-center"
-                data-bs-toggle="pill" data-bs-target="#settlements" type="button" role="tab">
-                <i class="fa-regular fa-rectangle-list me-2"></i>
-                <span>لیست درخواست‌های تسویه</span>
-            </button>
-        </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link  rounded-pill py-3 d-flex align-items-center justify-content-center"
+          data-bs-toggle="pill" data-bs-target="#settlements" type="button" role="tab">
+          <i class="fa-regular fa-rectangle-list me-2"></i>
+          <span>لیست درخواست‌های تسویه</span>
+        </button>
+      </li>
     </ul>
 
 
     <!-- Tab Content -->
     <div class="tab-content">
-        <!-- orderList -->
-        <div class="tab-pane fade show active" id="deposits" role="tabpanel">
-            [@import->orders->table]
-        </div>
-        <!-- usersList -->
-        <div class="tab-pane fade" id="credits" role="tabpanel">
-            [@import->orders->tableuserlist]
+      <!-- orderList -->
+      <div class="tab-pane fade show active" id="deposits" role="tabpanel">
+        [@import->orders->table]
+      </div>
+      <!-- usersList -->
+      <div class="tab-pane fade" id="credits" role="tabpanel">
+        [@import->orders->tableuserlist]
 
-        </div>
-        <!--requestList-->
-        <div class="tab-pane fade" id="settlements" role="tabpanel">
-            [@import->orders->tablerequestlist]
+      </div>
+      <!--requestList-->
+      <div class="tab-pane fade" id="settlements" role="tabpanel">
+        [@import->orders->tablerequestlist]
 
-        </div>
+      </div>
     </div>
-</div>
+  </div>
 </div>

@@ -1,0 +1,17 @@
+
+
+<!---LOGIN-->
+username : 09356439532
+pass : 12345
+
+
+<!--structure-->
+1/view/view.pages/viwe.pages.index  -> hndl/hndl.index.php
+2/view/viwe.top.index  -> hndl/hndl.top.php
+3/view/view.manage/viwe.manage.index  -> hndl/hndl.manage/hndl.manage.php
+4/view/view.order/viwe.order.index  -> hndl/hndl.order/hndl.manage.php
+5/view/view.transaction/viwe.transaction.index  -> hndl/hndl.transaction.php
+6/view/view.tickets/viwe.tickets.index  -> hndl/hndl.tickets.php
+7/view/view.tickets/viwe.tickets.index  -> hndl/hndl.tickets.php
+8/view/view.currency/viwe.currency.index  -> hndl/hndl.currency.php
+9/view/view.settings/viwe.settings.index  -> hndl/hndl.settings.php
