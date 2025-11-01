@@ -313,40 +313,22 @@ $("#buySellFilter").on("change", function() {
 }); // end of document.ready
 
 
-
-
-
-
-
-
-
 //login form
-  // وقتی فرم لاگین ارسال شد
-  $("#loginForm").on("submit", function(e) {
-    e.preventDefault(); // جلوگیری از ارسال واقعی فرم
+  // $("#loginForm").on("submit", function(e) {
+$("#loginForm").on("submit", function(e) {
+  e.preventDefault();
 
-    const username = $("#loginUsername").val().trim();
-    const password = $("#loginPassword").val().trim();
-    const $forgotMsg = $("#forgotMsg");
+  const username = $("#loginUsername").val().trim();
+  const password = $("#loginPassword").val().trim();
 
-    // چک شماره و رمز
-    if(username === "09356439532" && password === "12345") {
-      // موفقیت: نمایش داشبورد
-      $("#loginDiv").fadeOut(300, function() {
-        $("#dashboardContent").fadeIn(300);
-      });
-    } else {
-      // خطا: پیام هشدار
-      alert("شماره یا رمز عبور اشتباه است ❌");
-    }
+  if (username === "09356439532" && password === "12345") {
+    // هدایت به صفحه داشبورد
+    window.location.href = "dashboard.html";
+  } else {
+    alert("شماره یا رمز عبور اشتباه است ❌");
+  }
+});
 
-    // اگر فراموشی رمز انتخاب شده بود، پیام نمایش داده شود
-    if($("#forgotPassword").is(":checked")) {
-      $forgotMsg.show();
-    } else {
-      $forgotMsg.hide();
-    }
-  });
 
 //bakground loginform
  const numStars = 200; // تعداد ستاره‌ها
