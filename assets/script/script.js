@@ -314,53 +314,83 @@ $("#buySellFilter").on("change", function() {
 
 
 //login form
+  // وقتی فرم لاگین ارسال شد
   // $("#loginForm").on("submit", function(e) {
-$("#loginForm").on("submit", function(e) {
-  e.preventDefault();
+  //   e.preventDefault(); 
 
-  const username = $("#loginUsername").val().trim();
-  const password = $("#loginPassword").val().trim();
+  //   const username = $("#loginUsername").val().trim();
+  //   const password = $("#loginPassword").val().trim();
+  //   const $forgotMsg = $("#forgotMsg");
 
-  if (username === "09356439532" && password === "12345") {
-    // هدایت به صفحه داشبورد
-    window.location.href = "dashboard.html";
-  } else {
-    alert("شماره یا رمز عبور اشتباه است ❌");
-  }
-});
 
+  //   if(username === "09356439532" && password === "12345") {
+
+  //     $("#loginDiv").fadeOut(300, function() {
+  //       $("#dashboardContent").fadeIn(300);
+  //     });
+  //   } else {
+    
+  //     alert("شماره یا رمز عبور اشتباه است ❌");
+  //   }
+
+   
+  //   if($("#forgotPassword").is(":checked")) {
+  //     $forgotMsg.show();
+  //   } else {
+  //     $forgotMsg.hide();
+  //   }
+  // });
 
 //bakground loginform
- const numStars = 200; // تعداد ستاره‌ها
-  const $bg = $(".login-background");
+//  const numStars = 200; // تعداد ستاره‌ها
+//   const $bg = $(".login-background");
 
-  for (let i = 0; i < numStars; i++) {
-    const size = Math.random() * 2 + 1; // اندازه ستاره
-    const left = Math.random() * 100;   // درصد افقی
-    const top = Math.random() * 100;    // درصد عمودی
-    const duration = Math.random() * 2 + 1; // سرعت چشمک زدن
+//   for (let i = 0; i < numStars; i++) {
+//     const size = Math.random() * 2 + 1; // اندازه ستاره
+//     const left = Math.random() * 100;   // درصد افقی
+//     const top = Math.random() * 100;    // درصد عمودی
+//     const duration = Math.random() * 2 + 1; // سرعت چشمک زدن
 
-    const $star = $("<div class='star'></div>").css({
-      width: size + "px",
-      height: size + "px",
-      left: left + "%",
-      top: top + "%",
-      animationDuration: duration + "s",
-      opacity: Math.random()
-    });
+//     const $star = $("<div class='star'></div>").css({
+//       width: size + "px",
+//       height: size + "px",
+//       left: left + "%",
+//       top: top + "%",
+//       animationDuration: duration + "s",
+//       opacity: Math.random()
+//     });
 
-    $bg.append($star);
-  }
+//     $bg.append($star);
+//   }
 
   // انیمیشن تصادفی چشمک زدن
-  setInterval(function() {
-    $(".star").each(function() {
-      if (Math.random() > 0.5) {
-        $(this).fadeTo(Math.random() * 1000 + 500, Math.random());
-      }
-    });
-  }, 500);
+  // setInterval(function() {
+  //   $(".star").each(function() {
+  //     if (Math.random() > 0.5) {
+  //       $(this).fadeTo(Math.random() * 1000 + 500, Math.random());
+  //     }
+  //   });
+  // }, 500);
 
+
+
+
+  $("#smsLoginLink").on("click", function (e) {
+    const username = $("#loginUsername").val().trim();
+    const password = $("#loginPassword").val().trim();
+
+    // اگر هر دو باید پر باشند:
+    if (username === "" || password === "") {
+      e.preventDefault(); // جلوی رفتن به لینک را می‌گیرد
+      alert("لطفاً شماره موبایل و رمز عبور را وارد کنید.");
+      // می‌تونی به جای alert، نمایش خطای زیباتر اضافه کنی
+    }
+    // در غیر این صورت رفتار پیش‌فرض (رفتن به href) رخ می‌دهد
+  });
+
+
+
+  
 ///inja be bad js shod chon kar nemikone harkari mikonam
 $(window).on('load', function() {
     // ===== Donut Chart =====
