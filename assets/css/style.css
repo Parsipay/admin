@@ -1,22 +1,77 @@
-/* ==============================================
-   1️⃣ FONT DEFINITIONS
-============================================== */
-@font-face { font-family: dana; font-style: normal; font-weight: 100; src: url(../fonts/woff2/dana-thin.woff2) format("woff2"); }
-@font-face { font-family: dana; font-style: normal; font-weight: 200; src: url(../fonts/woff2/dana-extralight.woff2) format("woff2"); }
-@font-face { font-family: dana; font-style: normal; font-weight: 300; src: url(../fonts/woff2/dana-light.woff2) format("woff2"); }
-@font-face { font-family: dana; font-style: normal; font-weight: 400; src: url(../fonts/woff2/dana-regular.woff2) format("woff2"); }
-@font-face { font-family: dana; font-style: normal; font-weight: 500; src: url(../fonts/woff2/dana-medium.woff2) format("woff2"); }
-@font-face { font-family: dana; font-style: normal; font-weight: 600; src: url(../fonts/woff2/dana-demibold.woff2) format("woff2"); }
-@font-face { font-family: dana; font-style: normal; font-weight: 700; src: url(../fonts/woff2/dana-bold.woff2) format("woff2"); }
-@font-face { font-family: dana; font-style: normal; font-weight: 750; src: url(../fonts/woff2/dana-ultrabold.woff2) format("woff2"); }
-@font-face { font-family: dana; font-style: normal; font-weight: 800; src: url(../fonts/woff2/dana-extrabold.woff2) format("woff2"); }
-@font-face { font-family: dana; font-style: normal; font-weight: 900; src: url(../fonts/woff2/dana-black.woff2) format("woff2"); }
-@font-face { font-family: "Roboto-Regular"; font-weight: 400; font-style: normal; src: url(../fonts/woff2/Roboto-Regular.woff2) format("woff2"); font-display: swap; }
+/* ============================================================
+   🟣 1️⃣ FONT DEFINITIONS
+   ------------------------------------------------------------ */
+@font-face {
+  font-family: "dana";
+  font-style: normal;
+  font-weight: 100;
+  src: url("../fonts/woff2/dana-thin.woff2") format("woff2");
+}
+@font-face {
+  font-family: "dana";
+  font-style: normal;
+  font-weight: 200;
+  src: url("../fonts/woff2/dana-extralight.woff2") format("woff2");
+}
+@font-face {
+  font-family: "dana";
+  font-style: normal;
+  font-weight: 300;
+  src: url("../fonts/woff2/dana-light.woff2") format("woff2");
+}
+@font-face {
+  font-family: "dana";
+  font-style: normal;
+  font-weight: 400;
+  src: url("../fonts/woff2/dana-regular.woff2") format("woff2");
+}
+@font-face {
+  font-family: "dana";
+  font-style: normal;
+  font-weight: 500;
+  src: url("../fonts/woff2/dana-medium.woff2") format("woff2");
+}
+@font-face {
+  font-family: "dana";
+  font-style: normal;
+  font-weight: 600;
+  src: url("../fonts/woff2/dana-demibold.woff2") format("woff2");
+}
+@font-face {
+  font-family: "dana";
+  font-style: normal;
+  font-weight: 700;
+  src: url("../fonts/woff2/dana-bold.woff2") format("woff2");
+}
+@font-face {
+  font-family: "dana";
+  font-style: normal;
+  font-weight: 750;
+  src: url("../fonts/woff2/dana-ultrabold.woff2") format("woff2");
+}
+@font-face {
+  font-family: "dana";
+  font-style: normal;
+  font-weight: 800;
+  src: url("../fonts/woff2/dana-extrabold.woff2") format("woff2");
+}
+@font-face {
+  font-family: "dana";
+  font-style: normal;
+  font-weight: 900;
+  src: url("../fonts/woff2/dana-black.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Roboto-Regular";
+  font-weight: 400;
+  font-style: normal;
+  src: url("../fonts/woff2/Roboto-Regular.woff2") format("woff2");
+  font-display: swap;
+}
 
-
-/* ==============================================
-   2️⃣ ROOT VARIABLES
-============================================== */
+/* ============================================================
+   🟢 2️⃣ ROOT VARIABLES
+   ------------------------------------------------------------ */
 :root {
   --main-purple: #ab4f9e;
   --gray-light: #eff2f5;
@@ -28,13 +83,15 @@
   --danger-bg: #fbd7d9;
 }
 
-
-/* ==============================================
-   3️⃣ BASE STYLES
-============================================== */
-html, body { overflow-x: hidden !important; }
+/* ============================================================
+   ⚪ 3️⃣ BASE STYLES
+   ------------------------------------------------------------ */
+html,
 body {
-  font-family: "dana";
+  overflow-x: hidden !important;
+}
+body {
+  font-family: "dana", sans-serif;
   font-size: 13px;
   line-height: 1;
   margin: 0;
@@ -42,31 +99,62 @@ body {
   box-sizing: border-box;
 }
 
-
-/* ==============================================
-   4️⃣ COLORS & BACKGROUNDS
-============================================== */
-.bg-col { background: var(--gray-bg); }
-.font-color { color: #616e85 !important; }
-.text-gray { color: #dee4ec !important; }
-.bg-gray { background: var(--gray-light) !important; }
-.bg-purple { background: var(--main-purple) !important; }
-.bg-blue { background: #3861fb26 !important; }
-.bg-red { background: rgba(255, 0, 0, 0.14) !important; }
-.text-red { color: #e72626 !important; }
-.text-purple { color: var(--main-purple); }
-.text-green { color: var(--success); }
-.opacity-green { background: #adeed56b; }
-.opacity-danger { background: #ea39431a; }
-.bg-opacity-warning { background: var(--warn-opacity); }
-.bg-footer { background: #0d1421; }
-.opacity-primary { background: #3861fb1a; }
-
-
-/* ==============================================
-   5️⃣ NAVIGATION & SIDEBAR
-============================================== */
-.sidebar-link, .nav-link {
+/* ============================================================
+   🟡 4️⃣ COLORS & BACKGROUNDS
+   ------------------------------------------------------------ */
+.bg-col {
+  background: var(--gray-bg);
+}
+.font-color {
+  color: #616e85 !important;
+}
+.text-gray {
+  color: #dee4ec !important;
+}
+.bg-gray {
+  background: var(--gray-light) !important;
+}
+.bg-purple {
+  background: var(--main-purple) !important;
+}
+.bg-blue {
+  background: #3861fb26 !important;
+}
+.bg-red {
+  background: rgba(255, 0, 0, 0.14) !important;
+}
+.text-red {
+  color: #e72626 !important;
+}
+.text-purple {
+  color: var(--main-purple);
+}
+.text-green {
+  color: var(--success);
+}
+.opacity-green {
+  background: #adeed56b;
+}
+.opacity-danger {
+  background: #ea39431a;
+}
+.bg-opacity-warning {
+  background: var(--warn-opacity);
+}
+.bg-footer {
+  background: #0d1421;
+}
+.opacity-primary {
+  background: #3861fb1a;
+}
+.bg-login{
+  background-color: #FEFEFE;
+}
+/* ============================================================
+   🔵 5️⃣ NAVIGATION & SIDEBAR
+   ------------------------------------------------------------ */
+.sidebar-link,
+.nav-link {
   display: flex;
   align-items: center;
   text-decoration: none;
@@ -74,20 +162,34 @@ body {
   border-radius: 8px;
   color: #333;
 }
-.sidebar-link img { width: 20px; height: 20px; margin-left: 8px; }
-.sidebar-link.active, .nav-link.active {
+.sidebar-link img {
+  width: 20px;
+  height: 20px;
+  margin-left: 8px;
+}
+.sidebar-link.active,
+.nav-link.active {
   background: var(--main-purple) !important;
   color: #000;
 }
-.nav-item { margin-bottom: 10px; }
+.nav-item {
+  margin-bottom: 10px;
+}
 
-
-/* ==============================================
-   6️⃣ BUTTONS
-============================================== */
-.btn-danger:hover { background: #ff6565 !important; color: #fff !important; }
-.btn-success:hover { background: var(--success); }
-.btn-primary:hover { background: #64b9f1; color: #fff !important; }
+/* ============================================================
+   🔴 6️⃣ BUTTONS
+   ------------------------------------------------------------ */
+.btn-danger:hover {
+  background: #ff6565 !important;
+  color: #fff !important;
+}
+.btn-success:hover {
+  background: var(--success);
+}
+.btn-primary:hover {
+  background: #64b9f1;
+  color: #fff !important;
+}
 
 /* Neon Button Effect */
 .neon-btn {
@@ -107,32 +209,44 @@ body {
   box-shadow: 0 0 10px #0ff;
 }
 
-
-/* ==============================================
-   7️⃣ TABLES
-============================================== */
-table tbody tr:last-child td { border-bottom: none !important; }
-
+/* ============================================================
+   🟠 7️⃣ TABLES
+   ------------------------------------------------------------ */
+table tbody tr:last-child td {
+  border-bottom: none !important;
+}
 table:not(.accordion table) thead th {
   background: #eff2f5 !important;
 }
-table:not(.accordion table) thead th:first-child { border-top-right-radius: 30px !important; }
-table:not(.accordion table) thead th:last-child { border-top-left-radius: 30px !important; }
-.searchable-table tbody tr:nth-child(even) td { background: var(--gray-bg) !important; }
+table:not(.accordion table) thead th:first-child {
+  border-top-right-radius: 30px !important;
+}
+table:not(.accordion table) thead th:last-child {
+  border-top-left-radius: 30px !important;
+}
+.searchable-table tbody tr:nth-child(even) td {
+  background: var(--gray-bg) !important;
+}
 
-
-/* ==============================================
-   8️⃣ INPUTS & FORMS
-============================================== */
-.custom-input::placeholder { color: #999; transition: opacity 0.3s; }
+/* ============================================================
+   🟤 8️⃣ INPUTS & FORMS
+   ------------------------------------------------------------ */
+.custom-input::placeholder {
+  color: #999;
+  transition: opacity 0.3s;
+}
 .custom-input:focus::placeholder,
-.custom-input:not(:placeholder-shown)::placeholder { opacity: 0; }
+.custom-input:not(:placeholder-shown)::placeholder {
+  opacity: 0;
+}
 
-
-/* ==============================================
-   9️⃣ SEARCH FIELD
-============================================== */
-.search-wrapper { position: relative; display: inline-block; }
+/* ============================================================
+   🔵 9️⃣ SEARCH FIELD
+   ------------------------------------------------------------ */
+.search-wrapper {
+  position: relative;
+  display: inline-block;
+}
 .search-input {
   position: absolute;
   top: 100%;
@@ -144,16 +258,22 @@ table:not(.accordion table) thead th:last-child { border-top-left-radius: 30px !
   background: #fff;
   border: 1px solid #ced4da;
   border-radius: 4px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
-.search-input.show { display: block; }
-.search-icon { cursor: pointer; color: #6c757d; }
-.search-wrapper:hover .search-icon { color: #0d6efd; }
+.search-input.show {
+  display: block;
+}
+.search-icon {
+  cursor: pointer;
+  color: #6c757d;
+}
+.search-wrapper:hover .search-icon {
+  color: #0d6efd;
+}
 
-
-/* ==============================================
-   🔟 ACCORDION
-============================================== */
+/* ============================================================
+   🟢 🔟 ACCORDION
+   ------------------------------------------------------------ */
 .accordion-button {
   background: transparent !important;
   color: #000;
@@ -164,11 +284,13 @@ table:not(.accordion table) thead th:last-child { border-top-left-radius: 30px !
   padding-top: 10px;
 }
 
-
-/* ==============================================
-   11️⃣ PROFILE BOX
-============================================== */
-.profile-box { padding-top: 60px; position: relative; }
+/* ============================================================
+   ⚫ 11️⃣ PROFILE BOX
+   ------------------------------------------------------------ */
+.profile-box {
+  padding-top: 60px;
+  position: relative;
+}
 .profile-title {
   position: absolute;
   top: -13px;
@@ -184,67 +306,95 @@ table:not(.accordion table) thead th:last-child { border-top-left-radius: 30px !
   top: -3px;
   right: 50%;
   transform: translateX(50%);
-  background: rgb(7,7,31);
+  background: rgb(7, 7, 31);
   padding: 10px 12px;
   font-weight: 500;
   font-size: 15px;
-  border-top-color: rgb(7,7,31)!important;
+  border-top-color: rgb(7, 7, 31) !important;
 }
 
+/* ============================================================
+   🟣 12️⃣ UTILITIES
+   ------------------------------------------------------------ */
+.small {
+  font-size: x-small !important;
+}
+.outline-0 {
+  outline: 0;
+}
+.outline-0:focus {
+  box-shadow: none;
+}
+.ps-7px {
+  padding-inline-start: 20px;
+}
+.gap-24px {
+  gap: 0 7px;
+}
+.min-w-103 {
+  min-width: 103px;
+}
+.justify {
+  text-align: justify;
+}
+.amount {
+  background: #f8f9fa;
+}
 
-/* ==============================================
-   12️⃣ UTILITIES
-============================================== */
-.small { font-size: x-small !important; }
-.outline-0 { outline: 0; }
-.outline-0:focus { box-shadow: none; }
-.ps-7px { padding-inline-start: 20px; }
-.gap-24px { gap: 0 7px; }
-.min-w-103 { min-width: 103px; }
-.justify { text-align: justify; }
-.amount { background: #f8f9fa; }
-
-
-/* ==============================================
-   13️⃣ RESPONSIVE DESIGN
-============================================== */
-.table-responsive { overflow-x: auto; overflow-y: hidden; max-height: 500px; }
+/* ============================================================
+   🔶 13️⃣ RESPONSIVE DESIGN
+   ------------------------------------------------------------ */
+.table-responsive {
+  overflow-x: auto;
+  overflow-y: hidden;
+  max-height: 500px;
+}
 
 @media (max-width: 768px) {
-  .table-responsive { -webkit-overflow-scrolling: touch; }
-  table { min-width: 700px; }
-  .resImg { width: 280px !important; height: 152px; }
-  .accordion .accordion-button .d-flex { flex-wrap: wrap; }
+  .table-responsive {
+    -webkit-overflow-scrolling: touch;
+  }
+  table {
+    min-width: 700px;
+  }
+  .resImg {
+    width: 280px !important;
+    height: 152px;
+  }
+  .accordion .accordion-button .d-flex {
+    flex-wrap: wrap;
+  }
 }
+
 @media (max-width: 576px) {
-  main { width: 100%; overflow-x: hidden; }
+  main {
+    width: 100%;
+    overflow-x: hidden;
+  }
 }
+
 @media (min-width: 576px) and (max-width: 870px) {
-  .accordion { max-width: 600px; }
+  .accordion {
+    max-width: 600px;
+  }
 }
 
-
-/* ==============================================
-   14️⃣ MISC ELEMENTS
-============================================== */
-.ticket-reply { display: none; }
-.sort-margin i { margin-top: -50px !important; display: block!important; }
-
-
-/* ==============================================
-   15️⃣ FILTER BOX
-============================================== */
+/* ============================================================
+   ⚪ 14️⃣ FILTER BOX
+   ------------------------------------------------------------ */
 .filter-box {
   background: #fff;
   border-radius: 15px;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
   padding: 20px;
   max-width: 550px;
   margin: 50px auto;
   display: flex;
   gap: 20px;
 }
-.calendar-side { flex: 2; }
+.calendar-side {
+  flex: 2;
+}
 .options-side {
   flex: 1;
   border-right: 1px solid #eee;
@@ -260,7 +410,9 @@ table:not(.accordion table) thead th:last-child { border-top-left-radius: 30px !
   cursor: pointer;
   transition: 0.2s;
 }
-.options-side button:hover { color: #007bff; }
+.options-side button:hover {
+  color: #007bff;
+}
 .apply-btn {
   width: 100%;
   background: #4f46e5;
@@ -270,93 +422,74 @@ table:not(.accordion table) thead th:last-child { border-top-left-radius: 30px !
   padding: 10px;
   margin-top: 10px;
 }
-.pd-custom-buttons { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 5px; }
+.pd-custom-buttons {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+  margin-top: 5px;
+}
 
-
-/* ==============================================
-   16️⃣ LOGIN BACKGROUND (STARRY SKY)
-============================================== */
- .login-background {
+/* ============================================================
+   🌌 15️⃣ LOGIN BACKGROUND & CLOGIN SECTION
+   ------------------------------------------------------------ */
+.login-background {
   position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
- background: radial-gradient(ellipse at bottom, #ffffff 0%, #ffffff 100%); 
+  background: radial-gradient(ellipse at bottom, #ffffff 0%, #ffffff 100%);
   overflow: hidden;
   z-index: 9999;
+  min-height: 100vh;
 }
 
-
-.star {
-  position: absolute;
-  border-radius: 50%;
-  background: white;
-  opacity: 0.8;
-  animation: twinkle 2s infinite alternate;
-}
+/* Star Twinkle Animation */
 @keyframes twinkle {
   0% { opacity: 0.1; transform: scale(0.5); }
   50% { opacity: 0.8; transform: scale(1); }
   100% { opacity: 0.2; transform: scale(0.7); }
-} */
-
-
-/* ==============================================
-   17️⃣ GLASS LOGIN FORM
-============================================== */
-/* .login-background .login-card {
-  width: 360px;
-  padding: 2rem;
-  border-radius: 20px;
-  background: rgba(255,255,255,0.12);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.37);
-  box-shadow: 0 8px 32px rgba(0,0,0,0.25);
-  color: #fff;
-  animation: fadeIn 1s ease;
-  z-index: 1;
-} */
-
-/* Input Fields */
- /* .login-background .form-control {
-  border-radius: 12px;
-  border: 1px solid rgba(255,255,255,0.4);
-  background: rgba(92, 19, 19, 0);
-  color: #fff;
-  padding: 0.75rem 1rem;
-  transition: 0.3s;
-}  */
-/* .login-background .form-control::placeholder { color: rgba(255,255,255,0.7); }
-.login-background .form-control:focus {
-  border-color: #fff;
-  box-shadow: 0 0 10px rgba(255,255,255,0.5);
-  background: rgba(255,255,255,0.25);
-} */
-
-/* Login Button */
-/* .login-background .btn-login {
-  background: rgba(255,255,255,0.2);
-  color: #fff;
-  border: none;
-  border-radius: 12px;
-  padding: 0.75rem 1rem;
-  transition: 0.3s;
-  cursor: pointer;
 }
-.login-background .btn-login:hover {
-  background: rgba(255,255,255,0.35);
-  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-} */
 
-.currency-login {
-  background: url("../img/bgindexform.png") no-repeat  ;
-  background-size: cover;             
+/* Left Section (CLogin) */
+.clogin {
+  background-image: url("../img/bgindexform.png") !important;
+  background-repeat: repeat-x !important;
+  background-size: contain !important;
+  background-position: center bottom !important;
+  display: flex;
+  flex-direction: column;
+}
+
+/* From 768px and Up — Full Height Layout */
+@media (min-width: 768px) {
+  .login-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    overflow: auto;
   }
+  .login-background .container-fluid,
+  .login-background .row {
+    height: 100%;
+  }
+}
 
-/* Fade-in animation */
-/* @keyframes fadeIn {
-  0% { opacity: 0; transform: translateY(-20px); }
-  100% { opacity: 1; transform: translateY(0); }
-} */
+/* Below 768px — Natural Height Layout */
+@media (max-width: 767.98px) {
+  .login-background {
+    position: relative !important;
+    height: auto !important;
+    min-height: auto !important;
+    overflow: visible !important;
+  }
+  .login-background .container-fluid,
+  .login-background .row {
+    height: auto !important;
+  }
+}
