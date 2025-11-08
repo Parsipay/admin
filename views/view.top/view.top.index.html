@@ -1,5 +1,6 @@
 <!-- ✅ DASHBOARD PAGE -->
 <div>[@import->dateandtime->index]</div>
+<div id="insightsPanel" style="display:none;">
 <div class="row g-3 my-5">
   <!-- System status -->
   <div class="col-12 col-md-9 col-lg-2">
@@ -11,7 +12,7 @@
             <i class="fa fa-[@Item->Icon] font-color me-2"></i>
             <span class="font-color">[@Item->Title]</span>
           </a>
-          <p class="text-primary mb-0 small mt-2 text-start ">[@Item->Subtitle]</p>
+          <p class="text-primary mb-0 small mt-2 text-start ms-3">[@Item->Subtitle]</p>
         </div>
       </div>
       [endforeach]
@@ -21,16 +22,17 @@
   <div class="col-12 col-md-12 col-lg-5">
     <div class="d-flex align-items-center justify-content-center bg-white rounded shadow-sm h-100"
       style="min-height:280px;">
-      <div id="chart2" style="width:100%; height:100%;"></div>
+      <img src="../../assets/img/Frame11.png" alt="Frame11">
     </div>
   </div>
   <!-- Donut Chart -->
   <div class="col-12 col-md-12 col-lg-5">
     <div class="d-flex align-items-center justify-content-center bg-white rounded shadow-sm h-100"
       style="min-height:280px;">
-      <div id="chart1" style="width:100%; height:100%;"></div>
+      <img src="../../assets/img/Frame3.png" alt="Frame13">
     </div>
   </div>
+</div>
 </div>
 <!-- ✅ Tabs Section -->
 <div class="my-5" style="min-height: 80vh;">
@@ -53,6 +55,24 @@
       <span>لیست درخواست‌های تسویه</span>
     </button>
   </li>
+<!-- ✅ Reload + Insights in one row -->
+<div class="d-flex align-items-center justify-content-between mb-3">
+  
+  <!-- 🔄 Reload Icon -->
+  <i id="reloadBtn" class="fas fa-sync-alt  border me-3 p-1 rounded font-color" style="cursor:pointer;"></i>
+
+  <!-- ✅ Insights Toggle -->
+  <div class="d-flex align-items-center gap-2">
+    <label class="switch mb-0">
+      <input type="checkbox" id="toggleInsight">
+      <span class="slider"></span>
+    </label>
+    <span class="fw-bold font-color">Insights</span>
+  </div>
+
+</div>
+
+
 </ul>
 
   <div class="tab-content">

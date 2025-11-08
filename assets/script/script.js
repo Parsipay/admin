@@ -1,5 +1,4 @@
 $(document).ready(function () {
-
   /* ---------------------- 🔍 SEARCH ---------------------- */
   $(".search-icon").on("click", function (e) {
     e.stopPropagation();
@@ -11,13 +10,17 @@ $(document).ready(function () {
   $(".search-input").on("keyup", function () {
     const value = $(this).val().toLowerCase();
     const column = $(this).siblings(".search-icon").data("column");
-    $(this).closest("table").find("tbody tr").each(function () {
-      $(this).toggle($(this).find("td").eq(column).text().toLowerCase().includes(value));
-    });
+    $(this)
+      .closest("table")
+      .find("tbody tr")
+      .each(function () {
+        $(this).toggle(
+          $(this).find("td").eq(column).text().toLowerCase().includes(value)
+        );
+      });
   });
 
   $(document).on("click", () => $(".search-input").removeClass("show"));
-
 
   /* ---------------------- 🧾 DROPDOWN FILTER ---------------------- */
   $(document).on("click", ".dropdownitem", function (e) {
@@ -30,7 +33,6 @@ $(document).ready(function () {
     });
   });
 
-
   /* ---------------------- ⚙️ STATUS FILTER ---------------------- */
   $(".filter-status").on("click", function () {
     const selected = $(this).data("status").trim();
@@ -40,12 +42,10 @@ $(document).ready(function () {
     });
   });
 
-
   /* ---------------------- 💡 FANCY BUTTON TOGGLE ---------------------- */
   $(".fancy-btn").on("click", function () {
     $(this).toggleClass("active");
   });
-
 
   /* ---------------------- 🔽 SORTABLE COLUMNS ---------------------- */
   $(".sortable").on("click", function () {
@@ -55,33 +55,53 @@ $(document).ready(function () {
     const asc = $(this).data("asc") || false;
     $(this).data("asc", !asc);
 
-    const rows = $tbody.find("tr").get().sort((a, b) => {
-      const A = +$(a).find("td").eq(index).data("timestamp");
-      const B = +$(b).find("td").eq(index).data("timestamp");
-      return asc ? A - B : B - A;
-    });
+    const rows = $tbody
+      .find("tr")
+      .get()
+      .sort((a, b) => {
+        const A = +$(a).find("td").eq(index).data("timestamp");
+        const B = +$(b).find("td").eq(index).data("timestamp");
+        return asc ? A - B : B - A;
+      });
     $tbody.append(rows);
   });
 
-
   /* ---------------------- 📋 COPY TEXT ---------------------- */
   $(document).on("click", ".fa-copy", function () {
-    const text = $(this).closest("td").clone().children("i").remove().end().text().trim();
-    navigator.clipboard.writeText(text)
+    const text = $(this)
+      .closest("td")
+      .clone()
+      .children("i")
+      .remove()
+      .end()
+      .text()
+      .trim();
+    navigator.clipboard
+      .writeText(text)
       .then(() => alert("کپی شد ✅"))
       .catch(() => alert("کپی نشد ❌"));
   });
 
-
   /* ---------------------- 📅 DATES ---------------------- */
   const today = new Date();
-  $("#shamsi").text("تاریخ شمسی: " + today.toLocaleDateString('fa-IR', {
-    weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
-  }));
-  $("#miladi").text("تاریخ میلادی: " + today.toLocaleDateString('en-US', {
-    weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
-  }));
-
+  $("#shamsi").text(
+    "تاریخ شمسی: " +
+      today.toLocaleDateString("fa-IR", {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      })
+  );
+  $("#miladi").text(
+    "تاریخ میلادی: " +
+      today.toLocaleDateString("en-US", {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      })
+  );
 
   /* ---------------------- 🎫 TICKET REPLY TOGGLE ---------------------- */
   $(".ticket-card").on("click", function (e) {
@@ -91,38 +111,35 @@ $(document).ready(function () {
     $replyBox.slideToggle(200);
   });
 
-
   /* ---------------------- 🖼️ PROFILE IMAGE UPLOAD ---------------------- */
-  $('#profileInput').on('change', function () {
+  $("#profileInput").on("change", function () {
     const file = this.files[0];
     if (!file) return;
 
     const formData = new FormData();
-    formData.append('profile', file);
+    formData.append("profile", file);
 
     $.ajax({
-      url: 'upload.php',
-      type: 'POST',
+      url: "upload.php",
+      type: "POST",
       data: formData,
       contentType: false,
       processData: false,
       success: function (res) {
         const data = JSON.parse(res);
         if (data.success) {
-          $('#profileImg').attr('src', data.path + '?' + Date.now());
-          $('#profileError').text('');
+          $("#profileImg").attr("src", data.path + "?" + Date.now());
+          $("#profileError").text("");
         } else {
-          $('#profileError').text(data.error);
+          $("#profileError").text(data.error);
         }
       },
-      error: () => $('#profileError').text('خطا در آپلود فایل.')
+      error: () => $("#profileError").text("خطا در آپلود فایل."),
     });
   });
 
-
   /* ---------------------- 💾 SAVE PROFILE ---------------------- */
-  $('#saveProfileBtn').on('click', () => alert('تغییرات ذخیره شد!'));
-
+  $("#saveProfileBtn").on("click", () => alert("تغییرات ذخیره شد!"));
 
   /* ---------------------- 🔒 PASSWORD VALIDATION ---------------------- */
   $(".password-form").on("submit", function (e) {
@@ -156,7 +173,6 @@ $(document).ready(function () {
     $form[0].submit();
   });
 
-
   /* ---------------------- 👁️ TOGGLE PASSWORD VISIBILITY ---------------------- */
   $(".toggle-password").on("click", function () {
     const $input = $(this).siblings(".password-input");
@@ -170,59 +186,65 @@ $(document).ready(function () {
     }
   });
 
-
   /* ---------------------- 🔼 SORT TOGGLE ICONS ---------------------- */
-  $(document).on('click', '.sort-toggle', function (e) {
+  $(document).on("click", ".sort-toggle", function (e) {
     e.preventDefault();
 
     const $icon = $(this);
-    const $th = $icon.closest('th');
-    const $table = $th.closest('table');
-    const $tbody = $table.find('tbody');
+    const $th = $icon.closest("th");
+    const $table = $th.closest("table");
+    const $tbody = $table.find("tbody");
     if (!$tbody.length) return;
 
-    const order = $icon.data('order') === 'asc' ? 'desc' : 'asc';
-    $icon.data('order', order);
+    const order = $icon.data("order") === "asc" ? "desc" : "asc";
+    $icon.data("order", order);
 
-    const rows = $tbody.find('tr').toArray().sort((a, b) => {
-      const aTime = +$(a).find('td[data-timestamp]').data('timestamp') || 0;
-      const bTime = +$(b).find('td[data-timestamp]').data('timestamp') || 0;
-      return order === 'asc' ? aTime - bTime : bTime - aTime;
-    });
+    const rows = $tbody
+      .find("tr")
+      .toArray()
+      .sort((a, b) => {
+        const aTime = +$(a).find("td[data-timestamp]").data("timestamp") || 0;
+        const bTime = +$(b).find("td[data-timestamp]").data("timestamp") || 0;
+        return order === "asc" ? aTime - bTime : bTime - aTime;
+      });
 
     $.each(rows, (_, row) => $tbody.append(row));
 
-    $icon.removeClass('fa-sort-up fa-sort-down')
-         .addClass(order === 'asc' ? 'fa-sort-up' : 'fa-sort-down');
+    $icon
+      .removeClass("fa-sort-up fa-sort-down")
+      .addClass(order === "asc" ? "fa-sort-up" : "fa-sort-down");
   });
 
-
   /* ---------------------- 📅 PERSIAN CALENDAR MODAL ---------------------- */
-  const calendarModal = new bootstrap.Modal(document.getElementById('calendarModal'));
+  const calendarModal = new bootstrap.Modal(
+    document.getElementById("calendarModal")
+  );
 
   $("#persian-date").on("click", function () {
     calendarModal.show();
   });
 
-  $('#calendarModal').on('shown.bs.modal', function () {
+  $("#calendarModal").on("shown.bs.modal", function () {
     $("#fromDate, #toDate").persianDatepicker({
-      format: 'YYYY/MM/DD',
+      format: "YYYY/MM/DD",
       autoClose: true,
-      initialValue: false
+      initialValue: false,
     });
 
-    if (!$('#persian-calendar').hasClass('pdp-initialized')) {
-      $('#persian-calendar').addClass('pdp-initialized').persianDatepicker({
-        inline: true,
-        format: 'YYYY/MM/DD',
-        observer: true,
-        autoClose: false,
-        initialValue: false,
-        onSelect: function (unix) {
-          const selected = new persianDate(unix).format('YYYY/MM/DD');
-          $("#fromDate, #toDate").val(selected);
-        }
-      });
+    if (!$("#persian-calendar").hasClass("pdp-initialized")) {
+      $("#persian-calendar")
+        .addClass("pdp-initialized")
+        .persianDatepicker({
+          inline: true,
+          format: "YYYY/MM/DD",
+          observer: true,
+          autoClose: false,
+          initialValue: false,
+          onSelect: function (unix) {
+            const selected = new persianDate(unix).format("YYYY/MM/DD");
+            $("#fromDate, #toDate").val(selected);
+          },
+        });
     }
 
     function setRange(from, to) {
@@ -230,7 +252,9 @@ $(document).ready(function () {
       $("#toDate").val(to.format("YYYY/MM/DD"));
     }
 
-    $("#todayBtn").on("click", () => setRange(new persianDate(), new persianDate()));
+    $("#todayBtn").on("click", () =>
+      setRange(new persianDate(), new persianDate())
+    );
     $("#startWeekBtn").on("click", () => {
       const now = new persianDate();
       setRange(now.startOf("week"), now);
@@ -257,7 +281,6 @@ $(document).ready(function () {
     });
   });
 
-
   /* ---------------------- 💱 FILTERS ---------------------- */
   $("#buySellFilter").on("change", function () {
     const filter = $(this).val();
@@ -276,63 +299,95 @@ $(document).ready(function () {
   });
 
 
-  /* ---------------------- 🔗 LOGIN VALIDATION ---------------------- */
-  $("#smsLoginLink").on("click", function (e) {
-    const username = $("#loginUsername").val().trim();
-    const password = $("#loginPassword").val().trim();
-    if (username === "" || password === "") {
-      e.preventDefault();
-      alert("لطفاً شماره موبایل و رمز عبور را وارد کنید.");
-    }
-  });
 
-
-  
 
 }); // ✅ پایان document.ready
 
 
-  /* ---------------------- 📊 CHARTS ---------------------- */
-  $(window).on('load', function () {
-    const chart1 = echarts.init(document.getElementById('chart1'));
-    chart1.setOption({
-      title: { text: 'درصد دارایی‌ها', left: 'center' },
-      tooltip: { trigger: 'item', formatter: '{b}: {d}%' },
-      legend: { bottom: 0 },
-      series: [{
-        name: 'Assets',
-        type: 'pie',
-        radius: ['45%', '70%'],
-        avoidLabelOverlap: false,
-        itemStyle: { borderRadius: 8, borderColor: '#fff', borderWidth: 2 },
-        label: { show: false },
-        emphasis: { label: { show: true, fontSize: 16, fontWeight: 'bold' } },
-        data: [
-          { value: 40, name: 'بیت‌کوین' },
-          { value: 25, name: 'اتریوم' },
-          { value: 20, name: 'تتر' },
-          { value: 15, name: 'سایر' }
-        ]
-      }]
+  $("#toggleInsight").on("change", function(){
+      if(this.checked){
+        $("#insightsPanel").slideDown(300);
+      } else {
+        $("#insightsPanel").slideUp(300);
+      }
     });
 
-    const chart2 = echarts.init(document.getElementById('chart2'));
-    chart2.setOption({
-      tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
-      legend: { data: ['Sales', 'Revenue'], top: 'top' },
-      xAxis: {
-        type: 'category',
-        data: ['جمعه', 'پنج‌شنبه', 'چهارشنبه', 'سه‌شنبه', 'دوشنبه', 'یک‌شنبه', 'شنبه']
-      },
-      yAxis: { type: 'value' },
-      series: [
-        { name: 'Sales', type: 'bar', data: [120, 200, 150, 80, 70, 110, 130] },
-        { name: 'Revenue', type: 'bar', data: [90, 180, 120, 60, 50, 100, 120] }
-      ]
-    });
+      $("#smsLoginLink").on("click", function (e) {
+    e.preventDefault();
 
-    $(window).on('resize', function () {
-      chart1.resize();
-      chart2.resize();
-    });
+    const mobile = $("#loginPassword").val().trim();
+
+    if (mobile === "") {
+      alert("لطفاً شماره موبایل خود را وارد کنید.");
+      return false;
+    }
+
+    window.location.href = $(this).attr("href");
   });
+
+
+  // 🔄 Reload button
+  document.getElementById("reloadBtn").addEventListener("click", () => {
+    location.reload(); // ریلود کل صفحه
+  });
+
+  // 💡 Toggle Insights
+  // عملکرد رفرش صفحه
+  document.getElementById("reloadBtn").addEventListener("click", () => {
+    location.reload();
+  });
+
+  /* ---------------------- 📊 CHARTS ---------------------- */
+// $(window).on("load", function () {
+//   const chart1 = echarts.init(document.getElementById("chart1"));
+//   chart1.setOption({
+//     title: { text: "درصد دارایی‌ها", left: "center" },
+//     tooltip: { trigger: "item", formatter: "{b}: {d}%" },
+//     legend: { bottom: 0 },
+//     series: [
+//       {
+//         name: "Assets",
+//         type: "pie",
+//         radius: ["45%", "70%"],
+//         avoidLabelOverlap: false,
+//         itemStyle: { borderRadius: 8, borderColor: "#fff", borderWidth: 2 },
+//         label: { show: false },
+//         emphasis: { label: { show: true, fontSize: 16, fontWeight: "bold" } },
+//         data: [
+//           { value: 40, name: "بیت‌کوین" },
+//           { value: 25, name: "اتریوم" },
+//           { value: 20, name: "تتر" },
+//           { value: 15, name: "سایر" },
+//         ],
+//       },
+//     ],
+//   });
+
+//   const chart2 = echarts.init(document.getElementById("chart2"));
+//   chart2.setOption({
+//     tooltip: { trigger: "axis", axisPointer: { type: "shadow" } },
+//     legend: { data: ["Sales", "Revenue"], top: "top" },
+//     xAxis: {
+//       type: "category",
+//       data: [
+//         "جمعه",
+//         "پنج‌شنبه",
+//         "چهارشنبه",
+//         "سه‌شنبه",
+//         "دوشنبه",
+//         "یک‌شنبه",
+//         "شنبه",
+//       ],
+//     },
+//     yAxis: { type: "value" },
+//     series: [
+//       { name: "Sales", type: "bar", data: [120, 200, 150, 80, 70, 110, 130] },
+//       { name: "Revenue", type: "bar", data: [90, 180, 120, 60, 50, 100, 120] },
+//     ],
+//   });
+
+//   $(window).on("resize", function () {
+//     chart1.resize();
+//     chart2.resize();
+//   });
+// });
