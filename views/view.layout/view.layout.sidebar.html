@@ -12,45 +12,45 @@
   </div>
 
   <!-- Desktop Menu -->
-  <ul class="nav flex-column gap-4 justify-content-start mt-5">
+  <ul class="nav flex-column gap-4 justify-content-start mt-5 sidebar-menu">
     <li class="nav-item mb-3">
-      <a href="[@settings->site]top/" class="nav-link text-dark">
+      <a href="[@settings->site]top/" class="nav-link text-dark" data-link="top" >
         <i class="fa fa-home font-color"></i>
         <span class="font-color fs-5 ms-2">داشبورد</span>
       </a>
     </li>
     <li class="nav-item mb-3">
-      <a href="[@settings->site]manage/" class="nav-link text-dark">
-        <i class="fas fa-list-alt font-color"></i>
+      <a href="[@settings->site]manage/" class="nav-link text-dark" data-link="manage">
+        <i class="fas fa-user-shield font-color"></i>
         <span class="font-color fs-5 ms-2">مدیریت کاربران</span>
       </a>
     </li>
     <li class="nav-item mb-3">
-      <a href="[@settings->site]orders/" class="nav-link text-dark">
+      <a href="[@settings->site]orders/" class="nav-link text-dark" data-link="orders">
         <i class="fas fa-list-alt font-color"></i>
         <span class="font-color fs-5 ms-2">سفارشات</span>
       </a>
     </li>
     <li class="nav-item mb-3">
-      <a href="[@settings->site]transactions/" class="nav-link text-dark">
+      <a href="[@settings->site]transactions/" class="nav-link text-dark" data-link="transactions">
         <i class="fas fa-money-bill font-color"></i>
         <span class="font-color fs-5 ms-2">مالی</span>
       </a>
     </li>
     <li class="nav-item mb-3">
-      <a href="[@settings->site]tickets/" class="nav-link text-dark">
+      <a href="[@settings->site]tickets/" class="nav-link text-dark" data-link="tickets">
         <i class="fas fa-ticket font-color"></i>
         <span class="font-color fs-5 ms-2">تیکت‌ها</span>
       </a>
     </li>
     <li class="nav-item mb-3">
-      <a href="[@settings->site]currency/" class="nav-link text-dark">
+      <a href="[@settings->site]currency/" class="nav-link text-dark" data-link="currency">
         <i class="fas fa-coins font-color"></i>
         <span class="font-color fs-5 ms-2">ارز دیجیتال</span>
       </a>
     </li>
     <li class="nav-item mb-3">
-      <a href="[@settings->site]settings/" class="nav-link text-dark">
+      <a href="[@settings->site]settings/" class="nav-link text-dark" data-link="settings">
         <i class="fas fa-gear font-color"></i>
         <span class="font-color fs-5 ms-2">تنظیمات</span>
       </a>
@@ -59,7 +59,7 @@
 </aside>
 
 <!-- ==============================================
-     Mobile Offcanvas Sidebar (same items as desktop)
+     Mobile Offcanvas Sidebar
 =============================================== -->
 <div class="offcanvas offcanvas-start" tabindex="-1" id="myOffcanvas" aria-labelledby="myOffcanvasLabel">
   <div class="offcanvas-header">
@@ -67,45 +67,45 @@
     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
   <div class="offcanvas-body p-0">
-    <ul class="nav flex-column">
+    <ul class="nav flex-column sidebar-menu">
       <li class="nav-item mb-3">
-        <a href="[@settings->site]" class="nav-link text-dark">
+        <a href="[@settings->site]top/" class="nav-link text-dark" data-link="top">
           <i class="fa fa-home font-color"></i>
           <span class="font-color fs-5 ms-2">داشبورد</span>
         </a>
       </li>
       <li class="nav-item mb-3">
-        <a href="[@settings->site]manage/" class="nav-link text-dark">
+        <a href="[@settings->site]manage/" class="nav-link text-dark" data-link="manage">
           <i class="fas fa-list-alt font-color"></i>
           <span class="font-color fs-5 ms-2">مدیریت کاربران</span>
         </a>
       </li>
       <li class="nav-item mb-3">
-        <a href="[@settings->site]orders/" class="nav-link text-dark">
+        <a href="[@settings->site]orders/" class="nav-link text-dark" data-link="orders">
           <i class="fas fa-list-alt font-color"></i>
           <span class="font-color fs-5 ms-2">سفارشات</span>
         </a>
       </li>
       <li class="nav-item mb-3">
-        <a href="[@settings->site]transactions/" class="nav-link text-dark">
-          <i class="fas fa-coins font-color"></i>
+        <a href="[@settings->site]transactions/" class="nav-link text-dark" data-link="transactions">
+          <i class="fas fa-money-bill font-color"></i>
           <span class="font-color fs-5 ms-2">مالی</span>
         </a>
       </li>
       <li class="nav-item mb-3">
-        <a href="[@settings->site]tickets/" class="nav-link text-dark">
+        <a href="[@settings->site]tickets/" class="nav-link text-dark" data-link="tickets">
           <i class="fas fa-ticket font-color"></i>
           <span class="font-color fs-5 ms-2">تیکت‌ها</span>
         </a>
       </li>
       <li class="nav-item mb-3">
-        <a href="[@settings->site]currency/" class="nav-link text-dark">
+        <a href="[@settings->site]currency/" class="nav-link text-dark" data-link="currency">
           <i class="fas fa-coins font-color"></i>
           <span class="font-color fs-5 ms-2">ارز دیجیتال</span>
         </a>
       </li>
       <li class="nav-item mb-3">
-        <a href="[@settings->site]settings/" class="nav-link text-dark">
+        <a href="[@settings->site]settings/" class="nav-link text-dark" data-link="settings">
           <i class="fas fa-gear font-color"></i>
           <span class="font-color fs-5 ms-2">تنظیمات</span>
         </a>

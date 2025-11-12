@@ -13,8 +13,6 @@ function ProcessRequest($request)
         $GLOBALS['error']->Show(401);
         exit;
     }
-
-    //timeAgoWithPersianDate  
     //function seprate money
     function separateThousands($number)
     {
@@ -39,8 +37,21 @@ function ProcessRequest($request)
         "timeLeft" => "14 دقیقه پیش"
 
     ];
-// بعد از تعریف CurrentUser
 
+    $page->addresslist = [
+        [
+            "address" => "TBLdjcbXLozzqp6YYvH6Z9HuFwCbzeKbFP",
+            "network" => "TRC20",
+            "dateandtime" =>  biiq_PersianDate::date("l j F Y - H:i", 1266578),
+            "desciption" => "۲۰۲۳۲۷۳۸۰۳۰",
+        ],
+        [
+            "address" => "TBLdjcbXLozzqp6YYvH6Z9HuFwCbzeKbFP",
+            "network" => "TRC20",
+            "dateandtime" =>  biiq_PersianDate::date("l j F Y - H:i", 1266578),
+            "desciption" => "۲۰۲۳۲۷۳۸۰۳۰",
+        ]
+    ];
 
     $page->orderList = [
         [
@@ -254,7 +265,7 @@ function ProcessRequest($request)
     ];
 
     foreach ($page->accountInfo as &$Item) {
-        $status = trim($Item["details"]); // یا Status اگر تغییر داده باشی
+        $status = trim($Item["details"]); //      
         if ($status === "تایید شده") {
             $Item["StatusColor"] = "text-success opacity-green"; // رنگ متن و بک‌گراند
         } else {
@@ -262,48 +273,47 @@ function ProcessRequest($request)
         }
     }
     unset($Item);
-$page->identityDocuments = [
-    [
-        "description" => "<i class='fas fa-times-circle text-red me-1'></i> تصویر احراز هویت خود را با کیفیت بالاتری ارسال نمایید.",
-        "UserID" => 22,
-        "UnixTimestamp" => time() - 600, // 10 دقیقه پیش
-        "status" => "در انتظار تایید",
-        "details" => "  مشاهده مدارک",
-    ],
-    [
-        "description" => "<i class='fas fa-exclamation-circle text-warning me-1'></i> تصویر احراز هویت خود را با کیفیت بالاتری ارسال نمایید.",
-        "UserID" => 22,
-        "UnixTimestamp" => time() - 3600, // 1 ساعت پیش
-        "status" => "تایید شده",
-        "details" => " مشاهده مدارک",
-    ],
-    [
-        "description" => "<i class='fas fa-check-circle text-green me-1'></i> تصویر احراز هویت خود را با کیفیت بالاتری ارسال نمایید.",
-        "UserID" => 22,
-        "UnixTimestamp" => time() - 300, // 5 دقیقه پیش
-        "status" => "رد شده",
-        "details" => " مشاهده مدارک",
-    ],
-];
-foreach ($page->identityDocuments as &$Item) {
-    $Item['persianDate'] = timeAgo($Item['UnixTimestamp']);
-}
-unset($Item);
-
-foreach ($page->identityDocuments as &$Item) {
-    $status = trim($Item["status"]); // حذف فضای اضافی
-
-    if (strpos($status, "رد شده") !== false) {
-        $Item["StatusColor"] = "text-red bg-red"; // قرمز
-    } elseif (strpos($status, "تایید شده") !== false) {
-        $Item["StatusColor"] = "text-green opacity-green"; // سبز
-    } elseif (strpos($status, "در انتظار تایید") !== false) {
-        $Item["StatusColor"] = "text-warning bg-opacity-warning"; // زرد
-    } else {
-        $Item["StatusColor"] = "text-secondary bg-light"; // پیش‌فرض خاکستری
+    $page->identityDocuments = [
+        [
+            "description" => "<i class='fas fa-times-circle text-red me-1'></i> تصویر احراز هویت خود را با کیفیت بالاتری ارسال نمایید.",
+            "UserID" => 22,
+            "UnixTimestamp" => time() - 600, // 10 دقیقه پیش
+            "status" => "در انتظار تایید",
+            "details" => "  مشاهده مدارک",
+        ],
+        [
+            "description" => "<i class='fas fa-exclamation-circle text-warning me-1'></i> تصویر احراز هویت خود را با کیفیت بالاتری ارسال نمایید.",
+            "UserID" => 22,
+            "UnixTimestamp" => time() - 3600, // 1 ساعت پیش
+            "status" => "تایید شده",
+            "details" => " مشاهده مدارک",
+        ],
+        [
+            "description" => "<i class='fas fa-check-circle text-green me-1'></i> تصویر احراز هویت خود را با کیفیت بالاتری ارسال نمایید.",
+            "UserID" => 22,
+            "UnixTimestamp" => time() - 300,   
+            "status" => "رد شده",
+            "details" => " مشاهده مدارک",
+        ],
+    ];
+    foreach ($page->identityDocuments as &$Item) {
+        $Item['persianDate'] = timeAgo($Item['UnixTimestamp']);
     }
-}
-unset($Item);
+    unset($Item);
+
+    foreach ($page->identityDocuments as &$Item) {
+        $status = trim($Item["status"]);    
+        if (strpos($status, "رد شده") !== false) {
+            $Item["StatusColor"] = "text-red bg-red";  
+        } elseif (strpos($status, "تایید شده") !== false) {
+            $Item["StatusColor"] = "text-green opacity-green";  
+        } elseif (strpos($status, "در انتظار تایید") !== false) {
+            $Item["StatusColor"] = "text-warning bg-opacity-warning";  
+        } else {
+            $Item["StatusColor"] = "text-secondary bg-light";   
+        }
+    }
+    unset($Item);
 
 
 
@@ -350,9 +360,8 @@ unset($Item);
             $Item["extraReqcolor"] = "bg-secondary ";
         }
     }
-    unset($Item); // جلوگیری از مشکلات بعدی
+    unset($Item);
     // prevent possible bugs later
-
     //$page->CurrentUser = biiq_User::GetByID($SelectedUserID);
     $page->CurrentUser = $page; //Delete me later
     $page->CurrentUser = [
@@ -369,14 +378,12 @@ unset($Item);
         'birthday' => '1370/06/06',
         'ipAddress' => '4.126.16.37',
         'persianDate' => biiq_PersianDate::date("l j F Y"),
-'otherDate' => date("Y/m/d")
+        'otherDate' => date("Y/m/d")
     ];
-
-
 
     $page->Title = "  مدیریت کاربران ";
     $page = array(
-        'content' => biiq_Template::Start('manage->default', true, ['Objects' => $page, 'CurrentUser' => $page->CurrentUser,'dateandtime'=>$page->dateandtime]),
+        'content' => biiq_Template::Start('manage->default', true, ['Objects' => $page, 'CurrentUser' => $page->CurrentUser, 'dateandtime' => $page->dateandtime]),
         'id' => 0,
         'title' => $page->Title,
         'Canonical' => SITE . 'manage/',

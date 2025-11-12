@@ -303,7 +303,7 @@ $(document).ready(function () {
 
 }); // ✅ پایان document.ready
 
-
+  // 💡 Toggle Insights
   $("#toggleInsight").on("change", function(){
       if(this.checked){
         $("#insightsPanel").slideDown(300);
@@ -328,14 +328,29 @@ $(document).ready(function () {
 
   // 🔄 Reload button
   document.getElementById("reloadBtn").addEventListener("click", () => {
-    location.reload(); // ریلود کل صفحه
+    location.reload(); 
   });
 
-  // 💡 Toggle Insights
-  // عملکرد رفرش صفحه
+  //🔴 refresh page
   document.getElementById("reloadBtn").addEventListener("click", () => {
     location.reload();
   });
+
+ //🎲active link
+    var currentUrl = window.location.href; 
+    $('.d-xl-block .nav-link, .offcanvas .nav-link').each(function(){
+        var linkUrl = $(this).prop('href');     
+        if(currentUrl === linkUrl){
+            $(this).addClass('active');
+        }
+    });
+
+    // when clicked on link 
+    $('.nav-link').on('click', function(){
+        $('.nav-link').removeClass('active');
+        $(this).addClass('active');
+    });
+
 
   /* ---------------------- 📊 CHARTS ---------------------- */
 // $(window).on("load", function () {

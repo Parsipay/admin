@@ -1,28 +1,23 @@
 <!-- ================== PAGE WRAPPER ================== -->
-<div>     [@import->dateandtime->index]</div>
+<div> [@import->dateandtime->index]</div>
 
 <!-- ================== ORDERS SECTION ================== -->
 <div class="d-flex flex-column mt-3 w-100">
-
     <!-- Header -->
     <div class="d-flex justify-content-between my-4 p-3">
         <span class="fw-bold font-color">خرید ارز دیجیتال USDT</span>
         <i class="fas fa-chevron-left border border-dark rounded-circle p-1"></i>
     </div>
-
     <!-- Orders List -->
     [foreach ([@Objects->orders])]
     <div class="d-flex flex-column mt-5 p-3 rounded border">
-
         <!-- Order Header -->
         <div class="d-flex justify-content-between">
             <span class="fw-bold font-color">سفارش شماره [@Item->id]</span>
             <span class="[@Item->statusColor]">[@Item->status]</span>
         </div>
-
         <!-- Order Details -->
         <div class="d-flex justify-content-between mt-4 p-2 px-3 bg-light rounded">
-
             <!-- Amount -->
             <div class="d-flex ms-5 align-items-center">
                 <img src="[@Item->img]" alt="currency" class="me-2">
@@ -31,7 +26,6 @@
                     <span class="font-color">مقدار تتر</span>
                 </div>
             </div>
-
             <!-- Network -->
             <div class="d-flex ms-5 align-items-center">
                 <span class="fs-1 font-color text-center">.</span>
@@ -40,7 +34,6 @@
                     <span class="font-color">شبکه انتقال</span>
                 </div>
             </div>
-
             <!-- Price -->
             <div class="d-flex ms-5 align-items-center">
                 <span class="fs-1 font-color text-center">.</span>
@@ -49,7 +42,6 @@
                     <span class="font-color">مبلغ</span>
                 </div>
             </div>
-
             <!-- Date and Time -->
             <div class="d-flex ms-5 align-items-center">
                 <span class="fs-1 font-color text-center">.</span>
@@ -61,20 +53,16 @@
         </div>
     </div>
     [endforeach]
-
     <!-- ================== TRANSACTION INFO SECTION ================== -->
     <div class="d-flex gap-3 mt-5">
-
         <!-- ====== Status List ====== -->
         [foreach ([@Objects->statusbar])]
         <div class="flex-fill bg-light p-3 rounded border">
-
             <!-- Status -->
             <div class="d-flex justify-content-between border-bottom p-2">
                 <span>وضعیت</span>
                 <span class="[@Item->statusColor]">[@Item->status]</span>
             </div>
-
             <!-- Wallet -->
             <div class="d-flex justify-content-between p-4">
                 <div class="d-flex flex-column gap-2">
@@ -83,7 +71,6 @@
                 </div>
                 <i class="far fa-copy"></i>
             </div>
-
             <!-- Transaction ID -->
             <div class="d-flex justify-content-between p-4">
                 <div class="d-flex flex-column gap-2">
@@ -92,7 +79,6 @@
                 </div>
                 <i class="far fa-copy"></i>
             </div>
-
             <!-- Transfer ID -->
             <div class="d-flex justify-content-between p-4">
                 <div class="d-flex flex-column gap-2">
@@ -103,7 +89,6 @@
             </div>
         </div>
         [endforeach]
-
         <!-- ====== Single Transaction Details ====== -->
         <div class="flex-fill rounded border p-3">
 
@@ -159,4 +144,665 @@
             </div>
         </div>
     </div>
+</div>
+
+<div class="d-none">
+    <hr class="text-red mt-5">
+<!-- ================== اینا رو فقط برای نمونه زدم ولی توی حالت عادی میتونیم پی اچ پی رو تغییر بدیم کلمه وضعیتو و رنگ ها عوض بشه  ================== -->
+<!-- ==================  موفق/موفق/موفق============================================= -->
+<div class="d-flex flex-column mt-3 w-100">
+
+    <!-- Header -->
+    <div class="d-flex justify-content-between my-4 p-3">
+        <span class="fw-bold font-color">خرید ارز دیجیتال USDT</span>
+        <i class="fas fa-chevron-left border border-dark rounded-circle p-1"></i>
+    </div>
+
+    <!-- Orders List -->
+    [foreach ([@Objects->orders])]
+
+    <div class="d-flex flex-column mt-5 p-3 rounded border">
+
+        <!-- Order Header -->
+        <div class="d-flex justify-content-between  ">
+            <span class="fw-bold font-color">سفارش شماره 23565698</span>
+            <span class="bg-red text-red  p-1 px-2 rounded-3">رد شده</span>
+        </div>
+
+        <!-- Order Details -->
+        <div class="d-flex justify-content-between mt-4 p-2 px-3 bg-light rounded">
+
+            <!-- Amount -->
+            <div class="d-flex ms-5 align-items-center">
+                <img src="[@Item->img]" alt="currency" class="me-2">
+                <div class="d-flex flex-column gap-2">
+                    <span class="fw-bold">[@Item->amount]</span>
+                    <span class="font-color">مقدار تتر</span>
+                </div>
+            </div>
+
+            <!-- Network -->
+            <div class="d-flex ms-5 align-items-center">
+                <span class="fs-1 font-color text-center">.</span>
+                <div class="d-flex flex-column gap-3">
+                    <span>[@Item->currency]</span>
+                    <span class="font-color">شبکه انتقال</span>
+                </div>
+            </div>
+
+            <!-- Price -->
+            <div class="d-flex ms-5 align-items-center">
+                <span class="fs-1 font-color text-center">.</span>
+                <div class="d-flex flex-column gap-3">
+                    <span>[@Item->price]</span>
+                    <span class="font-color">مبلغ</span>
+                </div>
+            </div>
+
+            <!-- Date and Time -->
+            <div class="d-flex ms-5 align-items-center">
+                <span class="fs-1 font-color text-center">.</span>
+                <div class="d-flex flex-column gap-3">
+                    <span>[@Item->date] | ساعت [@Item->time]</span>
+                    <span class="font-color">تاریخ و ساعت پرداخت</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    [endforeach]
+    <!-- ================== TRANSACTION INFO SECTION ================== -->
+    <div class="d-flex gap-3 mt-5 align-items-start">
+        <!-- ====== Status List ====== -->
+        <div class="bg-light flex-fill p-3 rounded border">
+            <!-- Status -->
+            <div class="d-flex  justify-content-between border-bottom p-2">
+                <span>وضعیت</span>
+                <span class="bg-red text-red p-1 px-2 rounded-3">رد شده</span>
+            </div>
+            <!-- Wallet -->
+            <div class="d-flex justify-content-between p-4">
+                <div class="d-flex flex-column gap-2">
+                    <span>TN7TeTQxA1ZNEcThVABvwSunjaZJs2PeT5]</span>
+                    <span class="font-color">آدرس کیف پول</span>
+                </div>
+                <i class="far fa-copy"></i>
+            </div>
+
+        </div>
+
+        <!-- ====== Single Transaction Details ====== -->
+        <div class="rounded border p-3 flex-fill">
+
+            <!-- Transaction Header -->
+            <div class="d-flex justify-content-between border-bottom p-2">
+                <span>وضعیت تراکنش</span>
+                <span class="[@transaction->statusColor]">[@transaction->status]</span>
+            </div>
+
+            <!-- Tracking Number -->
+            <div class="d-flex justify-content-between p-2">
+                <span class="font-color">شماره پیگیری</span>
+                <span class="font-color">[@transaction->number] <i class="far fa-copy"></i></span>
+            </div>
+
+            <!-- IP Address -->
+            <div class="d-flex justify-content-between p-2">
+                <span class="font-color">آی‌پی</span>
+                <span class="font-color">[@transaction->ip] <i class="far fa-copy"></i></span>
+            </div>
+
+            <!-- Discount & Wallet -->
+            <div class="d-flex justify-content-between p-2">
+
+                <!-- Discount -->
+                <div class="d-flex align-items-center">
+                    <span class="fw-bold fs-1 me-2">.</span>
+                    <div class="d-flex flex-column gap-2">
+                        <span>[@transaction->discount]</span>
+                        <span class="font-color">تخفیف</span>
+                    </div>
+                </div>
+
+                <!-- Wallet -->
+                <div class="d-flex align-items-center">
+                    <span class="fw-bold fs-1 me-2">.</span>
+                    <div class="d-flex flex-column gap-2">
+                        <span>[@transaction->wallet]</span>
+                        <span class="font-color">کیف پول</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Card Number -->
+            <div class="d-flex justify-content-between rounded-5 border p-2 mt-2">
+                <span class="font-color">شماره کارت</span>
+                <span class="font-color">[@transaction->cartNumber] <i class="far fa-copy"></i></span>
+            </div>
+
+            <!-- Paid Amount -->
+            <div class="d-flex justify-content-between p-2 mt-4">
+                <span class="font-color">پرداخت شده</span>
+                <span class="text-green">[@transaction->paid]</span>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<hr class="mt-5 text-red">
+<!-- ==================  تکمیل نشده / تکمیل نشده /  تکمیل نشده  ===================== -->
+
+<div class="d-flex flex-column mt-3 w-100">
+
+    <!-- Header -->
+    <div class="d-flex justify-content-between my-4 p-3">
+        <span class="fw-bold font-color">خرید ارز دیجیتال USDT</span>
+        <i class="fas fa-chevron-left border border-dark rounded-circle p-1"></i>
+    </div>
+
+    <!-- Orders List -->
+    [foreach ([@Objects->orders])]
+
+    <div class="d-flex flex-column mt-5 p-3 rounded border">
+
+        <!-- Order Header -->
+        <div class="d-flex justify-content-between  ">
+            <span class="fw-bold font-color">سفارش شماره 23565698</span>
+            <span class="bg-blue text-primary p-1 px-2 rounded-3">تکمیل نشده</span>
+        </div>
+
+        <!-- Order Details -->
+        <div class="d-flex justify-content-between mt-4 p-2 px-3 bg-light rounded">
+
+            <!-- Amount -->
+            <div class="d-flex ms-5 align-items-center">
+                <img src="[@Item->img]" alt="currency" class="me-2">
+                <div class="d-flex flex-column gap-2">
+                    <span class="fw-bold">[@Item->amount]</span>
+                    <span class="font-color">مقدار تتر</span>
+                </div>
+            </div>
+
+            <!-- Network -->
+            <div class="d-flex ms-5 align-items-center">
+                <span class="fs-1 font-color text-center">.</span>
+                <div class="d-flex flex-column gap-3">
+                    <span>[@Item->currency]</span>
+                    <span class="font-color">شبکه انتقال</span>
+                </div>
+            </div>
+
+            <!-- Price -->
+            <div class="d-flex ms-5 align-items-center">
+                <span class="fs-1 font-color text-center">.</span>
+                <div class="d-flex flex-column gap-3">
+                    <span>[@Item->price]</span>
+                    <span class="font-color">مبلغ</span>
+                </div>
+            </div>
+
+            <!-- Date and Time -->
+            <div class="d-flex ms-5 align-items-center">
+                <span class="fs-1 font-color text-center">.</span>
+                <div class="d-flex flex-column gap-3">
+                    <span>[@Item->date] | ساعت [@Item->time]</span>
+                    <span class="font-color">تاریخ و ساعت پرداخت</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    [endforeach]
+    <!-- ================== TRANSACTION INFO SECTION ================== -->
+    <div class="d-flex gap-3 mt-5 align-items-start">
+        <!-- ====== Status List ====== -->
+        <div class="bg-light flex-fill p-3 rounded border">
+            <!-- Status -->
+            <div class="d-flex  justify-content-between border-bottom p-2">
+                <span>وضعیت</span>
+                <span class="bg-blue text-primary p-1 px-2 rounded-3">تکمیل نشده</span>
+            </div>
+            <!-- Wallet -->
+            <div class="d-flex justify-content-between p-4">
+                <div class="d-flex flex-column gap-2">
+                    <span>TN7TeTQxA1ZNEcThVABvwSunjaZJs2PeT5]</span>
+                    <span class="font-color">آدرس کیف پول</span>
+                </div>
+                <i class="far fa-copy"></i>
+            </div>
+
+        </div>
+
+        <!-- ====== Single Transaction Details ====== -->
+        <div class="rounded border p-3 flex-fill h-100">
+
+            <!-- Transaction Header -->
+            <div class="d-flex justify-content-between border-bottom p-2">
+                <span>وضعیت تراکنش</span>
+                <span class="bg-blue text-primary p-1 px-2 rounded-3">تکمیل نشده</span>
+            </div>
+            <div class="d-flex align-items-center justify-content-center p-5 ">
+            <p >هیچ موردی برای نمایش وجود ندارد</p>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<hr class="mt-5 text-red">
+<!-- =============== تکمیل نشده/ تکمیل نشده/ پرداخت با کارت نا معتبر ================== -->
+<div class="d-flex flex-column mt-3 w-100">
+
+    <!-- Header -->
+    <div class="d-flex justify-content-between my-4 p-3">
+        <span class="fw-bold font-color">خرید ارز دیجیتال USDT</span>
+        <i class="fas fa-chevron-left border border-dark rounded-circle p-1"></i>
+    </div>
+
+    <!-- Orders List -->
+    [foreach ([@Objects->orders])]
+
+    <div class="d-flex flex-column mt-5 p-3 rounded border">
+
+        <!-- Order Header -->
+        <div class="d-flex justify-content-between  ">
+            <span class="fw-bold font-color">سفارش شماره 23565698</span>
+            <span class="bg-blue text-primary p-1 px-2 rounded-3">تکمیل نشده</span>
+        </div>
+
+        <!-- Order Details -->
+        <div class="d-flex justify-content-between mt-4 p-2 px-3 bg-light rounded">
+
+            <!-- Amount -->
+            <div class="d-flex ms-5 align-items-center">
+                <img src="[@Item->img]" alt="currency" class="me-2">
+                <div class="d-flex flex-column gap-2">
+                    <span class="fw-bold">[@Item->amount]</span>
+                    <span class="font-color">مقدار تتر</span>
+                </div>
+            </div>
+
+            <!-- Network -->
+            <div class="d-flex ms-5 align-items-center">
+                <span class="fs-1 font-color text-center">.</span>
+                <div class="d-flex flex-column gap-3">
+                    <span>[@Item->currency]</span>
+                    <span class="font-color">شبکه انتقال</span>
+                </div>
+            </div>
+
+            <!-- Price -->
+            <div class="d-flex ms-5 align-items-center">
+                <span class="fs-1 font-color text-center">.</span>
+                <div class="d-flex flex-column gap-3">
+                    <span>[@Item->price]</span>
+                    <span class="font-color">مبلغ</span>
+                </div>
+            </div>
+
+            <!-- Date and Time -->
+            <div class="d-flex ms-5 align-items-center">
+                <span class="fs-1 font-color text-center">.</span>
+                <div class="d-flex flex-column gap-3">
+                    <span>[@Item->date] | ساعت [@Item->time]</span>
+                    <span class="font-color">تاریخ و ساعت پرداخت</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    [endforeach]
+    <!-- ================== TRANSACTION INFO SECTION ================== -->
+    <div class="d-flex gap-3 mt-5 align-items-start">
+        <!-- ====== Status List ====== -->
+        <div class="bg-light flex-fill p-3 rounded border">
+            <!-- Status -->
+            <div class="d-flex  justify-content-between border-bottom p-2">
+                <span>وضعیت</span>
+                <span class="bg-blue text-primary p-1 px-2 rounded-3">تکمیل نشده</span>
+            </div>
+            <!-- Wallet -->
+            <div class="d-flex justify-content-between p-4">
+                <div class="d-flex flex-column gap-2">
+                    <span>TN7TeTQxA1ZNEcThVABvwSunjaZJs2PeT5]</span>
+                    <span class="font-color">آدرس کیف پول</span>
+                </div>
+                <i class="far fa-copy"></i>
+            </div>
+
+        </div>
+
+        <!-- ====== Single Transaction Details ====== -->
+        <div class="rounded border p-3 flex-fill h-100">
+
+            <!-- Transaction Header -->
+            <div class="d-flex justify-content-between border-bottom p-2">
+                <span>وضعیت تراکنش</span>
+                <span class="bg-red text-red p-1 px-2 rounded-3"> پرداخت با کارت نا معتبر</span>
+                
+            </div>
+            <!-- Tracking Number -->
+            <div class="d-flex justify-content-between p-2">
+                <span class="font-color">شماره پیگیری</span>
+                <span class="font-color">[@transaction->number] <i class="far fa-copy"></i></span>
+            </div>
+
+            <!-- IP Address -->
+            <div class="d-flex justify-content-between p-2">
+                <span class="font-color">آی‌پی</span>
+                <span class="font-color">[@transaction->ip] <i class="far fa-copy"></i></span>
+            </div>
+
+            <!-- Discount & Wallet -->
+            <div class="d-flex justify-content-between p-2">
+
+                <!-- Discount -->
+                <div class="d-flex align-items-center">
+                    <span class="fw-bold fs-1 me-2">.</span>
+                    <div class="d-flex flex-column gap-2">
+                        <span>[@transaction->discount]</span>
+                        <span class="font-color">تخفیف</span>
+                    </div>
+                </div>
+                <!-- Wallet -->
+                <div class="d-flex align-items-center">
+                    <span class="fw-bold fs-1 me-2">.</span>
+                    <div class="d-flex flex-column gap-2">
+                        <span>[@transaction->wallet]</span>
+                        <span class="font-color">کیف پول</span>
+                    </div>
+                </div>
+
+            </div>
+            <!-- Card Number -->
+            <div class="d-flex justify-content-between rounded-5 border p-2 mt-2">
+                <span class="font-color">شماره کارت</span>
+                <span class="font-color">[@transaction->cartNumber] <i class="far fa-copy"></i></span>
+            </div>
+            <!-- Paid Amount -->
+            <div class="d-flex justify-content-between p-2 mt-4">
+                <span class="font-color">پرداخت شده</span>
+                <span class="text-green">[@transaction->paid]</span>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<hr class="text-red mt-5">
+<!-- ============= پردازش/پردازش/موفق ============================================== -->
+<div class="d-flex flex-column mt-3 w-100">
+
+    <!-- Header -->
+    <div class="d-flex justify-content-between my-4 p-3">
+        <span class="fw-bold font-color">خرید ارز دیجیتال USDT</span>
+        <i class="fas fa-chevron-left border border-dark rounded-circle p-1"></i>
+    </div>
+
+    <!-- Orders List -->
+    [foreach ([@Objects->orders])]
+
+    <div class="d-flex flex-column mt-5 p-3 rounded border">
+
+        <!-- Order Header -->
+        <div class="d-flex justify-content-between  ">
+            <span class="fw-bold font-color">سفارش شماره 23565698</span>
+            <span class="bg-opacity-warning text-warning p-1 px-2 rounded-3">پردازش</span>
+        </div>
+
+        <!-- Order Details -->
+        <div class="d-flex justify-content-between mt-4 p-2 px-3 bg-light rounded">
+
+            <!-- Amount -->
+            <div class="d-flex ms-5 align-items-center">
+                <img src="[@Item->img]" alt="currency" class="me-2">
+                <div class="d-flex flex-column gap-2">
+                    <span class="fw-bold">[@Item->amount]</span>
+                    <span class="font-color">مقدار تتر</span>
+                </div>
+            </div>
+
+            <!-- Network -->
+            <div class="d-flex ms-5 align-items-center">
+                <span class="fs-1 font-color text-center">.</span>
+                <div class="d-flex flex-column gap-3">
+                    <span>[@Item->currency]</span>
+                    <span class="font-color">شبکه انتقال</span>
+                </div>
+            </div>
+
+            <!-- Price -->
+            <div class="d-flex ms-5 align-items-center">
+                <span class="fs-1 font-color text-center">.</span>
+                <div class="d-flex flex-column gap-3">
+                    <span>[@Item->price]</span>
+                    <span class="font-color">مبلغ</span>
+                </div>
+            </div>
+
+            <!-- Date and Time -->
+            <div class="d-flex ms-5 align-items-center">
+                <span class="fs-1 font-color text-center">.</span>
+                <div class="d-flex flex-column gap-3">
+                    <span>[@Item->date] | ساعت [@Item->time]</span>
+                    <span class="font-color">تاریخ و ساعت پرداخت</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    [endforeach]
+    <!-- ================== TRANSACTION INFO SECTION ================== -->
+    <div class="d-flex gap-3 mt-5 align-items-start">
+        <!-- ====== Status List ====== -->
+        <div class="bg-light flex-fill p-3 rounded border">
+            <!-- Status -->
+            <div class="d-flex  justify-content-between border-bottom p-2">
+                <span>وضعیت</span>
+                <span class="bg-opacity-warning text-warning p-1 px-2 rounded-3">پردازش</span>
+            </div>
+            <!-- Wallet -->
+            <div class="d-flex justify-content-between p-4">
+                <div class="d-flex flex-column gap-2">
+                    <span>TN7TeTQxA1ZNEcThVABvwSunjaZJs2PeT5]</span>
+                    <span class="font-color">آدرس کیف پول</span>
+                </div>
+                <i class="far fa-copy"></i>
+            </div>
+
+        </div>
+        <!-- ====== Single Transaction Details ====== -->
+        <div class="rounded border p-3 flex-fill h-100">
+            <!-- Transaction Header -->
+            <div class="d-flex justify-content-between border-bottom p-2">
+                <span>وضعیت تراکنش</span>
+                <span class="opacity-green text-green p-1 px-2 rounded-3"> موفق </span>
+                
+            </div>
+            <!-- Tracking Number -->
+            <div class="d-flex justify-content-between p-2">
+                <span class="font-color">شماره پیگیری</span>
+                <span class="font-color">[@transaction->number] <i class="far fa-copy"></i></span>
+            </div>
+
+            <!-- IP Address -->
+            <div class="d-flex justify-content-between p-2">
+                <span class="font-color">آی‌پی</span>
+                <span class="font-color">[@transaction->ip] <i class="far fa-copy"></i></span>
+            </div>
+
+            <!-- Discount & Wallet -->
+            <div class="d-flex justify-content-between p-2">
+
+                <!-- Discount -->
+                <div class="d-flex align-items-center">
+                    <span class="fw-bold fs-1 me-2">.</span>
+                    <div class="d-flex flex-column gap-2">
+                        <span>[@transaction->discount]</span>
+                        <span class="font-color">تخفیف</span>
+                    </div>
+                </div>
+                <!-- Wallet -->
+                <div class="d-flex align-items-center">
+                    <span class="fw-bold fs-1 me-2">.</span>
+                    <div class="d-flex flex-column gap-2">
+                        <span>[@transaction->wallet]</span>
+                        <span class="font-color">کیف پول</span>
+                    </div>
+                </div>
+
+            </div>
+            <!-- Card Number -->
+            <div class="d-flex justify-content-between rounded-5 border p-2 mt-2">
+                <span class="font-color">شماره کارت</span>
+                <span class="font-color">[@transaction->cartNumber] <i class="far fa-copy"></i></span>
+            </div>
+            <!-- Paid Amount -->
+            <div class="d-flex justify-content-between p-2 mt-4">
+                <span class="font-color">پرداخت شده</span>
+                <span class="text-green">[@transaction->paid]</span>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<hr class="text-red mt-5">
+ <!-- =========== تکمیل نشده/ تکمیل نشده/موفق ===================================== -->
+<div class="d-flex flex-column mt-3 w-100">
+
+    <!-- Header -->
+    <div class="d-flex justify-content-between my-4 p-3">
+        <span class="fw-bold font-color">خرید ارز دیجیتال USDT</span>
+        <i class="fas fa-chevron-left border border-dark rounded-circle p-1"></i>
+    </div>
+
+    <!-- Orders List -->
+    [foreach ([@Objects->orders])]
+
+    <div class="d-flex flex-column mt-5 p-3 rounded border">
+
+        <!-- Order Header -->
+        <div class="d-flex justify-content-between  ">
+            <span class="fw-bold font-color">سفارش شماره 23565698</span>
+            <span class="bg-blue text-primary p-1 px-2 rounded-3" p-1 px-2 rounded-3">تکمیل نشده</span>
+        </div>
+
+        <!-- Order Details -->
+        <div class="d-flex justify-content-between mt-4 p-2 px-3 bg-light rounded">
+
+            <!-- Amount -->
+            <div class="d-flex ms-5 align-items-center">
+                <img src="[@Item->img]" alt="currency" class="me-2">
+                <div class="d-flex flex-column gap-2">
+                    <span class="fw-bold">[@Item->amount]</span>
+                    <span class="font-color">مقدار تتر</span>
+                </div>
+            </div>
+
+            <!-- Network -->
+            <div class="d-flex ms-5 align-items-center">
+                <span class="fs-1 font-color text-center">.</span>
+                <div class="d-flex flex-column gap-3">
+                    <span>[@Item->currency]</span>
+                    <span class="font-color">شبکه انتقال</span>
+                </div>
+            </div>
+
+            <!-- Price -->
+            <div class="d-flex ms-5 align-items-center">
+                <span class="fs-1 font-color text-center">.</span>
+                <div class="d-flex flex-column gap-3">
+                    <span>[@Item->price]</span>
+                    <span class="font-color">مبلغ</span>
+                </div>
+            </div>
+
+            <!-- Date and Time -->
+            <div class="d-flex ms-5 align-items-center">
+                <span class="fs-1 font-color text-center">.</span>
+                <div class="d-flex flex-column gap-3">
+                    <span>[@Item->date] | ساعت [@Item->time]</span>
+                    <span class="font-color">تاریخ و ساعت پرداخت</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    [endforeach]
+    <!-- ================== TRANSACTION INFO SECTION ================== -->
+    <div class="d-flex gap-3 mt-5 align-items-start">
+        <!-- ====== Status List ====== -->
+        <div class="bg-light flex-fill p-3 rounded border">
+            <!-- Status -->
+            <div class="d-flex  justify-content-between border-bottom p-2">
+                <span>وضعیت</span>
+                <span class="bg-blue text-primary p-1 px-2 rounded-3">تکمیل نشده</span>
+            </div>
+            <!-- Wallet -->
+            <div class="d-flex justify-content-between p-4">
+                <div class="d-flex flex-column gap-2">
+                    <span>TN7TeTQxA1ZNEcThVABvwSunjaZJs2PeT5]</span>
+                    <span class="font-color">آدرس کیف پول</span>
+                </div>
+                <i class="far fa-copy"></i>
+            </div>
+
+        </div>
+        <!-- ====== Single Transaction Details ====== -->
+        <div class="rounded border p-3 flex-fill h-100">
+            <!-- Transaction Header -->
+            <div class="d-flex justify-content-between border-bottom p-2">
+                <span>وضعیت تراکنش</span>
+                <span class="opacity-green text-green p-1 px-2 rounded-3"> موفق </span>
+                
+            </div>
+            <!-- Tracking Number -->
+            <div class="d-flex justify-content-between p-2">
+                <span class="font-color">شماره پیگیری</span>
+                <span class="font-color">[@transaction->number] <i class="far fa-copy"></i></span>
+            </div>
+
+            <!-- IP Address -->
+            <div class="d-flex justify-content-between p-2">
+                <span class="font-color">آی‌پی</span>
+                <span class="font-color">[@transaction->ip] <i class="far fa-copy"></i></span>
+            </div>
+
+            <!-- Discount & Wallet -->
+            <div class="d-flex justify-content-between p-2">
+
+                <!-- Discount -->
+                <div class="d-flex align-items-center">
+                    <span class="fw-bold fs-1 me-2">.</span>
+                    <div class="d-flex flex-column gap-2">
+                        <span>[@transaction->discount]</span>
+                        <span class="font-color">تخفیف</span>
+                    </div>
+                </div>
+                <!-- Wallet -->
+                <div class="d-flex align-items-center">
+                    <span class="fw-bold fs-1 me-2">.</span>
+                    <div class="d-flex flex-column gap-2">
+                        <span>[@transaction->wallet]</span>
+                        <span class="font-color">کیف پول</span>
+                    </div>
+                </div>
+
+            </div>
+            <!-- Card Number -->
+            <div class="d-flex justify-content-between rounded-5 border p-2 mt-2">
+                <span class="font-color">شماره کارت</span>
+                <span class="font-color">[@transaction->cartNumber] <i class="far fa-copy"></i></span>
+            </div>
+            <!-- Paid Amount -->
+            <div class="d-flex justify-content-between p-2 mt-4">
+                <span class="font-color">پرداخت شده</span>
+                <span class="text-green">[@transaction->paid]</span>
+            </div>
+        </div>
+
+    </div>
+
+</div>
 </div>

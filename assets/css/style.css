@@ -504,3 +504,10 @@ input:checked + .slider { background-color:#0d6efd; }
 input:checked + .slider:before { transform:translateX(22px); }
 
 
+
+/* Sidebar active */
+.sidebar-menu .nav-link.active {
+    background-color: white!important;
+    color: black;
+    border-radius: 8px;
+}

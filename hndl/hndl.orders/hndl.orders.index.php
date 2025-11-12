@@ -16,12 +16,20 @@ function ProcessRequest($request)
     $page->orderList = [
         [
             "numberOrder" => "
-            <div class='d-flex align-items-center justify-content-center'>
+            <div class='d-flex align-items-center justify-content-Start'>
                 <input type='checkbox' class='form-check-input me-2'>
-                <span>20232336263#</span>
+                <a href ='#'>502336263#</a>
                 <span class='ms-2 text-success'>خرید</span>
             </div>",
-            "OrderDetails" => "09128431937",
+            "OrderDetails" => "
+            <div class='d-flex justify-contetn-start gap-1'>
+            <img src ='../../assets/img/usdt.png' class = 'rounded-circle'>
+            <div class='d-flex flex-column'>
+            <span>197.3499</span>
+            <span>تتر</span>
+            </div>
+            </div>
+            ",
             "User" => "یگانه علیزاده",
             "UserID" => 16,
             "price" => $separateThousands(16520897),
@@ -31,12 +39,20 @@ function ProcessRequest($request)
         ],
         [
             "numberOrder" => "
-            <div class='d-flex align-items-center justify-content-center'>
+            <div class='d-flex align-items-center justify-content-start'>
                 <input type='checkbox' class='form-check-input me-2'>
-                <span>2013152343#</span>
+                <a href='#'>2013152343#</a>
                 <span class='ms-2 text-danger'>فروش</span>
             </div>",
-            "OrderDetails" => "09128431937",
+            "OrderDetails" => "
+                <div class='d-flex justify-contetn-start gap-1'>
+            <img src ='../../assets/img/usdt.png' class = 'rounded-circle'>
+            <div class='d-flex flex-column'>
+            <span>197.3499</span>
+            <span>تتر</span>
+            </div>
+            </div>
+            ",
             "User" => "بنفشه ابراهیمی",
             "UserID" => 17,
             "price" => $separateThousands(22000000),
@@ -46,12 +62,21 @@ function ProcessRequest($request)
         ],
         [
             "numberOrder" => "
-            <div class='d-flex align-items-center justify-content-center'>
+            <div class='d-flex align-items-center justify-content-start'>
                 <input type='checkbox' class='form-check-input me-2'>
-                <span>3013152343#</span>
+                <a href='#'>3013152343#</a>
                 <span class='ms-2 text-success'>خرید</span>
             </div>",
-            "OrderDetails" => "09128431937",
+            "OrderDetails" => "
+                <div class='d-flex justify-contetn-start gap-1'>
+            <img src ='../../assets/img/tron.png' class = 'rounded-circle'>
+            <div class='d-flex flex-column'>
+            <span>197.3499</span>
+            <span>ترون</span>
+            </div>
+            </div>
+            
+            ",
             "User" => "بنفشه ابراهیمی",
             "UserID" => 18,
             "price" => $separateThousands(12500000),
@@ -62,12 +87,20 @@ function ProcessRequest($request)
     ];
 
     // --- Filter by Buy/Sell ---
-    $buySellFilter = $_GET['buySellFilter'] ?? ''; // 'خرید' یا 'فروش'
+    $buySellFilter = $_GET['buySellFilter'] ?? '';
     if ($buySellFilter !== '') {
         $page->orderList = array_filter($page->orderList, function ($order) use ($buySellFilter) {
-            // فقط متن خرید/فروش رو جدا کن
-            preg_match('/>(خرید|فروش)</u', $order['numberOrder'], $matches);
+            preg_match('/(خرید|فروش)/u', $order['numberOrder'], $matches);
             return isset($matches[1]) && $matches[1] === $buySellFilter;
+        });
+    }
+
+    // --- Filter by Products ---
+    $products = $_GET['products'] ?? '';
+    if ($products !== '') {
+        $page->orderList = array_filter($page->orderList, function ($b) use ($products) {
+            preg_match('/<span>\s*(ترون|تتر)\s*<\/span>/su', $b['OrderDetails'], $matches);
+            return isset($matches[1]) && $matches[1] === $products;
         });
     }
 

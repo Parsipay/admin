@@ -1,56 +1,56 @@
 <?php
+
+// ==============================================
+// 📦 Utility Functions
+// ==============================================
+// ✅ Covering card numbers (masking)
+function maskCard(string $num): string
+{
+    $len = strlen($num);
+    if ($len <= 10) return str_repeat("*", $len);
+    return substr($num, 0, 6) . str_repeat("*", $len - 10) . substr($num, -4);
+}
+
+// ✅ Separate thousands
+function separateThousands($number): string
+{
+    return number_format((int)$number);
+}
+// ✅ Sorting lists by UnixTimestamp
+function sortByTimestamp(array &$list, string $order = 'desc'): void
+{
+    usort($list, function ($a, $b) use ($order) {
+        return $order === 'asc'
+            ? $a['UnixTimestamp'] <=> $b['UnixTimestamp']
+            : $b['UnixTimestamp'] <=> $a['UnixTimestamp'];
+    });
+}
+// ==============================================
+// 🧩 Main Function
+// ==============================================
 function ProcessRequest($request)
 {
-    // -----------------------------
-    // Utility Functions
-    // -----------------------------
-
-    // Mask sensitive parts of card numbers
-    function maskCard($num)
-    {
-        $len = strlen($num);
-        if ($len <= 10) return str_repeat("*", $len); // fallback for short numbers
-        return substr($num, 0, 6) . str_repeat("*", $len - 10) . substr($num, -4);
-    }
-
-    // Format numbers with thousand separators
-    function separateThousands($number)
-    {
-        return number_format((int)$number);
-    }
-
-    // Generic function to sort arrays by UnixTimestamp
-    function sortByTimestamp(array &$list, string $order = 'desc')
-    {
-        usort($list, function ($a, $b) use ($order) {
-            return $order === 'asc'
-                ? $a['UnixTimestamp'] <=> $b['UnixTimestamp']
-                : $b['UnixTimestamp'] <=> $a['UnixTimestamp'];
-        });
-    }
-
-    // -----------------------------
-    // Initialize Payload
-    // -----------------------------
     $p = new stdClass();
 
-    // === Current Date & Time ===
+    // -----------------------------
+    // 📅 تاریخ و ساعت فعلی
+    // -----------------------------
     $today = new DateTime();
     $today->modify('+1 hour');
     $p->dateandtime = [
         'persianDate' => biiq_PersianDate::date("l j F Y"),
         'otherDate'   => $today->format("Y/m/d"),
-        'time'        => $today->format("H:i")
+        'time'        => $today->format("H:i"),
     ];
 
     // -----------------------------
-    // Orders List
+    // 🧾 Order list
     // -----------------------------
     $p->orderList = [
         [
             "numberOrder" => "1013152343",
             "OrderDetails" => "09128431937",
-            "User" => "یگانه علیزاده ",
+            "User" => "یگانه علیزاده",
             "UserID" => 16,
             "price" => separateThousands(16520897),
             "UnixTimestamp" => 111111,
@@ -80,8 +80,9 @@ function ProcessRequest($request)
     ];
 
     // -----------------------------
-    // Users List
+    // 👥 User list    
     // -----------------------------
+
     $p->userList = [
         [
             "nationalCode" => "2356897845",
@@ -116,7 +117,7 @@ function ProcessRequest($request)
     ];
 
     // -----------------------------
-    // Financial Requests
+    // 💰 List of financial requests
     // -----------------------------
     $p->requestList = [
         [
@@ -150,27 +151,8 @@ function ProcessRequest($request)
             "Status" => "در صف تسویه",
         ],
     ];
-
     // -----------------------------
-    // Sorting all lists by UnixTimestamp
-    // -----------------------------
-// $sortOrder = $_GET['sort'] ?? 'desc';
-// $activeTab = $_GET['tab'] ?? 'deposits';
-
-// switch ($activeTab) {
-//     case 'deposits':
-//         sortByTimestamp($p->orderList, $sortOrder);
-//         break;
-//     case 'credits':
-//         sortByTimestamp($p->userList, $sortOrder);
-//         break;
-//     case 'settlements':
-//         sortByTimestamp($p->requestList, $sortOrder);
-//         break;
-// }
-
-    // -----------------------------
-    // Top Box Items
+    // 🔝 Top dashboard items
     // -----------------------------
     $p->TopBox = [
         ['Link' => "#", "Icon" => "home", "Title" => "پیغام‌ها", "Subtitle" => "12 تیکت | 5 اتوماسیون"],
@@ -179,11 +161,9 @@ function ProcessRequest($request)
         ['Link' => "#", "Icon" => "file-alt", "Title" => "حساب‌های بانکی", "Subtitle" => "3 مورد در حال انتظار"],
         ['Link' => "#", "Icon" => "id-card", "Title" => "مدارک احراز", "Subtitle" => "2 مورد در حال انتظار"],
     ];
-
     // -----------------------------
-    // Status Color Conditions
+    // 🎨 Status colors  
     // -----------------------------
-    // Orders
     foreach ($p->orderList as &$Item) {
         $status = trim($Item["Status"]);
         if ($status === "موفق") $Item["StatusColor"] = "text-success opacity-green";
@@ -192,7 +172,6 @@ function ProcessRequest($request)
     }
     unset($Item);
 
-    // Users
     foreach ($p->userList as &$Item) {
         $status = trim($Item["Status"]);
         if ($status === "موفق") $Item["StatusColor"] = "text-success opacity-green";
@@ -201,19 +180,20 @@ function ProcessRequest($request)
     }
     unset($Item);
 
-    // Financial Requests
     foreach ($p->requestList as &$Item) {
         $status = trim($Item["Status"]);
         if ($status === "مشاهده رسید") $Item["StatusColor"] = "text-primary";
         else $Item["StatusColor"] = "text-warning";
     }
     unset($Item);
-
     // -----------------------------
-    // Return payload to template
+    // 🔙 Final output
     // -----------------------------
     return [
-        'content'   => biiq_Template::Start('top->index', true, ['Objects' => $p, 'dateandtime' => $p->dateandtime]),
+        'content'   => biiq_Template::Start('top->index', true, [
+            'Objects' => $p,
+            'dateandtime' => $p->dateandtime,
+        ]),
         'id'        => 0,
         'title'     => 'صفحه اصلی',
         'Canonical' => SITE,
