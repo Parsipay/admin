@@ -3,7 +3,6 @@ function ProcessRequest($request)
 {
     $page = new stdClass();
 
-    // --- Helper functions ---
   // === Current Date & Time ===
     $today = new DateTime();
     $today->modify('+1 hour');
@@ -15,7 +14,7 @@ function ProcessRequest($request)
 
     // --- Return page data ---
     return [
-        'content'   => biiq_Template::Start('dateandtime->index', true, ['Objects' => $page]),
+        'content'   => biiq_Template::Start('layout->dateandtime', true, ['Objects' => $page]),
         'id'        => 1,
         'title'     => 'date',
         'Canonical' => SITE . 'dateandtime/'

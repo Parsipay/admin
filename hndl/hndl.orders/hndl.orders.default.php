@@ -1,5 +1,5 @@
 <?php
-function ProcessRequest($request) {
+function ProcessRequest($request){
     $page = new stdClass();
     if(!isset($request->Parameters) || !is_array($request->Parameters) || count($request->Parameters) == 0){
         //error
@@ -17,7 +17,7 @@ function ProcessRequest($request) {
     //Load user $SelectedUserID
 
     //$page->User = biiq_User::GetByID($SelectedUserID);
-echo "inja bayad sabte sefaresh beshe";
+    echo "inja bayad joziat sefaresh beshe";
 
     $page->Title = " مشاهده سفارش ";
     $page = array(

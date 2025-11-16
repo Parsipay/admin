@@ -701,3 +701,6 @@
     [previous:Exception:private] => 
 )
 
+[16-Nov-2025 17:57:27 Asia/Tehran] Failed to convert string to money in Template => 16,520,897
+[16-Nov-2025 17:57:27 Asia/Tehran] Failed to convert string to money in Template => 22,000,000
+[16-Nov-2025 17:57:27 Asia/Tehran] Failed to convert string to money in Template => 12,500,000

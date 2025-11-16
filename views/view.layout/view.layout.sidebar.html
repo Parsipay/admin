@@ -14,43 +14,43 @@
   <!-- Desktop Menu -->
   <ul class="nav flex-column gap-4 justify-content-start mt-5 sidebar-menu">
     <li class="nav-item mb-3">
-      <a href="[@settings->site]top/" class="nav-link text-dark" data-link="top" >
+      <a href="[@settings->site]" class="nav-link text-dark[if([@page->navlink] == 1)] active[endif]" data-link="top" >
         <i class="fa fa-home font-color"></i>
         <span class="font-color fs-5 ms-2">داشبورد</span>
       </a>
     </li>
     <li class="nav-item mb-3">
-      <a href="[@settings->site]manage/" class="nav-link text-dark" data-link="manage">
+      <a href="[@settings->site]manage/" class="nav-link text-dark[if([@page->navlink] == 2)] active[endif]" data-link="manage">
         <i class="fas fa-user-shield font-color"></i>
         <span class="font-color fs-5 ms-2">مدیریت کاربران</span>
       </a>
     </li>
     <li class="nav-item mb-3">
-      <a href="[@settings->site]orders/" class="nav-link text-dark" data-link="orders">
+      <a href="[@settings->site]orders/" class="nav-link text-dark[if([@page->navlink] == 3)] active[endif]" data-link="orders">
         <i class="fas fa-list-alt font-color"></i>
         <span class="font-color fs-5 ms-2">سفارشات</span>
       </a>
     </li>
     <li class="nav-item mb-3">
-      <a href="[@settings->site]transactions/" class="nav-link text-dark" data-link="transactions">
+      <a href="[@settings->site]transactions/" class="nav-link text-dark[if([@page->navlink] == 4)] active[endif]" data-link="transactions">
         <i class="fas fa-money-bill font-color"></i>
         <span class="font-color fs-5 ms-2">مالی</span>
       </a>
     </li>
     <li class="nav-item mb-3">
-      <a href="[@settings->site]tickets/" class="nav-link text-dark" data-link="tickets">
+      <a href="[@settings->site]tickets/" class="nav-link text-dark[if([@page->navlink] == 5)] active[endif]" data-link="tickets">
         <i class="fas fa-ticket font-color"></i>
         <span class="font-color fs-5 ms-2">تیکت‌ها</span>
       </a>
     </li>
     <li class="nav-item mb-3">
-      <a href="[@settings->site]currency/" class="nav-link text-dark" data-link="currency">
+      <a href="[@settings->site]currency/" class="nav-link text-dark[if([@page->navlink] == 6)] active[endif]" data-link="currency">
         <i class="fas fa-coins font-color"></i>
         <span class="font-color fs-5 ms-2">ارز دیجیتال</span>
       </a>
     </li>
     <li class="nav-item mb-3">
-      <a href="[@settings->site]settings/" class="nav-link text-dark" data-link="settings">
+      <a href="[@settings->site]settings/" class="nav-link text-dark[if([@page->navlink] == 7)] active[endif]" data-link="settings">
         <i class="fas fa-gear font-color"></i>
         <span class="font-color fs-5 ms-2">تنظیمات</span>
       </a>

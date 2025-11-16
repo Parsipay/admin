@@ -487,7 +487,7 @@ class biiq_PersianDate{
             $gd
         );
     }
-  public static function UnixToAgo($unix){
+    public static function UnixToAgo($unix){
         try{
             $datetime = gmdate("Y-m-d\TH:i:s\Z", $unix);
             return self::ToPersianHumanDateTime($datetime);
@@ -564,7 +564,7 @@ class biiq_PersianDate{
         return self::date("l j F Y ساعت H:i:s", $UnixTime);
     }
     public function ToPersianDateByFormat($x, $format = "l j F Y ساعت H:i:s"){
-        return $this->date($format,strtotime($x));
+        return $this->date($format, strtotime($x));
     }
 }
 ?>

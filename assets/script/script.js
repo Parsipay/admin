@@ -1,4 +1,6 @@
 $(document).ready(function () {
+  const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
+  const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
   /* ---------------------- 🔍 SEARCH ---------------------- */
   $(".search-icon").on("click", function (e) {
     e.stopPropagation();
@@ -207,24 +209,19 @@ $(document).ready(function () {
         const bTime = +$(b).find("td[data-timestamp]").data("timestamp") || 0;
         return order === "asc" ? aTime - bTime : bTime - aTime;
       });
-
     $.each(rows, (_, row) => $tbody.append(row));
-
-    $icon
-      .removeClass("fa-sort-up fa-sort-down")
-      .addClass(order === "asc" ? "fa-sort-up" : "fa-sort-down");
+    $icon.removeClass("fa-sort fa-sort-up fa-sort-down").addClass(order === "asc" ? "fa-sort-up" : "fa-sort-down");
   });
 
   /* ---------------------- 📅 PERSIAN CALENDAR MODAL ---------------------- */
-  const calendarModal = new bootstrap.Modal(
-    document.getElementById("calendarModal")
-  );
-
-  $("#persian-date").on("click", function () {
-    calendarModal.show();
-  });
-
-  $("#calendarModal").on("shown.bs.modal", function () {
+  if($('#calendarModal').length){
+	const calendarModal = new bootstrap.Modal(
+		document.getElementById("calendarModal")
+	);
+	$("#persian-date").on("click", function () {
+		calendarModal.show();
+	});
+	$("#calendarModal").on("shown.bs.modal", function () {
     $("#fromDate, #toDate").persianDatepicker({
       format: "YYYY/MM/DD",
       autoClose: true,
@@ -232,8 +229,7 @@ $(document).ready(function () {
     });
 
     if (!$("#persian-calendar").hasClass("pdp-initialized")) {
-      $("#persian-calendar")
-        .addClass("pdp-initialized")
+      $("#persian-calendar").addClass("pdp-initialized")
         .persianDatepicker({
           inline: true,
           format: "YYYY/MM/DD",
@@ -280,6 +276,12 @@ $(document).ready(function () {
       setRange(now.clone().subtract("years", 1), now);
     });
   });
+  }
+  
+
+  
+
+  
 
   /* ---------------------- 💱 FILTERS ---------------------- */
   $("#buySellFilter").on("change", function () {
@@ -300,56 +302,6 @@ $(document).ready(function () {
 
 
 
-
-}); // ✅ پایان document.ready
-
-  // 💡 Toggle Insights
-  $("#toggleInsight").on("change", function(){
-      if(this.checked){
-        $("#insightsPanel").slideDown(300);
-      } else {
-        $("#insightsPanel").slideUp(300);
-      }
-    });
-
-      $("#smsLoginLink").on("click", function (e) {
-    e.preventDefault();
-
-    const mobile = $("#loginPassword").val().trim();
-
-    if (mobile === "") {
-      alert("لطفاً شماره موبایل خود را وارد کنید.");
-      return false;
-    }
-
-    window.location.href = $(this).attr("href");
-  });
-
-
-  // 🔄 Reload button
-  document.getElementById("reloadBtn").addEventListener("click", () => {
-    location.reload(); 
-  });
-
-  //🔴 refresh page
-  document.getElementById("reloadBtn").addEventListener("click", () => {
-    location.reload();
-  });
-
- //🎲active link
-    var currentUrl = window.location.href; 
-    $('.d-xl-block .nav-link, .offcanvas .nav-link').each(function(){
-        var linkUrl = $(this).prop('href');     
-        if(currentUrl === linkUrl){
-            $(this).addClass('active');
-        }
-    });
-
-    // when clicked on link 
-    $('.nav-link').on('click', function(){
-        $('.nav-link').removeClass('active');
-        $(this).addClass('active');
-    });
 
 
   /* ---------------------- 📊 CHARTS ---------------------- */
@@ -406,3 +358,4 @@ $(document).ready(function () {
 //     chart2.resize();
 //   });
 // });
+});

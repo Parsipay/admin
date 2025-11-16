@@ -115,14 +115,11 @@ class biiq_Handler{
                 if(is_array($this->UrlExploded) && $this->UrlExploded[0] == 'maintenance'){
                     return;
                 }
-                if(defined('MaintenanceSkip') && is_array(MaintenanceSkip)){
-                    
-                    if($redirect){
-                        header("Location: ".SITE."maintenance/", true, 302);
-                        exit;
-                    }
-                    return true;
+                if($redirect){
+                    header("Location: ".SITE."maintenance/", true, 302);
+                    exit;
                 }
+                return true;
             }else{
                 if(is_array($this->UrlExploded) && $this->UrlExploded[0] == 'maintenance'){
                     if($redirect){

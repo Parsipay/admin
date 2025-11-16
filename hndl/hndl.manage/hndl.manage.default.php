@@ -55,7 +55,7 @@ function ProcessRequest($request)
 
     $page->orderList = [
         [
-            "numberOrder" => "20232336263# <span class='px-1 rounded-3'>خرید</span>",
+            'ID' => 20232336263,
             "OrderDetails" => '
              <div class="d-flex justify-content-start">
              <img src="../../assets/img/usdt.png" alt="btc" class="me-2" style="width:24px;height:24px;">
@@ -78,7 +78,7 @@ function ProcessRequest($request)
         </div>",
         ],
         [
-            "numberOrder" => "20232336263# <span class='px-1 rounded-3'>فروش</span>",
+            'ID' => 12312313123,
             "OrderDetails" => '
              <div class="d-flex justify-content-start">
              <img src="../../assets/img/usdt.png" alt="btc" class="me-2" style="width:24px;height:24px;">

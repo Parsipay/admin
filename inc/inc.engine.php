@@ -94,11 +94,12 @@ class biiq_Engine{
         foreach($global_settigns as $key => $value){
             $this->Setting[$key] = $value;
         }
-
+        
         $this->PageSettings = array(
             'layout' => 'main',
             'Canonical' => 0,
-            'HasGoogleCaptcha' => 0
+            'HasGoogleCaptcha' => 0,
+            'navlink'       => 0
         );
         $GLOBALS['config']  = $this;
     }

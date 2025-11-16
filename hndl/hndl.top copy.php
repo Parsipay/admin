@@ -190,11 +190,10 @@ function ProcessRequest($request)
     // 🔙 Final output
     // -----------------------------
     return [
-        'content'   => biiq_Template::Start('pages->index', true, [
+        'content'   => biiq_Template::Start('top->index', true, [
             'Objects' => $p,
             'dateandtime' => $p->dateandtime,
         ]),
-        'navlink' => 1,
         'id'        => 0,
         'title'     => 'صفحه اصلی',
         'Canonical' => SITE,

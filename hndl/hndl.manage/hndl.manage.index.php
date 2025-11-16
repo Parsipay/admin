@@ -205,6 +205,7 @@ function ProcessRequest($request)
         'content'   => biiq_Template::Start('manage->index', true, ['Objects' => $page,'dateandtime' => $page->dateandtime]),
         'id'        => 1,
         'title'     => 'مالی',
-        'Canonical' => SITE . 'manage/'
+        'Canonical' => SITE . 'manage/',
+        'navlink' => 2
     ];
 }

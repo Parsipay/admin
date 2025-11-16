@@ -2,86 +2,35 @@
 function ProcessRequest($request)
 {
     $page = new stdClass();
-
-    $today = new DateTime();
-    $today->modify('+1 hour');
-    $page->dateandtime = [
-        'persianDate' => biiq_PersianDate::date("l j F Y"),
-        'otherDate'   => $today->format("Y/m/d"),
-        'time'        => $today->format("H:i")
-    ];
-
-    $separateThousands = fn($n) => number_format((int)$n);
+    $date = new biiq_PersianDate();
 
     $page->orderList = [
         [
-            "numberOrder" => "
-            <div class='d-flex align-items-center justify-content-Start'>
-                <input type='checkbox' class='form-check-input me-2'>
-                <a href ='#'>502336263#</a>
-                <span class='ms-2 text-success'>خرید</span>
-            </div>",
-            "OrderDetails" => "
-            <div class='d-flex justify-contetn-start gap-1'>
-            <img src ='../../assets/img/usdt.png' class = 'rounded-circle'>
-            <div class='d-flex flex-column'>
-            <span>197.3499</span>
-            <span>تتر</span>
-            </div>
-            </div>
-            ",
-            "User" => "یگانه علیزاده",
-            "UserID" => 16,
-            "price" => $separateThousands(16520897),
-            "UnixTimestamp" => 111111,
-            "persianDate" => biiq_PersianDate::date("l j F Y - H:i", 11111111),
-            "Status" => "موفق"
+            'ID' => 11133441,
+            "User" => "بنفشه مورد دوم",
+            "UserID" => 18,
+            "price" => 100000,
+            "PersianDate" => biiq_PersianDate::UnixToAgo(time() - 255888),
+            "PersianDateString" => biiq_PersianDate::ToPersianDate(time() - 255888),
+            "Status" => "ناموفق"
         ],
         [
-            "numberOrder" => "
-            <div class='d-flex align-items-center justify-content-start'>
-                <input type='checkbox' class='form-check-input me-2'>
-                <a href='#'>2013152343#</a>
-                <span class='ms-2 text-danger'>فروش</span>
-            </div>",
-            "OrderDetails" => "
-                <div class='d-flex justify-contetn-start gap-1'>
-            <img src ='../../assets/img/usdt.png' class = 'rounded-circle'>
-            <div class='d-flex flex-column'>
-            <span>197.3499</span>
-            <span>تتر</span>
-            </div>
-            </div>
-            ",
-            "User" => "بنفشه ابراهیمی",
-            "UserID" => 17,
-            "price" => $separateThousands(22000000),
-            "UnixTimestamp" => 11111111,
-            "persianDate" => biiq_PersianDate::date("l j F Y - H:i", 555555555),
-            "Status" => "در انتظار تایید"
+            'ID' => 123135334,
+            "User" => "بنفشه مورد دوم",
+            "UserID" => 18,
+            "price" => 100000,
+            "PersianDate" => biiq_PersianDate::UnixToAgo(time() - 455888),
+            "PersianDateString" => biiq_PersianDate::ToPersianDate(time() - 455888),
+            "Status" => "ناموفق"
         ],
         [
-            "numberOrder" => "
-            <div class='d-flex align-items-center justify-content-start'>
-                <input type='checkbox' class='form-check-input me-2'>
-                <a href='#'>3013152343#</a>
-                <span class='ms-2 text-success'>خرید</span>
-            </div>",
-            "OrderDetails" => "
-                <div class='d-flex justify-contetn-start gap-1'>
-            <img src ='../../assets/img/tron.png' class = 'rounded-circle'>
-            <div class='d-flex flex-column'>
-            <span>197.3499</span>
-            <span>ترون</span>
-            </div>
-            </div>
-            
-            ",
+            'ID' => 965486241,
             "User" => "بنفشه ابراهیمی",
             "UserID" => 18,
-            "price" => $separateThousands(12500000),
-            "UnixTimestamp" => 9999999,
-            "persianDate" => biiq_PersianDate::date("l j F Y - H:i", 99999999),
+            "price" => 12500000,
+            "UnixTimestamp" => time() - 655888,
+            "PersianDate" => biiq_PersianDate::UnixToAgo(time() - 655888),
+            "PersianDateString" => biiq_PersianDate::ToPersianDate(time() - 655888),
             "Status" => "ناموفق"
         ],
     ];
@@ -122,7 +71,7 @@ function ProcessRequest($request)
     unset($item);
 
     return [
-        'content'   => biiq_Template::Start('orders->index', true, ['Objects' => $page, 'dateandtime' => $page->dateandtime]),
+        'content'   => biiq_Template::Start('orders->index', true, ['Objects' => $page]),
         'id'        => 1,
         'title'     => 'مالی',
         'Canonical' => SITE . 'orders/'

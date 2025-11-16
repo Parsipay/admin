@@ -74,8 +74,8 @@
    ------------------------------------------------------------ */
 :root {
   --main-purple: #ab4f9e;
-  --gray-light: #eff2f5;
-  --gray-bg: #f8fafd;
+  --gray-light: #f6f8fa;
+  --gray-bg: #F8FAFD;
   --success: #16c784;
   --danger: #ea3943;
   --warn-opacity: rgba(255, 207, 104, 0.35);
@@ -507,7 +507,10 @@ input:checked + .slider:before { transform:translateX(22px); }
 
 /* Sidebar active */
 .sidebar-menu .nav-link.active {
-    background-color: white!important;
-    color: black;
+    background-color: rgb(34, 4, 4)!important;
+    color: rgb(192, 36, 36);
     border-radius: 8px;
 }
+.popover{  --bs-popover-bg:#777;
+  --bs-popover-body-color:#fff}
+.popover *{font-family:"dana", sans-serif}
