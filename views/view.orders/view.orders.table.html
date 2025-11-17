@@ -1,9 +1,9 @@
 <!--in SAFHE HAR JAE K SEFARESH HA RO NIZA DARIM MIAD FAGHAT HAM HEADER JADAVAL MIAD-->
-<div class="table-responsive rounded-3 bg-white p-3">
-    <table class="table table-hover align-middle text-center mb-0 searchable-table" id="ordersTable">
+<div class="table-responsive rounded-3 p-3">
+    <table class="table table-hover align-middle text-start  mb-0 searchable-table" id="ordersTable">
         <thead>
             <tr>
-                <th class=" text-start py-3">
+                <th class="py-3">
                     <div class="search-wrapper d-flex align-items-center">
                         <i class="fa-brands fa-searchengin search-icon me-1 text-primary  bg-opacity rounded-3"
                             data-column="0" style="cursor:pointer;"></i>
@@ -11,16 +11,13 @@
                         <span>شماره سفارش‌ها </span>
                     </div>
                 </th>
-                <th class="text-start py-3">کاربر</th>
-                <th class="text-start py-3"> مبلغ</th>
-                <th class="text-start sortable py-3">
-                    <div class="d-flex align-items-center gap-2">
-                        <span data-order="desc">زمان و تاریخ تراکنش</span>
-                        <i class="fas fa-sort sort-toggle ms-2" style="cursor:pointer"></i>
-                    </div>
+                <th class="py-3">کاربر</th>
+                <th class="py-3"> مبلغ</th>
+                <th class=" sortable py-3 bg-primary text-center">
+                    <span data-order="desc" class="">زمان و تاریخ تراکنش</span>
+                    <i class="fas fa-sort sort-toggle ms-2" style="cursor:pointer"></i>
                 </th>
-
-                <th class="text-start py-3">
+                <th class="py-3">
                     وضعیت
                     <div class="dropdown d-inline">
 
@@ -42,23 +39,24 @@
         <tbody>
             [foreach ([@Objects->orderList])]
             <tr>
-                <td class="text-start">
+                <td class="">
                     <a href="[@settings->site]orders/[@Item->ID]/">
                         [@persian [@Item->ID]]
                     </a>
                 </td>
-                <td class="text-start "><a href="[@settings->site]manage/[@Item->UserID]/">[@Item->User]</a></td>
-                <td class="text-start">[@persian [@money [@Item->price]]]</td>
-                <td class="text-center">
-                    <span class="d-inline-block" tabindex="0" data-bs-placement="top" data-bs-toggle="popover" data-bs-content="[@persian [@Item->PersianDateString]]">
+                <td class=""><button class="btn btn-outline-danger w-50" >[@Item->User]</button></td>
+                <td class="">[@persian [@money [@Item->price]]]</td>
+                <td class="text-center sortable" data-column="2" data-timestamp="[@Item->UnixTimestamp]">
+                    <span class="d-inline-block" tabindex="0" data-bs-placement="top" data-bs-toggle="popover"
+                        data-bs-content="[@persian [@Item->PersianDateString]]">
                         <span>[@persian [@Item->PersianDate]]</span>
                     </span>
                 </td>
-                <td class="text-start">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <span class="px-3 py-2 rounded-pill status-text [@Item->StatusColor]">[@Item->Status]</span>
-                        <a href="#">مشاهده رسید</a>
-                    </div>
+                <td class="py-3">
+                    <span
+                        class="p-2 rounded-pill d-flex justify-content-center align-items-center status-text flex-grow-1 w-50 [@Item->StatusColor]">
+                        [@Item->Status]
+                    </span>
                 </td>
             </tr>
             [endforeach]

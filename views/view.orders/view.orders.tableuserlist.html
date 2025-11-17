@@ -1,80 +1,39 @@
-<div class="table-responsive rounded-3 bg-white p-3">
-    <table class="table table-hover align-middle text-center mb-0 searchable-table">
-        <thead>
-            <tr>
-                <th class="text-start py-3">
-                    <div class="search-wrapper d-flex align-items-center">
-                        <i class="fa-brands fa-searchengin search-icon me-1 text-primary  bg-opacity rounded-3"
-                            data-column="0" style="cursor:pointer;"></i>
-                        <input type="text" class="search-input form-control form-control-sm" placeholder="جستجو..." />
-                        <span>کد ملی</span>
-                    </div>
-                </th>
-                <th class="text-start py-3">
-                    <div class="search-wrapper d-flex align-items-center">
-                        <i class="fa-brands fa-searchengin search-icon me-1 text-primary  bg-opacity rounded-3"
-                            data-column="0" style="cursor:pointer;"></i>
-                        <input type="text" class="search-input form-control form-control-sm" placeholder="جستجو..." />
-                        <span>شماره موبایل</span>
-                    </div>
-                </th>
-                <th class="text-start py-3">
-                    <div class="search-wrapper d-flex align-items-center">
-                        <i class="fa-brands fa-searchengin search-icon me-1 text-primary  bg-opacity rounded-3"
-                            data-column="0" style="cursor:pointer;"></i>
-                        <input type="text" class="search-input form-control form-control-sm" placeholder="جستجو..." />
-                        <span> کاربر</span>
-                    </div>
-                </th>
-                <th class="text-start py-3">
-                    آخرین فعالیت
-                </th>
-                <th class="text-start sortable py-3">
-                    <div class="d-flex align-items-center gap-2">
-                        <span> تاریخ ثبت‌نام </span>
-                        <i class="fas fa-sort sort-toggle ms-2" data-order="desc" style="cursor:pointer"></i>
-                    </div>
-                </th>
-                <th class="text-start py-3">
-                    وضعیت
-                    <div class="dropdown d-inline">
-                        <i class="fas fa-sort  ms-1" data-bs-toggle="dropdown" style="cursor:pointer;"></i>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item filter-status" data-status="موفق">موفق</a></li>
-                            <li><a class="dropdown-item filter-status" data-status="مسدود">مسدود</a></li>
-                            <li><a class="dropdown-item filter-status" data-status="تکمیل نشده">تکمیل نشده</a>
-                            </li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item filter-status" data-status="all">همه</a></li>
-                        </ul>
-                    </div>
-                </th>
-            </tr>
-        </thead>
+<div class="table-responsive rounded-3 p-3 ">
+    <table class="table  table-hover align-middle mb-0 searchable-table">
+       <thead>
+        <tr>
+            <th class="col-5 py-3">
+                <div class="search-wrapper d-flex align-items-center text-center ms-5">
+                    <i class="fa-brands fa-searchengin search-icon me-1 text-primary ms-5 bg-opacity rounded-3"
+                        data-column="0" style="cursor:pointer;"></i>
+                    <input type="text" class="search-input form-control form-control-sm" placeholder="جستجو..." />
+                    <span>کاربر</span>
+                </div>
+            </th>
+            <th class="col-5 py-3 text-start">
+                آخرین فعالیت
+            </th>
+            <th class="col-4 py-3 text-center sortable">
+                <div class="d-flex align-items-center gap-2">
+                    <span>تاریخ ثبت‌نام</span>
+                    <i class="fas fa-sort sort-toggle ms-2" data-order="desc" style="cursor:pointer"></i>
+                </div>
+            </th>
+        </tr>
+    </thead>
         <tbody>
             [foreach ([@Objects->userList])]
             <tr>
-                <td class="text-start">[@Item->nationalCode]</td>
-                <td class="text-start">[@Item->phoneNumber]</td>
-                <td class="text-primary text-start">
-                    <a href="[@settings->site]users/[@Item->UserID]/" class="text-decoration-none">
+                <td class="text-primary">
+                    <button class="btn opacity-green w-50">
                         [@Item->User]
-                    </a>
+                    </button>
                 </td>
                 <td class="text-start">[@Item->lastActivity]</td>
                 <td class="text-start" data-timestamp="[@Item->UnixTimestamp]">[@Item->persianDate]</td>
-                <td class="text-start">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <span class="px-3 py-2 rounded-pill  status-text [@Item->StatusColor]">
-                            [@Item->Status]
-                        </span>
-                        <i class="fas fa-ellipsis-v text-secondary ms-2" style="cursor:pointer;"></i>
-                    </div>
-                </td>
             </tr>
             [endforeach]
         </tbody>
+
     </table>
 </div>

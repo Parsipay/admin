@@ -507,9 +507,9 @@ input:checked + .slider:before { transform:translateX(22px); }
 
 /* Sidebar active */
 .sidebar-menu .nav-link.active {
-    background-color: rgb(34, 4, 4)!important;
-    color: rgb(192, 36, 36);
-    border-radius: 8px;
+    background-color: rgb(231, 231, 231)!important;
+    color: rgb(25, 22, 179)!important;
+    border-radius: 8px!important;
 }
 .popover{  --bs-popover-bg:#777;
   --bs-popover-body-color:#fff}

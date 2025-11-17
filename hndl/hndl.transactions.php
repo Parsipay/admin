@@ -148,6 +148,7 @@ function ProcessRequest($request)
         ),
         'id'        => 1,    
         'title'     => 'مالی',
-        'Canonical' => SITE . 'transactions/'
+        'Canonical' => SITE . 'transactions/',
+        'navlink' => 4
     ];
 }

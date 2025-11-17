@@ -101,6 +101,7 @@ function ProcessRequest($request)
         ]),
         'id'        => 1,
         'title'     => 'مالی',
-        'Canonical' => SITE . 'tickets/'
+        'Canonical' => SITE . 'tickets/',
+        'navlink' => 5
     ];
 }

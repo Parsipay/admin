@@ -74,6 +74,7 @@ function ProcessRequest($request)
         'content'   => biiq_Template::Start('orders->index', true, ['Objects' => $page]),
         'id'        => 1,
         'title'     => 'مالی',
-        'Canonical' => SITE . 'orders/'
+        'Canonical' => SITE . 'orders/',
+        'navlink' => 3
     ];
 }
