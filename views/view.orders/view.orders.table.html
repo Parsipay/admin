@@ -39,19 +39,30 @@
         <tbody>
             [foreach ([@Objects->orderList])]
             <tr>
-                <td class="">
+                <td>
                     <a href="[@settings->site]orders/[@Item->ID]/">
                         [@persian [@Item->ID]]
                     </a>
                 </td>
-                <td class=""><button class="btn btn-outline-danger w-50" >[@Item->User]</button></td>
-                <td class="">[@persian [@money [@Item->price]]]</td>
-                <td class="text-center sortable" data-column="2" data-timestamp="[@Item->UnixTimestamp]">
-                    <span class="d-inline-block" tabindex="0" data-bs-placement="top" data-bs-toggle="popover"
-                        data-bs-content="[@persian [@Item->PersianDateString]]">
-                        <span>[@persian [@Item->PersianDate]]</span>
+       <td>
+    <button class="btn rounded-pill w-50 [@Item->LevelColor]"
+            data-user-level="[@Item->Level]"
+            data-user-id="[@Item->UserID]"
+            tabindex="0"
+            data-bs-toggle="popover"
+            data-bs-placement="top"
+            data-bs-content="[@Item->Level]">
+        <i class="[@Item->LevelIcon] me-1"></i>[@Item->User]
+    </button>
+</td>
+                <td>[@persian [@money [@Item->price]]]</td>
+                <td class="text-center sortable" data-timestamp="[@Item->UnixTimestamp]">
+                    <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-placement="top"
+                        data-bs-content="[@Item->PersianDate]">
+                        [@Item->PersianDateRelative]
                     </span>
                 </td>
+
                 <td class="py-3">
                     <span
                         class="p-2 rounded-pill d-flex justify-content-center align-items-center status-text flex-grow-1 w-50 [@Item->StatusColor]">

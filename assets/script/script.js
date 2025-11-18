@@ -305,57 +305,72 @@ $(document).ready(function () {
 
 
   /* ---------------------- 📊 CHARTS ---------------------- */
-// $(window).on("load", function () {
-//   const chart1 = echarts.init(document.getElementById("chart1"));
-//   chart1.setOption({
-//     title: { text: "درصد دارایی‌ها", left: "center" },
-//     tooltip: { trigger: "item", formatter: "{b}: {d}%" },
-//     legend: { bottom: 0 },
-//     series: [
-//       {
-//         name: "Assets",
-//         type: "pie",
-//         radius: ["45%", "70%"],
-//         avoidLabelOverlap: false,
-//         itemStyle: { borderRadius: 8, borderColor: "#fff", borderWidth: 2 },
-//         label: { show: false },
-//         emphasis: { label: { show: true, fontSize: 16, fontWeight: "bold" } },
-//         data: [
-//           { value: 40, name: "بیت‌کوین" },
-//           { value: 25, name: "اتریوم" },
-//           { value: 20, name: "تتر" },
-//           { value: 15, name: "سایر" },
-//         ],
-//       },
-//     ],
-//   });
+$(window).on("load", function () {
+const chart1 = echarts.init(document.getElementById("chart1"));
 
-//   const chart2 = echarts.init(document.getElementById("chart2"));
-//   chart2.setOption({
-//     tooltip: { trigger: "axis", axisPointer: { type: "shadow" } },
-//     legend: { data: ["Sales", "Revenue"], top: "top" },
-//     xAxis: {
-//       type: "category",
-//       data: [
-//         "جمعه",
-//         "پنج‌شنبه",
-//         "چهارشنبه",
-//         "سه‌شنبه",
-//         "دوشنبه",
-//         "یک‌شنبه",
-//         "شنبه",
-//       ],
-//     },
-//     yAxis: { type: "value" },
-//     series: [
-//       { name: "Sales", type: "bar", data: [120, 200, 150, 80, 70, 110, 130] },
-//       { name: "Revenue", type: "bar", data: [90, 180, 120, 60, 50, 100, 120] },
-//     ],
-//   });
+chart1.setOption({
+  title: { text: "درصد دارایی‌ها", left: "center" },
+  tooltip: { trigger: "item", formatter: "{b}: {d}%" },
+  legend: { bottom: 0 },
+  color: ["#9b59b6", "#3498db", "#f1c40f", "#2ecc71"], // بنفش - آبی - زرد - سبز
+  series: [
+    {
+      name: "Assets",
+      type: "pie",
+      radius: ["60%", "75%"], // نازک‌تر شدن چارت
+      avoidLabelOverlap: false,
+      itemStyle: {
+        borderRadius: 6,
+        borderColor: "#ffffff",
+        borderWidth: 2
+      },
+      label: { show: false },
+      emphasis: {
+        label: { show: true, fontSize: 16, fontWeight: "bold" }
+      },
+      data: [
+        { value: 40, name: "بیت‌کوین" },
+        { value: 25, name: "اتریوم" },
+        { value: 20, name: "تتر" },
+        { value: 15, name: "سایر" }
+      ]
+    }
+  ]
+});
 
-//   $(window).on("resize", function () {
-//     chart1.resize();
-//     chart2.resize();
-//   });
-// });
+
+const chart2 = echarts.init(document.getElementById("chart2"));
+const colors = ["#3498db", "#e67e22", "#2ecc71", "#9b59b6", "#e74c3c"]; 
+chart2.setOption({
+  tooltip: { trigger: "axis", axisPointer: { type: "shadow" } },
+  legend: { data: ["Coins"], top: "top" },
+  xAxis: {
+    type: "category",
+    data: ["BTC", "ETH", "BNB", "SOL", "XRP"], 
+  },
+  yAxis: { type: "value" },
+  series: [
+    {
+      name: "Coins",
+      type: "bar",
+      barWidth: 30, // 👈   
+      data: [120, 90, 150, 70, 110],
+
+      itemStyle: {
+        borderRadius: [8, 8, 0, 0],
+
+        // 👇 هر ستون یک رنگ
+        color: function (params) {
+          return colors[params.dataIndex];
+        }
+      },
+    },
+  ],
+});
+
+  $(window).on("resize", function () {
+    chart1.resize();
+    chart2.resize();
+  });
+});
 });
