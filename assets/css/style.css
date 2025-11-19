@@ -148,7 +148,11 @@ body {
   background: #3861fb1a;
 }
 .bg-login{
-  background-color: #fcfcfc ;
+  background-color: #e4e4e4 ;
+}
+.text-silver{
+  color:#bebebe
+
 }
 /* ============================================================
    🔵 5️⃣ NAVIGATION & SIDEBAR
@@ -212,11 +216,18 @@ body {
 /* ============================================================
    🟠 7️⃣ TABLES
    ------------------------------------------------------------ */
+table tbody tr:last-child td:first-child {
+    border-bottom-right-radius: 30px !important;
+}
+
+table tbody tr:last-child td:last-child {
+    border-bottom-left-radius: 30px !important;
+} 
 table tbody tr:last-child td {
   border-bottom: none !important;
 }
 table:not(.accordion table) thead th {
-  background: #eff2f5 !important;
+  background: #f8fbff !important;
 }
 table:not(.accordion table) thead th:first-child {
   border-top-right-radius: 30px !important;
@@ -340,7 +351,9 @@ table:not(.accordion table) thead th:last-child {
 .amount {
   background: #f8f9fa;
 }
-
+.ms-7 {
+      margin-right: 6rem !important;
+}
 /* ============================================================
    🔶 13️⃣ RESPONSIVE DESIGN
    ------------------------------------------------------------ */
@@ -507,7 +520,7 @@ input:checked + .slider:before { transform:translateX(22px); }
 
 /* Sidebar active */
 .sidebar-menu .nav-link.active {
-    background-color: rgb(231, 231, 231)!important;
+    background-color: rgb(255, 255, 255)!important;
     color: rgb(25, 22, 179)!important;
     border-radius: 8px!important;
 }

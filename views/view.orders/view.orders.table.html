@@ -1,6 +1,6 @@
 <!--in SAFHE HAR JAE K SEFARESH HA RO NIZA DARIM MIAD FAGHAT HAM HEADER JADAVAL MIAD-->
-<div class="table-responsive rounded-3 p-3">
-    <table class="table table-hover align-middle text-start  mb-0 searchable-table" id="ordersTable">
+<div class="table-responsive rounded-3 text-center p-3">
+    <table class="table table-hover align-middle  mb-0 searchable-table" id="ordersTable">
         <thead>
             <tr>
                 <th class="py-3">
@@ -20,41 +20,40 @@
                 <th class="py-3">
                     وضعیت
                     <div class="dropdown d-inline">
+                        <i class="fas fa-sort ms-1" data-bs-toggle="dropdown" style="cursor:pointer;"></i>
 
-                        <i class="fas fa-sort  ms-1" data-bs-toggle="dropdown" style="cursor:pointer;"></i>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item filter-status" data-status="موفق">موفق</a></li>
-                            <li><a class="dropdown-item filter-status" data-status="ناموفق">ناموفق</a></li>
-                            <li><a class="dropdown-item filter-status" data-status="در انتظار تایید">در انتظار تایید</a>
-                            </li>
+                            <li><a class="dropdown-item filter-status" data-status="رد شده">رد شده</a></li>
+                            <li><a class="dropdown-item filter-status" data-status="پردازش">پردازش</a></li>
+                            <li><a class="dropdown-item filter-status" data-status="تکمیل نشده">تکمیل نشده</a></li>
+
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
+
                             <li><a class="dropdown-item filter-status" data-status="all">همه</a></li>
                         </ul>
                     </div>
                 </th>
+
             </tr>
         </thead>
         <tbody>
             [foreach ([@Objects->orderList])]
             <tr>
-                <td>
+                <td class="text-start">
                     <a href="[@settings->site]orders/[@Item->ID]/">
                         [@persian [@Item->ID]]
                     </a>
                 </td>
-       <td>
-    <button class="btn rounded-pill w-50 [@Item->LevelColor]"
-            data-user-level="[@Item->Level]"
-            data-user-id="[@Item->UserID]"
-            tabindex="0"
-            data-bs-toggle="popover"
-            data-bs-placement="top"
-            data-bs-content="[@Item->Level]">
-        <i class="[@Item->LevelIcon] me-1"></i>[@Item->User]
-    </button>
-</td>
+                <td>
+                    <button class="btn rounded-pill w-50 [@Item->LevelColor]" data-user-level="[@Item->Level]"
+                        data-user-id="[@Item->UserID]" tabindex="0" data-bs-toggle="popover" data-bs-placement="top"
+                        data-bs-content="[@Item->Level]">
+                        <i class="[@Item->LevelIcon] me-1"></i>[@Item->User]
+                    </button>
+                </td>
                 <td>[@persian [@money [@Item->price]]]</td>
                 <td class="text-center sortable" data-timestamp="[@Item->UnixTimestamp]">
                     <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-placement="top"
@@ -65,7 +64,7 @@
 
                 <td class="py-3">
                     <span
-                        class="p-2 rounded-pill d-flex justify-content-center align-items-center status-text flex-grow-1 w-50 [@Item->StatusColor]">
+                        class="p-2 ms-7 text-end rounded-pill d-flex justify-content-center align-items-center status-text flex-grow-1 w-50 [@Item->StatusColor]">
                         [@Item->Status]
                     </span>
                 </td>

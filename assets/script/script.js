@@ -25,24 +25,32 @@ $(document).ready(function () {
   $(document).on("click", () => $(".search-input").removeClass("show"));
 
   /* ---------------------- 🧾 DROPDOWN FILTER ---------------------- */
-  $(document).on("click", ".dropdownitem", function (e) {
+$(document).on("click", ".dropdownitem", function (e) {
     e.preventDefault();
+
     const selected = $(this).data("value").trim();
     const $rows = $("#tablesearch tr");
-    if (selected === "all") return $rows.show();
+
+    if (selected === "all") {
+        $rows.show();
+        return;
+    }
+
     $rows.each(function () {
-      $(this).toggle($(this).data("item-status")?.trim() === selected);
+        const status = ($(this).data("item-status") || "").toString().trim();
+        $(this).toggle(status === selected);
     });
-  });
+});
+
 
   /* ---------------------- ⚙️ STATUS FILTER ---------------------- */
-  $(".filter-status").on("click", function () {
+$(".filter-status").on("click", function () {
     const selected = $(this).data("status").trim();
     $("tbody tr").each(function () {
       const status = $(this).find(".status-text").text().trim();
       $(this).toggle(selected === "all" || status === selected);
     });
-  });
+});
 
   /* ---------------------- 💡 FANCY BUTTON TOGGLE ---------------------- */
   $(".fancy-btn").on("click", function () {

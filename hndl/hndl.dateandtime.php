@@ -1,4 +1,4 @@
-<?php
+z<?php
 function ProcessRequest($request)
 {
     $page = new stdClass();

@@ -59,7 +59,7 @@ function ProcessRequest($request)
             "ID" => "1013152343",
             "OrderDetails" => "09128431937",
             "User" => "یگانه علیزاده",
-            "UserID" => 16,
+            "UserID" => 1,
             "price" => 16520897,
             "Level" => "فعال",
             "UnixTimestamp" => time() - 60 * 86400, // 2 ماه پیش
@@ -70,34 +70,34 @@ function ProcessRequest($request)
             "ID" => "2013152343",
             "OrderDetails" => "09128431937",
             "User" => "بنفشه ابراهیمی",
-            "UserID" => 17,
+            "UserID" => 2,
             "price" => 22000000,
             "Level" => "طلایی",
             "UnixTimestamp" => time() - 3600,
             "PersianDate" => biiq_PersianDate::date("l j F Y - H:i", time() - 3600),
-            "Status" => "در انتظار تایید",
+            "Status" => "پردازش",
         ],
         [
             "ID" => "3013152343",
             "OrderDetails" => "09128431937",
-            "User" => "بنفشه ابراهیمی",
-            "UserID" => 18,
+            "User" => " سارا کریمی",
+            "UserID" => 3,
             "price" => 12500000,
             "Level" => "حرفه ای",
             "UnixTimestamp" => 1703464000,
             "PersianDate" => biiq_PersianDate::date("l j F Y - H:i", 1703464000),
-            "Status" => "ناموفق",
+            "Status" => "رد شده",
         ],
         [
             "ID" => "4013152343",
             "OrderDetails" => "09128431937",
-            "User" => "یگانه علیزاده",
+            "User" => " علی تهرانی",
             "UserID" => 18,
             "price" => 6598542,
             "Level" => "جدید",
             "UnixTimestamp" => time() - (5 * 30 * 86400),
             "PersianDate" => biiq_PersianDate::date("l j F Y - H:i", time() - (5 * 30 * 86400)),
-            "Status" => "موفق",
+            "Status" => "تکمیل نشده",
         ],
     ];
     foreach ($p->orderList as &$Item) {
@@ -111,31 +111,49 @@ function ProcessRequest($request)
     $p->userList = [
         [
 
-            "User" => "یگانه علیزاده",
-            "UserID" => 19,
-            "lastActivity" => "2 ماه پیش",
-            "UnixTimestamp" => 11111111,
-            "persianDate" => biiq_PersianDate::date("l j F Y - H:i", 1111111),
+            "User" =>  "یگانه علیزاده",
+            "UserID" => 1,
+            "lastActivity" => biiq_PersianDate::date("l j F Y - H:i", time() - (23 * 86400)),
+            "lastActivityTimestamp" => time() - (23 * 60),
+            "UnixTimestamp" => time() - (5 * 30 * 86400),
+            "PersianDate" => biiq_PersianDate::date("l j F Y - H:i", time() - (5 * 30 * 86400)),
         ],
         [
 
             "User" => "بنفشه ابراهیمی",
-            "UserID" => 20,
-            "lastActivity" => "2 ماه پیش",
-            "UnixTimestamp" => 33333333,
-            "persianDate" => biiq_PersianDate::date("l j F Y - H:i", 333333333),
+            "UserID" => 2,
+            // آخرین فعالیت → 14 روز پیش
+            "lastActivity" => biiq_PersianDate::date("l j F Y - H:i", time() - (15 * 86400)),
+            "lastActivityTimestamp" => time() - (14 * 86400),
+            "UnixTimestamp" => time() - (5 * 12 * 86400),
+            "PersianDate" => biiq_PersianDate::date("l j F Y - H:i", time() - (5 * 12 * 86400)),
         ],
         [
 
-            "User" => "مونا مارامی",
-            "UserID" => 21,
-            "lastActivity" => "2 ماه پیش",
-            "UnixTimestamp" => 4444444444,
-            "persianDate" => biiq_PersianDate::date("l j F Y - H:i", 4444444444),
+            "User" => "سارا کریمی",
+            "UserID" => 3,
+            "lastActivity" => biiq_PersianDate::date("l j F Y - H:i", time() - (15 * 86400)),
+            "lastActivityTimestamp" => time() - (1 * 86400),
+            "UnixTimestamp" => time() - (14 * 86400),
+            "PersianDate" => biiq_PersianDate::date("l j F Y - H:i", time() - (14 * 86400))
+
+        ],
+        [
+
+            "User" => " علی تهرانی",
+            "UserID" => 4,
+            "lastActivity" => biiq_PersianDate::date("l j F Y - H:i", time() - (15 * 86400)),
+            "lastActivityTimestamp" => time() - (45 * 86400),
+            "UnixTimestamp" => time() - (45 * 86400),
+            "PersianDate" => biiq_PersianDate::date("l j F Y - H:i", time() - (2 * 86400)),
 
         ],
     ];
-
+    foreach ($p->userList as &$Item) {
+        $Item["PersianDateRelative"] = timeAgo($Item["UnixTimestamp"]);
+        $Item["akharin"] = timeAgo($Item["lastActivityTimestamp"]);
+    }
+    unset($Item);
     // -----------------------------
     // 💰 List of financial requests
     // -----------------------------
@@ -144,7 +162,7 @@ function ProcessRequest($request)
             "requestCode" => "0013152343",
             "trackingNumber" => "0293564635",
             "User" => "بنفشه ابراهیمی",
-            "UserID" => 22,
+            "UserID" => 2,
             "price" => separateThousands(65665454546),
             "UnixTimestamp" => 9999999999,
             "persianDate" => biiq_PersianDate::date("l j F Y - H:i", 88888888),
@@ -153,18 +171,28 @@ function ProcessRequest($request)
         [
             "requestCode" => "0013152343",
             "trackingNumber" => "0293564635",
-            "User" => "بنفشه ابراهیمی",
-            "UserID" => 23,
+            "User" => " یگانه علیزاده",
+            "UserID" => 1,
             "price" => separateThousands(65665454546),
-            "UnixTimestamp" => 777777777,
-            "persianDate" => biiq_PersianDate::date("l j F Y - H:i", 33333333),
+            "UnixTimestamp" => 1762545600,
+            "persianDate" => biiq_PersianDate::date("l j F Y - H:i", 1762545600),
             "Status" => "مشاهده رسید",
         ],
         [
             "requestCode" => "0013152343",
             "trackingNumber" => "0293564635",
-            "User" => "بنفشه ابراهیمی",
-            "UserID" => 24,
+            "User" => " سارا کریمی",
+            "UserID" => 3,
+            "price" => separateThousands(65665454546),
+            "UnixTimestamp" => 1616301000,
+            "persianDate" => biiq_PersianDate::date("l j F Y - H:i", 1616301000),
+            "Status" => "در صف تسویه",
+        ],
+        [
+            "requestCode" => "0013152343",
+            "trackingNumber" => "0293564635",
+            "User" => "  علی تهرانی",
+            "UserID" => 4,
             "price" => separateThousands(65665454546),
             "UnixTimestamp" => 1616301000,
             "persianDate" => biiq_PersianDate::date("l j F Y - H:i", 1616301000),
@@ -182,51 +210,41 @@ function ProcessRequest($request)
             'Title'    => 'پیغام‌ها',
             'Subtitle' => '12 تیکت | 5 اتوماسیون'
         ],
-
         ['Link' => $settings['site'] . 'settings/', "Icon" => "gear", "Title" => "تنظیمات", "Subtitle" => "2 سفارش در حال پردازش"],
         ['Link' => $settings['site'] . 'transactions/', "Icon" => "list-ul", "Title" => "تسویه", "Subtitle" => "نرمال"],
         ['Link' => "#", "Icon" => "file-alt", "Title" => "حساب‌های بانکی", "Subtitle" => "3 مورد در حال انتظار"],
         ['Link' => "#", "Icon" => "id-card", "Title" => "مدارک احراز", "Subtitle" => "2 مورد در حال انتظار"],
     ];
-    // -----------------------------
-    // 🎨 Status colors  
-    // -----------------------------
-// -----------------------------
-// 🔝 اضافه کردن رنگ وضعیت
-// -----------------------------
-// -----------------------------
-// سطح کاربر و کلاس + آیکون مخصوص
-// -----------------------------
-foreach ($p->orderList as &$Item) {
 
-    // رنگ وضعیت
-    $status = trim($Item["Status"]);
-    if ($status === "موفق") $Item["StatusColor"] = "text-success opacity-green";
-    elseif ($status === "در انتظار تایید") $Item["StatusColor"] = "text-warning bg-opacity-warning";
-    else $Item["StatusColor"] = "text-danger opacity-danger";
+    // -----------------------------
+    // -----------------------------
+    foreach ($p->orderList as &$Item) {
+        $status = trim($Item["Status"]);
+        if ($status === "موفق") $Item["StatusColor"] = "text-success opacity-green";
+        elseif ($status === "پردازش") $Item["StatusColor"] = "text-warning bg-opacity-warning";
+        elseif ($status === "رد شده") $Item["StatusColor"] = "text-danger opacity-danger";
+        elseif ($status === "تکمیل نشده") $Item["StatusColor"] = "text-primary opacity-primary";
+        else $Item["StatusColor"] = "text-danger opacity-danger";
+        $level = trim($Item["Level"]);
+        switch ($level) {
+            case "طلایی":
 
-    // سطح کاربر و آیکون
-    $level = trim($Item["Level"]);
-    switch ($level) {
-        case "طلایی":
-            $Item["LevelColor"] = "text-warning";
-            $Item["LevelIcon"] = "fa-solid fa-star"; 
-            break;
-        case "حرفه ای":
-            $Item["LevelColor"] = "text-red";
-            $Item["LevelIcon"] = "fa-solid fa-medal"; 
-            break;
-        case "فعال":
-            $Item["LevelColor"] = "text-success";
-            $Item["LevelIcon"] = "fa-solid fa-circle-check"; 
-            break;
-        default: // جدید یا سایر سطح‌ها
-            $Item["LevelColor"] = "text-primary";
-            $Item["LevelIcon"] = "fa-solid fa-user"; 
-            break;
+                $Item["LevelIcon"] = "fa-solid fa-star text-warning";
+                break;
+            case "حرفه ای":
+
+                $Item["LevelIcon"] = "fa-solid fa-medal text-red";
+                break;
+            case "فعال":
+
+                $Item["LevelIcon"] = "fa-solid fa-circle-check text-green";
+                break;
+            default:
+                $Item["LevelIcon"] = "fa-solid fa-user text-primary";
+                break;
+        }
     }
-}
-unset($Item);
+    unset($Item);
 
     foreach ($p->userList as &$Item) {
         $status = trim($Item["Status"]);
@@ -242,7 +260,7 @@ unset($Item);
         else $Item["StatusColor"] = "text-warning";
     }
     unset($Item);
-    
+
     // -----------------------------
     // 🔙 Final output
     // -----------------------------

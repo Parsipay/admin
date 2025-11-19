@@ -109,7 +109,7 @@ function ProcessRequest($request)
              <span>USDT (تتر)</span>
              </div>
             </div>',
-            "User" => "یگانه علیزاده",
+            "User" => "یگانه عزززلیزاده",
             "UserID" => 16,
             "price" => "<b>" . separateThousands(445609806) . "</b>",
             "UnixTimestamp" => 789635,
@@ -347,6 +347,7 @@ function ProcessRequest($request)
         ],
     ];
 
+
     foreach ($page->userAuthentication as &$Item) {
         $extraReq = trim($Item["extraReq"]);
 
@@ -361,6 +362,7 @@ function ProcessRequest($request)
         }
     }
     unset($Item);
+
     // prevent possible bugs later
     //$page->CurrentUser = biiq_User::GetByID($SelectedUserID);
     $page->CurrentUser = $page; //Delete me later
