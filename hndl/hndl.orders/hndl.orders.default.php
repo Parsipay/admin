@@ -36,13 +36,6 @@ function ProcessRequest($request){
     }
 }
 
-/**
- * Main request processor for "currency" page
- */
-
-    // -------------------------
-    // Initialize page object
-    // -------------------------
 
     // -------------------------
     // Current Date & Time

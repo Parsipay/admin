@@ -58,23 +58,23 @@ $(".filter-status").on("click", function () {
   });
 
   /* ---------------------- 🔽 SORTABLE COLUMNS ---------------------- */
-  $(".sortable").on("click", function () {
-    const $table = $(this).closest("table");
-    const $tbody = $table.find("tbody");
-    const index = $(this).data("column");
-    const asc = $(this).data("asc") || false;
-    $(this).data("asc", !asc);
+  // $(".sortable").on("click", function () {
+  //   const $table = $(this).closest("table");
+  //   const $tbody = $table.find("tbody");
+  //   const index = $(this).data("column");
+  //   const asc = $(this).data("asc") || false;
+  //   $(this).data("asc", !asc);
 
-    const rows = $tbody
-      .find("tr")
-      .get()
-      .sort((a, b) => {
-        const A = +$(a).find("td").eq(index).data("timestamp");
-        const B = +$(b).find("td").eq(index).data("timestamp");
-        return asc ? A - B : B - A;
-      });
-    $tbody.append(rows);
-  });
+  //   const rows = $tbody
+  //     .find("tr")
+  //     .get()
+  //     .sort((a, b) => {
+  //       const A = +$(a).find("td").eq(index).data("timestamp");
+  //       const B = +$(b).find("td").eq(index).data("timestamp");
+  //       return asc ? A - B : B - A;
+  //     });
+  //   $tbody.append(rows);
+  // });
 
   /* ---------------------- 📋 COPY TEXT ---------------------- */
   $(document).on("click", ".fa-copy", function () {

@@ -13,20 +13,19 @@
                 <th class="col-5 py-3 text-start">
                     آخرین فعالیت
                 </th>
-                <th class="col-4 py-3 text-center sortable">
-                    <div class="d-flex align-items-center gap-2">
-                        <span>تاریخ ثبت‌نام</span>
-                        <i class="fas fa-sort sort-toggle ms-2" data-order="desc" style="cursor:pointer"></i>
-                    </div>
-                </th>
-            </tr>
+   <th class="col-4 py-3 text-start sortable" data-column="2">
+    <span>تاریخ ثبت‌نام</span>
+    <i class="fas fa-sort sort-toggle ms-2"></i>
+</th>
+      </tr>
         </thead>
         <tbody>
             [foreach ([@Objects->userList])]
             <tr>
                 <td class="text-primary">
-                    <button class="btn opacity-green rounded-pill w-50 text-green">
+                    <button class="btn opacity-green rounded-pill w-25 text-green  ms-5">
                         [@Item->User]
+                        <i class="fas fa-user text-success ms-3"></i>
                     </button>
                 </td>
                 <td class="sortable" data-timestamp="[@Item->lastActivityTimestamp]">

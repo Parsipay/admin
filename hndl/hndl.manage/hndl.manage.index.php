@@ -61,7 +61,7 @@ function ProcessRequest($request)
             "phoneNumber"  => "09128431937",
             "User"         => "یگانه علیزاده",
             "UserID"       => 1,
-            "UnixTimestamp"=> 6365897855,
+            "UnixTimestamp" => time() - 2592000, 
             "persianDate"  => biiq_PersianDate::date("l j F Y - H:i", 665150314),
             "Status"       => "مسدود",
         ],
@@ -70,7 +70,7 @@ function ProcessRequest($request)
             "phoneNumber"  => "09128431937",
             "User"         => " بنفشه ابراهیمی",
             "UserID"       => 2,
-            "UnixTimestamp"=> 1756301000,
+            "UnixTimestamp"=>  time() - 30,
             "persianDate"  => biiq_PersianDate::date("l j F Y - H:i", 45468892),
             "Status"       => "موفق",
         ],
@@ -79,7 +79,7 @@ function ProcessRequest($request)
             "phoneNumber"  => "09128431937",
             "User"         => " سارا کریمی",
             "UserID"       => 3,
-            "UnixTimestamp"=> 1616301000,
+            "UnixTimestamp"=> time() - 600,
             "persianDate"  => biiq_PersianDate::date("l j F Y - H:i", 18978752),
             "Status"       => "تکمیل نشده",
         ],
@@ -88,7 +88,7 @@ function ProcessRequest($request)
             "phoneNumber"  => "09128431937",
             "User"         => "علی نهرانی",
             "UserID"       => 4,
-            "UnixTimestamp"=> 1616301000,
+            "UnixTimestamp"=> time() - 604800,
             "persianDate"  => biiq_PersianDate::date("l j F Y - H:i", 18978752),
             "Status"       => "تکمیل نشده",
         ],
@@ -103,20 +103,33 @@ function ProcessRequest($request)
     });
 
     // --- Auto-calculate last activity for each user ---
-    foreach ($page->userList as &$item) {
-        $diff = time() - $item['UnixTimestamp'];
-        if ($diff < 60)
-            $item['lastActivity'] = 'لحظاتی پیش';
-        elseif ($diff < 3600)
-            $item['lastActivity'] = floor($diff / 60) . ' دقیقه پیش';
-        elseif ($diff < 86400)
-            $item['lastActivity'] = floor($diff / 3600) . ' ساعت پیش';
-        elseif ($diff < 2592000)
-            $item['lastActivity'] = floor($diff / 86400) . ' روز پیش';
-        else
-            $item['lastActivity'] = floor($diff / 2592000) . ' ماه پیش';
+foreach ($page->userList as &$item) {
+    $diff = time() - $item['UnixTimestamp'];
+
+    if ($diff < 60) {
+        $item['lastActivity'] = 'لحظاتی پیش';
+    } elseif ($diff < 3600) {
+        $minutes = round($diff / 60);
+        $item['lastActivity'] = $minutes . ' دقیقه پیش';
+    } elseif ($diff < 86400) {
+        $hours = round($diff / 3600);
+        $item['lastActivity'] = $hours . ' ساعت پیش';
+    } elseif ($diff < 604800) {
+        $days = round($diff / 86400);
+        $item['lastActivity'] = $days . ' روز پیش';
+    } elseif ($diff < 2592000) {
+        $weeks = round($diff / 604800);
+        $item['lastActivity'] = $weeks . ' هفته پیش';
+    } elseif ($diff < 31536000) {
+        $months = round($diff / 2592000);
+        $item['lastActivity'] = $months . ' ماه پیش';
+    } else {
+        $years = round($diff / 31536000);
+        $item['lastActivity'] = $years . ' سال پیش';
     }
-    unset($item);
+}
+unset($item);
+
 
     // --- Bank accounts list (keep nationalCode & phoneNumber for HTML) ---
     $page->bankAccount = [

@@ -108,52 +108,44 @@ function ProcessRequest($request)
     // 👥 User list    
     // -----------------------------
 
-    $p->userList = [
-        [
+$p->userList = [
+    [
+        "User" => "یگانه علیزاده",
+        "UserID" => 1,
+        "UnixTimestamp" => time() - (5 * 30 * 86400), // 5 ماه پیش
+        "lastActivityTimestamp" => time() - (23 * 86400), // 23 روز پیش
+    ],
+    [
+        "User" => "بنفشه ابراهیمی",
+        "UserID" => 2,
+        "UnixTimestamp" => time() - (5 * 12 * 86400), // تقریبا 2 ماه پیش
+        "lastActivityTimestamp" => time() - (14 * 86400), // 14 روز پیش
+    ],
+    [
+        "User" => "سارا کریمی",
+        "UserID" => 3,
+        "UnixTimestamp" => time() - (14 * 86400), // 14 روز پیش
+        "lastActivityTimestamp" => time() - (1 * 86400), // 1 روز پیش
+    ],
+    [
+        "User" => "علی تهرانی",
+        "UserID" => 4,
+        "UnixTimestamp" => time() - (45 * 86400), // 1 ماه و نیم پیش
+        "lastActivityTimestamp" => time() - (2 * 86400), // 2 روز پیش
+    ],
+];
 
-            "User" =>  "یگانه علیزاده",
-            "UserID" => 1,
-            "lastActivity" => biiq_PersianDate::date("l j F Y - H:i", time() - (23 * 86400)),
-            "lastActivityTimestamp" => time() - (23 * 60),
-            "UnixTimestamp" => time() - (5 * 30 * 86400),
-            "PersianDate" => biiq_PersianDate::date("l j F Y - H:i", time() - (5 * 30 * 86400)),
-        ],
-        [
+// ساخت رشته‌های نسبی
+foreach ($p->userList as &$Item) {
+    $Item["PersianDateRelative"] = timeAgo($Item["UnixTimestamp"]); // برای تاریخ ثبت
+    $Item["akharin"] = timeAgo($Item["lastActivityTimestamp"]); // برای آخرین فعالیت
+}
+unset($Item);
 
-            "User" => "بنفشه ابراهیمی",
-            "UserID" => 2,
-            // آخرین فعالیت → 14 روز پیش
-            "lastActivity" => biiq_PersianDate::date("l j F Y - H:i", time() - (15 * 86400)),
-            "lastActivityTimestamp" => time() - (14 * 86400),
-            "UnixTimestamp" => time() - (5 * 12 * 86400),
-            "PersianDate" => biiq_PersianDate::date("l j F Y - H:i", time() - (5 * 12 * 86400)),
-        ],
-        [
-
-            "User" => "سارا کریمی",
-            "UserID" => 3,
-            "lastActivity" => biiq_PersianDate::date("l j F Y - H:i", time() - (15 * 86400)),
-            "lastActivityTimestamp" => time() - (1 * 86400),
-            "UnixTimestamp" => time() - (14 * 86400),
-            "PersianDate" => biiq_PersianDate::date("l j F Y - H:i", time() - (14 * 86400))
-
-        ],
-        [
-
-            "User" => " علی تهرانی",
-            "UserID" => 4,
-            "lastActivity" => biiq_PersianDate::date("l j F Y - H:i", time() - (15 * 86400)),
-            "lastActivityTimestamp" => time() - (45 * 86400),
-            "UnixTimestamp" => time() - (45 * 86400),
-            "PersianDate" => biiq_PersianDate::date("l j F Y - H:i", time() - (2 * 86400)),
-
-        ],
-    ];
-    foreach ($p->userList as &$Item) {
-        $Item["PersianDateRelative"] = timeAgo($Item["UnixTimestamp"]);
-        $Item["akharin"] = timeAgo($Item["lastActivityTimestamp"]);
-    }
-    unset($Item);
+// مرتب‌سازی بر اساس آخرین فعالیت (جدیدترین اول)
+usort($p->userList, function($a, $b){
+    return $b['lastActivityTimestamp'] <=> $a['lastActivityTimestamp'];
+});
     // -----------------------------
     // 💰 List of financial requests
     // -----------------------------
@@ -167,6 +159,8 @@ function ProcessRequest($request)
             "UnixTimestamp" => 9999999999,
             "persianDate" => biiq_PersianDate::date("l j F Y - H:i", 88888888),
             "Status" => "مشاهده رسید",
+            "Level" => "طلایی",
+
         ],
         [
             "requestCode" => "0013152343",
@@ -177,6 +171,8 @@ function ProcessRequest($request)
             "UnixTimestamp" => 1762545600,
             "persianDate" => biiq_PersianDate::date("l j F Y - H:i", 1762545600),
             "Status" => "مشاهده رسید",
+            "Level" => "فعال",
+
         ],
         [
             "requestCode" => "0013152343",
@@ -187,6 +183,8 @@ function ProcessRequest($request)
             "UnixTimestamp" => 1616301000,
             "persianDate" => biiq_PersianDate::date("l j F Y - H:i", 1616301000),
             "Status" => "در صف تسویه",
+            "Level" => "حرفه ای",
+
         ],
         [
             "requestCode" => "0013152343",
@@ -197,6 +195,8 @@ function ProcessRequest($request)
             "UnixTimestamp" => 1616301000,
             "persianDate" => biiq_PersianDate::date("l j F Y - H:i", 1616301000),
             "Status" => "در صف تسویه",
+            "Level" => "جدید",
+
         ],
     ];
     // -----------------------------
@@ -245,12 +245,39 @@ function ProcessRequest($request)
         }
     }
     unset($Item);
+    foreach ($p->requestList as &$Item) {
+        $status = trim($Item["Status"]);
+        if ($status === "موفق") $Item["StatusColor"] = "text-success opacity-green";
+        elseif ($status === "پردازش") $Item["StatusColor"] = "text-warning bg-opacity-warning";
+        elseif ($status === "رد شده") $Item["StatusColor"] = "text-danger opacity-danger";
+        elseif ($status === "تکمیل نشده") $Item["StatusColor"] = "text-primary opacity-primary";
+        else $Item["StatusColor"] = "text-danger opacity-danger";
+        $level = trim($Item["Level"]);
+        switch ($level) {
+            case "طلایی":
+
+                $Item["LevelIcon"] = "fa-solid fa-star text-warning";
+                break;
+            case "حرفه ای":
+
+                $Item["LevelIcon"] = "fa-solid fa-medal text-red";
+                break;
+            case "فعال":
+
+                $Item["LevelIcon"] = "fa-solid fa-circle-check text-green";
+                break;
+            default:
+                $Item["LevelIcon"] = "fa-solid fa-user text-primary";
+                break;
+        }
+    }
+    unset($Item);
 
     foreach ($p->userList as &$Item) {
         $status = trim($Item["Status"]);
         if ($status === "موفق") $Item["StatusColor"] = "text-success opacity-green";
         elseif ($status === "تکمیل نشده") $Item["StatusColor"] = "text-primary bg-blue";
-        else $Item["StatusColor"] = "text-danger opacity-danger";
+        else $Item["StatusColor"] = "text-danger opacity-danger text-decoration-none";
     }
     unset($Item);
 
