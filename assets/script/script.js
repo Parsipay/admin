@@ -58,23 +58,19 @@ $(".filter-status").on("click", function () {
   });
 
   /* ---------------------- 🔽 SORTABLE COLUMNS ---------------------- */
-  // $(".sortable").on("click", function () {
-  //   const $table = $(this).closest("table");
-  //   const $tbody = $table.find("tbody");
-  //   const index = $(this).data("column");
-  //   const asc = $(this).data("asc") || false;
-  //   $(this).data("asc", !asc);
-
-  //   const rows = $tbody
-  //     .find("tr")
-  //     .get()
-  //     .sort((a, b) => {
-  //       const A = +$(a).find("td").eq(index).data("timestamp");
-  //       const B = +$(b).find("td").eq(index).data("timestamp");
-  //       return asc ? A - B : B - A;
-  //     });
-  //   $tbody.append(rows);
-  // });
+document.querySelectorAll('.sortable').forEach(th => {
+    th.addEventListener('click', () => {
+        const table = th.closest('table');
+        const tbody = table.querySelector('tbody');
+        Array.from(tbody.querySelectorAll('tr'))
+            .sort((a, b) => {
+                const t1 = +a.querySelector('.sortable').dataset.timestamp;
+                const t2 = +b.querySelector('.sortable').dataset.timestamp;
+                return t2 - t1; // جدیدترین اول
+            })
+            .forEach(tr => tbody.appendChild(tr));
+    });
+});
 
   /* ---------------------- 📋 COPY TEXT ---------------------- */
   $(document).on("click", ".fa-copy", function () {
@@ -197,6 +193,7 @@ $(".filter-status").on("click", function () {
   });
 
   /* ---------------------- 🔼 SORT TOGGLE ICONS ---------------------- */
+  //in sorto baraye safheye mali neveshtam .vali age nabashe ham baghie sorta kar nemikone baghie jadavala hamashon ba php sort shodan ama ino baraye nemone gozashtam
   $(document).on("click", ".sort-toggle", function (e) {
     e.preventDefault();
 

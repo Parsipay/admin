@@ -241,11 +241,15 @@
                             </td>
                             <td class="text-start fw-semibold">[@Item->phoneNumber]
                             </td>
-                            <td class="text-start fw-semibold"><a href="[@settings->site]manage/[@Item->UserID]/">
+                            <td class="text-start fw-semibold">
+                                <a href="[@settings->site]manage/[@Item->UserID]/"
+                                    class="d-inline-flex align-items-center text-decoration-none">
+                                    <i class="[@Item->LevelIcon] me-1"></i>
                                     [@Item->User]
-                                </a></td>
+                                </a>
+                            </td>
                             <td class="text-start fw-semibold">[@Item->lastActivity]</td>
-                            <td class="text-start" data-timestamp="[@Item->UnixTimestamp]">[@Item->persianDate]</td>
+                            <td class="text-start" data-timestamp="[@Item->UnixTimestamp]">[@Item->PersianDate]</td>
 
                             <td class="py-3 text-start">
                                 <span
@@ -302,18 +306,20 @@
                         <tr>
                             <td class="text-start fw-semibold py-3">[@Item->nationalCode]</td>
                             <td class="text-start fw-semibold">[@Item->phoneNumber]</td>
-                            <td class="text-primary text-start">
-                                <a href="[@settings->site]users/[@Item->UserID]/" class="text-decoration-none">
+                       <td class="text-start fw-semibold">
+                                <a href="[@settings->site]manage/[@Item->UserID]/"
+                                    class="d-inline-flex align-items-center text-decoration-none">
+                                    <i class="[@Item->LevelIcon] me-1"></i>
                                     [@Item->User]
                                 </a>
                             </td>
                             <td class="text-start">
                                 <span>[@Item->bankInfo]</span>
-                                <img src="[@Item->BankImage]" alt="بانک" width="30" height="30" class="ms-2">
+                                <img src="[@Item->BankImage]" alt="بانک"  class="ms-3">
                             </td>
 
                             <td class="text-start">
-                                <div class="d-flex justify-content-between">
+                                <div class="d-flex justify-content-Start align-items-center gap-4">
                                     <span class="px-3 py-2 rounded-pill text-success opacity-green">
                                         [@Item->details]
                                     </span>
@@ -355,7 +361,7 @@
                             </th>
                             <th class="text-start py-3">کاربر</th>
                             <th class="text-start py-3">مدارک <i class="fas fa-sort ms-1"></i></th>
-                            <th class="text-start py-3">
+                            <th class=" py-3">
                                 وضعیت
                                 <div class="dropdown d-inline">
                                     <i class="fas fa-sort  ms-1" data-bs-toggle="dropdown" style="cursor:pointer;"></i>
@@ -383,18 +389,19 @@
                             <td class="text-start fw-semibold">[@Item->nationalCode]</td>
                             <td class="text-start fw-semibold">[@Item->phoneNumber]
                             </td>
-                            <td class="text-primary text-start">
-                                <a href="[@settings->site]users/[@Item->UserID]/" class="text-decoration-none">
+                              <td class="text-start fw-semibold">
+                                <a href="[@settings->site]manage/[@Item->UserID]/"
+                                    class="d-inline-flex align-items-center text-decoration-none">
+                                    <i class="[@Item->LevelIcon] me-1"></i>
                                     [@Item->User]
                                 </a>
                             </td>
-                            <td class="text-start fw-bold">[@Item->documents]</td>
-                            <td class="text-start">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <span class="px-3 py-2 rounded-pill status-text [@Item->StatusColor]">
+                            <td class="text-start fw-bold"><a href="#">[@Item->documents]</a></td>
+                            <td class="text-center">
+                                <div class="d-flex justify-content-center align-items-center flex-fill">
+                                    <span class="px-3 py-2   w-50 rounded-pill status-text [@Item->StatusColor]">
                                         [@Item->Status]
                                     </span>
-                                    <i class="fas fa-ellipsis-v text-secondary ms-2" style="cursor:pointer;"></i>
                                 </div>
                             </td>
                         </tr>

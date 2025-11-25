@@ -2,7 +2,7 @@
 function ProcessRequest($request)
 {
 
-    
+
 
     // Helper: Mask card number except first 6 and last 4 digits
     function maskCard($num)
@@ -15,13 +15,6 @@ function ProcessRequest($request)
 
     $page = new stdClass();
     // === Current Date & Time ===
-    $today = new DateTime();
-    $today->modify('+1 hour');
-    $page->dateandtime = [
-        'persianDate' => biiq_PersianDate::date("l j F Y"),
-        'otherDate'   => $today->format("Y/m/d"),
-        'time'        => $today->format("H:i")
-    ];
 
     // --- Accordion documents list ---
     $timestamp = 1616301000;
@@ -53,6 +46,7 @@ function ProcessRequest($request)
             "MaskedCard" => maskCard("5022291077470837"),
         ],
     ];
+    // -----------------------------
 
     // --- User deposits list ---
     $page->userList = [
@@ -61,74 +55,86 @@ function ProcessRequest($request)
             "phoneNumber"  => "09128431937",
             "User"         => "یگانه علیزاده",
             "UserID"       => 1,
-            "UnixTimestamp" => time() - 2592000, 
-            "persianDate"  => biiq_PersianDate::date("l j F Y - H:i", 665150314),
+            "UnixTimestamp" => time() - (5 * 30 * 86400), // 5 ماه پیش
+            "lastActivityTimestamp" => time() - (23 * 86400), // 23 روز پیش
+            "PersianDate" => biiq_PersianDate::date("l j F Y - H:i", time() - (5 * 2 * 86400)),
             "Status"       => "مسدود",
+            "Level" => "فعال",
         ],
         [
             "nationalCode" => "0013152343",
             "phoneNumber"  => "09128431937",
-            "User"         => " بنفشه ابراهیمی",
+            "User"         => "بنفشه ابراهیمی",
             "UserID"       => 2,
-            "UnixTimestamp"=>  time() - 30,
-            "persianDate"  => biiq_PersianDate::date("l j F Y - H:i", 45468892),
-            "Status"       => "موفق",
+            "UnixTimestamp" => time() - (5 * 12 * 86400), // تقریبا 2 ماه پیش
+            "lastActivityTimestamp" => time() - (14 * 86400), // 14 روز پیش
+            "PersianDate" => biiq_PersianDate::date("l j F Y - H:i", 896554121),
+            "Level" => "طلایی",
+            "Status" => "موفق "
+
         ],
         [
             "nationalCode" => "0013152343",
             "phoneNumber"  => "09128431937",
-            "User"         => " سارا کریمی",
+            "User"         => "سارا کریمی",
             "UserID"       => 3,
-            "UnixTimestamp"=> time() - 600,
-            "persianDate"  => biiq_PersianDate::date("l j F Y - H:i", 18978752),
-            "Status"       => "تکمیل نشده",
+            "UnixTimestamp" => time() - (14 * 86400), // 14 روز پیش
+            "lastActivityTimestamp" => time() - (1 * 86400), // 1 روز پیش
+            "PersianDate" => biiq_PersianDate::date("l j F Y - H:i", 126545878),
+            "Level" => "حرفه ای",
+            "Status" => "موفق "
         ],
         [
             "nationalCode" => "0013152343",
             "phoneNumber"  => "09128431937",
             "User"         => "علی نهرانی",
             "UserID"       => 4,
-            "UnixTimestamp"=> time() - 604800,
-            "persianDate"  => biiq_PersianDate::date("l j F Y - H:i", 18978752),
+            "UnixTimestamp" => time() - (45 * 86400), // 1 ماه و نیم پیش
+            "lastActivityTimestamp" => time() - (2 * 86400), // 2 روز پیش
+            "PersianDate" => biiq_PersianDate::date("l j F Y - H:i", 568753525),
+
             "Status"       => "تکمیل نشده",
+            "Level" => "جدید",
         ],
     ];
 
-    // --- Sort deposits by timestamp (default: newest first) ---
-    $sortOrder = $_GET['sort'] ?? 'desc';
-    usort($page->userList, function ($a, $b) use ($sortOrder) {
-        return $sortOrder === 'asc'
-            ? $a['UnixTimestamp'] <=> $b['UnixTimestamp']
-            : $b['UnixTimestamp'] <=> $a['UnixTimestamp'];
+    // --- Auto-calculate last activity for each user ---
+    foreach ($page->userList as &$item) {
+        $diff = time() - $item['UnixTimestamp'];
+
+        if ($diff < 60) {
+            $item['lastActivity'] = 'لحظاتی پیش';
+        } elseif ($diff < 3600) {
+            $minutes = round($diff / 60);
+            $item['lastActivity'] = $minutes . ' دقیقه پیش';
+        } elseif ($diff < 86400) {
+            $hours = round($diff / 3600);
+            $item['lastActivity'] = $hours . ' ساعت پیش';
+        } elseif ($diff < 604800) {
+            $days = round($diff / 86400);
+            $item['lastActivity'] = $days . ' روز پیش';
+        } elseif ($diff < 2592000) {
+            $weeks = round($diff / 604800);
+            $item['lastActivity'] = $weeks . ' هفته پیش';
+        } elseif ($diff < 31536000) {
+            $months = round($diff / 2592000);
+            $item['lastActivity'] = $months . ' ماه پیش';
+        } else {
+            $years = round($diff / 31536000);
+            $item['lastActivity'] = $years . ' سال پیش';
+        }
+    }
+    unset($item);
+
+    // --- Sort users by UnixTimestamp (جدیدترین اول) ---
+    // ساخت رشته‌های نسبی
+
+
+
+    usort($page->userList, function ($a, $b) {
+        return $b["UnixTimestamp"] <=> $a["UnixTimestamp"];
     });
 
-    // --- Auto-calculate last activity for each user ---
-foreach ($page->userList as &$item) {
-    $diff = time() - $item['UnixTimestamp'];
-
-    if ($diff < 60) {
-        $item['lastActivity'] = 'لحظاتی پیش';
-    } elseif ($diff < 3600) {
-        $minutes = round($diff / 60);
-        $item['lastActivity'] = $minutes . ' دقیقه پیش';
-    } elseif ($diff < 86400) {
-        $hours = round($diff / 3600);
-        $item['lastActivity'] = $hours . ' ساعت پیش';
-    } elseif ($diff < 604800) {
-        $days = round($diff / 86400);
-        $item['lastActivity'] = $days . ' روز پیش';
-    } elseif ($diff < 2592000) {
-        $weeks = round($diff / 604800);
-        $item['lastActivity'] = $weeks . ' هفته پیش';
-    } elseif ($diff < 31536000) {
-        $months = round($diff / 2592000);
-        $item['lastActivity'] = $months . ' ماه پیش';
-    } else {
-        $years = round($diff / 31536000);
-        $item['lastActivity'] = $years . ' سال پیش';
-    }
-}
-unset($item);
 
 
     // --- Bank accounts list (keep nationalCode & phoneNumber for HTML) ---
@@ -141,6 +147,8 @@ unset($item);
             "bankInfo"     => "IR940150000184370199152881",
             "BankImage"    => "../assets/img/dey.png",
             "details"      => "تایید شده",
+            "Level" => "فعال",
+
         ],
         [
             "nationalCode" => "0013152343",
@@ -150,24 +158,30 @@ unset($item);
             "bankInfo"     => "IR940150000184370199152881",
             "BankImage"    => "../assets/img/ansar.png",
             "details"      => "تایید شده",
+            "Level" => "طلایی",
+
         ],
         [
             "nationalCode" => "0013152343",
             "phoneNumber"  => "09128431937",
-            "User"         =>"سارا کریمی",
+            "User"         => "سارا کریمی",
             "UserID"       => 3,
             "bankInfo"     => "IR940150000184370199152881",
             "BankImage"    => "../assets/img/blu.png",
             "details"      => "تایید شده",
+            "Level" => "حرفه ای",
+
         ],
         [
             "nationalCode" => "0013152343",
             "phoneNumber"  => "09128431937",
-            "User"         =>" علی تهرانی",
+            "User"         => " علی تهرانی",
             "UserID"       => 4,
             "bankInfo"     => "IR940150000184370199152881",
             "BankImage"    => "../assets/img/blu.png",
             "details"      => "تایید شده",
+            "Level" => "جدید",
+
         ],
     ];
 
@@ -180,6 +194,8 @@ unset($item);
             "UserID"       => 2,
             "documents"    => "مشاهده مدارک",
             "Status"       => "در انتظار تایید",
+            "Level" => "فعال",
+
         ],
         [
             "nationalCode" => "0013152343",
@@ -188,6 +204,8 @@ unset($item);
             "UserID"       => 1,
             "documents"    => "مشاهده مدارک",
             "Status"       => "تایید شده",
+            "Level" => "طلایی",
+
         ],
         [
             "nationalCode" => "0013152343",
@@ -196,6 +214,8 @@ unset($item);
             "UserID"       => 3,
             "documents"    => "مشاهده مدارک",
             "Status"       => "تکمیل نشده",
+            "Level" => "حرفه ای",
+
         ],
         [
             "nationalCode" => "0013152343",
@@ -204,6 +224,8 @@ unset($item);
             "UserID"       => 4,
             "documents"    => "مشاهده مدارک",
             "Status"       => "رد شده",
+            "Level" => "جدید",
+
         ],
     ];
 
@@ -230,10 +252,74 @@ unset($item);
         };
     }
     unset($item);
+    //add icon for user level
+    // -----------------------------
+    foreach ($page->userList as &$Item) {
 
+        $level = trim($Item["Level"]);
+        switch ($level) {
+            case "طلایی":
+
+                $Item["LevelIcon"] = "fa-solid fa-star text-warning ";
+                break;
+            case "حرفه ای":
+
+                $Item["LevelIcon"] = "fa-solid fa-medal text-red";
+                break;
+            case "فعال":
+
+                $Item["LevelIcon"] = "fa-solid fa-circle-check text-green";
+                break;
+            default:
+                $Item["LevelIcon"] = "fa-solid fa-user text-primary";
+                break;
+        }
+    }
+    foreach ($page->bankAccount as &$Item) {
+
+        $level = trim($Item["Level"]);
+        switch ($level) {
+            case "طلایی":
+
+                $Item["LevelIcon"] = "fa-solid fa-star text-warning ";
+                break;
+            case "حرفه ای":
+
+                $Item["LevelIcon"] = "fa-solid fa-medal text-red";
+                break;
+            case "فعال":
+
+                $Item["LevelIcon"] = "fa-solid fa-circle-check text-green";
+                break;
+            default:
+                $Item["LevelIcon"] = "fa-solid fa-user text-primary";
+                break;
+        }
+    }
+    foreach ($page->authentication as &$Item) {
+
+        $level = trim($Item["Level"]);
+        switch ($level) {
+            case "طلایی":
+
+                $Item["LevelIcon"] = "fa-solid fa-star text-warning ";
+                break;
+            case "حرفه ای":
+
+                $Item["LevelIcon"] = "fa-solid fa-medal text-red";
+                break;
+            case "فعال":
+
+                $Item["LevelIcon"] = "fa-solid fa-circle-check text-green";
+                break;
+            default:
+                $Item["LevelIcon"] = "fa-solid fa-user text-primary";
+                break;
+        }
+    }
     // --- Final output ---
     return [
-        'content'   => biiq_Template::Start('manage->index', true, ['Objects' => $page,'dateandtime' => $page->dateandtime]),
+        'content'   => biiq_Template::Start('manage->index', true, ['Objects' => $page, 'dateandtime' => $page->dateandtime]),
         'id'        => 1,
         'title'     => 'مالی',
         'Canonical' => SITE . 'manage/',
