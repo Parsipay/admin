@@ -14,7 +14,25 @@ function ProcessRequest($request)
 
     // --- Helper: format number with thousands separator ---
     $separateThousands = fn($n) => number_format((int)$n);
+    function timeAgo($unixTimestamp)
+    {
+        $now = time();
+        $diff = $now - $unixTimestamp;
 
+        if ($diff < 60) {
+            return $diff . " ثانیه پیش";
+        } elseif ($diff < 3600) {
+            return floor($diff / 60) . " دقیقه پیش";
+        } elseif ($diff < 86400) {
+            return floor($diff / 3600) . " ساعت پیش";
+        } elseif ($diff < 2592000) { // کمتر از 30 روز
+            return floor($diff / 86400) . " روز پیش";
+        } elseif ($diff < 31104000) { // کمتر از 12 ماه
+            return floor($diff / 2592000) . " ماه پیش";
+        } else {
+            return floor($diff / 31104000) . " سال پیش";
+        }
+    }
     // --- Deposits ---
     $page->Deposits = [
         [
@@ -22,8 +40,9 @@ function ProcessRequest($request)
             "trackingNumber" => "ATRK1001",
             "User" => "یگانه علیزاده",
             "UserID" => 2,
-            "UnixTimestamp" => 169787400,
-            "persianDate" => biiq_PersianDate::date("l j F Y - H:i", 1456865410),
+  "UnixTimestamp" => time() - (5 * 30 * 86400), // 5 ماه پیش
+            "lastActivityTimestamp" => time() - (23 * 86400), // 23 روز پیش
+            "PersianDate" => biiq_PersianDate::date("l j F Y - H:i", time() - (5 * 2 * 86400)),
             "Price" => $separateThousands(750000),
             "Status" => "مشاهده رسید"
         ],
@@ -32,8 +51,9 @@ function ProcessRequest($request)
             "trackingNumber" => "BTRK1002",
             "User" => "بنفشه ابراهیمی",
             "UserID" => 3,
-            "UnixTimestamp" => 1659787500,
-            "persianDate" => biiq_PersianDate::date("l j F Y - H:i", 1399787500),
+             "UnixTimestamp" => time() - (5 * 12 * 86400), // تقریبا 2 ماه پیش
+            "lastActivityTimestamp" => time() - (14 * 86400), // 14 روز پیش
+            "PersianDate" => biiq_PersianDate::date("l j F Y - H:i", 896554121),
             "Price" => $separateThousands(1250000),
             "Status" => "مشاهده رسید"
         ],
@@ -42,8 +62,9 @@ function ProcessRequest($request)
             "trackingNumber" => "CTRK1003",
             "User" => "محمد رضایی",
             "UserID" => 4,
-            "UnixTimestamp" => 1659787600,
-            "persianDate" => biiq_PersianDate::date("l j F Y - H:i", 1659787600),
+              "UnixTimestamp" => time() - (14 * 86400), // 14 روز پیش
+            "lastActivityTimestamp" => time() - (1 * 86400), // 1 روز پیش
+            "PersianDate" => biiq_PersianDate::date("l j F Y - H:i", 126545878),
             "Price" => $separateThousands(980000),
             "Status" => "در صف تسویه"
         ]
@@ -64,6 +85,17 @@ function ProcessRequest($request)
         }
     }
     unset($item);
+    // ساخت رشته‌های نسبی
+    foreach ($page->Deposits as &$Item) {
+        $Item["akharin"] = timeAgo($Item["lastActivityTimestamp"]); // برای آخرین فعالیت
+        $Item["PersianDateRelative"] = timeAgo($Item["UnixTimestamp"]); // برای تاریخ ثبت
+    }
+    unset($Item);
+
+
+    usort($page->Deposits, function ($a, $b) {
+        return $b["UnixTimestamp"] <=> $a["UnixTimestamp"];
+    });
 
     // --- Credits ---
     $page->Credits = [

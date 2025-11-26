@@ -27,7 +27,30 @@ function ProcessRequest($request)
         'time'        => $today->format("H:i")
     ];
 
+    function timeAgo($timestamp)
+    {
+        $diff = time() - $timestamp;
 
+        $minutes = floor($diff / 60);
+        $hours   = floor($diff / 3600);
+        $days    = floor($diff / 86400);
+        $months  = floor($diff / 2592000);
+        $years   = floor($diff / 31104000);
+
+        if ($years > 0) {
+            return $years . " سال پیش";
+        } elseif ($months > 0) {
+            return $months . " ماه پیش";
+        } elseif ($days > 0) {
+            return $days . " روز پیش";
+        } elseif ($hours > 0) {
+            return $hours . " ساعت پیش";
+        } elseif ($minutes > 0) {
+            return $minutes . " دقیقه پیش";
+        } else {
+            return "لحظاتی پیش";
+        }
+    }
     //Load user $SelectedUserID
     $page->profileBox = [
         "registrationStatus" => "تایید شده",
@@ -64,18 +87,13 @@ function ProcessRequest($request)
              <span>USDT (تتر)</span>
              </div>
             </div>',
-            "User" => "یگانه علیزاده",
             "UserID" => 16,
             "price" => "<b>" . separateThousands(445609806) . "</b>",
-            "UnixTimestamp" => 111111,
-            "persianDate" => biiq_PersianDate::date("l j F Y - H:i", 11111111),
-            "Status" => "
-             <div class='d-flex justify-content-between'>
-             <span class='opacity-green text-green py-1  px-2 rounded me-4'>
-            موفق<i class='fas fa-check-circle text-green ms-1'></i> 
-            </span>
-         
-        </div>",
+            "UnixTimestamp" => time() - (14 * 86400), // 14 روز پیش
+            "lastActivityTimestamp" => time() - (1 * 86400), // 1 روز پیش
+            "PersianDate" => biiq_PersianDate::date("l j F Y - H:i", 126545878),
+             "Status" => "موفق",
+
         ],
         [
             'ID' => 12312313123,
@@ -87,19 +105,16 @@ function ProcessRequest($request)
              <span>USDT (تتر)</span>
              </div>
             </div>',
-            "User" => "یگانه علیزاده",
             "UserID" => 16,
             "price" => "<b>" . separateThousands(445609806) . "</b>",
-            "UnixTimestamp" => 897887,
-            "persianDate" => biiq_PersianDate::date("l j F Y - H:i", 1236554),
-            "Status" => "
-             <div class='d-flex justify-content-between'>
-             <span class='bg-opacity-warning py-1 text-warning px-2 rounded me-4'>
-           در انتظار تایید <i class='fas fa-stopwatch text-warning'></i>   
-            </span>
-        </div>",
+            "UnixTimestamp" => time() - (5 * 30 * 86400), // 5 ماه پیش
+            "lastActivityTimestamp" => time() - (23 * 86400), // 23 روز پیش
+            "PersianDate" => biiq_PersianDate::date("l j F Y - H:i", time() - (2 * 2 * 86400)),
+            "Status" => "در انتظار تایید",
+
         ],
         [
+            'ID' => 65988978754,
             "numberOrder" => "20232336263# <span class='px-1 rounded-3'>فروش</span>",
             "OrderDetails" => '
              <div class="d-flex justify-content-start">
@@ -109,17 +124,12 @@ function ProcessRequest($request)
              <span>USDT (تتر)</span>
              </div>
             </div>',
-            "User" => "یگانه عزززلیزاده",
             "UserID" => 16,
             "price" => "<b>" . separateThousands(445609806) . "</b>",
-            "UnixTimestamp" => 789635,
-            "persianDate" => biiq_PersianDate::date("l j F Y - H:i", 1266578),
-            "Status" => "
-             <div class='d-flex justify-content-between'>
-             <span class='opacity-danger text-danger py-1  px-2 rounded me-4'>
-             ناموفق <i class='fas fa-ban text-danger'></i>   
-            </span>
-        </div>",
+            "UnixTimestamp" => time() - (5 * 30 * 86400), // 5 ماه پیش
+            "lastActivityTimestamp" => time() - (23 * 86400), // 23 روز پیش
+            "PersianDate" => biiq_PersianDate::date("l j F Y - H:i", time() - (15 * 2 * 86400)),
+            "Status" => "نا موفق",
         ],
     ];
     //condition for number order span
@@ -140,70 +150,51 @@ function ProcessRequest($request)
     }
     unset($Item);
 
-
-    //for sort desc or asc date and time
-    $sortOrder = $_GET['sort'] ?? 'desc';
-    usort($page->orderList, function ($a, $b) use ($sortOrder) {
-        if ($sortOrder === 'asc') {
-            return $a['UnixTimestamp'] <=> $b['UnixTimestamp']; // قدیمی به جدید
-        } else {
-            return $b['UnixTimestamp'] <=> $a['UnixTimestamp']; // جدید به قدیم
-        }
+    // ساخت رشته‌های نسبی
+    usort($page->orderList, function ($a, $b) {
+        return $b["UnixTimestamp"] <=> $a["UnixTimestamp"];
     });
+
+    foreach ($page->orderList as &$Item) {
+        $status = trim($Item["Status"]);
+        if ($status === "موفق") $Item["StatusColor"] = "text-success opacity-green";
+        elseif ($status === "در انتظار تایید") $Item["StatusColor"] = "text-primary bg-blue";
+        else $Item["StatusColor"] = "text-danger opacity-danger text-decoration-none";
+    }
+    unset($Item);
 
     $page->transactions = [
         [
             "request" => '<span>154852#</span><span class="bg-blue text-primary ms-2 border border-primary p-1 rounded">درخواست تسویه - تسویه شده {IR360560611828005651602601}</span>',
             "UserID" => 19,
             "price" => -445609806,
-            "UnixTimestamp" => 1710656897,
-            "persianDate" => biiq_PersianDate::date("l j F Y - H:i", 1266578),
+               "UnixTimestamp" => time() - (14 * 86400), // 14 روز پیش
+            "lastActivityTimestamp" => time() - (1 * 86400), // 1 روز پیش
+            "PersianDate" => biiq_PersianDate::date("l j F Y - H:i", 126545878),
             "description" => "<span class='text-primary'>مشاهده رسید <span>",
         ],
         [
             "request" => '<span>154852#</span><span class="bg-red text-danger ms-2 border border-danger p-1 rounded">درخواست تسویه - تسویه شده {IR360560611828005651602601}</span>',
             "UserID" => 19,
             "price" => 445609806,
-            "UnixTimestamp" => 1720656897,
-            "persianDate" => biiq_PersianDate::date("l j F Y - H:i", 1266578),
-
+             "UnixTimestamp" => time() - (45 * 86400), // 1 ماه و نیم پیش
+            "lastActivityTimestamp" => time() - (2 * 86400), // 2 روز پیش
+            "PersianDate" => biiq_PersianDate::date("l j F Y - H:i", 568753525),
             "description" => "<span class='text-primary'>۲۰۲۳۲۷۳۸۰۳۰</span>",
         ],
         [
             "request" => '<span>154852#</span><span class="bg-opacity-green text-green ms-2 border border-success p-1 rounded">درخواست تسویه - تسویه شده {IR360560611828005651602601}</span>',
             "UserID" => 19,
             "price" => -445609806,
-            "UnixTimestamp" => 1750656897,
-            "persianDate" => biiq_PersianDate::date("l j F Y - H:i", 1266578),
+           "UnixTimestamp" => time() - (5 * 12 * 86400), // تقریبا 2 ماه پیش
+            "lastActivityTimestamp" => time() - (14 * 86400), // 14 روز پیش
+            "PersianDate" => biiq_PersianDate::date("l j F Y - H:i", 896554121),
 
             "description" => "<span class='text-'>1404041100032259426803</span>",
         ],
     ];
 
-    function timeAgo($timestamp)
-    {
-        $diff = time() - $timestamp;
 
-        $minutes = floor($diff / 60);
-        $hours   = floor($diff / 3600);
-        $days    = floor($diff / 86400);
-        $months  = floor($diff / 2592000);
-        $years   = floor($diff / 31104000);
-
-        if ($years > 0) {
-            return $years . " سال پیش";
-        } elseif ($months > 0) {
-            return $months . " ماه پیش";
-        } elseif ($days > 0) {
-            return $days . " روز پیش";
-        } elseif ($hours > 0) {
-            return $hours . " ساعت پیش";
-        } elseif ($minutes > 0) {
-            return $minutes . " دقیقه پیش";
-        } else {
-            return "لحظاتی پیش";
-        }
-    }
     // ترکیب تاریخ شمسی و زمان گذشته
     foreach ($page->transactions as &$Item) {
         $persian = biiq_PersianDate::date("l j F Y - H:i", $Item["UnixTimestamp"]);
@@ -222,15 +213,19 @@ function ProcessRequest($request)
     unset($Item);
 
 
-    $sortOrder = 'desc';
-    $sortOrder = $_GET['sort'] ?? 'desc';
-    usort($page->transactions, function ($a, $b) use ($sortOrder) {
-        if ($sortOrder === 'asc') {
-            return $a['UnixTimestamp'] <=> $b['UnixTimestamp']; // قدیمی به جدید
-        } else {
-            return $b['UnixTimestamp'] <=> $a['UnixTimestamp']; // جدید به قدیم
-        }
+
+    // ساخت رشته‌های نسبی
+    foreach ($page->transactions as &$Item) {
+        $Item["akharin"] = timeAgo($Item["lastActivityTimestamp"]); // برای آخرین فعالیت
+        $Item["PersianDateRelative"] = timeAgo($Item["UnixTimestamp"]); // برای تاریخ ثبت
+    }
+    unset($Item);
+
+
+    usort($page->transactions, function ($a, $b) {
+        return $b["UnixTimestamp"] <=> $a["UnixTimestamp"];
     });
+
     $page->accountInfo = [
         [
             "id" => "1",
@@ -291,7 +286,7 @@ function ProcessRequest($request)
         [
             "description" => "<i class='fas fa-check-circle text-green me-1'></i> تصویر احراز هویت خود را با کیفیت بالاتری ارسال نمایید.",
             "UserID" => 22,
-            "UnixTimestamp" => time() - 300,   
+            "UnixTimestamp" => time() - 300,
             "status" => "رد شده",
             "details" => " مشاهده مدارک",
         ],
@@ -302,15 +297,15 @@ function ProcessRequest($request)
     unset($Item);
 
     foreach ($page->identityDocuments as &$Item) {
-        $status = trim($Item["status"]);    
+        $status = trim($Item["status"]);
         if (strpos($status, "رد شده") !== false) {
-            $Item["StatusColor"] = "text-red bg-red";  
+            $Item["StatusColor"] = "text-red bg-red";
         } elseif (strpos($status, "تایید شده") !== false) {
-            $Item["StatusColor"] = "text-green opacity-green";  
+            $Item["StatusColor"] = "text-green opacity-green";
         } elseif (strpos($status, "در انتظار تایید") !== false) {
-            $Item["StatusColor"] = "text-warning bg-opacity-warning";  
+            $Item["StatusColor"] = "text-warning bg-opacity-warning";
         } else {
-            $Item["StatusColor"] = "text-secondary bg-light";   
+            $Item["StatusColor"] = "text-secondary bg-light";
         }
     }
     unset($Item);

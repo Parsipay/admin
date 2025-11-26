@@ -52,7 +52,7 @@
                             </th>
                             <th class="text-start py-3">کاربر</th>
                             <th class="text-start py-3">مبلغ</th>
-                            <th class="text-start sortable py-3">
+                            <th class="text-center sortable py-3">
                                 <div class="d-flex align-items-center gap-2">
                                     <span>زمان و تاریخ تراکنش</span>
                                     <i class="fas fa-sort sort-toggle ms-2" data-order="desc"
@@ -81,8 +81,8 @@
                     </thead>
                     <tbody>
                         [foreach ([@Objects->Deposits])]
-                        <tr class="p-1">
-                            <td class="text-start fw-semibold">[@Item->ID]<i class="far fa-copy ms-1 text-primary"></i>
+                        <tr >
+                            <td class="text-start fw-semibold py-4">[@Item->ID]<i class="far fa-copy ms-1 text-primary"></i>
                             </td>
                             <td class="text-start fw-semibold">[@Item->trackingNumber]<i
                                     class="far fa-copy ms-1 text-primary"></i></td>
@@ -92,8 +92,12 @@
                                 </a>
                             </td>
                             <td class="text-start fw-bold">[@Item->Price]</td>
-                            <td class="text-start" data-timestamp="[@Item->UnixTimestamp]">[@Item->persianDate]</td>
-
+        <td class=" text-start " data-timestamp="[@Item->UnixTimestamp]">
+                    <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-placement="top"
+                        data-bs-content="[@Item->PersianDateRelative]">
+                        [@Item->PersianDate]
+                    </span>
+                </td>
                             <td class="text-start">
                                 <span class="badge px-3 py-2 rounded-pill status-text [@Item->StatusColor]">
                                     [@Item->Status]

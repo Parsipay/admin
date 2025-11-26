@@ -54,12 +54,8 @@
             </div>
 
             <!-- Last activity & robots -->
-            <div class="d-flex justify-content-between mt-4 flex-wrap">
-                <div class="d-flex justify-content-start gap-2">
-                    <i class="fas fa-robot font-color"></i>
-                    <i class="fas fa-robot font-color"></i>
-                </div>
-                <div class="d-flex justify-content-start gap-2">
+            <div class="d-flex justify-content-end mt-4 flex-wrap">
+                <div class="d-flex justify-content-center gap-2">
                     <span>[@CurrentUser->lastTime]</span>
                     <i class="fas fa-clock font-color"></i>
                 </div>
@@ -76,7 +72,8 @@
                     <span>تلفن همراه</span>
                     <div class="d-flex bg-white align-items-center p-2 rounded">
                         <span class="flex-grow-1">[@CurrentUser->phoneNumber]</span>
-<i class="fas fa-mobile-alt ms-2 font-color"></i>                    </div>
+                        <i class="fas fa-mobile-alt ms-2 font-color"></i>
+                    </div>
                 </div>
                 <div class="d-flex flex-column gap-2 flex-fill">
                     <span>شناسه کاربری</span>
@@ -218,7 +215,76 @@
              USER ORDER LIST
         ============================== -->
         <div class="tab-pane fade show active" id="deposits" role="tabpanel">
-            [@import->orders->table]
+            <!--in SAFHE HAR JAE K SEFARESH HA RO NIZA DARIM MIAD FAGHAT HAM HEADER JADAVAL MIAD-->
+            <div class="table-responsive rounded-3 text-center p-3">
+                <table class="table table-hover align-middle  mb-0 searchable-table" id="ordersTable">
+                    <thead>
+                        <tr>
+                            <th class="py-3">
+                                <div class="search-wrapper d-flex align-items-center">
+                                    <i class="fa-brands fa-searchengin search-icon me-1 text-primary  bg-opacity rounded-3"
+                                        data-column="0" style="cursor:pointer;"></i>
+                                    <input type="text" class="search-input form-control form-control-sm"
+                                        placeholder="جستجو" />
+                                    <span>شماره سفارش‌ها </span>
+                                </div>
+                            </th>
+                            <th class="py-3"> مبلغ</th>
+                            <th class=" sortable py-3 bg-primary text-center">
+                                <span data-order="desc" class="">زمان و تاریخ تراکنش</span>
+                                <i class="fas fa-sort sort-toggle ms-2" style="cursor:pointer"></i>
+                            </th>
+                            <th class="py-3  text-start ">
+                                وضعیت
+                                <div class="dropdown d-inline">
+                                    <i class="fas fa-sort ms-1" data-bs-toggle="dropdown" style="cursor:pointer;"></i>
+
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item filter-status" data-status="موفق">موفق</a></li>
+                                        <li><a class="dropdown-item filter-status" data-status="نا موفق">نا موفق</a>
+                                        </li>
+                                        <li><a class="dropdown-item filter-status" data-status="در انتظار تایید">در
+                                                انتظار تایید</a></li>
+
+                                        <li>
+                                            <hr class="dropdown-divider">
+                                        </li>
+
+                                        <li><a class="dropdown-item filter-status" data-status="all">همه</a></li>
+                                    </ul>
+                                </div>
+                            </th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        [foreach ([@Objects->orderList])]
+                        <tr>
+                            <td class="text-start">
+                                <a href="[@settings->site]orders/[@Item->ID]/">
+                                    [@persian [@Item->ID]]
+                                </a>
+                            </td>
+
+                            <td>[@persian [@money [@Item->price]]]</td>
+                            <td class="text-center sortable" data-timestamp="[@Item->UnixTimestamp]">
+                                <span class="d-inline-block" tabindex="0" data-bs-toggle="popover"
+                                    data-bs-placement="top" data-bs-content="[@Item->PersianDate]">
+                                    [@Item->PersianDate]
+                                </span>
+                            </td>
+
+                            <td class="py-3">
+                                <span
+                                    class="p-2  text-end rounded-pill d-flex justify-content-center align-items-center status-text flex-grow-1 w-25 [@Item->StatusColor]">
+                                    [@Item->Status]
+                                </span>
+                            </td>
+                        </tr>
+                        [endforeach]
+                    </tbody>
+                </table>
+            </div>
         </div>
 
         <!-- ==============================
@@ -240,7 +306,7 @@
                             </th>
                             <th class="text-start py-3">مبلغ</th>
                             <th class="text-start sortable py-3">
-                                <div class="d-flex align-items-center gap-2">
+                                <div class="d-flex justify-content-center align-items-center gap-2">
                                     <span>زمان و تاریخ تراکنش</span>
                                     <i class="fas fa-sort sort-toggle ms-2" data-order="desc"
                                         style="cursor:pointer"></i>
@@ -253,9 +319,14 @@
                     <tbody>
                         [foreach ([@Objects->transactions])]
                         <tr>
-                            <td class="text-start">[@Item->request]</td>
+                            <td class="text-start py-4">[@Item->request]</td>
                             <td class="text-start">[@Item->price]</td>
-                            <td class="text-start" data-timestamp="[@Item->UnixTimestamp]">[@Item->persianDate]</td>
+                            <td class="text-center sortable" data-timestamp="[@Item->UnixTimestamp]">
+                                <span class="d-inline-block" tabindex="0" data-bs-toggle="popover"
+                                    data-bs-placement="top" data-bs-content="[@Item->PersianDate]">
+                                    [@Item->PersianDateRelative]
+                                </span>
+                            </td>
                             <td class="text-start">[@Item->description]</td>
                         </tr>
                         [endforeach]
@@ -272,7 +343,6 @@
                 <table class="table table-hover align-middle text-center mb-0 searchable-table">
                     <thead>
                         <tr>
-                            <th class="text-start py-3">#</th>
                             <th class="text-start py-3">
                                 <div class="search-wrapper d-flex align-items-center">
                                     <i class="fa-brands fa-searchengin search-icon me-1 text-primary  bg-opacity rounded-3"
@@ -289,7 +359,7 @@
                                     placeholder="جستجو..." />
                                 <span>شماره کارت</span>
                             </th>
-                            <th class="text-center py-3">بانک</th>
+                            <th class="text-start py-3">بانک</th>
                             <th class="text-start py-3">جزییات وضعیت
                                 <div class="dropdown d-inline">
                                     <i class="fas fa-sort ms-1" data-bs-toggle="dropdown" style="cursor:pointer;"></i>
@@ -309,21 +379,17 @@
                     <tbody>
                         [foreach ([@Objects->accountInfo])]
                         <tr>
-                            <td class="text-start">[@Item->id]</td>
-                            <td class="text-start">[@Item->shebaNumber]<i class="far fa-copy text-primary ms-1"
+                            <td class="text-start py-4">[@Item->shebaNumber]<i class="far fa-copy text-primary ms-1"
                                     style="cursor:pointer"></i></td>
                             <td class="text-start">[@Item->cartNumber]<i class="far fa-copy text-primary ms-1"
                                     style="cursor:pointer"></i></td>
                             <td class="text-start"><img src="[@Item->bank]" alt="بانک" width="28" height="25"
                                     class="ms-2"></td>
-                            <td class="text-start">
+                            <td class="text-center">
                                 <div class="d-flex justify-content-between align-items-center gap-2">
                                     <span
-                                        class="px-3 py-2 rounded-pill d-inline-block status-text [@Item->StatusColor]">[@Item->details]</span>
-                                    <div class="d-flex justify-content-start gap-1">
-                                        <i class="fas fa-check-circle text-green" style="cursor:pointer;"></i>
-                                        <i class="fas fa-times-circle text-danger" style="cursor:pointer;"></i>
-                                    </div>
+                                        class="px-3 py-2 w-25 rounded-pill text-center d-inline-block status-text [@Item->StatusColor]">[@Item->details]</span>
+    
                                 </div>
                             </td>
                         </tr>
@@ -350,13 +416,13 @@
                     <tbody>
                         [foreach ([@Objects->identityDocuments])]
                         <tr>
-                            <td class="text-start">[@Item->description]</td>
-                            <td class="text-start" data-timestamp="[@Item->UnixTimestamp]">[@Item->persianDate]</td>
-                            <td class="text-start">
+                            <td class="text-start py-3">[@Item->description]</td>
+                            <td class="text-start py-3" data-timestamp="[@Item->UnixTimestamp]">[@Item->persianDate]</td>
+                            <td class="text-start d-flex flex-fill  py-3">
                                 <span
-                                    class="px-3 py-2 rounded-pill d-inline-block status-text [@Item->StatusColor]">[@Item->status]</span>
+                                    class="px-3 py-2 text-center w-50 rounded-pill d-inline-block status-text [@Item->StatusColor]">[@Item->status]</span>
                             </td>
-                            <td class="text-start">
+                            <td class="text-start py-3 ">
                                 <span class="px-3 py-2 me-3 rounded-pill bg-blue text-primary">[@Item->details]</span>
                                 <i class='far fa-times-circle text-red me-1'></i>
                                 <i class='far fa-check-circle text-green me-1'></i>
