@@ -6,14 +6,14 @@
             <button
                 class="nav-link text-purple active rounded-pill py-3 text-center d-flex align-items-center justify-content-center"
                 data-bs-toggle="pill" data-bs-target="#deposits" type="button" role="tab">لیست واریزی‌ها <i
-                    class="far fa-credit-card ms-2"></i>
+                    class="far fa-solid fa-list ms-2"></i>
             </button>
         </li>
         <li class="nav-item" role="presentation">
             <button
                 class="nav-link text-purple rounded-pill py-3 text-center d-flex align-items-center justify-content-center"
                 data-bs-toggle="pill" data-bs-target="#credits" type="button" role="tab">افزایش اعتبار<i
-                    class="far fa-coins ms-2"></i>
+                    class="far fa-solid fa-arrow-up-right-dots ms-2"></i>
             </button>
         </li>
         <li class="nav-item" role="presentation">
@@ -32,8 +32,8 @@
                 <table class="table table-hover align-middle text-center mb-0 searchable-table">
                     <thead>
                         <tr>
-                            <th class="text-start py-3">
-                                <div class="search-wrapper d-flex align-items-center">
+                            <th class=" py-3">
+                                <div class="search-wrapper justify-content-center d-flex align-items-center">
                                     <i class="fa-brands fa-searchengin search-icon me-1 text-primary  bg-opacity rounded-3"
                                         data-column="0" style="cursor:pointer;"></i>
                                     <input type="text" class="search-input form-control form-control-sm"
@@ -41,8 +41,8 @@
                                     <span>شماره درخواست</span>
                                 </div>
                             </th>
-                            <th class="text-start py-3">
-                                <div class="search-wrapper d-flex align-items-center">
+                            <th class=" py-3">
+                                <div class="search-wrapper d-flex align-items-center justify-content-center">
                                     <i class="fa-brands fa-searchengin search-icon me-1 text-primary  bg-opacity rounded-3"
                                         data-column="0" style="cursor:pointer;"></i>
                                     <input type="text" class="search-input form-control form-control-sm"
@@ -50,17 +50,17 @@
                                     <span>شماره پیگیری</span>
                                 </div>
                             </th>
-                            <th class="text-start py-3">کاربر</th>
-                            <th class="text-start py-3">مبلغ</th>
+                            <th class=" me-3 py-3">کاربر</th>
+                            <th class=" py-3">مبلغ</th>
                             <th class="text-center sortable py-3">
-                                <div class="d-flex align-items-center gap-2">
+                                <div class="d-flex justify-content-center align-items-center gap-2">
                                     <span>زمان و تاریخ تراکنش</span>
                                     <i class="fas fa-sort sort-toggle ms-2" data-order="desc"
                                         style="cursor:pointer"></i>
                                 </div>
                             </th>
 
-                            <th class="text-start py-3">
+                            <th class=" py-3">
                                 وضعیت
                                 <div class="dropdown d-inline">
                                     <i class="fas fa-sort  ms-1" data-bs-toggle="dropdown" style="cursor:pointer;"></i>
@@ -81,24 +81,26 @@
                     </thead>
                     <tbody>
                         [foreach ([@Objects->Deposits])]
-                        <tr >
-                            <td class="text-start fw-semibold py-4">[@Item->ID]<i class="far fa-copy ms-1 text-primary"></i>
+                        <tr>
+                            <td class=" fw-semibold py-4">[@Item->ID]<i class="far fa-copy ms-1 text-primary"></i>
                             </td>
-                            <td class="text-start fw-semibold">[@Item->trackingNumber]<i
+                            <td class=" fw-semibold حغ-4">[@Item->trackingNumber]<i
                                     class="far fa-copy ms-1 text-primary"></i></td>
-                            <td class="text-primary text-start">
-                                <a href="[@settings->site]users/[@Item->UserID]/" class="text-decoration-none">
-                                    [@Item->User]
-                                </a>
+                            <td class=>
+                                <button class="btn rounded-pill w-50 [@Item->LevelColor]"
+                                    data-user-level="[@Item->Level]" data-user-id="[@Item->UserID]" tabindex="0"
+                                    data-bs-toggle="popover" data-bs-placement="top" data-bs-content="[@Item->Level]">
+                                    <i class="[@Item->LevelIcon] me-1"></i>[@Item->User]
+                                </button>
                             </td>
-                            <td class="text-start fw-bold">[@Item->Price]</td>
-        <td class=" text-start " data-timestamp="[@Item->UnixTimestamp]">
-                    <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-placement="top"
-                        data-bs-content="[@Item->PersianDateRelative]">
-                        [@Item->PersianDate]
-                    </span>
-                </td>
-                            <td class="text-start">
+                            <td class=" fw-bold">[@Item->Price]</td>
+                            <td class="  " data-timestamp="[@Item->UnixTimestamp]">
+                                <span class="d-inline-block" tabindex="0" data-bs-toggle="popover"
+                                    data-bs-placement="top" data-bs-content="[@Item->PersianDateRelative]">
+                                    [@Item->PersianDate]
+                                </span>
+                            </td>
+                            <td class="">
                                 <span class="badge px-3 py-2 rounded-pill status-text [@Item->StatusColor]">
                                     [@Item->Status]
                                 </span>
@@ -134,7 +136,7 @@
                                     <span>شماره موبایل </span>
                                 </div>
                             </th>
-                            <th class="text-start py-3">کاربر</th>
+                            <th class=" py-3">کاربر</th>
                             <th class="text-start py-3"> اطلاعات حساب<i class="fas fa-sort ms-1"></i></th>
                             <th class="text-start py-3">مبلغ</th>
                             <th class="text-start py-3">
@@ -151,13 +153,14 @@
                     <tbody>
                         [foreach ([@Objects->Credits])]
                         <tr>
-                            <td class="text-start">[@Item->ID]<i class="far fa-copy ms-1 text-primary"></i></td>
-                            <td class="text-start">[@Item->trackingNumber]<i class="far fa-copy text-primary ms-1"></i>
-                            </td>
-                            <td class="text-primary text-start">
-                                <a href="[@settings->site]users/[@Item->UserID]/" class="text-decoration-none">
-                                    [@Item->User]
-                                </a>
+                            <td class="text-start py-4">[@Item->ID]<i class="far fa-copy ms-1 text-primary"></i></td>
+                            <td class="text-start">[@Item->phoneNumber]</td>
+                            <td class="text-center">
+                                <button class="btn rounded-pill w-50 [@Item->LevelColor]"
+                                    data-user-level="[@Item->Level]" data-user-id="[@Item->UserID]" tabindex="0"
+                                    data-bs-toggle="popover" data-bs-placement="top" data-bs-content="[@Item->Level]">
+                                    <i class="[@Item->LevelIcon] me-1"></i>[@Item->User]
+                                </button>
                             </td>
                             <td class="text-start">
                                 <span>[@Item->bankData]</span>
@@ -179,45 +182,59 @@
                 <table class="table table-hover align-middle text-center mb-0 searchable-table">
                     <thead>
                         <tr>
-                            <th class="text-start py-3">
-                                <input type="checkbox" id="selectAll" />
-                            </th>
-                            <th class="text-start py-3"> <i
+
+                            <th class=" py-3"> <i
                                     class="fa-brands fa-searchengin search-icon me-1 text-primary  bg-opacity rounded-3"
                                     data-column="0" style="cursor:pointer;"></i>
                                 <input type="text" class="search-input form-control form-control-sm"
                                     placeholder="جستجو..." />شناسه واریز
                             </th>
-                            <th class="text-start py-3">زمان و تاریخ تراکنش</th>
-                            <th class="text-start py-3">کاربر</th>
+                                <th class="text-center sortable py-3">
+                                <div class="d-flex justify-content-center align-items-center gap-2">
+                                    <span>زمان و تاریخ تراکنش</span>
+                                    <i class="fas fa-sort sort-toggle ms-2" data-order="desc"
+                                        style="cursor:pointer"></i>
+                                </div>
+                            </th>
+                            <th class=" py-3">کاربر</th>
                             <th class="text-start py-3">مبلغ</th>
-                            <th class="text-start py-3">وضعیت</th>
-                            <th class="text-start py-3">مشخصات</th>
+                            <th class=" py-3">وضعیت</th>
+                            <th class=" py-3">مشخصات</th>
+                            <!-- 🔥 اینجا چک‌باکس گذاشته شده -->
+                            <th class="d-flex justify-content-center align-items-center py-3">
+                                <a href="#">واریز شود</a>
+                                <input type="checkbox" id="selectAll" class="form-check-input ms-2"
+                                    style="cursor:pointer;">
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
                         [foreach ([@Objects->Settlements])]
                         <tr>
-                            <td class="text-start py-3">
-                                <input type="checkbox" id="selectAll" />
+
+                            <td class="">[@Item->ID]<i class="far fa-copy text-primary ms-2"></i></td>
+                               <td class="  " data-timestamp="[@Item->UnixTimestamp]">
+<span class="d-inline-block" tabindex="0" data-bs-toggle="popover"
+      data-bs-placement="top" data-bs-content="[@Item->PersianDateRelative]">
+    [@Item->akharin]
+</span>
                             </td>
-                            <td class="text-start">[@Item->ID]<i class="far fa-copy text-primary ms-2"></i></td>
-                            <td class="text-start" data-timestamp="[@Item->UnixTimestamp]"
-                                data-persian-date="[@Item->persianDate]">
-                                [@Item->persianDate]
-                            </td>
-                            <td class="text-primary text-start">
-                                <a href="[@settings->site]users/[@Item->UserID]/" class="text-decoration-none">
-                                    [@Item->User]
-                                </a>
+                            <td class="">
+                                <button class="btn rounded-pill w-50 [@Item->LevelColor]"
+                                    data-user-level="[@Item->Level]" data-user-id="[@Item->UserID]" tabindex="0"
+                                    data-bs-toggle="popover" data-bs-placement="top" data-bs-content="[@Item->Level]">
+                                    <i class="[@Item->LevelIcon] me-1"></i>[@Item->User]
+                                </button>
                             </td>
                             <td class="text-start">[@Item->price]</td>
-                            <td class="text-start">
+                            <td class="">
                                 <span class="text-warning px-3 py-2 rounded-pill">[@Item->Status]</span>
                             </td>
-                            <td class="text-start ">
-                                <span class="badge text-primary px-3 py-2 rounded-pill">[@Item->properties] <i
-                                        class="fas fa-ellipsis-v text-secondary ms-5"></i></span>
+                            <td class="">
+                                <span class="badge text-primary px-3 py-2 rounded-pill">[@Item->properties] </span>
+                            </td>
+                            <td class="  py-3">
+                                <input type="checkbox" id="selectAll" class="form-check-input " style="cursor:pointer;">
                             </td>
                         </tr>
                         [endforeach]
