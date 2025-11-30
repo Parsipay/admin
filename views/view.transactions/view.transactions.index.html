@@ -189,7 +189,7 @@
                                 <input type="text" class="search-input form-control form-control-sm"
                                     placeholder="جستجو..." />شناسه واریز
                             </th>
-                                <th class="text-center sortable py-3">
+                            <th class="text-center sortable py-3">
                                 <div class="d-flex justify-content-center align-items-center gap-2">
                                     <span>زمان و تاریخ تراکنش</span>
                                     <i class="fas fa-sort sort-toggle ms-2" data-order="desc"
@@ -213,11 +213,11 @@
                         <tr>
 
                             <td class="">[@Item->ID]<i class="far fa-copy text-primary ms-2"></i></td>
-                               <td class="  " data-timestamp="[@Item->UnixTimestamp]">
-<span class="d-inline-block" tabindex="0" data-bs-toggle="popover"
-      data-bs-placement="top" data-bs-content="[@Item->PersianDateRelative]">
-    [@Item->akharin]
-</span>
+                            <td class="  " data-timestamp="[@Item->UnixTimestamp]">
+                                <span class="d-inline-block" tabindex="0" data-bs-toggle="popover"
+                                    data-bs-placement="top" data-bs-content="[@Item->PersianDateRelative]">
+                                    [@Item->PersianDate]
+                                </span>
                             </td>
                             <td class="">
                                 <button class="btn rounded-pill w-50 [@Item->LevelColor]"
