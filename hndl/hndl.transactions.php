@@ -1,32 +1,32 @@
 <?php
+
 function ProcessRequest($request)
 {
     $page = new stdClass();
 
-    // === Helpers ===
+    // ============================
+    // Helpers
+    // ============================
+
     $separateThousands = fn($n) => number_format((int)$n);
 
-    function timeAgo($unixTimestamp)
-    {
-        $now = time();
-        $diff = $now - $unixTimestamp;
+    $timeAgo = function ($unix) {
+        $diff = time() - $unix;
 
-        if ($diff < 60) {
-            return $diff . " ثانیه پیش";
-        } elseif ($diff < 3600) {
-            return floor($diff / 60) . " دقیقه پیش";
-        } elseif ($diff < 86400) {
-            return floor($diff / 3600) . " ساعت پیش";
-        } elseif ($diff < 2592000) {     
-            return floor($diff / 86400) . " روز پیش";
-        } elseif ($diff < 31104000) {     
-            return floor($diff / 2592000) . " ماه پیش";
-        } else {
-            return floor($diff / 31104000) . " سال پیش";
-        }
-    }
+        return match (true) {
+            $diff < 60        => "$diff ثانیه پیش",
+            $diff < 3600      => floor($diff / 60) . " دقیقه پیش",
+            $diff < 86400     => floor($diff / 3600) . " ساعت پیش",
+            $diff < 2592000   => floor($diff / 86400) . " روز پیش",
+            $diff < 31104000  => floor($diff / 2592000) . " ماه پیش",
+            default           => floor($diff / 31104000) . " سال پیش",
+        };
+    };
 
-    // ==== ICONS & STATUS (GLOBAL) ====
+    // ============================
+    // Global Icons / Colors
+    // ============================
+
     $LevelIcons = [
         "طلایی"   => "fa-solid fa-star text-warning",
         "حرفه ای" => "fa-solid fa-medal text-danger",
@@ -36,21 +36,24 @@ function ProcessRequest($request)
     ];
 
     $StatusColors = [
-        "در صف تسویه" => "text-warning bg-opacity-warning",
-        "مشاهده رسید" => "text-primary opacity-primary",
-        "default"      => "text-danger opacity-danger"
+        "در صف تسویه"  => "text-warning bg-opacity-warning",
+        "مشاهده رسید"  => "text-primary opacity-primary",
+        "default"       => "text-danger opacity-danger"
     ];
 
-    // ====== Deposits ======
+    // ============================
+    // Deposits
+    // ============================
+
     $page->Deposits = [
         [
             "ID" => "e3140202507",
             "trackingNumber" => "ATRK1001",
             "User" => "یگانه علیزاده",
             "UserID" => 1,
-            "UnixTimestamp" => time() - (5 * 30 * 86400),
+            "UnixTimestamp" => time() - (150 * 86400),
             "lastActivityTimestamp" => time() - (23 * 86400),
-            "PersianDate" => biiq_PersianDate::date("l j F Y - H:i", time() - (5 * 30 * 86400)),
+            "PersianDate" => biiq_PersianDate::date("l j F Y - H:i", time() - (150 * 86400)),
             "Price" => $separateThousands(750000),
             "Status" => "مشاهده رسید",
             "Level" => "فعال",
@@ -73,7 +76,7 @@ function ProcessRequest($request)
             "User" => "سارا کریمی",
             "UserID" => 3,
             "UnixTimestamp" => time() - (14 * 86400),
-            "lastActivityTimestamp" => time() - (1 * 86400),
+            "lastActivityTimestamp" => time() - (86400),
             "PersianDate" => biiq_PersianDate::date("l j F Y - H:i", time() - (14 * 86400)),
             "Price" => $separateThousands(980000),
             "Status" => "در صف تسویه",
@@ -81,7 +84,10 @@ function ProcessRequest($request)
         ]
     ];
 
-    // ====== Credits ======
+    // ============================
+    // Credits
+    // ============================
+
     $page->Credits = [
         [
             "ID" => "1013152343",
@@ -131,7 +137,10 @@ function ProcessRequest($request)
         ],
     ];
 
-    // ====== Settlements ======
+    // ============================
+    // Settlements
+    // ============================
+
     $page->Settlements = [
         [
             "ID" => "S540202507",
@@ -149,7 +158,7 @@ function ProcessRequest($request)
             "ID" => "S540202508",
             "User" => "بنفشه ابراهیمی",
             "UnixTimestamp" => time() - (14 * 86400),
-            "lastActivityTimestamp" => time() - (1 * 86400),
+            "lastActivityTimestamp" => time() - (86400),
             "PersianDate" => biiq_PersianDate::date("l j F Y - H:i", time() - (14 * 86400)),
             "price" => $separateThousands(658721321),
             "Status" => "در صف تسویه",
@@ -170,27 +179,25 @@ function ProcessRequest($request)
         ]
     ];
 
-    // ===============================
-    //   APPLY ICONS + STATUS + TIME
-    // ===============================
+    // ============================
+    // Apply Icons, Status Colors, Relative Time
+    // ============================
 
-    $ApplyProcessing = function (&$list) use ($LevelIcons, $StatusColors) {
-        foreach ($list as &$Item) {
+    $ApplyProcessing = function (&$list) use ($LevelIcons, $StatusColors, $timeAgo) {
+        foreach ($list as &$item) {
 
-            // LevelIcon
-            $Item["LevelIcon"] = $LevelIcons[$Item["Level"]] ?? $LevelIcons["default"];
+            $item["LevelIcon"] = $LevelIcons[$item["Level"]] ?? $LevelIcons["default"];
 
-            // StatusColor (optional)
-            if (isset($Item["Status"])) {
-                $Item["StatusColor"] = $StatusColors[$Item["Status"]] ?? $StatusColors["default"];
+            if (isset($item["Status"])) {
+                $item["StatusColor"] = $StatusColors[$item["Status"]] ?? $StatusColors["default"];
             }
 
-            // Relative time (optional)
-            if (isset($Item["UnixTimestamp"])) {
-                $Item["PersianDateRelative"] = timeAgo($Item["UnixTimestamp"]);
+            if (isset($item["UnixTimestamp"])) {
+                $item["PersianDateRelative"] = $timeAgo($item["UnixTimestamp"]);
             }
-            if (isset($Item["lastActivityTimestamp"])) {
-                $Item["akharin"] = timeAgo($Item["lastActivityTimestamp"]);
+
+            if (isset($item["lastActivityTimestamp"])) {
+                $item["akharin"] = $timeAgo($item["lastActivityTimestamp"]);
             }
         }
     };
@@ -199,20 +206,23 @@ function ProcessRequest($request)
     $ApplyProcessing($page->Credits);
     $ApplyProcessing($page->Settlements);
 
-    // ==== Sort (only once per list) ====
+    // ============================
+    // Sorting
+    // ============================
+
     usort($page->Deposits, fn($a, $b) => $b["UnixTimestamp"] <=> $a["UnixTimestamp"]);
     usort($page->Settlements, fn($a, $b) => $b["UnixTimestamp"] <=> $a["UnixTimestamp"]);
 
-    // ==== Final Output ====
+    // ============================
+    // Final Response
+    // ============================
+
     return [
-        'content'   => biiq_Template::Start(
-            'transactions->index',
-            true,
-            ['Objects' => $page, 'dateandtime' => $page->dateandtime]
-        ),
+        'content'   => biiq_Template::Start('transactions->index', true, ['Objects' => $page]),
         'id'        => 1,
         'title'     => 'مالی',
         'Canonical' => SITE . 'transactions/',
-        'navlink' => 4
+        'navlink'   => 4
     ];
 }
+

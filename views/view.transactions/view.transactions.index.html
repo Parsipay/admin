@@ -231,8 +231,12 @@
                                 <span class="text-warning px-3 py-2 rounded-pill">[@Item->Status]</span>
                             </td>
                             <td class="">
-                                <span class="badge text-primary px-3 py-2 rounded-pill">[@Item->properties] </span>
+                                <a href="#" class="px-3 py-2 rounded-pill open-properties" data-bs-toggle="modal"
+                                    data-bs-target="#propertiesModal" data-properties="[@Item->properties]">
+                                    مشاهده عملیات
+                                </a>
                             </td>
+
                             <td class="  py-3">
                                 <input type="checkbox" id="selectAll" class="form-check-input " style="cursor:pointer;">
                             </td>
@@ -244,5 +248,79 @@
         </div>
 
 
+    </div>
+</div>
+
+
+<div class="modal fade" id="propertiesModal" tabindex="-1" aria-labelledby="propertiesModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header d-flex align-items-center justify-content-start">
+                <div class="d-flex justify-content-start">
+                    <button type="button" class="btn-close ms-0 me-auto  rounded-circle " data-bs-dismiss="modal"
+                        aria-label="بستن"></button>
+                    <span class="modal-title " id="propertiesModalLabel">
+                        جزئیات وضعیت درخواست تسویه
+                    </span>
+                </div>
+            </div>
+
+            <div class="modal-body mt-5 p-4">
+                <!-- محتوا با JS پر میشه -->
+                <div id="propertiesContent d-flex flex-column border rounded p-3 ">
+                    <div class="d-flex justify-content-between ">
+                        <h6>وضعیت درخواست تسویه </h6>
+                        <span class="bg-opacity-warning text-warning p-1 px-3 rounded">پردازش</span>
+                    </div>
+                    <div class="d-flex justify-content-between mt-3 ">
+                        <p><span class="fs-1">.</span> شماره درخواست
+                        </p>
+                        <span class=" p-1 px-3 rounded  fw-bold">15495319</span>
+                    </div>
+                    <div class="d-flex justify-content-between mt-1 ">
+                        <p><span class="fs-1">.</span> مشخصات کاربر
+                        </p>
+                        <span class=" p-1 px-3 rounded  fw-bold"> بنفشه ابراهیمی</span>
+                    </div>
+                    <div class="d-flex justify-content-between mt-1 ">
+                        <p><span class="fs-1">.</span> مبلع(تومان)
+                        </p>
+                        <span class=" p-1 px-3 rounded  fw-bold">5،277،630</span>
+                    </div>
+                    <div class="position-relative">
+
+                        <div
+                            class="p-3 bg-col border position-absolute top-0 start-50 translate-middle p-1 bg-white rounded-circle">
+                            <img src="../../assets/img/saderat.png" class="" style="width:50px; height:50px;">
+                        </div>
+                        <!-- باکس اصلی -->
+                        <div class="d-flex flex-column px-4 pb-3 pt-5 bg-col mt-4 border rounded-3">
+                            <div class="d-flex justify-content-between mt-1 ">
+                                <p>شماره شبا</p>
+                                <span class="p-1 px-3 rounded fw-bold">
+                                    IR940150000184370199152881
+                                </span>
+                            </div>
+
+                            <div class="d-flex justify-content-between mt-1 ">
+                                <p>شماره کارت</p>
+                                <span class="p-1 px-3 rounded fw-bold">
+                                    6273811170944968
+                                </span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+   <div class="modal-footer mt-5 p-3">
+    <div class="d-flex flex-column w-100 gap-3">
+        <button type="button" class="btn btn-primary w-100" data-bs-dismiss="modal">پرداخت شد</button>
+        <button type="button" class="btn btn-outline-danger w-100" data-bs-dismiss="modal">لغو و بازگشت وجه</button>
+    </div>
+</div>
+
+        </div>
     </div>
 </div>

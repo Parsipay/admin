@@ -1,25 +1,27 @@
 <?php
+
 function ProcessRequest($request)
 {
     $page = new stdClass();
-    $date = new biiq_PersianDate();
-
-    // Convert Unix timestamp to relative time
-    function timeAgo($unixTimestamp)
-    {
-        $now = time();
-        $diff = $now - $unixTimestamp;
-
-        if ($diff < 60) return $diff . " ثانیه پیش";
-        if ($diff < 3600) return floor($diff / 60) . " دقیقه پیش";
-        if ($diff < 86400) return floor($diff / 3600) . " ساعت پیش";
-        if ($diff < 2592000) return floor($diff / 86400) . " روز پیش";
-        if ($diff < 31104000) return floor($diff / 2592000) . " ماه پیش";
-        return floor($diff / 31104000) . " سال پیش";
-    }
 
     // -----------------------------
-    // Orders list
+    // Helper: Relative Time
+    // -----------------------------
+    $timeAgo = function ($unix) {
+        $diff = time() - $unix;
+
+        return match (true) {
+            $diff < 60        => $diff . " ثانیه پیش",
+            $diff < 3600      => floor($diff / 60) . " دقیقه پیش",
+            $diff < 86400     => floor($diff / 3600) . " ساعت پیش",
+            $diff < 2592000   => floor($diff / 86400) . " روز پیش",
+            $diff < 31104000  => floor($diff / 2592000) . " ماه پیش",
+            default           => floor($diff / 31104000) . " سال پیش",
+        };
+    };
+
+    // -----------------------------
+    // Orders List (Static Data)
     // -----------------------------
     $page->orderList = [
         [
@@ -27,8 +29,8 @@ function ProcessRequest($request)
             "User" => "یگانه علیزاده",
             "UserID" => 1,
             "price" => 100000,
-            "UnixTimestamp" => time() - (5 * 30 * 86400), // 5 ماه پیش
-            "lastActivityTimestamp" => time() - (23 * 86400), // 23 روز پیش
+            "UnixTimestamp" => time() - (5 * 30 * 86400),
+            "lastActivityTimestamp" => time() - (23 * 86400),
             "PersianDate" => biiq_PersianDate::date("l j F Y - H:i", time() - (5 * 30 * 86400)),
             "Status" => "در انتظار تایید",
             "Level" => "فعال"
@@ -38,8 +40,8 @@ function ProcessRequest($request)
             "User" => "بنفشه ابراهیمی",
             "UserID" => 2,
             "price" => 100000,
-            "UnixTimestamp" => time() - (5 * 12 * 86400), // تقریبا 2 ماه پیش
-            "lastActivityTimestamp" => time() - (14 * 86400), // 14 روز پیش
+            "UnixTimestamp" => time() - (5 * 12 * 86400),
+            "lastActivityTimestamp" => time() - (14 * 86400),
             "PersianDate" => biiq_PersianDate::date("l j F Y - H:i", time() - (5 * 12 * 86400)),
             "Status" => "ناموفق",
             "Level" => "طلایی"
@@ -49,19 +51,19 @@ function ProcessRequest($request)
             "User" => "سارا کریمی",
             "UserID" => 3,
             "price" => 12500000,
-            "UnixTimestamp" => time() - (14 * 86400), // 14 روز پیش
-            "lastActivityTimestamp" => time() - (1 * 86400), // 1 روز پیش
+            "UnixTimestamp" => time() - (14 * 86400),
+            "lastActivityTimestamp" => time() - (1 * 86400),
             "PersianDate" => biiq_PersianDate::date("ل j F Y - H:i", time() - (14 * 86400)),
             "Status" => "ناموفق",
             "Level" => "حرفه‌ای"
         ],
         [
             'ID' => '۴۰۱۳۱۵۲۳۴۳',
-            "User" => " علی تهرانی",
+            "User" => "علی تهرانی",
             "UserID" => 4,
             "price" => 12500000,
-            "UnixTimestamp" => time() - (30 * 86400), // 1 ماه و نیم پیش
-            "lastActivityTimestamp" => time() - (2 * 86400), // 2 روز پیش
+            "UnixTimestamp" => time() - (30 * 86400),
+            "lastActivityTimestamp" => time() - (2 * 86400),
             "PersianDate" => biiq_PersianDate::date("l j F Y - H:i", time() - (30 * 86400)),
             "Status" => "موفق",
             "Level" => "جدید"
@@ -69,87 +71,72 @@ function ProcessRequest($request)
     ];
 
     // -----------------------------
-    // Assign Level Icons
+    // Level Icons
     // -----------------------------
-    foreach ($page->orderList as &$Item) {
-        $level = trim($Item["Level"]);
-        switch ($level) {
-            case "طلایی":
-                $Item["LevelIcon"] = "fa-solid fa-star text-warning";
-                break;
-            case "حرفه ای":
-                $Item["LevelIcon"] = "fa-solid fa-medal text-red";
-                break;
-            case "فعال":
-                $Item["LevelIcon"] = "fa-solid fa-circle-check text-green";
-                break;
-            default:
-                $Item["LevelIcon"] = "fa-solid fa-user text-primary";
-                break;
-        }
+    foreach ($page->orderList as &$item) {
+        $item["LevelIcon"] = match (trim($item["Level"])) {
+            "طلایی"     => "fa-solid fa-star text-warning",
+            "حرفه‌ای"   => "fa-solid fa-medal text-red",
+            "فعال"      => "fa-solid fa-circle-check text-green",
+            default     => "fa-solid fa-user text-primary",
+        };
     }
 
     // -----------------------------
-    // Add relative date strings
+    // Relative Times
     // -----------------------------
-    foreach ($page->orderList as &$Item) {
-        $Item["akharin"] = timeAgo($Item["lastActivityTimestamp"]); // Last activity
-        $Item["PersianDateRelative"] = timeAgo($Item["UnixTimestamp"]); // Registration date
+    foreach ($page->orderList as &$item) {
+        $item["akharin"] = $timeAgo($item["lastActivityTimestamp"]);
+        $item["PersianDateRelative"] = $timeAgo($item["UnixTimestamp"]);
     }
-    unset($Item);
 
     // -----------------------------
-    // Sort orders by UnixTimestamp descending
+    // Filter: Buy / Sell
     // -----------------------------
-    usort($page->orderList, function ($a, $b) {
-        return $b["UnixTimestamp"] <=> $a["UnixTimestamp"];
+    if (!empty($_GET['buySellFilter'])) {
+        $filter = $_GET['buySellFilter'];
+
+        $page->orderList = array_filter($page->orderList, function ($row) use ($filter) {
+            return preg_match('/(خرید|فروش)/u', $row['numberOrder'], $m) && $m[1] === $filter;
+        });
+    }
+
+    // -----------------------------
+    // Filter: Products
+    // -----------------------------
+    if (!empty($_GET['products'])) {
+        $product = $_GET['products'];
+
+        $page->orderList = array_filter($page->orderList, function ($row) use ($product) {
+            return preg_match('/<span>\s*(ترون|تتر)\s*<\/span>/su', $row['OrderDetails'], $m)
+                && $m[1] === $product;
+        });
+    }
+
+    // -----------------------------
+    // Final Sort (ASC or DESC)
+    // -----------------------------
+    $sort = $_GET['sort'] ?? 'desc';
+
+    usort($page->orderList, function ($a, $b) use ($sort) {
+        return $sort === 'asc'
+            ? $a["UnixTimestamp"] <=> $b["UnixTimestamp"]
+            : $b["UnixTimestamp"] <=> $a["UnixTimestamp"];
     });
 
     // -----------------------------
-    // Filter by Buy/Sell
-    // -----------------------------
-    $buySellFilter = $_GET['buySellFilter'] ?? '';
-    if ($buySellFilter !== '') {
-        $page->orderList = array_filter($page->orderList, function ($order) use ($buySellFilter) {
-            preg_match('/(خرید|فروش)/u', $order['numberOrder'], $matches);
-            return isset($matches[1]) && $matches[1] === $buySellFilter;
-        });
-    }
-
-    // -----------------------------
-    // Filter by Products
-    // -----------------------------
-    $products = $_GET['products'] ?? '';
-    if ($products !== '') {
-        $page->orderList = array_filter($page->orderList, function ($b) use ($products) {
-            preg_match('/<span>\s*(ترون|تتر)\s*<\/span>/su', $b['OrderDetails'], $matches);
-            return isset($matches[1]) && $matches[1] === $products;
-        });
-    }
-
-    // -----------------------------
-    // Sort order list by date (asc/desc)
-    // -----------------------------
-    $sortOrder = $_GET['sort'] ?? 'desc';
-    usort($page->orderList, fn($a, $b) => 
-        $sortOrder === 'asc' ? $a['UnixTimestamp'] <=> $b['UnixTimestamp'] : $b['UnixTimestamp'] <=> $a['UnixTimestamp']
-    );
-
-    // -----------------------------
-    // Assign colors by status
+    // Status Colors
     // -----------------------------
     foreach ($page->orderList as &$item) {
-        $status = trim($item["Status"]);
-        $item["StatusColor"] = match ($status) {
-            "موفق" => "text-success opacity-green",
+        $item["StatusColor"] = match (trim($item["Status"])) {
+            "موفق"            => "text-success opacity-green",
             "در انتظار تایید" => "text-warning bg-opacity-warning",
-            default => "text-danger opacity-danger"
+            default           => "text-danger opacity-danger"
         };
     }
-    unset($item);
 
     // -----------------------------
-    // Final output
+    // Final Output
     // -----------------------------
     return [
         'content'   => biiq_Template::Start('orders->index', true, ['Objects' => $page]),

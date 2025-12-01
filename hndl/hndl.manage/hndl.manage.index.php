@@ -1,10 +1,12 @@
 <?php
+
 function ProcessRequest($request)
 {
+    // =========================
+    // Helper Functions
+    // =========================
 
-
-
-    // Helper: Mask card number except first 6 and last 4 digits
+    // ماسک شماره کارت
     function maskCard($num)
     {
         $len = strlen($num);
@@ -13,11 +15,71 @@ function ProcessRequest($request)
             : substr($num, 0, 6) . str_repeat("*", $len - 10) . substr($num, -4);
     }
 
-    $page = new stdClass();
-    // === Current Date & Time ===
+    // آیکون سطح
+    function getLevelIcon($level)
+    {
+        return match (trim($level)) {
+            "طلایی"   => "fa-solid fa-star text-warning",
+            "حرفه ای" => "fa-solid fa-medal text-red",
+            "فعال"    => "fa-solid fa-circle-check text-green",
+            default   => "fa-solid fa-user text-primary",
+        };
+    }
 
-    // --- Accordion documents list ---
+    // رنگ وضعیت
+    function getStatusColor($status)
+    {
+        return match (trim($status)) {
+            "تایید شده", "موفق" => "text-success opacity-green",
+            "در انتظار تایید"   => "text-warning bg-opacity-warning",
+            "تکمیل نشده"        => "text-primary bg-blue",
+            default              => "text-danger bg-red",
+        };
+    }
+
+    // زمان نسبی
+    function timeAgo($timestamp)
+    {
+        $diff = time() - $timestamp;
+
+        return match (true) {
+            $diff < 60       => "لحظاتی پیش",
+            $diff < 3600     => round($diff / 60) . " دقیقه پیش",
+            $diff < 86400    => round($diff / 3600) . " ساعت پیش",
+            $diff < 604800   => round($diff / 86400) . " روز پیش",
+            $diff < 2592000  => round($diff / 604800) . " هفته پیش",
+            $diff < 31536000 => round($diff / 2592000) . " ماه پیش",
+            default          => round($diff / 31536000) . " سال پیش",
+        };
+    }
+
+    // ✨ تابع مشترک برای اضافه کردن آیکون سطح – رنگ – زمان
+    function enrichList(&$list, $hasTime = false, $hasStatus = false)
+    {
+        foreach ($list as &$item) {
+            if (isset($item["Level"])) {
+                $item["LevelIcon"] = getLevelIcon($item["Level"]);
+            }
+            if ($hasStatus && isset($item["Status"])) {
+                $item["StatusColor"] = getStatusColor($item["Status"]);
+            }
+            if ($hasTime && isset($item["UnixTimestamp"])) {
+                $item["lastActivity"] = timeAgo($item["UnixTimestamp"]);
+            }
+        }
+        unset($item);
+    }
+
+    // =========================
+    // START BUILDING PAGE DATA
+    // =========================
+
+    $page = new stdClass();
     $timestamp = 1616301000;
+
+    // ------------------------------
+    // Documents
+    // ------------------------------
     $page->docList = [
         [
             "user" => "بنفشه ابراهیمی",
@@ -31,7 +93,9 @@ function ProcessRequest($request)
         ],
     ];
 
-    // --- Cards list ---
+    // ------------------------------
+    // Cards List
+    // ------------------------------
     $page->Cards = [
         [
             "user" => "یگانه علیزاده",
@@ -46,283 +110,166 @@ function ProcessRequest($request)
             "MaskedCard" => maskCard("5022291077470837"),
         ],
     ];
-    // -----------------------------
 
-    // --- User deposits list ---
+    // ------------------------------
+    // Users
+    // ------------------------------
     $page->userList = [
         [
             "nationalCode" => "0013152343",
-            "phoneNumber"  => "09128431937",
-            "User"         => "یگانه علیزاده",
-            "UserID"       => 1,
-            "UnixTimestamp" => time() - (5 * 30 * 86400), // 5 ماه پیش
-            "lastActivityTimestamp" => time() - (23 * 86400), // 23 روز پیش
-            "PersianDate" => biiq_PersianDate::date("l j F Y - H:i", time() - (5 * 2 * 86400)),
-            "Status"       => "مسدود",
+            "phoneNumber" => "09128431937",
+            "User" => "یگانه علیزاده",
+            "UserID" => 1,
+            "UnixTimestamp" => time() - (150 * 86400),
+            "lastActivityTimestamp" => time() - (23 * 86400),
+            "PersianDate" => biiq_PersianDate::date("l j F Y - H:i", time()),
+            "Status" => "مسدود",
             "Level" => "فعال",
         ],
         [
             "nationalCode" => "0013152343",
-            "phoneNumber"  => "09128431937",
-            "User"         => "بنفشه ابراهیمی",
-            "UserID"       => 2,
-            "UnixTimestamp" => time() - (5 * 12 * 86400), // تقریبا 2 ماه پیش
-            "lastActivityTimestamp" => time() - (14 * 86400), // 14 روز پیش
+            "phoneNumber" => "09128431937",
+            "User" => "بنفشه ابراهیمی",
+            "UserID" => 2,
+            "UnixTimestamp" => time() - (60 * 86400),
+            "lastActivityTimestamp" => time() - (14 * 86400),
             "PersianDate" => biiq_PersianDate::date("l j F Y - H:i", 896554121),
+            "Status" => "موفق",
             "Level" => "طلایی",
-            "Status" => "موفق "
-
         ],
         [
             "nationalCode" => "0013152343",
-            "phoneNumber"  => "09128431937",
-            "User"         => "سارا کریمی",
-            "UserID"       => 3,
-            "UnixTimestamp" => time() - (14 * 86400), // 14 روز پیش
-            "lastActivityTimestamp" => time() - (1 * 86400), // 1 روز پیش
+            "phoneNumber" => "09128431937",
+            "User" => "سارا کریمی",
+            "UserID" => 3,
+            "UnixTimestamp" => time() - (14 * 86400),
+            "lastActivityTimestamp" => time() - (1 * 86400),
             "PersianDate" => biiq_PersianDate::date("l j F Y - H:i", 126545878),
+            "Status" => "موفق",
             "Level" => "حرفه ای",
-            "Status" => "موفق "
         ],
         [
             "nationalCode" => "0013152343",
-            "phoneNumber"  => "09128431937",
-            "User"         => "علی نهرانی",
-            "UserID"       => 4,
-            "UnixTimestamp" => time() - (45 * 86400), // 1 ماه و نیم پیش
-            "lastActivityTimestamp" => time() - (2 * 86400), // 2 روز پیش
+            "phoneNumber" => "09128431937",
+            "User" => "علی نهرانی",
+            "UserID" => 4,
+            "UnixTimestamp" => time() - (45 * 86400),
+            "lastActivityTimestamp" => time() - (2 * 86400),
             "PersianDate" => biiq_PersianDate::date("l j F Y - H:i", 568753525),
-
-            "Status"       => "تکمیل نشده",
+            "Status" => "تکمیل نشده",
             "Level" => "جدید",
         ],
     ];
 
-    // --- Auto-calculate last activity for each user ---
-    foreach ($page->userList as &$item) {
-        $diff = time() - $item['UnixTimestamp'];
+    // ✨ اینجا دیگه خودمون foreach نمی‌نویسیم
+    enrichList($page->userList, hasTime: true, hasStatus: true);
 
-        if ($diff < 60) {
-            $item['lastActivity'] = 'لحظاتی پیش';
-        } elseif ($diff < 3600) {
-            $minutes = round($diff / 60);
-            $item['lastActivity'] = $minutes . ' دقیقه پیش';
-        } elseif ($diff < 86400) {
-            $hours = round($diff / 3600);
-            $item['lastActivity'] = $hours . ' ساعت پیش';
-        } elseif ($diff < 604800) {
-            $days = round($diff / 86400);
-            $item['lastActivity'] = $days . ' روز پیش';
-        } elseif ($diff < 2592000) {
-            $weeks = round($diff / 604800);
-            $item['lastActivity'] = $weeks . ' هفته پیش';
-        } elseif ($diff < 31536000) {
-            $months = round($diff / 2592000);
-            $item['lastActivity'] = $months . ' ماه پیش';
-        } else {
-            $years = round($diff / 31536000);
-            $item['lastActivity'] = $years . ' سال پیش';
-        }
-    }
-    unset($item);
+    // مرتب‌سازی
+    usort($page->userList, fn($a, $b) => $b["UnixTimestamp"] <=> $a["UnixTimestamp"]);
 
-    // --- Sort users by UnixTimestamp (جدیدترین اول) ---
-    // ساخت رشته‌های نسبی
-
-
-
-    usort($page->userList, function ($a, $b) {
-        return $b["UnixTimestamp"] <=> $a["UnixTimestamp"];
-    });
-
-
-
-    // --- Bank accounts list (keep nationalCode & phoneNumber for HTML) ---
+    // ------------------------------
+    // Bank Accounts
+    // ------------------------------
     $page->bankAccount = [
         [
             "nationalCode" => "2313152343",
-            "phoneNumber"  => "09128431937",
-            "User"         => "یگانه علیزاده",
-            "UserID"       => 1,
-            "bankInfo"     => "IR940150000184370199152881",
-            "BankImage"    => "../assets/img/dey.png",
-            "details"      => "تایید شده",
+            "phoneNumber" => "09128431937",
+            "User" => "یگانه علیزاده",
+            "UserID" => 1,
+            "bankInfo" => "IR940150000184370199152881",
+            "BankImage" => "../assets/img/dey.png",
+            "details" => "تایید شده",
             "Level" => "فعال",
-
         ],
         [
             "nationalCode" => "0013152343",
-            "phoneNumber"  => "09128431937",
-            "User"         => " بنفشه ابراهیمی",
-            "UserID"       => 2,
-            "bankInfo"     => "IR940150000184370199152881",
-            "BankImage"    => "../assets/img/ansar.png",
-            "details"      => "تایید شده",
+            "phoneNumber" => "09128431937",
+            "User" => "بنفشه ابراهیمی",
+            "UserID" => 2,
+            "bankInfo" => "IR940150000184370199152881",
+            "BankImage" => "../assets/img/ansar.png",
+            "details" => "تایید شده",
             "Level" => "طلایی",
-
         ],
         [
             "nationalCode" => "0013152343",
-            "phoneNumber"  => "09128431937",
-            "User"         => "سارا کریمی",
-            "UserID"       => 3,
-            "bankInfo"     => "IR940150000184370199152881",
-            "BankImage"    => "../assets/img/blu.png",
-            "details"      => "تایید شده",
+            "phoneNumber" => "09128431937",
+            "User" => "سارا کریمی",
+            "UserID" => 3,
+            "bankInfo" => "IR940150000184370199152881",
+            "BankImage" => "../assets/img/blu.png",
+            "details" => "تایید شده",
             "Level" => "حرفه ای",
-
         ],
         [
             "nationalCode" => "0013152343",
-            "phoneNumber"  => "09128431937",
-            "User"         => " علی تهرانی",
-            "UserID"       => 4,
-            "bankInfo"     => "IR940150000184370199152881",
-            "BankImage"    => "../assets/img/blu.png",
-            "details"      => "تایید شده",
+            "phoneNumber" => "09128431937",
+            "User" => "علی تهرانی",
+            "UserID" => 4,
+            "bankInfo" => "IR940150000184370199152881",
+            "BankImage" => "../assets/img/blu.png",
+            "details" => "تایید شده",
             "Level" => "جدید",
-
         ],
     ];
 
-    // --- Authentication documents list (keep nationalCode & phoneNumber) ---
+    enrichList($page->bankAccount);
+
+    // ------------------------------
+    // Authentication
+    // ------------------------------
     $page->authentication = [
         [
             "nationalCode" => "0013152343",
-            "phoneNumber"  => "0293564635",
-            "User"         => "بنفشه ابراهیمی",
-            "UserID"       => 2,
-            "documents"    => "مشاهده مدارک",
-            "Status"       => "در انتظار تایید",
+            "phoneNumber" => "0293564635",
+            "User" => "بنفشه ابراهیمی",
+            "UserID" => 2,
+            "documents" => "مشاهده مدارک",
+            "Status" => "در انتظار تایید",
             "Level" => "فعال",
-
         ],
         [
             "nationalCode" => "0013152343",
-            "phoneNumber"  => "09128431937",
-            "User"         => "یگانه علیزاده",
-            "UserID"       => 1,
-            "documents"    => "مشاهده مدارک",
-            "Status"       => "تایید شده",
+            "phoneNumber" => "09128431937",
+            "User" => "یگانه علیزاده",
+            "UserID" => 1,
+            "documents" => "مشاهده مدارک",
+            "Status" => "تایید شده",
             "Level" => "طلایی",
-
         ],
         [
             "nationalCode" => "0013152343",
-            "phoneNumber"  => "09128431937",
-            "User"         => " سارا کریمی",
-            "UserID"       => 3,
-            "documents"    => "مشاهده مدارک",
-            "Status"       => "تکمیل نشده",
+            "phoneNumber" => "09128431937",
+            "User" => "سارا کریمی",
+            "UserID" => 3,
+            "documents" => "مشاهده مدارک",
+            "Status" => "تکمیل نشده",
             "Level" => "حرفه ای",
-
         ],
         [
             "nationalCode" => "0013152343",
-            "phoneNumber"  => "09128431937",
-            "User"         => " علی تهرانی",
-            "UserID"       => 4,
-            "documents"    => "مشاهده مدارک",
-            "Status"       => "رد شده",
+            "phoneNumber" => "09128431937",
+            "User" => "علی تهرانی",
+            "UserID" => 4,
+            "documents" => "مشاهده مدارک",
+            "Status" => "رد شده",
             "Level" => "جدید",
-
         ],
     ];
 
-    // --- Add color class based on document status ---
-    foreach ($page->authentication as &$item) {
-        $status = trim($item["Status"]);
-        $item["StatusColor"] = match ($status) {
-            "تایید شده" => "text-success opacity-green",
-            "در انتظار تایید" => "text-warning bg-opacity-warning",
-            "تکمیل نشده" => "text-primary bg-blue",
-            default => "text-danger bg-red",
-        };
-    }
-    unset($item);
+    enrichList($page->authentication, hasStatus: true);
 
-    // --- Add color class for deposit status ---
-    foreach ($page->userList as &$item) {
-        $status = trim($item["Status"]);
-        $item["StatusColor"] = match ($status) {
-            "موفق" => "text-success opacity-green",
-            "تکمیل نشده" => "text-primary bg-blue",
-            "در انتظار تایید" => "text-warning",
-            default => "text-danger bg-red",
-        };
-    }
-    unset($item);
-    //add icon for user level
-    // -----------------------------
-    foreach ($page->userList as &$Item) {
-
-        $level = trim($Item["Level"]);
-        switch ($level) {
-            case "طلایی":
-
-                $Item["LevelIcon"] = "fa-solid fa-star text-warning ";
-                break;
-            case "حرفه ای":
-
-                $Item["LevelIcon"] = "fa-solid fa-medal text-red";
-                break;
-            case "فعال":
-
-                $Item["LevelIcon"] = "fa-solid fa-circle-check text-green";
-                break;
-            default:
-                $Item["LevelIcon"] = "fa-solid fa-user text-primary";
-                break;
-        }
-    }
-    foreach ($page->bankAccount as &$Item) {
-
-        $level = trim($Item["Level"]);
-        switch ($level) {
-            case "طلایی":
-
-                $Item["LevelIcon"] = "fa-solid fa-star text-warning ";
-                break;
-            case "حرفه ای":
-
-                $Item["LevelIcon"] = "fa-solid fa-medal text-red";
-                break;
-            case "فعال":
-
-                $Item["LevelIcon"] = "fa-solid fa-circle-check text-green";
-                break;
-            default:
-                $Item["LevelIcon"] = "fa-solid fa-user text-primary";
-                break;
-        }
-    }
-    foreach ($page->authentication as &$Item) {
-
-        $level = trim($Item["Level"]);
-        switch ($level) {
-            case "طلایی":
-
-                $Item["LevelIcon"] = "fa-solid fa-star text-warning ";
-                break;
-            case "حرفه ای":
-
-                $Item["LevelIcon"] = "fa-solid fa-medal text-red";
-                break;
-            case "فعال":
-
-                $Item["LevelIcon"] = "fa-solid fa-circle-check text-green";
-                break;
-            default:
-                $Item["LevelIcon"] = "fa-solid fa-user text-primary";
-                break;
-        }
-    }
-    // --- Final output ---
+    // ------------------------------
+    // FINAL RENDER OUTPUT
+    // ------------------------------
     return [
-        'content'   => biiq_Template::Start('manage->index', true, ['Objects' => $page, 'dateandtime' => $page->dateandtime]),
+        'content'   => biiq_Template::Start('manage->index', true, [
+            'Objects'     => $page,
+        ]),
         'id'        => 1,
         'title'     => 'مالی',
         'Canonical' => SITE . 'manage/',
-        'navlink' => 2
+        'navlink'   => 2
     ];
 }
+
