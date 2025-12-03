@@ -2,8 +2,6 @@
 function ProcessRequest($request)
 {
     $page = new stdClass();
-
-
  $page->orderList = [
         [
             "numberOrder" => "111111111111111111111",
@@ -107,7 +105,7 @@ function ProcessRequest($request)
     ];
   
 
-    // فقط برای لیست واریزی‌ها رنگ وضعیت
+    //color just fro orderlist
     foreach ($page->orderList as &$Item) {
         $status = trim($Item["Status"]);
         if ($status === "موفق") {
@@ -132,7 +130,7 @@ foreach($page->userList as &$Item) {
         $Item["StatusColor"] = "text-danger";
     }
 }
-unset($Item); // خیلی مهمه برای جلوگیری از باگ‌های احتمالی
+unset($Item);        
 
 foreach($page->requestList as &$Item) {
     $status = trim($Item["Status"]);

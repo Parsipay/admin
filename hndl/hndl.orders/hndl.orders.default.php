@@ -1,41 +1,38 @@
 <?php
 function ProcessRequest($request){
-    $page = new stdClass();
+    // -------------------------
+    // Validation
+    // -------------------------
     if(!isset($request->Parameters) || !is_array($request->Parameters) || count($request->Parameters) == 0){
-        //error
         $GLOBALS['error']->Show(401);
         exit;
     }
+
     $SelectedUserID = $request->Parameters[0];
     if(!is_numeric($SelectedUserID) || $SelectedUserID == 0){
-        //error
         $GLOBALS['error']->Show(401);
         exit;
     }
 
-
-    //Load user $SelectedUserID
-
-    //$page->User = biiq_User::GetByID($SelectedUserID);
-   function getStatusColor($status)
-{
-    switch (trim($status)) {
-        case 'موفق':
-            return "text-green opacity-green p-1 px-2 rounded";
-        case 'رد شده':
-            return "text-danger bg-red p-1 px-2 rounded";
-        case 'تکمیل نشده':
-            return "text-primary bg-blue p-1 px-2 rounded";
-        case 'در انتظار تایید':
-        case 'پردازش':
-            return "text-warning bg-opacity-warning p-1 px-2 rounded";
-        case 'پرداخت با کارت نامعتبر':
-            return "text-red bg-red p-1 px-2 rounded";
-        default:
-            return "text-secondary p-1 px-2 rounded";
+    // -------------------------
+    // Helper: Status Color
+    // -------------------------
+    function getStatusColor($status){
+        switch (trim($status)) {
+            case 'موفق': return "text-green opacity-green p-1 px-2 rounded";
+            case 'رد شده': return "text-danger bg-red p-1 px-2 rounded";
+            case 'تکمیل نشده': return "text-primary bg-blue p-1 px-2 rounded";
+            case 'در انتظار تایید':
+            case 'پردازش': return "text-warning bg-opacity-warning p-1 px-2 rounded";
+            case 'پرداخت با کارت نامعتبر': return "text-red bg-red p-1 px-2 rounded";
+            default: return "text-secondary p-1 px-2 rounded";
+        }
     }
-}
 
+    // -------------------------
+    // Init Page Object
+    // -------------------------
+    $page = new stdClass();
 
     // -------------------------
     // Current Date & Time
@@ -43,7 +40,7 @@ function ProcessRequest($request){
     $today = new DateTime();
     $today->modify('+1 hour');
 
-    $page->dateandtime = [
+    $page->dateandtime = (object)[
         'persianDate' => biiq_PersianDate::date("l j F Y"),
         'otherDate'   => $today->format("Y/m/d"),
         'time'        => $today->format("H:i")
@@ -53,67 +50,52 @@ function ProcessRequest($request){
     // Orders Data
     // -------------------------
     $page->orders = [
-        [
+        (object)[
             'id'       => "۲۰۲۳۲۲۴۶۴۴۸",
-            'status'   => " موفق",
+            'status'   => "موفق",
             'amount'   => "12 USDT",
             'currency' => "ترون (TRC20)",
             'network'  => "TRC20",
             'price'    => "504,504 تومان",
-            'date'     => $page->dateandtime['persianDate'],
-            'time'     => $page->dateandtime['time'],
+            'date'     => $page->dateandtime->persianDate,
+            'time'     => $page->dateandtime->time,
             'img'      => "../../assets/img/usdt.png",
+            'statusColor' => getStatusColor("موفق")
         ]
     ];
 
-    // Add CSS color for each order status
-    foreach ($page->orders as $key => $order) {
-        $page->orders[$key]['statusColor'] = getStatusColor($order['status']);
-    }
-
     // -------------------------
-    // Status Bar (Transfer Info)
+    // Status Bar & Transaction
     // -------------------------
-    $statusbar = [
-        [
-            'status'      => ' موفق',
-            'wallet'      => 'TN7TeTQxA1ZNEcThVABvwSunjaZJs2PeT5',
-            'tx_id'       => 'TN7TeTQxA1ZNEcThVABvwSunjaZJs2PeT5TN7TeTQxA1ZNEcT',
-            'transfer_id' => 'CW2528380666409'
-        ]
-    ];
-
-    // Add CSS color for each status item
-    foreach ($statusbar as $key => $tx) {
-        $statusbar[$key]['statusColor'] = getStatusColor($tx['status']);
-    }
-    $page->statusbar = $statusbar;
-
-    // -------------------------
-    // Transaction Info
-    // -------------------------
-    $transaction = [
+    $tx = (object)[
         'status'     => 'موفق',
+        'wallet'     => 'TN7TeTQxA1ZNEcThVABvwSunjaZJs2PeT5',
+        'tx_id'      => 'TN7TeTQxA1ZNEcThVABvwSunjaZJs2PeT5TN7TeTQxA1ZNEcT',
+        'transfer_id'=> 'CW2528380666409',
         'number'     => '3215402',
         'ip'         => '45.93.169.254',
         'discount'   => '۵۰۴,۵۰۴ تومان',
-        'wallet'     => '۵۰۴,۵۰۴ تومان',
+        'walletAmount'=> '۵۰۴,۵۰۴ تومان',
         'cartNumber' => '5022291577226309',
-        'paid'       => '۵۰۴,۵۰۴ تومان'
+        'paid'       => '۵۰۴,۵۰۴ تومان',
+        'statusColor'=> getStatusColor('موفق')
     ];
 
-    // Add color based on transaction status
-    $transaction['statusColor'] = getStatusColor($transaction['status']);
-    $page->transaction = $transaction;
+    $page->statusbar    = [$tx];          
 
-    $page->Title = " مشاهده سفارش ";
-    $page = array(
-        'content' => biiq_Template::Start('orders->default', true, ['Objects' => $page]),
-        'id' => 1,
-        'title' => $page->Title,
+    // -------------------------
+    // Page Title
+    // -------------------------
+    $page->Title = "مشاهده سفارش";
+
+    // -------------------------
+    // Return Template Output
+    // -------------------------
+    return [
+        'content'   => biiq_Template::Start('orders->default', true, ['Objects' => $page]),
+        'id'        => 1,
+        'title'     => $page->Title,
         'Canonical' => SITE.'orders/',
-    );
-    return $page;
+    ];
 }
-
 ?>

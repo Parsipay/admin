@@ -378,4 +378,105 @@ chart2.setOption({
     chart2.resize();
   });
 });
+
+
+   // تبدیل تاریخ فارسی + زمان به Unix Timestamp
+    function persianToUnix(dateStr, timeStr) {
+        if(!dateStr) return null;
+        // dateStr فرمت: yyyy/mm/dd
+        let parts = dateStr.split('/');
+        if(parts.length < 3) return null;
+        let hour = 0, min = 0;
+        if(timeStr) {
+            let timeParts = timeStr.split(':');
+            hour = parseInt(timeParts[0]) || 0;
+            min  = parseInt(timeParts[1]) || 0;
+        }
+        let d = new Date(parts[0], parts[1]-1, parts[2], hour, min, 0);
+        return Math.floor(d.getTime() / 1000);
+    }
+
+    // فیلتر کردن جدول بر اساس timestamp
+    function filterTableByDate(fromTS, toTS) {
+        $('#ordersTable tbody tr').each(function() {
+            let rowTS = parseInt($(this).find('[data-timestamp]').data('timestamp'));
+            if ((!fromTS || rowTS >= fromTS) && (!toTS || rowTS <= toTS)) {
+                $(this).show();
+            } else {
+                $(this).hide();
+            }
+        });
+    }
+
+    // وقتی دکمه فیلتر مودال زده شد
+    $('#confirmBtn').on('click', function() {
+        let fromDate = $('#fromDate').val();
+        let toDate   = $('#toDate').val();
+        let fromTime = $('#fromTime').val() || '00:00';
+        let toTime   = $('#toTime').val() || '23:59';
+
+        let fromTS = persianToUnix(fromDate, fromTime);
+        let toTS   = persianToUnix(toDate, toTime);
+
+        filterTableByDate(fromTS, toTS);
+    });
+
+    // فیلتر سریع: امروز
+    $('#todayBtn').click(function(){
+        let today = new Date();
+        let start = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 0,0,0);
+        let end   = new Date(today.getFullYear(), today.getMonth(), today.getDate(),23,59,59);
+        filterTableByDate(Math.floor(start.getTime()/1000), Math.floor(end.getTime()/1000));
+    });
+
+    // فیلتر سریع: از ابتدای هفته
+    $('#startWeekBtn').click(function(){
+        let today = new Date();
+        let firstDay = new Date(today.setDate(today.getDate() - today.getDay()));
+        let start = new Date(firstDay.getFullYear(), firstDay.getMonth(), firstDay.getDate(), 0,0,0);
+        let end = new Date();
+        filterTableByDate(Math.floor(start.getTime()/1000), Math.floor(end.getTime()/1000));
+    });
+
+    // فیلتر سریع: یک هفته گذشته
+    $('#weekBtn').click(function(){
+        let today = new Date();
+        let start = new Date(today.getTime() - 7*24*60*60*1000);
+        let end   = new Date();
+        filterTableByDate(Math.floor(start.getTime()/1000), Math.floor(end.getTime()/1000));
+    });
+
+    // فیلتر سریع: از ابتدای ماه
+    $('#startMonthBtn').click(function(){
+        let today = new Date();
+        let start = new Date(today.getFullYear(), today.getMonth(), 1, 0,0,0);
+        let end = new Date();
+        filterTableByDate(Math.floor(start.getTime()/1000), Math.floor(end.getTime()/1000));
+    });
+
+    // فیلتر سریع: یک ماه گذشته
+    $('#monthBtn').click(function(){
+        let today = new Date();
+        let start = new Date(today.getTime() - 30*24*60*60*1000);
+        let end   = new Date();
+        filterTableByDate(Math.floor(start.getTime()/1000), Math.floor(end.getTime()/1000));
+    });
+
+    // فیلتر سریع: از ابتدای سال
+    $('#startYearBtn').click(function(){
+        let today = new Date();
+        let start = new Date(today.getFullYear(),0,1,0,0,0);
+        let end = new Date();
+        filterTableByDate(Math.floor(start.getTime()/1000), Math.floor(end.getTime()/1000));
+    });
+
+    // فیلتر سریع: یک سال گذشته
+    $('#yearBtn').click(function(){
+        let today = new Date();
+        let start = new Date(today.getTime() - 365*24*60*60*1000);
+        let end   = new Date();
+        filterTableByDate(Math.floor(start.getTime()/1000), Math.floor(end.getTime()/1000));
+    });
+
+
 });

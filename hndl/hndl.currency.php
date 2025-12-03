@@ -1,25 +1,21 @@
 <?php
 /**
- * Get CSS class based on status text
- * Returns a Bootstrap-style badge class depending on Persian status
+ * Returns a Bootstrap-style badge class based on Persian status
  */
 function getStatusColor($status)
 {
-    switch (trim($status)) {
-        case 'موفق':
-            return "text-green opacity-green p-1 px-2 rounded";
-        case 'رد شده':
-            return "text-danger bg-red p-1 px-2 rounded";
-        case 'تکمیل نشده':
-            return "text-primary bg-blue p-1 px-2 rounded";
-        case 'در انتظار تایید':
-        case 'پردازش':
-            return "text-warning bg-opacity-warning p-1 px-2 rounded";
-        case 'پرداخت با کارت نامعتبر':
-            return "text-red bg-red p-1 px-2 rounded";
-        default:
-            return "text-secondary p-1 px-2 rounded";
-    }
+    $status = trim($status);
+
+    $colors = [
+        'موفق'                       => "text-green opacity-green p-1 px-2 rounded",
+        'رد شده'                     => "text-danger bg-red p-1 px-2 rounded",
+        'تکمیل نشده'                  => "text-primary bg-blue p-1 px-2 rounded",
+        'در انتظار تایید'            => "text-warning bg-opacity-warning p-1 px-2 rounded",
+        'پردازش'                     => "text-warning bg-opacity-warning p-1 px-2 rounded",
+        'پرداخت با کارت نامعتبر'     => "text-red bg-red p-1 px-2 rounded",
+    ];
+
+    return $colors[$status] ?? "text-secondary p-1 px-2 rounded";
 }
 
 /**
@@ -27,16 +23,12 @@ function getStatusColor($status)
  */
 function ProcessRequest($request)
 {
-    // -------------------------
-    // Initialize page object
-    // -------------------------
     $page = new stdClass();
 
     // -------------------------
     // Current Date & Time
     // -------------------------
-    $today = new DateTime();
-    $today->modify('+1 hour');
+    $today = new DateTime('+1 hour');
 
     $page->dateandtime = [
         'persianDate' => biiq_PersianDate::date("l j F Y"),
@@ -50,7 +42,7 @@ function ProcessRequest($request)
     $page->orders = [
         [
             'id'       => "۲۰۲۳۲۲۴۶۴۴۸",
-            'status'   => " موفق",
+            'status'   => "موفق",
             'amount'   => "12 USDT",
             'currency' => "ترون (TRC20)",
             'network'  => "TRC20",
@@ -61,57 +53,52 @@ function ProcessRequest($request)
         ]
     ];
 
-    // Add CSS color for each order status
-    foreach ($page->orders as $key => $order) {
-        $page->orders[$key]['statusColor'] = getStatusColor($order['status']);
+    // Add CSS color for each order
+    foreach ($page->orders as &$order) {
+        $order['statusColor'] = getStatusColor($order['status']);
     }
+    unset($order); // break reference
 
     // -------------------------
     // Status Bar (Transfer Info)
     // -------------------------
-    $statusbar = [
+    $page->statusbar = [
         [
-            'status'      => ' موفق',
+            'status'      => 'موفق',
             'wallet'      => 'TN7TeTQxA1ZNEcThVABvwSunjaZJs2PeT5',
             'tx_id'       => 'TN7TeTQxA1ZNEcThVABvwSunjaZJs2PeT5TN7TeTQxA1ZNEcT',
             'transfer_id' => 'CW2528380666409'
         ]
     ];
 
-    // Add CSS color for each status item
-    foreach ($statusbar as $key => $tx) {
-        $statusbar[$key]['statusColor'] = getStatusColor($tx['status']);
+    foreach ($page->statusbar as &$tx) {
+        $tx['statusColor'] = getStatusColor($tx['status']);
     }
-    $page->statusbar = $statusbar;
+    unset($tx);
 
     // -------------------------
     // Transaction Info
     // -------------------------
-    $transaction = [
-        'status'     => 'موفق',
-        'number'     => '3215402',
-        'ip'         => '45.93.169.254',
-        'discount'   => '۵۰۴,۵۰۴ تومان',
-        'wallet'     => '۵۰۴,۵۰۴ تومان',
-        'cartNumber' => '5022291577226309',
-        'paid'       => '۵۰۴,۵۰۴ تومان'
-    ];
-
-    // Add color based on transaction status
-    $transaction['statusColor'] = getStatusColor($transaction['status']);
-    $page->transaction = $transaction;
+$page->transaction = (object)[
+    'status'     => 'موفق',
+    'number'     => '3215402',
+    'ip'         => '45.93.169.254',
+    'discount'   => '۵۰۴,۵۰۴ تومان',
+    'wallet'     => '۵۰۴,۵۰۴ تومان',
+    'cartNumber' => '5022291577226309',
+    'paid'       => '۵۰۴,۵۰۴ تومان',
+    'statusColor'=> getStatusColor('موفق')
+];
 
     // -------------------------
     // Return Template Output
     // -------------------------
-    return [
-        'content'   => biiq_Template::Start('currency->index', true, [
-            'Objects'     => $page,
-            'dateandtime' => $page->dateandtime,
-            'transaction' => $page->transaction
-        ]),
-        'id'        => 1,
-        'title'     => 'ارز دیجیتال',
-        'Canonical' => SITE . 'currency/'
-    ];
+return [
+    'content' => biiq_Template::Start('orders->default', true, [
+        'transaction' => $page->transaction
+    ]),
+    'id' => 1,
+    'title' => 'ارز دیجیتال',
+    'Canonical' => SITE . 'orders/'
+];
 }

@@ -3,6 +3,7 @@ function ProcessRequest($request)
 {
     $page = new stdClass();
 
+    // بررسی پارامترهای ورودی
     if (!isset($request->Parameters) || !is_array($request->Parameters) || count($request->Parameters) == 0) {
         $GLOBALS['error']->Show(401);
         exit;
@@ -14,13 +15,20 @@ function ProcessRequest($request)
         exit;
     }
 
-    // فرمت اعداد با جداکننده هزارگان
+    //just with yegane's userid can access to this page
+
+    if ($SelectedUserID != 1) {
+        $GLOBALS['error']->Show(401);
+        exit;
+    }
+
+    // تابع فرمت اعداد با جداکننده هزارگان
     function separateThousands($number)
     {
         return number_format((int)$number);
     }
 
-    // زمان نسبی
+    // تابع زمان نسبی
     function timeAgo($timestamp)
     {
         $diff = time() - $timestamp;
@@ -47,7 +55,7 @@ function ProcessRequest($request)
         'time'        => $today->format("H:i")
     ];
 
-    // تابع کمکی برای ادغام همه فور ایچ‌ها
+    // تابع قالب‌بندی آیتم‌ها
     function applyFormatting(&$items, $type)
     {
         foreach ($items as &$item) {
@@ -109,7 +117,7 @@ function ProcessRequest($request)
         unset($item);
     }
 
-    // ======== داده‌ها ========
+    // ===== داده‌ها =====
     $page->profileBox = [
         "registrationStatus" => "تایید شده",
         "authenticationStatus" => "در انتظار تایید",
@@ -117,19 +125,18 @@ function ProcessRequest($request)
         "buyToday" => " 58،256،000 تومان",
         "timeLeft" => "14 دقیقه پیش"
     ];
-
     $page->addresslist = [
         ["address"=>"TBLdjcbXLozzqp6YYvH6Z9HuFwCbzeKbFP","network"=>"TRC20","dateandtime"=>biiq_PersianDate::date("l j F Y - H:i",1266578),"desciption"=>"۲۰۲۳۲۷۳۸۰۳۰"],
         ["address"=>"TBLdjcbXLozzqp6YYvH6Z9HuFwCbzeKbFP","network"=>"TRC20","dateandtime"=>biiq_PersianDate::date("l j F Y - H:i",1266578),"desciption"=>"۲۰۲۳۲۷۳۸۰۳۰"]
     ];
 
-    $page->orderList = [
+
+      $page->orderList = [
         ['ID'=>20232336263,"OrderDetails"=>'<div class="d-flex justify-content-start"><img src="../../assets/img/usdt.png" alt="btc" class="me-2" style="width:24px;height:24px;"><div class="d-flex flex-column"><span>19788</span><span>USDT (تتر)</span></div></div>',"UserID"=>16,"price"=>separateThousands(445609806),"UnixTimestamp"=>time()-(14*86400),"lastActivityTimestamp"=>time()-(1*86400),"PersianDate"=>biiq_PersianDate::date("l j F Y - H:i",126545878),"Status"=>"موفق","numberOrder"=>"20232336263# <span class='px-1 rounded-3'>فروش</span>"],
         ['ID'=>12312313123,"OrderDetails"=>'<div class="d-flex justify-content-start"><img src="../../assets/img/usdt.png" alt="btc" class="me-2" style="width:24px;height:24px;"><div class="d-flex flex-column"><span>19788</span><span>USDT (تتر)</span></div></div>',"UserID"=>16,"price"=>separateThousands(445609806),"UnixTimestamp"=>time()-(5*30*86400),"lastActivityTimestamp"=>time()-(23*86400),"PersianDate"=>biiq_PersianDate::date("l j F Y - H:i",time()-(2*2*86400)),"Status"=>"در انتظار تایید","numberOrder"=>"12312313123# <span class='px-1 rounded-3'>خرید</span>"],
         ['ID'=>65988978754,"OrderDetails"=>'<div class="d-flex justify-content-start"><img src="../../assets/img/usdt.png" alt="btc" class="me-2" style="width:24px;height:24px;"><div class="d-flex flex-column"><span>19788</span><span>USDT (تتر)</span></div></div>',"UserID"=>16,"price"=>separateThousands(445609806),"UnixTimestamp"=>time()-(5*30*86400),"lastActivityTimestamp"=>time()-(23*86400),"PersianDate"=>biiq_PersianDate::date("l j F Y - H:i",time()-(15*2*86400)),"Status"=>"نا موفق","numberOrder"=>"20232336263# <span class='px-1 rounded-3'>فروش</span>"],
     ];
 
-    // مرتب‌سازی سفارش‌ها
     usort($page->orderList, fn($a,$b)=>$b["UnixTimestamp"]<=>$a["UnixTimestamp"]);
     applyFormatting($page->orderList,'orderList');
 
@@ -141,7 +148,6 @@ function ProcessRequest($request)
     usort($page->transactions, fn($a,$b)=>$b["UnixTimestamp"]<=>$a["UnixTimestamp"]);
     applyFormatting($page->transactions,'transactions');
 
-    // حساب‌ها
     $page->accountInfo = [
         ["id"=>"1","shebaNumber"=>"IR940150000184370199152881","cartNumber"=>"6273811170944968","UserID"=>22,"bank"=>"/assets/img/blu.png","UnixTimestamp"=>9999999999,"details"=>"تایید شده"],
         ["id"=>"2","shebaNumber"=>"IR940150000184370199152881","cartNumber"=>"6273811170944968","UserID"=>22,"bank"=>"/assets/img/ansar.png","UnixTimestamp"=>9999999999,"persianDate"=>biiq_PersianDate::date("l j F Y - H:i",88888888),"details"=>"رد شده"],
@@ -149,7 +155,6 @@ function ProcessRequest($request)
     ];
     applyFormatting($page->accountInfo,'accountInfo');
 
-    // مدارک هویتی
     $page->identityDocuments = [
         ["description"=>"<i class='fas fa-times-circle text-red me-1'></i> تصویر احراز هویت خود را با کیفیت بالاتری ارسال نمایید.","UserID"=>22,"UnixTimestamp"=>time()-600,"status"=>"در انتظار تایید","details"=>"  مشاهده مدارک"],
         ["description"=>"<i class='fas fa-exclamation-circle text-warning me-1'></i> تصویر احراز هویت خود را با کیفیت بالاتری ارسال نمایید.","UserID"=>22,"UnixTimestamp"=>time()-3600,"status"=>"تایید شده","details"=>" مشاهده مدارک"],
@@ -157,19 +162,15 @@ function ProcessRequest($request)
     ];
     applyFormatting($page->identityDocuments,'identityDocuments');
 
-    // userAuthentication (مثال: userAuth یا extraReq)
-    if(isset($page->userAuthentication)) applyFormatting($page->userAuthentication,'userAuthentication');
-
-    // اطلاعات کاربر فعلی
     $page->CurrentUser = [
         'Status' => "تایید شده",
         'SelfieStatus' => 'ارسال نشده',
         'maximumPurchase' => "صد هزار تومن",
-        'buyToday' => " 28،256،000 تومان",
+        'buyToday' => "28،256،000 تومان",
         'lastTime' => "10 دقیقه پیش",
-        'phoneNumber' => '09356458975',
-        'userNumber' => '56789',
-        'introduced' => '  2 نفر ',
+        'phoneNumber' => '09128431937',
+        'userNumber' => '2',
+        'introduced' => '2 نفر',
         'nationalCode' => '0013152343',
         'GiftCredit' => '500 هزار تومن',
         'birthday' => '1370/06/06',
@@ -178,7 +179,7 @@ function ProcessRequest($request)
         'otherDate' => date("Y/m/d")
     ];
 
-    $page->Title = "  مدیریت کاربران ";
+    $page->Title = "مدیریت کاربران";
     $page = array(
         'content' => biiq_Template::Start('manage->default', true, ['Objects' => $page, 'CurrentUser' => $page->CurrentUser, 'dateandtime' => $page->dateandtime]),
         'id' => 0,
