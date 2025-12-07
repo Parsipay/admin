@@ -13,7 +13,7 @@
                 <th class="col-5 py-3 text-start">
                     آخرین فعالیت
                 </th>
-                <th class="col-4 py-3 text-start sortable" data-column="2">
+                <th class="col-4 py-3 text-center sortable" data-column="2">
                     <span>تاریخ ثبت‌نام</span>
                     <i class="fas fa-sort sort-toggle ms-2"></i>
                 </th>
@@ -23,7 +23,7 @@
             [foreach ([@Objects->userList])]
             <tr>
                 <td class="text-primary">
-                    <button class="btn opacity-green rounded-pill w-25 text-green  ms-5">
+                    <button class="btn btn-sm-outline-secondary opacity-green rounded-pill w-25 text-green  ms-5">
                         [@Item->User]
                         <i class="fas fa-user text-success ms-3"></i>
                     </button>
@@ -31,7 +31,7 @@
                 <td class="sortable" data-timestamp="[@Item->lastActivityTimestamp]">
                     [@Item->akharin]
                 </td>
-                <td class="sortable" data-timestamp="[@Item->UnixTimestamp]">
+                <td class="sortable text-center" data-timestamp="[@Item->UnixTimestamp]">
                     <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-placement="top"
                         data-bs-content=" [@Item->PersianDateRelative]">
                         [@Item->PersianDate]

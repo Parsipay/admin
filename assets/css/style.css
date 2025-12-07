@@ -106,8 +106,9 @@ body {
   background: var(--gray-bg);
 }
 .font-color {
-  color: #616e85 !important;
-}
+  color: rgb(103, 102, 112)!important;
+} 
+  
 .text-gray {
   color: #dee4ec !important;
 }
@@ -354,6 +355,7 @@ table:not(.accordion table) thead th:last-child {
 .ms-7 {
       margin-right: 6rem !important;
 }
+.mt-10{ margin-top: 160px!important;}
 /* ============================================================
    🔶 13️⃣ RESPONSIVE DESIGN
    ------------------------------------------------------------ */
@@ -361,35 +363,6 @@ table:not(.accordion table) thead th:last-child {
   overflow-x: auto;
   overflow-y: hidden;
   max-height: 500px;
-}
-
-@media (max-width: 768px) {
-  .table-responsive {
-    -webkit-overflow-scrolling: touch;
-  }
-  table {
-    min-width: 700px;
-  }
-  .resImg {
-    width: 280px !important;
-    height: 152px;
-  }
-  .accordion .accordion-button .d-flex {
-    flex-wrap: wrap;
-  }
-}
-
-@media (max-width: 576px) {
-  main {
-    width: 100%;
-    overflow-x: hidden;
-  }
-}
-
-@media (min-width: 576px) and (max-width: 870px) {
-  .accordion {
-    max-width: 600px;
-  }
 }
 
 /* ============================================================
@@ -477,35 +450,6 @@ table:not(.accordion table) thead th:last-child {
   flex-direction: column;
 }
 
-/* From 768px and Up — Full Height Layout */
-@media (min-width: 768px) {
-  .login-background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    overflow: auto;
-  }
-  .login-background .container-fluid,
-  .login-background .row {
-    height: 100%;
-  }
-}
-
-/* Below 768px — Natural Height Layout */
-@media (max-width: 767.98px) {
-  .login-background {
-    position: relative !important;
-    height: auto !important;
-    min-height: auto !important;
-    overflow: visible !important;
-  }
-  .login-background .container-fluid,
-  .login-background .row {
-    height: auto !important;
-  }
-}
 
 
 /*toggle insight button*/
@@ -527,3 +471,104 @@ input:checked + .slider:before { transform:translateX(22px); }
 .popover{  --bs-popover-bg:#777;
   --bs-popover-body-color:#fff}
 .popover *{font-family:"dana", sans-serif}
+
+
+@media (max-width: 1500px) {
+
+.btn-sm-outline-secondary {
+    border: none !important;
+    background-color: transparent !important;
+    font-size: 0.8rem;
+    white-space: nowrap!important;
+    padding: 0.5rem 1rem;
+    box-shadow: none !important;
+}
+
+.btn-sm-outline-secondary:hover,
+.btn-sm-outline-secondary:active,
+.btn-sm-outline-secondary:focus {
+    border: none !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+}
+}
+
+@media (max-width: 768px) {
+  .table-responsive {
+    -webkit-overflow-scrolling: touch;
+  }
+  table {
+    min-width: 700px;
+  }
+  .resImg {
+    width: 280px !important;
+    height: 152px;
+  }
+  .accordion .accordion-button .d-flex {
+    flex-wrap: wrap;
+  }
+.btn-sm-outline-secondary {
+    border: none !important;
+    background-color: transparent !important;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    padding: 0.5rem 1rem;
+    box-shadow: none !important;
+}
+
+.btn-sm-outline-secondary:hover,
+.btn-sm-outline-secondary:active,
+.btn-sm-outline-secondary:focus {
+    border: none !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+}
+  .login-background {
+    position: relative !important;
+    height: auto !important;
+    min-height: auto !important;
+    overflow: visible !important;
+  }
+  .login-background .container-fluid,
+  .login-background .row {
+    height: auto !important;
+  }
+}
+
+/* From 768px and Up — Full Height Layout */
+@media (min-width: 768px) {
+  .login-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    overflow: auto;
+  }
+  .login-background .container-fluid,
+  .login-background .row {
+    height: 100%;
+  }
+}
+
+@media (max-width: 576px) {
+  main {
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+}
+
+@media (min-width: 576px) and (max-width: 870px) {
+  .accordion {
+    max-width: 600px;
+  }
+ .btn-sm-outline-secondary {
+    border-color: #ffffff !important;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    padding: 0.5rem 1rem;
+}
+
+}
+

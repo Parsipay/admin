@@ -82,25 +82,25 @@
                     <tbody>
                         [foreach ([@Objects->Deposits])]
                         <tr>
-                            <td class=" fw-semibold py-4">[@Item->ID]<i class="far fa-copy ms-1 text-primary"></i>
+                            <td class="py-4">[@Item->ID]<i class="far fa-copy ms-1 text-primary"></i>
                             </td>
-                            <td class=" fw-semibold حغ-4">[@Item->trackingNumber]<i
+                            <td class="py-4">[@Item->trackingNumber]<i
                                     class="far fa-copy ms-1 text-primary"></i></td>
                             <td class=>
-                                <button class="btn rounded-pill w-50 [@Item->LevelColor]"
+                                <button class="btn btn-outline-secondary btn-sm-outline-secondary rounded-pill w-50 [@Item->LevelColor]"
                                     data-user-level="[@Item->Level]" data-user-id="[@Item->UserID]" tabindex="0"
                                     data-bs-toggle="popover" data-bs-placement="top" data-bs-content="[@Item->Level]">
                                     <i class="[@Item->LevelIcon] me-1"></i>[@Item->User]
                                 </button>
                             </td>
-                            <td class=" fw-bold">[@Item->Price]</td>
-                            <td class="  " data-timestamp="[@Item->UnixTimestamp]">
+                            <td >[@Item->Price]</td>
+                            <td  data-timestamp="[@Item->UnixTimestamp]">
                                 <span class="d-inline-block" tabindex="0" data-bs-toggle="popover"
                                     data-bs-placement="top" data-bs-content="[@Item->PersianDateRelative]">
                                     [@Item->PersianDate]
                                 </span>
                             </td>
-                            <td class="">
+                            <td >
                                 <span class="badge px-3 py-2 rounded-pill status-text [@Item->StatusColor]">
                                     [@Item->Status]
                                 </span>
@@ -156,7 +156,7 @@
                             <td class="text-start py-4">[@Item->ID]<i class="far fa-copy ms-1 text-primary"></i></td>
                             <td class="text-start">[@Item->phoneNumber]</td>
                             <td class="text-center">
-                                <button class="btn rounded-pill w-50 [@Item->LevelColor]"
+                                <button class="btn btn-outline-secondary btn-sm-outline-secondary rounded-pill w-50 [@Item->LevelColor]"
                                     data-user-level="[@Item->Level]" data-user-id="[@Item->UserID]" tabindex="0"
                                     data-bs-toggle="popover" data-bs-placement="top" data-bs-content="[@Item->Level]">
                                     <i class="[@Item->LevelIcon] me-1"></i>[@Item->User]
@@ -212,32 +212,32 @@
                         [foreach ([@Objects->Settlements])]
                         <tr>
 
-                            <td class="">[@Item->ID]<i class="far fa-copy text-primary ms-2"></i></td>
-                            <td class="  " data-timestamp="[@Item->UnixTimestamp]">
+                            <td>[@Item->ID]<i class="far fa-copy text-primary ms-2"></i></td>
+                            <td data-timestamp="[@Item->UnixTimestamp]">
                                 <span class="d-inline-block" tabindex="0" data-bs-toggle="popover"
                                     data-bs-placement="top" data-bs-content="[@Item->PersianDateRelative]">
                                     [@Item->PersianDate]
                                 </span>
                             </td>
-                            <td class="">
-                                <button class="btn rounded-pill w-50 [@Item->LevelColor]"
+                            <td>
+                                <button class="btn btn-outline-secondary btn-sm-outline-secondary rounded-pill w-50 [@Item->LevelColor]"
                                     data-user-level="[@Item->Level]" data-user-id="[@Item->UserID]" tabindex="0"
                                     data-bs-toggle="popover" data-bs-placement="top" data-bs-content="[@Item->Level]">
                                     <i class="[@Item->LevelIcon] me-1"></i>[@Item->User]
                                 </button>
                             </td>
                             <td class="text-start">[@Item->price]</td>
-                            <td class="">
+                            <td>
                                 <span class="text-warning px-3 py-2 rounded-pill">[@Item->Status]</span>
                             </td>
-                            <td class="">
+                            <td>
                                 <a href="#" class="px-3 py-2 rounded-pill open-properties" data-bs-toggle="modal"
                                     data-bs-target="#propertiesModal" data-properties="[@Item->properties]">
                                     مشاهده عملیات
                                 </a>
                             </td>
 
-                            <td class="  py-3">
+                            <td class="py-3">
                                 <input type="checkbox" id="selectAll" class="form-check-input " style="cursor:pointer;">
                             </td>
                         </tr>

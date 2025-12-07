@@ -11,7 +11,6 @@ function ProcessRequest($request)
         'otherDate'   => $today->format("Y/m/d"),
         'time'        => $today->format("H:i")
     ];
-
     // --- Return page data ---
     return [
         'content'   => biiq_Template::Start('layout->dateandtime', true, ['Objects' => $page]),

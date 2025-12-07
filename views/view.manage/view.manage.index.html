@@ -6,10 +6,10 @@
                 <div class="d-flex  justify-contetn-center align-items-center flex-nowrap gap-2 ">
                     <img src="[@settings->site]assets/img/ehra.png" alt="مدارک احراز" width="35" height="35"
                         class="d-none d-sm-block">
-                    <span class="font-color small text-nowrap">مدارک احراز هویت | </span>
+                    <span class="text-secondary small text-nowrap">مدارک احراز هویت | </span>
 
                     <span class="bg-blue px-2 pt-1 rounded-circle text-primary small">2</span>
-                    <span class="font-color small text-nowrap">مورد در انتظار بررسی</span>
+                    <span class="text-secondary small text-nowrap">مورد در انتظار بررسی</span>
                 </div>
             </button>
         </h2>
@@ -19,10 +19,10 @@
                 <div class="table-responsive rounded-3 ">
                     <table class="table text-center rounded-3 align-middle mb-0">
                         <thead>
-                            <tr>
-                                <th class="py-3">نام و نام خانوادگی</th>
-                                <th class="py-3">زمان ارسال فایل</th>
-                                <th class="py-3">مدارک</th>
+                            <tr class="">
+                                <th class="py-3 bg-gray">نام و نام خانوادگی</th>
+                                <th class="py-3 bg-gray">زمان ارسال فایل</th>
+                                <th class="py-3 bg-gray">مدارک</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -60,8 +60,14 @@
             </div>
             <div class="modal-body">
                 <div class="d-flex flex-column align-items-center">
-                    <div class="documentBox bg-light w-100 mb-3" style="max-width: 100%; height: 200px;"></div>
+                    <div class="documentBox bg-light w-100 mb-3"
+                        style="max-width: 100%; height: 200px; display:flex; align-items:center; justify-content:center;">
+                        <span class="text-muted">فایلی انتخاب نشده</span>
+                    </div>
 
+                    <input type="file" id="fileInput" class="d-none" accept="image/*">
+
+                    <button type="button" class="btn btn-primary mt-2" id="uploadBtn">انتخاب فایل</button>
                     <select class="form-select mt-2 rounded-5 w-100">
                         <option selected>علت وارد شده</option>
                         <option value="1">دلیل عمومی</option>
@@ -102,9 +108,9 @@
                 <div class="d-flex align-items-center gap-2 flex-nowrap">
                     <img src="[@settings->site]assets/img/hesabbanki.png" alt="hesab banki" width="35" height="35"
                         class="d-none d-sm-block">
-                    <span class="font-color small text-nowrap">حساب‌های بانکی</span>
+                    <span class="text-secondary small text-nowrap">حساب‌های بانکی</span>
                     <span class="bg-blue px-1 pt-1 rounded-circle text-primary small">2</span>
-                    <span class="font-color small text-nowrap">مورد انتظار در بررسی</span>
+                    <span class="text-secondary small text-nowrap">مورد انتظار در بررسی</span>
                 </div>
             </button>
         </h2>
@@ -113,13 +119,13 @@
             <div class="accordion-body bg-white">
                 <div class="table-responsive rounded-3 ">
                     <table class="table text-center rounded-3  mb-0">
-                        <thead>
-                            <tr class="align-middle">
-                                <th class="py-3">نام و نام خانوادگی</th>
-                                <th class="py-3">نام بانک</th>
-                                <th class="py-3">شماره شبا</th>
-                                <th class="py-3">شماره کارت</th>
-                                <th class="text-center py-3">عملیات</th>
+                        <thead class="bg-dark">
+                            <tr class="align-middle bg-gray">
+                                <th class="py-3 bg-gray">نام و نام خانوادگی</th>
+                                <th class="py-3 bg-gray">نام بانک</th>
+                                <th class="py-3 bg-gray">شماره شبا</th>
+                                <th class="py-3 bg-gray">شماره کارت</th>
+                                <th class="text-center py-3 bg-gray">عملیات</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -237,18 +243,18 @@
                     <tbody>
                         [foreach ([@Objects->userList])]
                         <tr>
-                            <td class="text-start fw-semibold">[@Item->nationalCode]
+                            <td class="text-start">[@Item->nationalCode]
                             </td>
-                            <td class="text-start fw-semibold">[@Item->phoneNumber]
+                            <td class="text-start">[@Item->phoneNumber]
                             </td>
-                            <td class="text-start fw-semibold">
+                            <td class="text-start">
                                 <a href="[@settings->site]manage/[@Item->UserID]/"
                                     class="d-inline-flex align-items-center text-decoration-none">
                                     <i class="[@Item->LevelIcon] me-1"></i>
                                     [@Item->User]
                                 </a>
                             </td>
-                            <td class="text-start fw-semibold">[@Item->lastActivity]</td>
+                            <td class="text-start">[@Item->lastActivity]</td>
                             <td class="text-start" data-timestamp="[@Item->UnixTimestamp]">[@Item->PersianDate]</td>
 
                             <td class="py-3 text-start">
@@ -304,9 +310,9 @@
                     <tbody>
                         [foreach ([@Objects->bankAccount])]
                         <tr>
-                            <td class="text-start fw-semibold py-3">[@Item->nationalCode]</td>
-                            <td class="text-start fw-semibold">[@Item->phoneNumber]</td>
-                       <td class="text-start fw-semibold">
+                            <td class="text-start py-3">[@Item->nationalCode]</td>
+                            <td class="text-start py-4">[@Item->phoneNumber]</td>
+                            <td class="text-start fw-bold">
                                 <a href="[@settings->site]manage/[@Item->UserID]/"
                                     class="d-inline-flex align-items-center text-decoration-none">
                                     <i class="[@Item->LevelIcon] me-1"></i>
@@ -315,7 +321,7 @@
                             </td>
                             <td class="text-start">
                                 <span>[@Item->bankInfo]</span>
-                                <img src="[@Item->BankImage]" alt="بانک"  class="ms-3">
+                                <img src="[@Item->BankImage]" alt="بانک" class="ms-3">
                             </td>
 
                             <td class="text-start">
@@ -386,10 +392,10 @@
                     <tbody>
                         [foreach ([@Objects->authentication])]
                         <tr>
-                            <td class="text-start fw-semibold">[@Item->nationalCode]</td>
-                            <td class="text-start fw-semibold">[@Item->phoneNumber]
+                            <td class="text-start py-4">[@Item->nationalCode]</td>
+                            <td class="text-start">[@Item->phoneNumber]
                             </td>
-                              <td class="text-start fw-semibold">
+                            <td class="text-start fw-bold">
                                 <a href="[@settings->site]manage/[@Item->UserID]/"
                                     class="d-inline-flex align-items-center text-decoration-none">
                                     <i class="[@Item->LevelIcon] me-1"></i>

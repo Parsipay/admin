@@ -478,5 +478,19 @@ chart2.setOption({
         filterTableByDate(Math.floor(start.getTime()/1000), Math.floor(end.getTime()/1000));
     });
 
+    //modale modireate karabara entekhabe file
+    $('#uploadBtn').click(function() {
+        $('#fileInput').click();
+    });
 
+    $('#fileInput').on('change', function() {
+        var file = this.files[0];
+        if (!file) return;
+
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            $('.documentBox').html('<img src="' + e.target.result + '" alt="file" style="max-width:100%; max-height:100%;">');
+        };
+        reader.readAsDataURL(file);
+    });
 });

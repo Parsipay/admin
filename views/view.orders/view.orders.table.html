@@ -21,34 +21,30 @@
                     وضعیت
                     <div class="dropdown d-inline">
                         <i class="fas fa-sort ms-1" data-bs-toggle="dropdown" style="cursor:pointer;"></i>
-
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item filter-status" data-status="موفق">موفق</a></li>
                             <li><a class="dropdown-item filter-status" data-status="رد شده">رد شده</a></li>
                             <li><a class="dropdown-item filter-status" data-status="پردازش">پردازش</a></li>
                             <li><a class="dropdown-item filter-status" data-status="تکمیل نشده">تکمیل نشده</a></li>
-
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-
                             <li><a class="dropdown-item filter-status" data-status="all">همه</a></li>
                         </ul>
                     </div>
                 </th>
-
             </tr>
         </thead>
         <tbody>
             [foreach ([@Objects->orderList])]
             <tr>
-                <td class="text-start">
+                <td class="text-start fw-bold">
                     <a href="[@settings->site]orders/[@Item->ID]/">
                         [@persian [@Item->ID]]
                     </a>
                 </td>
                 <td>
-                    <button class="btn rounded-pill w-50 [@Item->LevelColor]" data-user-level="[@Item->Level]"
+                    <button class="btn btn-outline-secondary btn-sm-outline-secondary rounded-pill w-50 text-xl-nowrap [@Item->LevelColor]" data-user-level="[@Item->Level]"
                         data-user-id="[@Item->UserID]" tabindex="0" data-bs-toggle="popover" data-bs-placement="top"
                         data-bs-content="[@Item->Level]">
                         <i class="[@Item->LevelIcon] me-1"></i>[@Item->User]

@@ -6,15 +6,16 @@
   <div class="col-12 col-md-9 col-lg-2">
     <div class="d-flex flex-column gap-3 h-100">
       [foreach ([@Objects->TopBox])]
-      <div class="bg-col rounded-5">
-        <div class="d-flex flex-column justify-content-between py-2 px-3 text-center">
-          <a href="[@settings->site][@Item->Link]" class="nav-link text-dark">
-            <i class="fa fa-[@Item->Icon] font-color me-2"></i>
-            <span class="font-color">[@Item->Title]</span>
-          </a>
-          <p class="text-primary mb-0 small mt-2 text-start ms-3">[@Item->Subtitle]</p>
-        </div>
-      </div>
+    <div class="bg-col rounded-5 text-secondary">
+  <div class="d-flex flex-column justify-content-between py-2 px-3 text-center">
+    <a href="[@settings->site][@Item->Link]" class="nav-link p-0 font-color">
+      <i class="fa fa-[@Item->Icon] me-2"></i>
+      <span>[@Item->Title]</span>
+    </a>
+    <p class="text-primary mb-0 small mt-2 text-start ms-3">[@Item->Subtitle]</p>
+  </div>
+</div>
+
       [endforeach]
     </div>
   </div>
@@ -58,14 +59,14 @@
 <!-- ✅ Reload + Insights in one row -->
 <div class="d-flex align-items-center justify-content-between mb-3">
   <!-- 🔄 Reload Icon -->
-  <i id="reloadBtn" class="fas fa-sync-alt  border me-3 p-1 rounded font-color" style="cursor:pointer;"></i>
+  <i id="reloadBtn" class="fas fa-sync-alt  border me-3 p-1 rounded text-secondary" style="cursor:pointer;"></i>
   <!-- ✅ Insights Toggle -->
   <div class="d-flex align-items-center gap-2">
     <label class="switch mb-0">
       <input type="checkbox" id="toggleInsight">
       <span class="slider"></span>
     </label>
-    <span class="fw-bold font-color">Insights</span>
+    <span class="fw-bold text-secondary">Insights</span>
   </div>
 
 </div>

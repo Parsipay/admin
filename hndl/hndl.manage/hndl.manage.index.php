@@ -6,42 +6,30 @@ function ProcessRequest($request)
     // Helper Functions
     // =========================
 
-    // ماسک شماره کارت
-    function maskCard($num)
-    {
-        $len = strlen($num);
-        return $len <= 10
-            ? str_repeat("*", $len)
-            : substr($num, 0, 6) . str_repeat("*", $len - 10) . substr($num, -4);
-    }
+// Card number mask
+    $maskCard = fn($num) => strlen($num) <= 10
+        ? str_repeat("*", strlen($num))
+        : substr($num, 0, 6) . str_repeat("*", strlen($num) - 10) . substr($num, -4);
 
-    // آیکون سطح
-    function getLevelIcon($level)
-    {
-        return match (trim($level)) {
-            "طلایی"   => "fa-solid fa-star text-warning",
-            "حرفه ای" => "fa-solid fa-medal text-red",
-            "فعال"    => "fa-solid fa-circle-check text-green",
-            default   => "fa-solid fa-user text-primary",
-        };
-    }
+// User level icon
+    $getLevelIcon = fn($level) => match (trim($level)) {
+        "طلایی"   => "fa-solid fa-star text-warning",
+        "حرفه ای" => "fa-solid fa-medal text-danger",
+        "فعال"    => "fa-solid fa-circle-check text-success",
+        default   => "fa-solid fa-user text-primary",
+    };
 
-    // رنگ وضعیت
-    function getStatusColor($status)
-    {
-        return match (trim($status)) {
-            "تایید شده", "موفق" => "text-success opacity-green",
-            "در انتظار تایید"   => "text-warning bg-opacity-warning",
-            "تکمیل نشده"        => "text-primary bg-blue",
-            default              => "text-danger bg-red",
-        };
-    }
+// Status color
+    $getStatusColor = fn($status) => match (trim($status)) {
+        "تایید شده", "موفق"       => "text-success opacity-green",
+        "در انتظار تایید"          => "text-warning bg-opacity-warning",
+        "تکمیل نشده"               => "text-primary bg-blue",
+        default                    => "text-danger bg-red",
+    };
 
-    // زمان نسبی
-    function timeAgo($timestamp)
-    {
+// Relative time
+    $timeAgo = function($timestamp) {
         $diff = time() - $timestamp;
-
         return match (true) {
             $diff < 60       => "لحظاتی پیش",
             $diff < 3600     => round($diff / 60) . " دقیقه پیش",
@@ -51,63 +39,48 @@ function ProcessRequest($request)
             $diff < 31536000 => round($diff / 2592000) . " ماه پیش",
             default          => round($diff / 31536000) . " سال پیش",
         };
-    }
+    };
 
-    // ✨ تابع مشترک برای اضافه کردن آیکون سطح – رنگ – زمان
-    function enrichList(&$list, $hasTime = false, $hasStatus = false)
-    {
+    // ✨ Common function to add level icon, status color and time
+    $enrichList = function(&$list, $hasTime = false, $hasStatus = false, $levelKey = "Level", $statusKey = "Status", $timeKey = "UnixTimestamp") use ($getLevelIcon, $getStatusColor, $timeAgo) {
         foreach ($list as &$item) {
-            if (isset($item["Level"])) {
-                $item["LevelIcon"] = getLevelIcon($item["Level"]);
-            }
-            if ($hasStatus && isset($item["Status"])) {
-                $item["StatusColor"] = getStatusColor($item["Status"]);
-            }
-            if ($hasTime && isset($item["UnixTimestamp"])) {
-                $item["lastActivity"] = timeAgo($item["UnixTimestamp"]);
-            }
+            if (isset($item[$levelKey])) $item["LevelIcon"] = $getLevelIcon($item[$levelKey]);
+            if ($hasStatus && isset($item[$statusKey])) $item["StatusColor"] = $getStatusColor($item[$statusKey]);
+            if ($hasTime && isset($item[$timeKey])) $item["lastActivity"] = $timeAgo($item[$timeKey]);
         }
         unset($item);
-    }
+    };
 
     // =========================
-    // START BUILDING PAGE DATA
+    // Build Page Data
     // =========================
-
     $page = new stdClass();
     $timestamp = 1616301000;
 
     // ------------------------------
     // Documents
     // ------------------------------
-    $page->docList = [
-        [
-            "user" => "بنفشه ابراهیمی",
-            "UnixTimestamp" => $timestamp,
-            "persianDate" => biiq_PersianDate::date("l j F Y - H:i", $timestamp),
-        ],
-        [
-            "user" => "بنفشه ابراهیمی",
-            "UnixTimestamp" => $timestamp,
-            "persianDate" => biiq_PersianDate::date("l j F Y - H:i", $timestamp),
-        ],
-    ];
+    $page->docList = array_map(fn($user) => [
+        "user" => $user,
+        "UnixTimestamp" => $timestamp,
+        "persianDate" => biiq_PersianDate::date("l j F Y - H:i", $timestamp),
+    ], ["بنفشه ابراهیمی", "بنفشه ابراهیمی"]);
 
     // ------------------------------
-    // Cards List
+    // Cards
     // ------------------------------
     $page->Cards = [
         [
             "user" => "یگانه علیزاده",
             "BankName" => "صادرات",
             "Shaba" => "IR940150000184370199152881",
-            "MaskedCard" => maskCard("5022291077470837"),
+            "MaskedCard" => $maskCard("5022291077470837"),
         ],
         [
             "user" => "مریم ماهور",
             "BankName" => "صادرات",
             "Shaba" => "IR940150000184370199152881",
-            "MaskedCard" => maskCard("5022291077470837"),
+            "MaskedCard" => $maskCard("5022291077470837"),
         ],
     ];
 
@@ -161,12 +134,9 @@ function ProcessRequest($request)
         ],
     ];
 
-    // ✨ اینجا دیگه خودمون foreach نمی‌نویسیم
-    enrichList($page->userList, hasTime: true, hasStatus: true);
-
-    // مرتب‌سازی
+    $enrichList($page->userList, hasTime: true, hasStatus: true);
+    // Sort by latest activity
     usort($page->userList, fn($a, $b) => $b["UnixTimestamp"] <=> $a["UnixTimestamp"]);
-
     // ------------------------------
     // Bank Accounts
     // ------------------------------
@@ -213,7 +183,7 @@ function ProcessRequest($request)
         ],
     ];
 
-    enrichList($page->bankAccount);
+    $enrichList($page->bankAccount);
 
     // ------------------------------
     // Authentication
@@ -257,19 +227,16 @@ function ProcessRequest($request)
         ],
     ];
 
-    enrichList($page->authentication, hasStatus: true);
+    $enrichList($page->authentication, hasStatus: true);
 
     // ------------------------------
-    // FINAL RENDER OUTPUT
+    // Return payload
     // ------------------------------
     return [
-        'content'   => biiq_Template::Start('manage->index', true, [
-            'Objects'     => $page,
-        ]),
+        'content'   => biiq_Template::Start('manage->index', true, ['Objects' => $page]),
         'id'        => 1,
         'title'     => 'مالی',
         'Canonical' => SITE . 'manage/',
         'navlink'   => 2
     ];
 }
-

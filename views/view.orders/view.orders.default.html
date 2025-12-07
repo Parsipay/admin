@@ -2,7 +2,7 @@
 <div class="d-flex flex-column mt-3 w-100">
     <!-- Header -->
     <div class="d-flex justify-content-between my-4 p-3">
-        <span class="fw-bold font-color">خرید ارز دیجیتال USDT</span>
+        <span class="fw-bold text-secondary">خرید ارز دیجیتال USDT</span>
         <i class="fas fa-chevron-left border border-dark rounded-circle p-1"></i>
     </div>
     <!-- Orders List -->
@@ -10,7 +10,7 @@
     <div class="d-flex flex-column mt-5 p-3 rounded border">
         <!-- Order Header -->
         <div class="d-flex justify-content-between">
-            <span class="fw-bold font-color">سفارش شماره [@Item->id]</span>
+            <span class="fw-bold text-secondary">سفارش شماره [@Item->id]</span>
             <span class="[@Item->statusColor]">[@Item->status]</span>
         </div>
         <!-- Order Details -->
@@ -20,31 +20,31 @@
                 <img src="[@Item->img]" alt="currency" class="me-2">
                 <div class="d-flex flex-column gap-2">
                     <span class="fw-bold">[@Item->amount]</span>
-                    <span class="font-color">مقدار تتر</span>
+                    <span class="text-secondary">مقدار تتر</span>
                 </div>
             </div>
             <!-- Network -->
             <div class="d-flex ms-5 align-items-center">
-                <span class="fs-1 font-color text-center">.</span>
+                <span class="fs-1 text-secondary text-center">.</span>
                 <div class="d-flex flex-column gap-3">
                     <span>[@Item->currency]</span>
-                    <span class="font-color">شبکه انتقال</span>
+                    <span class="text-secondary">شبکه انتقال</span>
                 </div>
             </div>
             <!-- Price -->
             <div class="d-flex ms-5 align-items-center">
-                <span class="fs-1 font-color text-center">.</span>
+                <span class="fs-1 text-secondary text-center">.</span>
                 <div class="d-flex flex-column gap-3">
                     <span>[@Item->price]</span>
-                    <span class="font-color">مبلغ</span>
+                    <span class="text-secondary">مبلغ</span>
                 </div>
             </div>
             <!-- Date and Time -->
             <div class="d-flex ms-5 align-items-center">
-                <span class="fs-1 font-color text-center">.</span>
+                <span class="fs-1 text-secondary text-center">.</span>
                 <div class="d-flex flex-column gap-3">
                     <span>[@Item->date] | ساعت [@Item->time]</span>
-                    <span class="font-color">تاریخ و ساعت پرداخت</span>
+                    <span class="text-secondary">تاریخ و ساعت پرداخت</span>
                 </div>
             </div>
         </div>
@@ -64,7 +64,7 @@
             <div class="d-flex justify-content-between p-4">
                 <div class="d-flex flex-column gap-2">
                     <span>[@Item->wallet]</span>
-                    <span class="font-color">آدرس کیف پول</span>
+                    <span class="text-secondary">آدرس کیف پول</span>
                 </div>
                 <i class="far fa-copy"></i>
             </div>
@@ -72,7 +72,7 @@
             <div class="d-flex justify-content-between p-4">
                 <div class="d-flex flex-column gap-2">
                     <span>[@Item->tx_id]</span>
-                    <span class="font-color">شناسه تراکنش</span>
+                    <span class="text-secondary">شناسه تراکنش</span>
                 </div>
                 <i class="far fa-copy"></i>
             </div>
@@ -80,7 +80,7 @@
             <div class="d-flex justify-content-between p-4">
                 <div class="d-flex flex-column gap-2">
                     <span>[@Item->transfer_id]</span>
-                    <span class="font-color">شناسه‌ی انتقال</span>
+                    <span class="text-secondary">شناسه‌ی انتقال</span>
                 </div>
                 <i class="far fa-copy"></i>
             </div>
@@ -97,14 +97,14 @@
 
             <!-- Tracking Number -->
             <div class="d-flex justify-content-between p-2">
-                <span class="font-color">شماره پیگیری</span>
-                <span class="font-color">[@Item->number] <i class="far fa-copy"></i></span>
+                <span class="text-secondary">شماره پیگیری</span>
+                <span class="text-secondary">[@Item->number] <i class="far fa-copy"></i></span>
             </div>
 
             <!-- IP Address -->
             <div class="d-flex justify-content-between p-2">
-                <span class="font-color">آی‌پی</span>
-                <span class="font-color">[@Item->ip] <i class="far fa-copy"></i></span>
+                <span class="text-secondary">آی‌پی</span>
+                <span class="text-secondary">[@Item->ip] <i class="far fa-copy"></i></span>
             </div>
 
             <!-- Discount & Wallet -->
@@ -114,7 +114,7 @@
                     <span class="fw-bold fs-1 me-2">.</span>
                     <div class="d-flex flex-column gap-2">
                         <span>[@Item->discount]</span>
-                        <span class="font-color">تخفیف</span>
+                        <span class="text-secondary">تخفیف</span>
                     </div>
                 </div>
 
@@ -123,20 +123,20 @@
                     <span class="fw-bold fs-1 me-2">.</span>
                     <div class="d-flex flex-column gap-2">
                         <span>[@Item->wallet]</span>
-                        <span class="font-color">کیف پول</span>
+                        <span class="text-secondary">کیف پول</span>
                     </div>
                 </div>
             </div>
 
             <!-- Card Number -->
             <div class="d-flex justify-content-between rounded-5 border p-2 mt-2">
-                <span class="font-color">شماره کارت</span>
-                <span class="font-color">[@Item->cartNumber] <i class="far fa-copy"></i></span>
+                <span class="text-secondary">شماره کارت</span>
+                <span class="text-secondary">[@Item->cartNumber] <i class="far fa-copy"></i></span>
             </div>
 
             <!-- Paid Amount -->
             <div class="d-flex justify-content-between p-2 mt-4">
-                <span class="font-color">پرداخت شده</span>
+                <span class="text-secondary">پرداخت شده</span>
                 <span class="text-green">[@Item->paid]</span>
             </div>
             [endforeach]

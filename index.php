@@ -93,7 +93,7 @@
     if(!function_exists('ToMoney')){
         function ToMoney($x, $y = 0){
             if(!is_numeric($x)){
-                return $x;
+                return $x; 
             }
             $x = $x + 0;
             if(is_numeric($y) && $y > 0 && floor($x) == $x){

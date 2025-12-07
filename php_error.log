@@ -1538,3 +1538,108 @@
 [03-Dec-2025 11:20:27 Asia/Tehran] Failed to convert string to money in Template => 445,609,806
 [03-Dec-2025 11:20:27 Asia/Tehran] Failed to convert string to money in Template => 445,609,806
 [03-Dec-2025 11:20:27 Asia/Tehran] Failed to convert string to money in Template => 445,609,806
+[03-Dec-2025 16:49:39 Asia/Tehran] Failed to convert string to money in Template => 445,609,806
+[03-Dec-2025 16:49:39 Asia/Tehran] Failed to convert string to money in Template => 445,609,806
+[03-Dec-2025 16:49:39 Asia/Tehran] Failed to convert string to money in Template => 445,609,806
+[03-Dec-2025 16:50:51 Asia/Tehran] Failed to convert string to money in Template => 445,609,806
+[03-Dec-2025 16:50:51 Asia/Tehran] Failed to convert string to money in Template => 445,609,806
+[03-Dec-2025 16:50:51 Asia/Tehran] Failed to convert string to money in Template => 445,609,806
+[03-Dec-2025 16:59:14 Asia/Tehran] Failed to convert string to money in Template => 445,609,806
+[03-Dec-2025 16:59:14 Asia/Tehran] Failed to convert string to money in Template => 445,609,806
+[03-Dec-2025 16:59:14 Asia/Tehran] Failed to convert string to money in Template => 445,609,806
+[06-Dec-2025 11:31:53 Asia/Tehran] Failed to convert string to money in Template => 445,609,806
+[06-Dec-2025 11:31:53 Asia/Tehran] Failed to convert string to money in Template => 445,609,806
+[06-Dec-2025 11:31:53 Asia/Tehran] Failed to convert string to money in Template => 445,609,806
+[06-Dec-2025 14:17:21 Asia/Tehran] Failed to convert string to money in Template => 445,609,806
+[06-Dec-2025 14:17:21 Asia/Tehran] Failed to convert string to money in Template => 445,609,806
+[06-Dec-2025 14:17:21 Asia/Tehran] Failed to convert string to money in Template => 445,609,806
+[06-Dec-2025 14:19:13 Asia/Tehran] Failed to convert string to money in Template => 445,609,806
+[06-Dec-2025 14:19:13 Asia/Tehran] Failed to convert string to money in Template => 445,609,806
+[06-Dec-2025 14:19:13 Asia/Tehran] Failed to convert string to money in Template => 445,609,806
+[06-Dec-2025 14:19:14 Asia/Tehran] Failed to convert string to money in Template => 445,609,806
+[06-Dec-2025 14:19:14 Asia/Tehran] Failed to convert string to money in Template => 445,609,806
+[06-Dec-2025 14:19:14 Asia/Tehran] Failed to convert string to money in Template => 445,609,806
+[06-Dec-2025 14:19:16 Asia/Tehran] Failed to convert string to money in Template => 445,609,806
+[06-Dec-2025 14:19:16 Asia/Tehran] Failed to convert string to money in Template => 445,609,806
+[06-Dec-2025 14:19:16 Asia/Tehran] Failed to convert string to money in Template => 445,609,806
+[06-Dec-2025 15:06:11 Asia/Tehran] Failed to convert string to money in Template => 445,609,806
+[06-Dec-2025 15:06:11 Asia/Tehran] Failed to convert string to money in Template => 445,609,806
+[06-Dec-2025 15:06:11 Asia/Tehran] Failed to convert string to money in Template => 445,609,806
+[06-Dec-2025 15:43:06 Asia/Tehran] DateMalformedStringException Object
+(
+    [message:protected] => Failed to parse time string (@) at position 0 (@): Unexpected character
+    [string:Exception:private] => 
+    [code:protected] => 0
+    [file:protected] => C:\www\inc\inc.persiandate.php
+    [line:protected] => 18
+    [trace:Exception:private] => Array
+        (
+            [0] => Array
+                (
+                    [file] => C:\www\inc\inc.persiandate.php
+                    [line] => 18
+                    [function] => __construct
+                    [class] => DateTime
+                    [type] => ->
+                )
+
+            [1] => Array
+                (
+                    [file] => C:\www\hndl\hndl.manage\hndl.manage.index.php
+                    [line] => 65
+                    [function] => date
+                    [class] => biiq_PersianDate
+                    [type] => ::
+                )
+
+            [2] => Array
+                (
+                    [function] => {closure:ProcessRequest():62}
+                )
+
+            [3] => Array
+                (
+                    [file] => C:\www\hndl\hndl.manage\hndl.manage.index.php
+                    [line] => 62
+                    [function] => array_map
+                )
+
+            [4] => Array
+                (
+                    [file] => C:\www\inc\inc.handler.php
+                    [line] => 142
+                    [function] => ProcessRequest
+                )
+
+            [5] => Array
+                (
+                    [file] => C:\www\inc\inc.handler.php
+                    [line] => 87
+                    [function] => Process
+                    [class] => biiq_Handler
+                    [type] => ->
+                )
+
+            [6] => Array
+                (
+                    [file] => C:\www\inc\inc.engine.php
+                    [line] => 12
+                    [function] => __construct
+                    [class] => biiq_Handler
+                    [type] => ->
+                )
+
+            [7] => Array
+                (
+                    [file] => C:\www\index.php
+                    [line] => 126
+                    [function] => __construct
+                    [class] => biiq_Engine
+                    [type] => ->
+                )
+
+        )
+
+    [previous:Exception:private] => 
+)
+
