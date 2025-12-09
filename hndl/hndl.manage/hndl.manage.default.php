@@ -1,9 +1,8 @@
 <?php
 function ProcessRequest($request)
 {
-    $page = new stdClass();
-
-    // بررسی پارامترهای ورودی
+    $page = new stdClass();    
+// Checking the input parameters
     if (!isset($request->Parameters) || !is_array($request->Parameters) || count($request->Parameters) == 0) {
         $GLOBALS['error']->Show(401);
         exit;
@@ -22,13 +21,14 @@ function ProcessRequest($request)
         exit;
     }
 
-    // تابع فرمت اعداد با جداکننده هزارگان
+    
+// Function to format numbers with thousands separator
     function separateThousands($number)
     {
         return number_format((int)$number);
     }
 
-    // تابع زمان نسبی
+    // Relative time function
     function timeAgo($timestamp)
     {
         $diff = time() - $timestamp;
@@ -55,7 +55,9 @@ function ProcessRequest($request)
         'time'        => $today->format("H:i")
     ];
 
-    // تابع قالب‌بندی آیتم‌ها
+
+    
+// Item formatting function
     function applyFormatting(&$items, $type)
     {
         foreach ($items as &$item) {
@@ -117,7 +119,7 @@ function ProcessRequest($request)
         unset($item);
     }
 
-    // ===== داده‌ها =====
+    // ===== Data =====
     $page->profileBox = [
         "registrationStatus" => "تایید شده",
         "authenticationStatus" => "در انتظار تایید",

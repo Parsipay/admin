@@ -1,6 +1,10 @@
 $(document).ready(function () {
-  const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
-  const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
+  const popoverTriggerList = document.querySelectorAll(
+    '[data-bs-toggle="popover"]'
+  );
+  const popoverList = [...popoverTriggerList].map(
+    (popoverTriggerEl) => new bootstrap.Popover(popoverTriggerEl)
+  );
   /* ---------------------- 🔍 SEARCH ---------------------- */
   $(".search-icon").on("click", function (e) {
     e.stopPropagation();
@@ -25,32 +29,31 @@ $(document).ready(function () {
   $(document).on("click", () => $(".search-input").removeClass("show"));
 
   /* ---------------------- 🧾 DROPDOWN FILTER ---------------------- */
-$(document).on("click", ".dropdownitem", function (e) {
+  $(document).on("click", ".dropdownitem", function (e) {
     e.preventDefault();
 
     const selected = $(this).data("value").trim();
     const $rows = $("#tablesearch tr");
 
     if (selected === "all") {
-        $rows.show();
-        return;
+      $rows.show();
+      return;
     }
 
     $rows.each(function () {
-        const status = ($(this).data("item-status") || "").toString().trim();
-        $(this).toggle(status === selected);
+      const status = ($(this).data("item-status") || "").toString().trim();
+      $(this).toggle(status === selected);
     });
-});
-
+  });
 
   /* ---------------------- ⚙️ STATUS FILTER ---------------------- */
-$(".filter-status").on("click", function () {
+  $(".filter-status").on("click", function () {
     const selected = $(this).data("status").trim();
     $("tbody tr").each(function () {
       const status = $(this).find(".status-text").text().trim();
       $(this).toggle(selected === "all" || status === selected);
     });
-});
+  });
 
   /* ---------------------- 💡 FANCY BUTTON TOGGLE ---------------------- */
   $(".fancy-btn").on("click", function () {
@@ -58,19 +61,19 @@ $(".filter-status").on("click", function () {
   });
 
   /* ---------------------- 🔽 SORTABLE COLUMNS ---------------------- */
-document.querySelectorAll('.sortable').forEach(th => {
-    th.addEventListener('click', () => {
-        const table = th.closest('table');
-        const tbody = table.querySelector('tbody');
-        Array.from(tbody.querySelectorAll('tr'))
-            .sort((a, b) => {
-                const t1 = +a.querySelector('.sortable').dataset.timestamp;
-                const t2 = +b.querySelector('.sortable').dataset.timestamp;
-                return t2 - t1; // جدیدترین اول
-            })
-            .forEach(tr => tbody.appendChild(tr));
+  document.querySelectorAll(".sortable").forEach((th) => {
+    th.addEventListener("click", () => {
+      const table = th.closest("table");
+      const tbody = table.querySelector("tbody");
+      Array.from(tbody.querySelectorAll("tr"))
+        .sort((a, b) => {
+          const t1 = +a.querySelector(".sortable").dataset.timestamp;
+          const t2 = +b.querySelector(".sortable").dataset.timestamp;
+          return t2 - t1;
+        })
+        .forEach((tr) => tbody.appendChild(tr));
     });
-});
+  });
 
   /* ---------------------- 📋 COPY TEXT ---------------------- */
   $(document).on("click", ".fa-copy", function () {
@@ -215,78 +218,76 @@ document.querySelectorAll('.sortable').forEach(th => {
         return order === "asc" ? aTime - bTime : bTime - aTime;
       });
     $.each(rows, (_, row) => $tbody.append(row));
-    $icon.removeClass("fa-sort fa-sort-up fa-sort-down").addClass(order === "asc" ? "fa-sort-up" : "fa-sort-down");
+    $icon
+      .removeClass("fa-sort fa-sort-up fa-sort-down")
+      .addClass(order === "asc" ? "fa-sort-up" : "fa-sort-down");
   });
 
   /* ---------------------- 📅 PERSIAN CALENDAR MODAL ---------------------- */
-  if($('#calendarModal').length){
-	const calendarModal = new bootstrap.Modal(
-		document.getElementById("calendarModal")
-	);
-	$("#persian-date").on("click", function () {
-		calendarModal.show();
-	});
-	$("#calendarModal").on("shown.bs.modal", function () {
-    $("#fromDate, #toDate").persianDatepicker({
-      format: "YYYY/MM/DD",
-      autoClose: true,
-      initialValue: false,
-    });
-
-    if (!$("#persian-calendar").hasClass("pdp-initialized")) {
-      $("#persian-calendar").addClass("pdp-initialized")
-        .persianDatepicker({
-          inline: true,
-          format: "YYYY/MM/DD",
-          observer: true,
-          autoClose: false,
-          initialValue: false,
-          onSelect: function (unix) {
-            const selected = new persianDate(unix).format("YYYY/MM/DD");
-            $("#fromDate, #toDate").val(selected);
-          },
-        });
-    }
-
-    function setRange(from, to) {
-      $("#fromDate").val(from.format("YYYY/MM/DD"));
-      $("#toDate").val(to.format("YYYY/MM/DD"));
-    }
-
-    $("#todayBtn").on("click", () =>
-      setRange(new persianDate(), new persianDate())
+  if ($("#calendarModal").length) {
+    const calendarModal = new bootstrap.Modal(
+      document.getElementById("calendarModal")
     );
-    $("#startWeekBtn").on("click", () => {
-      const now = new persianDate();
-      setRange(now.startOf("week"), now);
+    $("#persian-date").on("click", function () {
+      calendarModal.show();
     });
-    $("#weekBtn").on("click", () => {
-      const now = new persianDate();
-      setRange(now.clone().subtract("days", 6), now);
+    $("#calendarModal").on("shown.bs.modal", function () {
+      $("#fromDate, #toDate").persianDatepicker({
+        format: "YYYY/MM/DD",
+        autoClose: true,
+        initialValue: false,
+      });
+
+      if (!$("#persian-calendar").hasClass("pdp-initialized")) {
+        $("#persian-calendar")
+          .addClass("pdp-initialized")
+          .persianDatepicker({
+            inline: true,
+            format: "YYYY/MM/DD",
+            observer: true,
+            autoClose: false,
+            initialValue: false,
+            onSelect: function (unix) {
+              const selected = new persianDate(unix).format("YYYY/MM/DD");
+              $("#fromDate, #toDate").val(selected);
+            },
+          });
+      }
+
+      function setRange(from, to) {
+        $("#fromDate").val(from.format("YYYY/MM/DD"));
+        $("#toDate").val(to.format("YYYY/MM/DD"));
+      }
+
+      $("#todayBtn").on("click", () =>
+        setRange(new persianDate(), new persianDate())
+      );
+      $("#startWeekBtn").on("click", () => {
+        const now = new persianDate();
+        setRange(now.startOf("week"), now);
+      });
+      $("#weekBtn").on("click", () => {
+        const now = new persianDate();
+        setRange(now.clone().subtract("days", 6), now);
+      });
+      $("#startMonthBtn").on("click", () => {
+        const now = new persianDate();
+        setRange(now.startOf("month"), now);
+      });
+      $("#monthBtn").on("click", () => {
+        const now = new persianDate();
+        setRange(now.clone().subtract("months", 1), now);
+      });
+      $("#startYearBtn").on("click", () => {
+        const now = new persianDate();
+        setRange(now.startOf("year"), now);
+      });
+      $("#yearBtn").on("click", () => {
+        const now = new persianDate();
+        setRange(now.clone().subtract("years", 1), now);
+      });
     });
-    $("#startMonthBtn").on("click", () => {
-      const now = new persianDate();
-      setRange(now.startOf("month"), now);
-    });
-    $("#monthBtn").on("click", () => {
-      const now = new persianDate();
-      setRange(now.clone().subtract("months", 1), now);
-    });
-    $("#startYearBtn").on("click", () => {
-      const now = new persianDate();
-      setRange(now.startOf("year"), now);
-    });
-    $("#yearBtn").on("click", () => {
-      const now = new persianDate();
-      setRange(now.clone().subtract("years", 1), now);
-    });
-  });
   }
-  
-
-  
-
-  
 
   /* ---------------------- 💱 FILTERS ---------------------- */
   $("#buySellFilter").on("change", function () {
@@ -305,192 +306,238 @@ document.querySelectorAll('.sortable').forEach(th => {
     });
   });
 
-
-
-
-
   /* ---------------------- 📊 CHARTS ---------------------- */
-$(window).on("load", function () {
-const chart1 = echarts.init(document.getElementById("chart1"));
+  $(window).on("load", function () {
+    const chart1 = echarts.init(document.getElementById("chart1"));
 
-chart1.setOption({
-  title: { text: "درصد دارایی‌ها", left: "center" },
-  tooltip: { trigger: "item", formatter: "{b}: {d}%" },
-  legend: { bottom: 0 },
-  color: ["#9b59b6", "#3498db", "#f1c40f", "#2ecc71"], // بنفش - آبی - زرد - سبز
-  series: [
-    {
-      name: "Assets",
-      type: "pie",
-      radius: ["60%", "75%"], // نازک‌تر شدن چارت
-      avoidLabelOverlap: false,
-      itemStyle: {
-        borderRadius: 6,
-        borderColor: "#ffffff",
-        borderWidth: 2
+    chart1.setOption({
+      title: {
+        text: "درصد دارایی‌ها",
+        left: "center",
+        textStyle: {
+          color: " rgb(103, 102, 112)",
+        },
       },
-      label: { show: false },
-      emphasis: {
-        label: { show: true, fontSize: 16, fontWeight: "bold" }
+      tooltip: { trigger: "item", formatter: "{b}: {d}%" },
+      legend: { bottom: 0 },
+      color: ["#9b59b6", "#3498db", "#f1c40f", "#2ecc71"],
+      series: [
+        {
+          name: "Assets",
+          type: "pie",
+          radius: ["60%", "75%"],
+          avoidLabelOverlap: false,
+          itemStyle: {
+            borderRadius: 6,
+            borderColor: "#ffffff",
+            borderWidth: 2,
+          },
+          label: { show: false },
+          emphasis: {
+            label: { show: true, fontSize: 16, fontWeight: "bold" },
+          },
+          data: [
+            { value: 40, name: "بیت‌کوین" },
+            { value: 25, name: "اتریوم" },
+            { value: 20, name: "تتر" },
+            { value: 15, name: "سایر" },
+          ],
+        },
+      ],
+    });
+
+    const chart2 = echarts.init(document.getElementById("chart2"));
+    const colors = ["#3498db", "#e67e22", "#2ecc71", "#9b59b6", "#e74c3c"];
+    chart2.setOption({
+      tooltip: { trigger: "axis", axisPointer: { type: "shadow" } },
+      legend: { data: ["Coins"], top: "top" },
+      xAxis: {
+        type: "category",
+        data: ["BTC", "ETH", "BNB", "SOL", "XRP"],
       },
-      data: [
-        { value: 40, name: "بیت‌کوین" },
-        { value: 25, name: "اتریوم" },
-        { value: 20, name: "تتر" },
-        { value: 15, name: "سایر" }
-      ]
-    }
-  ]
-});
+      yAxis: { type: "value" },
+      series: [
+        {
+          name: "Coins",
+          type: "bar",
+          barWidth: 30, // 👈
+          data: [120, 90, 150, 70, 110],
 
+          itemStyle: {
+            borderRadius: [8, 8, 0, 0],
 
-const chart2 = echarts.init(document.getElementById("chart2"));
-const colors = ["#3498db", "#e67e22", "#2ecc71", "#9b59b6", "#e74c3c"]; 
-chart2.setOption({
-  tooltip: { trigger: "axis", axisPointer: { type: "shadow" } },
-  legend: { data: ["Coins"], top: "top" },
-  xAxis: {
-    type: "category",
-    data: ["BTC", "ETH", "BNB", "SOL", "XRP"], 
-  },
-  yAxis: { type: "value" },
-  series: [
-    {
-      name: "Coins",
-      type: "bar",
-      barWidth: 30, // 👈   
-      data: [120, 90, 150, 70, 110],
+            color: function (params) {
+              return colors[params.dataIndex];
+            },
+          },
+        },
+      ],
+    });
 
-      itemStyle: {
-        borderRadius: [8, 8, 0, 0],
-
-        // 👇 هر ستون یک رنگ
-        color: function (params) {
-          return colors[params.dataIndex];
-        }
-      },
-    },
-  ],
-});
-
-  $(window).on("resize", function () {
-    chart1.resize();
-    chart2.resize();
+    $(window).on("resize", function () {
+      chart1.resize();
+      chart2.resize();
+    });
   });
-});
 
-
-   // تبدیل تاریخ فارسی + زمان به Unix Timestamp
-    function persianToUnix(dateStr, timeStr) {
-        if(!dateStr) return null;
-        // dateStr فرمت: yyyy/mm/dd
-        let parts = dateStr.split('/');
-        if(parts.length < 3) return null;
-        let hour = 0, min = 0;
-        if(timeStr) {
-            let timeParts = timeStr.split(':');
-            hour = parseInt(timeParts[0]) || 0;
-            min  = parseInt(timeParts[1]) || 0;
-        }
-        let d = new Date(parts[0], parts[1]-1, parts[2], hour, min, 0);
-        return Math.floor(d.getTime() / 1000);
+  // تبدیل تاریخ فارسی + زمان به Unix Timestamp
+  function persianToUnix(dateStr, timeStr) {
+    if (!dateStr) return null;
+    // dateStr فرمت: yyyy/mm/dd
+    let parts = dateStr.split("/");
+    if (parts.length < 3) return null;
+    let hour = 0,
+      min = 0;
+    if (timeStr) {
+      let timeParts = timeStr.split(":");
+      hour = parseInt(timeParts[0]) || 0;
+      min = parseInt(timeParts[1]) || 0;
     }
+    let d = new Date(parts[0], parts[1] - 1, parts[2], hour, min, 0);
+    return Math.floor(d.getTime() / 1000);
+  }
 
-    // فیلتر کردن جدول بر اساس timestamp
-    function filterTableByDate(fromTS, toTS) {
-        $('#ordersTable tbody tr').each(function() {
-            let rowTS = parseInt($(this).find('[data-timestamp]').data('timestamp'));
-            if ((!fromTS || rowTS >= fromTS) && (!toTS || rowTS <= toTS)) {
-                $(this).show();
-            } else {
-                $(this).hide();
-            }
-        });
-    }
-
-    // وقتی دکمه فیلتر مودال زده شد
-    $('#confirmBtn').on('click', function() {
-        let fromDate = $('#fromDate').val();
-        let toDate   = $('#toDate').val();
-        let fromTime = $('#fromTime').val() || '00:00';
-        let toTime   = $('#toTime').val() || '23:59';
-
-        let fromTS = persianToUnix(fromDate, fromTime);
-        let toTS   = persianToUnix(toDate, toTime);
-
-        filterTableByDate(fromTS, toTS);
+  // Filter the table by timestamp
+  function filterTableByDate(fromTS, toTS) {
+    $("#ordersTable tbody tr").each(function () {
+      let rowTS = parseInt($(this).find("[data-timestamp]").data("timestamp"));
+      if ((!fromTS || rowTS >= fromTS) && (!toTS || rowTS <= toTS)) {
+        $(this).show();
+      } else {
+        $(this).hide();
+      }
     });
+  }
 
-    // فیلتر سریع: امروز
-    $('#todayBtn').click(function(){
-        let today = new Date();
-        let start = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 0,0,0);
-        let end   = new Date(today.getFullYear(), today.getMonth(), today.getDate(),23,59,59);
-        filterTableByDate(Math.floor(start.getTime()/1000), Math.floor(end.getTime()/1000));
-    });
+  // When the modal filter button is clicked
+  $("#confirmBtn").on("click", function () {
+    let fromDate = $("#fromDate").val();
+    let toDate = $("#toDate").val();
+    let fromTime = $("#fromTime").val() || "00:00";
+    let toTime = $("#toTime").val() || "23:59";
 
-    // فیلتر سریع: از ابتدای هفته
-    $('#startWeekBtn').click(function(){
-        let today = new Date();
-        let firstDay = new Date(today.setDate(today.getDate() - today.getDay()));
-        let start = new Date(firstDay.getFullYear(), firstDay.getMonth(), firstDay.getDate(), 0,0,0);
-        let end = new Date();
-        filterTableByDate(Math.floor(start.getTime()/1000), Math.floor(end.getTime()/1000));
-    });
+    let fromTS = persianToUnix(fromDate, fromTime);
+    let toTS = persianToUnix(toDate, toTime);
 
-    // فیلتر سریع: یک هفته گذشته
-    $('#weekBtn').click(function(){
-        let today = new Date();
-        let start = new Date(today.getTime() - 7*24*60*60*1000);
-        let end   = new Date();
-        filterTableByDate(Math.floor(start.getTime()/1000), Math.floor(end.getTime()/1000));
-    });
+    filterTableByDate(fromTS, toTS);
+  });
 
-    // فیلتر سریع: از ابتدای ماه
-    $('#startMonthBtn').click(function(){
-        let today = new Date();
-        let start = new Date(today.getFullYear(), today.getMonth(), 1, 0,0,0);
-        let end = new Date();
-        filterTableByDate(Math.floor(start.getTime()/1000), Math.floor(end.getTime()/1000));
-    });
+  // Quick filter: Today
 
-    // فیلتر سریع: یک ماه گذشته
-    $('#monthBtn').click(function(){
-        let today = new Date();
-        let start = new Date(today.getTime() - 30*24*60*60*1000);
-        let end   = new Date();
-        filterTableByDate(Math.floor(start.getTime()/1000), Math.floor(end.getTime()/1000));
-    });
+  $("#todayBtn").click(function () {
+    let today = new Date();
+    let start = new Date(
+      today.getFullYear(),
+      today.getMonth(),
+      today.getDate(),
+      0,
+      0,
+      0
+    );
+    let end = new Date(
+      today.getFullYear(),
+      today.getMonth(),
+      today.getDate(),
+      23,
+      59,
+      59
+    );
+    filterTableByDate(
+      Math.floor(start.getTime() / 1000),
+      Math.floor(end.getTime() / 1000)
+    );
+  });
 
-    // فیلتر سریع: از ابتدای سال
-    $('#startYearBtn').click(function(){
-        let today = new Date();
-        let start = new Date(today.getFullYear(),0,1,0,0,0);
-        let end = new Date();
-        filterTableByDate(Math.floor(start.getTime()/1000), Math.floor(end.getTime()/1000));
-    });
+  // Quick filter: from the beginning of the week
+  $("#startWeekBtn").click(function () {
+    let today = new Date();
+    let firstDay = new Date(today.setDate(today.getDate() - today.getDay()));
+    let start = new Date(
+      firstDay.getFullYear(),
+      firstDay.getMonth(),
+      firstDay.getDate(),
+      0,
+      0,
+      0
+    );
+    let end = new Date();
+    filterTableByDate(
+      Math.floor(start.getTime() / 1000),
+      Math.floor(end.getTime() / 1000)
+    );
+  });
 
-    // فیلتر سریع: یک سال گذشته
-    $('#yearBtn').click(function(){
-        let today = new Date();
-        let start = new Date(today.getTime() - 365*24*60*60*1000);
-        let end   = new Date();
-        filterTableByDate(Math.floor(start.getTime()/1000), Math.floor(end.getTime()/1000));
-    });
+  // Quick filter: Last week
+  $("#weekBtn").click(function () {
+    let today = new Date();
+    let start = new Date(today.getTime() - 7 * 24 * 60 * 60 * 1000);
+    let end = new Date();
+    filterTableByDate(
+      Math.floor(start.getTime() / 1000),
+      Math.floor(end.getTime() / 1000)
+    );
+  });
 
-    //modale modireate karabara entekhabe file
-    $('#uploadBtn').click(function() {
-        $('#fileInput').click();
-    });
+  // Quick filter: from the beginning of the month
+  $("#startMonthBtn").click(function () {
+    let today = new Date();
+    let start = new Date(today.getFullYear(), today.getMonth(), 1, 0, 0, 0);
+    let end = new Date();
+    filterTableByDate(
+      Math.floor(start.getTime() / 1000),
+      Math.floor(end.getTime() / 1000)
+    );
+  });
 
-    $('#fileInput').on('change', function() {
-        var file = this.files[0];
-        if (!file) return;
+  // Quick filter: Last month
+  $("#monthBtn").click(function () {
+    let today = new Date();
+    let start = new Date(today.getTime() - 30 * 24 * 60 * 60 * 1000);
+    let end = new Date();
+    filterTableByDate(
+      Math.floor(start.getTime() / 1000),
+      Math.floor(end.getTime() / 1000)
+    );
+  });
 
-        var reader = new FileReader();
-        reader.onload = function(e) {
-            $('.documentBox').html('<img src="' + e.target.result + '" alt="file" style="max-width:100%; max-height:100%;">');
-        };
-        reader.readAsDataURL(file);
-    });
+  // Quick filter: from the beginning of the year
+  $("#startYearBtn").click(function () {
+    let today = new Date();
+    let start = new Date(today.getFullYear(), 0, 1, 0, 0, 0);
+    let end = new Date();
+    filterTableByDate(
+      Math.floor(start.getTime() / 1000),
+      Math.floor(end.getTime() / 1000)
+    );
+  });
+  // Quick filter: Last year
+  $("#yearBtn").click(function () {
+    let today = new Date();
+    let start = new Date(today.getTime() - 365 * 24 * 60 * 60 * 1000);
+    let end = new Date();
+    filterTableByDate(
+      Math.floor(start.getTime() / 1000),
+      Math.floor(end.getTime() / 1000)
+    );
+  });
+
+  //modale modireate karabara entekhabe file
+  $("#uploadBtn").click(function () {
+    $("#fileInput").click();
+  });
+
+  $("#fileInput").on("change", function () {
+    var file = this.files[0];
+    if (!file) return;
+
+    var reader = new FileReader();
+    reader.onload = function (e) {
+      $(".documentBox").html(
+        '<img src="' +
+          e.target.result +
+          '" alt="file" style="max-width:100%; max-height:100%;">'
+      );
+    };
+    reader.readAsDataURL(file);
+  });
 });

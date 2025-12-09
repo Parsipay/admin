@@ -1,7 +1,7 @@
 <?php
 
 // ==============================================
-// 📦 Utility Functions
+// Utility Functions
 // ==============================================
 function maskCard(string $num): string
 {
@@ -36,7 +36,7 @@ function timeAgo($unixTimestamp)
 }
 
 // ==============================================
-// 🧩 Main Function
+// Main Function
 // ==============================================
 function ProcessRequest($request)
 {
@@ -104,7 +104,7 @@ function ProcessRequest($request)
     ];
 
     // -----------------------------
-    // 💰 Financial requests
+    //  Financial requests
     // -----------------------------
     $p->requestList = [
         ["requestCode"=>"0013152343","trackingNumber"=>"0293564635","User"=>"بنفشه ابراهیمی","UserID"=>2,"price"=>separateThousands(65665454546),"UnixTimestamp"=>1690000000,"lastActivityTimestamp"=>1690000000,"PersianDate"=>biiq_PersianDate::date("l j F Y - H:i",1690000000),"Status"=>"مشاهده رسید","Level"=>"طلایی"],
@@ -114,8 +114,8 @@ function ProcessRequest($request)
     ];
 
     // -----------------------------
-    // 🔝 Top dashboard items
-    // -----------------------------
+    //  Top dashboard items
+    // ----------------------------
     $p->TopBox = [
         ['Link'=>$settings['site'].'tickets/','Icon'=>'home','Title'=>'پیغام‌ها','Subtitle'=>'12 تیکت | 5 اتوماسیون'],
         ['Link'=>$settings['site'].'settings/','Icon'=>'gear','Title'=>'تنظیمات','Subtitle'=>'2 سفارش در حال پردازش'],
@@ -125,7 +125,7 @@ function ProcessRequest($request)
     ];
 
     // -----------------------------
-    // ⚡ Common function to apply status & level colors/icons
+    //  Common function to apply status & level colors/icons
     // -----------------------------
     $applyStatusAndLevel = function (&$list, $type='general') {
         foreach ($list as &$Item) {
