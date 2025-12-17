@@ -2,16 +2,10 @@
 
 function ProcessRequest($request)
 {
-    // =========================
-    // Helper Functions
-    // =========================
+    /* =========================
+       Helper Functions
+    ========================= */
 
-// Card number mask
-    $maskCard = fn($num) => strlen($num) <= 10
-        ? str_repeat("*", strlen($num))
-        : substr($num, 0, 6) . str_repeat("*", strlen($num) - 10) . substr($num, -4);
-
-// User level icon
     $getLevelIcon = fn($level) => match (trim($level)) {
         "طلایی"   => "fa-solid fa-star text-warning",
         "حرفه ای" => "fa-solid fa-medal text-danger",
@@ -19,74 +13,83 @@ function ProcessRequest($request)
         default   => "fa-solid fa-user text-primary",
     };
 
-// Status color
     $getStatusColor = fn($status) => match (trim($status)) {
-        "تایید شده", "موفق"       => "text-success opacity-green",
-        "در انتظار تایید"          => "text-warning bg-opacity-warning",
-        "تکمیل نشده"               => "text-primary bg-blue",
-        default                    => "text-danger bg-red",
+        "تایید شده", "موفق"  => "text-success opacity-green",
+        "در انتظار تایید"     => "text-warning bg-opacity-warning",
+        "تکمیل نشده"          => "text-primary bg-blue",
+        default               => "text-danger bg-red",
     };
 
-// Relative time
-    $timeAgo = function($timestamp) {
+    $timeAgo = function ($timestamp) {
         $diff = time() - $timestamp;
-        return match (true) {
-            $diff < 60       => "لحظاتی پیش",
-            $diff < 3600     => round($diff / 60) . " دقیقه پیش",
-            $diff < 86400    => round($diff / 3600) . " ساعت پیش",
-            $diff < 604800   => round($diff / 86400) . " روز پیش",
-            $diff < 2592000  => round($diff / 604800) . " هفته پیش",
-            $diff < 31536000 => round($diff / 2592000) . " ماه پیش",
-            default          => round($diff / 31536000) . " سال پیش",
-        };
+
+        if ($diff < 60)        return "لحظاتی پیش";
+        if ($diff < 3600)      return floor($diff / 60) . " دقیقه پیش";
+        if ($diff < 86400)     return floor($diff / 3600) . " ساعت پیش";
+        if ($diff < 604800)    return floor($diff / 86400) . " روز پیش";
+        if ($diff < 2592000)   return floor($diff / 604800) . " هفته پیش";
+        if ($diff < 31536000)  return floor($diff / 2592000) . " ماه پیش";
+
+        return floor($diff / 31536000) . " سال پیش";
     };
 
-    // ✨ Common function to add level icon, status color and time
-    $enrichList = function(&$list, $hasTime = false, $hasStatus = false, $levelKey = "Level", $statusKey = "Status", $timeKey = "UnixTimestamp") use ($getLevelIcon, $getStatusColor, $timeAgo) {
+    $enrichList = function (
+        array &$list,
+        bool $withTime = false,
+        bool $withStatus = false
+    ) use ($getLevelIcon, $getStatusColor, $timeAgo) {
+
         foreach ($list as &$item) {
-            if (isset($item[$levelKey])) $item["LevelIcon"] = $getLevelIcon($item[$levelKey]);
-            if ($hasStatus && isset($item[$statusKey])) $item["StatusColor"] = $getStatusColor($item[$statusKey]);
-            if ($hasTime && isset($item[$timeKey])) $item["lastActivity"] = $timeAgo($item[$timeKey]);
+
+            // Level
+            if (isset($item["Level"])) {
+                $item["LevelIcon"] = $getLevelIcon($item["Level"]);
+            }
+
+            // Status
+            if ($withStatus && isset($item["Status"])) {
+                $item["StatusColor"] = $getStatusColor($item["Status"]);
+            }
+
+            // Time
+            if ($withTime && isset($item["UnixTimestamp"])) {
+                $item["lastActivity"] = $timeAgo($item["UnixTimestamp"]);
+            }
         }
         unset($item);
     };
 
-    // =========================
-    // Build Page Data
-    // =========================
+    /* =========================
+       Build Page Data
+    ========================= */
+
     $page = new stdClass();
     $timestamp = 1616301000;
 
-    // ------------------------------
-    // Documents
-    // ------------------------------
+    // ---------------- Documents ----------------
     $page->docList = array_map(fn($user) => [
-        "user" => $user,
-        "UnixTimestamp" => $timestamp,
-        "persianDate" => biiq_PersianDate::date("l j F Y - H:i", $timestamp),
+        "user"           => $user,
+        "UnixTimestamp"  => $timestamp,
+        "persianDate"    => biiq_PersianDate::date("l j F Y - H:i", $timestamp),
     ], ["بنفشه ابراهیمی", "بنفشه ابراهیمی"]);
 
-    // ------------------------------
-    // Cards
-    // ------------------------------
+    // ---------------- Cards ----------------
     $page->Cards = [
         [
             "user" => "یگانه علیزاده",
             "BankName" => "صادرات",
             "Shaba" => "IR940150000184370199152881",
-            "MaskedCard" => $maskCard("5022291077470837"),
+            "MaskedCard" => biiq_Engine::maskCard("5022291077470837"),
         ],
         [
             "user" => "مریم ماهور",
             "BankName" => "صادرات",
             "Shaba" => "IR940150000184370199152881",
-            "MaskedCard" => $maskCard("5022291077470837"),
+            "MaskedCard" => biiq_Engine::maskCard("5022291077470837"),
         ],
     ];
 
-    // ------------------------------
-    // Users
-    // ------------------------------
+    // ---------------- Users ----------------
     $page->userList = [
         [
             "nationalCode" => "0013152343",
@@ -134,12 +137,10 @@ function ProcessRequest($request)
         ],
     ];
 
-    $enrichList($page->userList, hasTime: true, hasStatus: true);
-    // Sort by latest activity
+    $enrichList($page->userList, true, true);
     usort($page->userList, fn($a, $b) => $b["UnixTimestamp"] <=> $a["UnixTimestamp"]);
-    // ------------------------------
-    // Bank Accounts
-    // ------------------------------
+
+    // ---------------- Bank Accounts ----------------
     $page->bankAccount = [
         [
             "nationalCode" => "2313152343",
@@ -185,9 +186,7 @@ function ProcessRequest($request)
 
     $enrichList($page->bankAccount);
 
-    // ------------------------------
-    // Authentication
-    // ------------------------------
+    // ---------------- Authentication ----------------
     $page->authentication = [
         [
             "nationalCode" => "0013152343",
@@ -227,11 +226,12 @@ function ProcessRequest($request)
         ],
     ];
 
-    $enrichList($page->authentication, hasStatus: true);
+    $enrichList($page->authentication, false, true);
 
-    // ------------------------------
-    // Return payload
-    // ------------------------------
+    /* =========================
+       Return
+    ========================= */
+
     return [
         'content'   => biiq_Template::Start('manage->index', true, ['Objects' => $page]),
         'id'        => 1,

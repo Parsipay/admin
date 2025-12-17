@@ -1,10 +1,12 @@
 $(document).ready(function () {
+  /* ---------------------- 🔹 POPOVER INIT ---------------------- */
   const popoverTriggerList = document.querySelectorAll(
     '[data-bs-toggle="popover"]'
   );
   const popoverList = [...popoverTriggerList].map(
     (popoverTriggerEl) => new bootstrap.Popover(popoverTriggerEl)
   );
+
   /* ---------------------- 🔍 SEARCH ---------------------- */
   $(".search-icon").on("click", function (e) {
     e.stopPropagation();
@@ -31,15 +33,12 @@ $(document).ready(function () {
   /* ---------------------- 🧾 DROPDOWN FILTER ---------------------- */
   $(document).on("click", ".dropdownitem", function (e) {
     e.preventDefault();
-
     const selected = $(this).data("value").trim();
     const $rows = $("#tablesearch tr");
-
     if (selected === "all") {
       $rows.show();
       return;
     }
-
     $rows.each(function () {
       const status = ($(this).data("item-status") || "").toString().trim();
       $(this).toggle(status === selected);
@@ -65,10 +64,13 @@ $(document).ready(function () {
     th.addEventListener("click", () => {
       const table = th.closest("table");
       const tbody = table.querySelector("tbody");
+      const columnIndex = Array.from(th.parentNode.children).indexOf(th);
       Array.from(tbody.querySelectorAll("tr"))
         .sort((a, b) => {
-          const t1 = +a.querySelector(".sortable").dataset.timestamp;
-          const t2 = +b.querySelector(".sortable").dataset.timestamp;
+          const t1 =
+            +a.querySelectorAll("td")[columnIndex].dataset.timestamp || 0;
+          const t2 =
+            +b.querySelectorAll("td")[columnIndex].dataset.timestamp || 0;
           return t2 - t1;
         })
         .forEach((tr) => tbody.appendChild(tr));
@@ -153,31 +155,25 @@ $(document).ready(function () {
   /* ---------------------- 🔒 PASSWORD VALIDATION ---------------------- */
   $(".password-form").on("submit", function (e) {
     e.preventDefault();
-
     const $form = $(this);
     const newPass = $form.find("#newPassword").val().trim();
     const repeatPass = $form.find("#repeatPassword").val().trim();
     const captchaInput = $form.find("#captcha-input").val().trim();
     const captchaVal = $form.find("#captcha").text().trim();
     const $error = $form.find(".error-message");
-
     $error.text("");
-
     if (!newPass || !repeatPass) {
       $error.text("رمز عبور نمی‌تواند خالی باشد 🔴");
       return $form.find("#newPassword").focus();
     }
-
     if (newPass !== repeatPass) {
       $error.text("رمز عبور با تکرارش مطابقت ندارد 🔴");
       return $form.find("#repeatPassword").focus();
     }
-
     if (captchaInput !== captchaVal) {
       $error.text("Captcha اشتباه است 🔴");
       return $form.find("#captcha-input").focus();
     }
-
     alert("رمز عبور با موفقیت تغییر کرد ✅");
     $form[0].submit();
   });
@@ -196,10 +192,8 @@ $(document).ready(function () {
   });
 
   /* ---------------------- 🔼 SORT TOGGLE ICONS ---------------------- */
-  //in sorto baraye safheye mali neveshtam .vali age nabashe ham baghie sorta kar nemikone baghie jadavala hamashon ba php sort shodan ama ino baraye nemone gozashtam
   $(document).on("click", ".sort-toggle", function (e) {
     e.preventDefault();
-
     const $icon = $(this);
     const $th = $icon.closest("th");
     const $table = $th.closest("table");
@@ -237,7 +231,6 @@ $(document).ready(function () {
         autoClose: true,
         initialValue: false,
       });
-
       if (!$("#persian-calendar").hasClass("pdp-initialized")) {
         $("#persian-calendar")
           .addClass("pdp-initialized")
@@ -309,14 +302,11 @@ $(document).ready(function () {
   /* ---------------------- 📊 CHARTS ---------------------- */
   $(window).on("load", function () {
     const chart1 = echarts.init(document.getElementById("chart1"));
-
     chart1.setOption({
       title: {
         text: "درصد دارایی‌ها",
         left: "center",
-        textStyle: {
-          color: " rgb(103, 102, 112)",
-        },
+        textStyle: { color: " rgb(103, 102, 112)" },
       },
       tooltip: { trigger: "item", formatter: "{b}: {d}%" },
       legend: { bottom: 0 },
@@ -327,15 +317,9 @@ $(document).ready(function () {
           type: "pie",
           radius: ["60%", "75%"],
           avoidLabelOverlap: false,
-          itemStyle: {
-            borderRadius: 6,
-            borderColor: "#ffffff",
-            borderWidth: 2,
-          },
+          itemStyle: { borderRadius: 6, borderColor: "#ffffff", borderWidth: 2 },
           label: { show: false },
-          emphasis: {
-            label: { show: true, fontSize: 16, fontWeight: "bold" },
-          },
+          emphasis: { label: { show: true, fontSize: 16, fontWeight: "bold" } },
           data: [
             { value: 40, name: "بیت‌کوین" },
             { value: 25, name: "اتریوم" },
@@ -351,21 +335,16 @@ $(document).ready(function () {
     chart2.setOption({
       tooltip: { trigger: "axis", axisPointer: { type: "shadow" } },
       legend: { data: ["Coins"], top: "top" },
-      xAxis: {
-        type: "category",
-        data: ["BTC", "ETH", "BNB", "SOL", "XRP"],
-      },
+      xAxis: { type: "category", data: ["BTC", "ETH", "BNB", "SOL", "XRP"] },
       yAxis: { type: "value" },
       series: [
         {
           name: "Coins",
           type: "bar",
-          barWidth: 30, // 👈
+          barWidth: 30,
           data: [120, 90, 150, 70, 110],
-
           itemStyle: {
             borderRadius: [8, 8, 0, 0],
-
             color: function (params) {
               return colors[params.dataIndex];
             },
@@ -380,162 +359,48 @@ $(document).ready(function () {
     });
   });
 
-  // تبدیل تاریخ فارسی + زمان به Unix Timestamp
+  /* ---------------------- 🕰️ DATE FILTER HELPERS ---------------------- */
   function persianToUnix(dateStr, timeStr) {
     if (!dateStr) return null;
-    // dateStr فرمت: yyyy/mm/dd
-    let parts = dateStr.split("/");
+    const parts = dateStr.split("/");
     if (parts.length < 3) return null;
     let hour = 0,
       min = 0;
     if (timeStr) {
-      let timeParts = timeStr.split(":");
+      const timeParts = timeStr.split(":");
       hour = parseInt(timeParts[0]) || 0;
       min = parseInt(timeParts[1]) || 0;
     }
-    let d = new Date(parts[0], parts[1] - 1, parts[2], hour, min, 0);
+    const d = new Date(parts[0], parts[1] - 1, parts[2], hour, min, 0);
     return Math.floor(d.getTime() / 1000);
   }
 
-  // Filter the table by timestamp
   function filterTableByDate(fromTS, toTS) {
     $("#ordersTable tbody tr").each(function () {
-      let rowTS = parseInt($(this).find("[data-timestamp]").data("timestamp"));
-      if ((!fromTS || rowTS >= fromTS) && (!toTS || rowTS <= toTS)) {
-        $(this).show();
-      } else {
-        $(this).hide();
-      }
+      const rowTS = parseInt($(this).find("[data-timestamp]").data("timestamp"));
+      $(this).toggle((!fromTS || rowTS >= fromTS) && (!toTS || rowTS <= toTS));
     });
   }
 
-  // When the modal filter button is clicked
   $("#confirmBtn").on("click", function () {
-    let fromDate = $("#fromDate").val();
-    let toDate = $("#toDate").val();
-    let fromTime = $("#fromTime").val() || "00:00";
-    let toTime = $("#toTime").val() || "23:59";
-
-    let fromTS = persianToUnix(fromDate, fromTime);
-    let toTS = persianToUnix(toDate, toTime);
-
+    const fromDate = $("#fromDate").val();
+    const toDate = $("#toDate").val();
+    const fromTime = $("#fromTime").val() || "00:00";
+    const toTime = $("#toTime").val() || "23:59";
+    const fromTS = persianToUnix(fromDate, fromTime);
+    const toTS = persianToUnix(toDate, toTime);
     filterTableByDate(fromTS, toTS);
   });
 
-  // Quick filter: Today
-
-  $("#todayBtn").click(function () {
-    let today = new Date();
-    let start = new Date(
-      today.getFullYear(),
-      today.getMonth(),
-      today.getDate(),
-      0,
-      0,
-      0
-    );
-    let end = new Date(
-      today.getFullYear(),
-      today.getMonth(),
-      today.getDate(),
-      23,
-      59,
-      59
-    );
-    filterTableByDate(
-      Math.floor(start.getTime() / 1000),
-      Math.floor(end.getTime() / 1000)
-    );
-  });
-
-  // Quick filter: from the beginning of the week
-  $("#startWeekBtn").click(function () {
-    let today = new Date();
-    let firstDay = new Date(today.setDate(today.getDate() - today.getDay()));
-    let start = new Date(
-      firstDay.getFullYear(),
-      firstDay.getMonth(),
-      firstDay.getDate(),
-      0,
-      0,
-      0
-    );
-    let end = new Date();
-    filterTableByDate(
-      Math.floor(start.getTime() / 1000),
-      Math.floor(end.getTime() / 1000)
-    );
-  });
-
-  // Quick filter: Last week
-  $("#weekBtn").click(function () {
-    let today = new Date();
-    let start = new Date(today.getTime() - 7 * 24 * 60 * 60 * 1000);
-    let end = new Date();
-    filterTableByDate(
-      Math.floor(start.getTime() / 1000),
-      Math.floor(end.getTime() / 1000)
-    );
-  });
-
-  // Quick filter: from the beginning of the month
-  $("#startMonthBtn").click(function () {
-    let today = new Date();
-    let start = new Date(today.getFullYear(), today.getMonth(), 1, 0, 0, 0);
-    let end = new Date();
-    filterTableByDate(
-      Math.floor(start.getTime() / 1000),
-      Math.floor(end.getTime() / 1000)
-    );
-  });
-
-  // Quick filter: Last month
-  $("#monthBtn").click(function () {
-    let today = new Date();
-    let start = new Date(today.getTime() - 30 * 24 * 60 * 60 * 1000);
-    let end = new Date();
-    filterTableByDate(
-      Math.floor(start.getTime() / 1000),
-      Math.floor(end.getTime() / 1000)
-    );
-  });
-
-  // Quick filter: from the beginning of the year
-  $("#startYearBtn").click(function () {
-    let today = new Date();
-    let start = new Date(today.getFullYear(), 0, 1, 0, 0, 0);
-    let end = new Date();
-    filterTableByDate(
-      Math.floor(start.getTime() / 1000),
-      Math.floor(end.getTime() / 1000)
-    );
-  });
-  // Quick filter: Last year
-  $("#yearBtn").click(function () {
-    let today = new Date();
-    let start = new Date(today.getTime() - 365 * 24 * 60 * 60 * 1000);
-    let end = new Date();
-    filterTableByDate(
-      Math.floor(start.getTime() / 1000),
-      Math.floor(end.getTime() / 1000)
-    );
-  });
-
-  //modale modireate karabara entekhabe file
-  $("#uploadBtn").click(function () {
-    $("#fileInput").click();
-  });
-
+  /* ---------------------- 📂 FILE UPLOAD MODAL ---------------------- */
+  $("#uploadBtn").click(() => $("#fileInput").click());
   $("#fileInput").on("change", function () {
-    var file = this.files[0];
+    const file = this.files[0];
     if (!file) return;
-
-    var reader = new FileReader();
-    reader.onload = function (e) {
+    const reader = new FileReader();
+    reader.onload = (e) => {
       $(".documentBox").html(
-        '<img src="' +
-          e.target.result +
-          '" alt="file" style="max-width:100%; max-height:100%;">'
+        `<img src="${e.target.result}" alt="file" style="max-width:100%; max-height:100%;">`
       );
     };
     reader.readAsDataURL(file);
