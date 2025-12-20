@@ -194,14 +194,14 @@ $(document).ready(function () {
   /* ---------------------- 🔼 SORT TOGGLE ICONS ---------------------- */
   $(document).on("click", ".sort-toggle", function (e) {
     e.preventDefault();
-    const $icon = $(this);
-    const $th = $icon.closest("th");
+    const $th = $(this);
+    const $icon = $th.find("i");
     const $table = $th.closest("table");
     const $tbody = $table.find("tbody");
     if (!$tbody.length) return;
 
-    const order = $icon.data("order") === "asc" ? "desc" : "asc";
-    $icon.data("order", order);
+    const order = $th.data("order") === "asc" ? "desc" : "asc";
+    $th.data("order", order);
 
     const rows = $tbody
       .find("tr")
@@ -212,9 +212,7 @@ $(document).ready(function () {
         return order === "asc" ? aTime - bTime : bTime - aTime;
       });
     $.each(rows, (_, row) => $tbody.append(row));
-    $icon
-      .removeClass("fa-sort fa-sort-up fa-sort-down")
-      .addClass(order === "asc" ? "fa-sort-up" : "fa-sort-down");
+    $icon.removeClass("fa-sort fa-sort-up fa-sort-down").addClass(order === "asc" ? "fa-sort-down" : "fa-sort-up");
   });
 
   /* ---------------------- 📅 PERSIAN CALENDAR MODAL ---------------------- */

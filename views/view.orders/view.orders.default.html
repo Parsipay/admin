@@ -6,20 +6,20 @@
         <i class="fas fa-chevron-left border border-dark rounded-circle p-1"></i>
     </div>
     <!-- Orders List -->
-    [foreach ([@Objects->orders])]
+
     <div class="d-flex flex-column mt-5 p-3 rounded border">
         <!-- Order Header -->
         <div class="d-flex justify-content-between">
-            <span class="fw-bold text-secondary">سفارش شماره [@Item->id]</span>
-            <span class="[@Item->statusColor]">[@Item->status]</span>
+            <span class="fw-bold text-secondary">سفارش شماره [@Order->ID]</span>
+            <span class="[@Order->statusColor]">[@Order->status]</span>
         </div>
         <!-- Order Details -->
         <div class="d-flex justify-content-between mt-4 p-2 px-3 bg-light rounded">
             <!-- Amount -->
             <div class="d-flex ms-5 align-items-center">
-                <img src="[@Item->img]" alt="currency" class="me-2">
+                <img src="[@Order->img]" alt="currency" class="me-2">
                 <div class="d-flex flex-column gap-2">
-                    <span class="fw-bold">[@Item->amount]</span>
+                    <span class="fw-bold">[@Order->amount]</span>
                     <span class="text-secondary">مقدار تتر</span>
                 </div>
             </div>
@@ -27,7 +27,7 @@
             <div class="d-flex ms-5 align-items-center">
                 <span class="fs-1 text-secondary text-center">.</span>
                 <div class="d-flex flex-column gap-3">
-                    <span>[@Item->currency]</span>
+                    <span>[@Order->currency]</span>
                     <span class="text-secondary">شبکه انتقال</span>
                 </div>
             </div>
@@ -35,7 +35,7 @@
             <div class="d-flex ms-5 align-items-center">
                 <span class="fs-1 text-secondary text-center">.</span>
                 <div class="d-flex flex-column gap-3">
-                    <span>[@Item->price]</span>
+                    <span>[@Order->price]</span>
                     <span class="text-secondary">مبلغ</span>
                 </div>
             </div>
@@ -43,13 +43,13 @@
             <div class="d-flex ms-5 align-items-center">
                 <span class="fs-1 text-secondary text-center">.</span>
                 <div class="d-flex flex-column gap-3">
-                    <span>[@Item->date] | ساعت [@Item->time]</span>
+                    <span>[@Order->date] | ساعت [@Order->time]</span>
                     <span class="text-secondary">تاریخ و ساعت پرداخت</span>
                 </div>
             </div>
         </div>
     </div>
-    [endforeach]
+
     <!-- ================== TRANSACTION INFO SECTION ================== -->
     <div class="d-flex gap-3 mt-5">
         <!-- ====== Status List ====== -->

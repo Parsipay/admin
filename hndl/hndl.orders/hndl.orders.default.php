@@ -46,23 +46,6 @@ function ProcessRequest($request){
         'time'        => $today->format("H:i")
     ];
 
-    // -------------------------
-    // Orders Data
-    // -------------------------
-    $page->orders = [
-        (object)[
-            'id'       => "۲۰۲۳۲۲۴۶۴۴۸",
-            'status'   => "موفق",
-            'amount'   => "12 USDT",
-            'currency' => "ترون (TRC20)",
-            'network'  => "TRC20",
-            'price'    => "504,504 تومان",
-            'date'     => $page->dateandtime->persianDate,
-            'time'     => $page->dateandtime->time,
-            'img'      => "../../assets/img/usdt.png",
-            'statusColor' => getStatusColor("موفق")
-        ]
-    ];
 
     // -------------------------
     // Status Bar & Transaction
@@ -91,8 +74,20 @@ function ProcessRequest($request){
     // -------------------------
     // Return Template Output
     // -------------------------
+    $page->Order = [
+        'ID' => $SelectedUserID,
+        'status'   => "موفق",
+        'amount'   => "12 USDT",
+        'currency' => "ترون (TRC20)",
+        'network'  => "TRC20",
+        'price'    => "504,504 تومان",
+        'date'     => $page->dateandtime->persianDate,
+        'time'     => $page->dateandtime->time,
+        'img'      => "../../assets/img/usdt.png",
+        'statusColor' => getStatusColor("موفق")
+    ];
     return [
-        'content'   => biiq_Template::Start('orders->default', true, ['Objects' => $page]),
+        'content'   => biiq_Template::Start('orders->default', true, ['Objects' => $page, 'Order' => $page->Order]),
         'id'        => 1,
         'title'     => $page->Title,
         'Canonical' => SITE.'orders/',

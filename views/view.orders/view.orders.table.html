@@ -1,5 +1,5 @@
 <!--in SAFHE HAR JAE K SEFARESH HA RO NIZA DARIM MIAD FAGHAT HAM HEADER JADAVAL MIAD-->
-<div class="table-responsive rounded-3 text-center p-3">
+<div class="table-responsive rounded-3 text-center p-3" style="min-height: 400px;">
     <table class="table table-hover align-middle  mb-0 searchable-table" id="ordersTable">
         <thead>
             <tr>
@@ -12,7 +12,7 @@
                     </div>
                 </th>
                 <th class="py-3">کاربر</th>
-                <th class="py-3"> مبلغ</th>
+                <th class="py-3">مبلغ <span class="small text-secondary">(تومان)</span></th>
                 <th class=" sortable py-3 bg-primary text-center">
                     <span data-order="desc" class="">زمان و تاریخ تراکنش</span>
                     <i class="fas fa-sort sort-toggle ms-2" style="cursor:pointer"></i>
@@ -38,18 +38,28 @@
         <tbody>
             [foreach ([@Objects->orderList])]
             <tr>
-                <td class="text-start fw-bold">
-                    <a href="[@settings->site]orders/[@Item->ID]/">
+                <td class="text-start fw-bold ">
+                    <a href="[@settings->site]orders/[@Item->ID]/" class="border rounded-pill pt-1 px-3">
                         [@persian [@Item->ID]]
+                        <i class="fa-solid fa-tag text-purple ms-1 "></i>
+
                     </a>
                 </td>
-                <td>
+                <td class="text-center">
+                    <a href="[@settings->site]users/[@Item->UserID]/"
+                        class="d-inline-flex justify-content-center align-items-center text-decoration-none border rounded-pill w-50 p-2 text-center">
+                        [@Item->User]
+                        <i class="[@Item->LevelIcon] ms-1"></i>
+
+                    </a>
+                </td>
+                <!-- <td>
                     <button class="btn btn-outline-secondary btn-sm-outline-secondary rounded-pill w-50 text-xl-nowrap [@Item->LevelColor]" data-user-level="[@Item->Level]"
                         data-user-id="[@Item->UserID]" tabindex="0" data-bs-toggle="popover" data-bs-placement="top"
                         data-bs-content="[@Item->Level]">
                         <i class="[@Item->LevelIcon] me-1"></i>[@Item->User]
                     </button>
-                </td>
+                </td> -->
                 <td>[@persian [@money [@Item->price]]]</td>
                 <td class="text-center sortable" data-timestamp="[@Item->UnixTimestamp]">
                     <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-placement="top"

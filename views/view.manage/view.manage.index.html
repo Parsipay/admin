@@ -207,11 +207,10 @@
                             </th>
                             <th class="text-start py-3">کاربر</th>
                             <th class="text-start py-3">اخرین فعالیت</th>
-                            <th class="text-start sortable py-3">
+                            <th class="text-start sortable py-3 sort-toggle" style="cursor:pointer" data-order="desc">
                                 <div class="d-flex align-items-center gap-2">
-                                    <span>زمان و تاریخ تراکنش</span>
-                                    <i class="fas fa-sort sort-toggle ms-2" data-order="desc"
-                                        style="cursor:pointer"></i>
+                                    <span>تاریخ ثبت نام</span>
+                                    <i class="fas fa-sort-down ms-2"></i>
                                 </div>
                             </th>
 
@@ -242,7 +241,7 @@
                             <td class="text-start">[@Item->phoneNumber]
                             </td>
                             <td class="text-start">
-                                <a href="[@settings->site]manage/[@Item->UserID]/"
+                                <a href="[@settings->site]users/[@Item->UserID]/"
                                     class="d-inline-flex align-items-center text-decoration-none">
                                     <i class="[@Item->LevelIcon] me-1"></i>
                                     [@Item->User]

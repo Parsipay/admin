@@ -119,7 +119,7 @@ function ProcessRequest($request)
         ['Link' => $settings['site'] . 'tickets/', 'Icon' => 'home', 'Title' => 'پیغام‌ها', 'Subtitle' => '12 تیکت | 5 اتوماسیون'],
         ['Link' => $settings['site'] . 'settings/', 'Icon' => 'gear', 'Title' => 'تنظیمات', 'Subtitle' => '2 سفارش در حال پردازش'],
         ['Link' => $settings['site'] . 'transactions/', 'Icon' => 'list-ul', 'Title' => 'تسویه', 'Subtitle' => 'نرمال'],
-        ['Link' => '#', 'Icon' => 'file-alt', 'Title' => 'حساب‌های بانکی', 'Subtitle' => '3 مورد در حال انتظار'],
+        ['Link' => $settings['site'] . 'manage', 'Icon' => 'file-alt', 'Title' => 'حساب‌های بانکی', 'Subtitle' => '3 مورد در حال انتظار'],
         ['Link' => '#', 'Icon' => 'id-card', 'Title' => 'مدارک احراز', 'Subtitle' => '2 مورد در حال انتظار'],
     ];
 
