@@ -1,4 +1,4 @@
-<div class="accordion mt-3 w-100" id="accordionExample1" dir="rtl">
+<!-- <div class="accordion mt-3 w-100" id="accordionExample1" dir="rtl">
     <div class="accordion-item rounded-5  border">
         <h2 class="accordion-header" id="headingOne">
             <button class="accordion-button rounded-0" type="button" data-bs-toggle="collapse"
@@ -44,7 +44,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 
 <!-- Modal:documents -->
 <div class="modal fade " id="modal_view_docs" tabindex="-1">
@@ -96,7 +96,7 @@
         </div>
     </div>
 </div>
-<!--accordion-->
+<!-- accordion
 <div class="accordion mt-5" id="accordionExample" dir="rtl" data-bs-target="user-management">
     <div class="accordion-item rounded-5  border">
         <h2 class="accordion-header" id="headingOne">
@@ -152,12 +152,12 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 
 <!--nav section-->
-<div class=" mt-5 " style="min-height: 80vh;">
+<div class=" mt-5" style="min-height: 80vh;">
     <!-- Nav Pills -->
-    <ul class="nav nav-pills nav-justified gap-1  border-bottom border-muted" id="financeTab" role="tablist">
+    <ul class="nav nav-pills nav-justified gap-1  border-bottom border-muted mt-5" id="financeTab" role="tablist">
         <li class="nav-item" role="presentation">
             <button
                 class="nav-link text-purple active rounded-pill py-3 text-center d-flex align-items-center justify-content-center"
@@ -180,32 +180,19 @@
         </li>
     </ul>
     <!-- Tab Content -->
-    <div class="tab-content mt-3">
+    <div class="tab-content mt-5">
         <!-- Deposits -->
         <div class="tab-pane fade show active" id="deposits" role="tabpanel">
             <div class="table-responsive rounded-4 ">
                 <table class="table table-hover rounded-4 align-middle text-center mb-0 searchable-table">
-                    <thead class="">
+                    <thead>
                         <tr>
                             <th class="text-start py-3">
-                                <div class="search-wrapper d-flex align-items-center">
-                                    <i class="fa-brands fa-searchengin search-icon me-1 text-primary  bg-opacity rounded-3"
-                                        data-column="0" style="cursor:pointer;"></i>
-                                    <input type="text" class="search-input form-control form-control-sm"
-                                        placeholder="جستجو..." />
-                                    <span>کد ملی</span>
+                                <div class="d-inline-flex justify-content-center align-items-center px-4 w-50">
+                                    کاربر
                                 </div>
                             </th>
-                            <th class="text-start py-3">
-                                <div class="search-wrapper d-flex align-items-center">
-                                    <i class="fa-brands fa-searchengin search-icon me-1 text-primary  bg-opacity rounded-3"
-                                        data-column="0" style="cursor:pointer;"></i>
-                                    <input type="text" class="search-input form-control form-control-sm"
-                                        placeholder="جستجو..." />
-                                    <span>شماره موبایل</span>
-                                </div>
-                            </th>
-                            <th class="text-start py-3">کاربر</th>
+                            <th class="text-start py-3">شماره موبایل</th>
                             <th class="text-start py-3">اخرین فعالیت</th>
                             <th class="text-start sortable py-3 sort-toggle" style="cursor:pointer" data-order="desc">
                                 <div class="d-flex align-items-center gap-2">
@@ -213,48 +200,59 @@
                                     <i class="fas fa-sort-down ms-2"></i>
                                 </div>
                             </th>
+                            <th class="py-3 text-start">
+                                <div class="d-inline-flex justify-content-center align-items-center px-4 w-50">
 
-                            <th class=" py-3">
-                                وضعیت
-                                <div class="dropdown d-inline">
-                                    <i class="fas fa-sort  ms-1" data-bs-toggle="dropdown" style="cursor:pointer;"></i>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item filter-status" data-status="موفق">موفق</a></li>
-                                        <li><a class="dropdown-item filter-status" data-status="مسدود">مسدود</a></li>
-                                        <li><a class="dropdown-item filter-status" data-status="تکمیل نشده">تکمیل
-                                                نشده</a>
-                                        </li>
-                                        <li>
-                                            <hr class="dropdown-divider">
-                                        </li>
-                                        <li><a class="dropdown-item filter-status" data-status="all">همه</a></li>
-                                    </ul>
+                                    <span class="me-2">وضعیت</span>
+
+                                    <div class="dropdown">
+                                        <i class="fas fa-sort" data-bs-toggle="dropdown" style="cursor:pointer;"></i>
+
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item filter-status" data-status="موفق">موفق</a></li>
+                                            <li><a class="dropdown-item filter-status" data-status="مسدود">مسدود</a>
+                                            </li>
+                                            <li><a class="dropdown-item filter-status" data-status="تکمیل نشده">تکمیل
+                                                    نشده</a></li>
+                                            <li>
+                                                <hr class="dropdown-divider">
+                                            </li>
+                                            <li><a class="dropdown-item filter-status" data-status="all">همه</a></li>
+                                        </ul>
+                                    </div>
+
                                 </div>
                             </th>
+
+
                         </tr>
                     </thead>
                     <tbody>
                         [foreach ([@Objects->userList])]
                         <tr>
-                            <td class="text-start">[@Item->nationalCode]
-                            </td>
-                            <td class="text-start">[@Item->phoneNumber]
-                            </td>
                             <td class="text-start">
                                 <a href="[@settings->site]users/[@Item->UserID]/"
-                                    class="d-inline-flex align-items-center text-decoration-none">
+                                    class="d-inline-flex justify-content-center align-items-center text-decoration-none border  rounded-pill py-2 px-3 w-50">
                                     <i class="[@Item->LevelIcon] me-1"></i>
                                     [@Item->User]
                                 </a>
                             </td>
+
+                            <td class="text-start">[@Item->phoneNumber]
+                            </td>
                             <td class="text-start">[@Item->lastActivity]</td>
                             <td class="text-start" data-timestamp="[@Item->UnixTimestamp]">[@Item->PersianDate]</td>
+                            <td class="py-3 text-end">
+                                <div class="d-flex align-items-center justify-content-between gap-2">
 
-                            <td class="py-3 text-start">
-                                <span
-                                    class="p-2 ms-7 text-end rounded-pill d-flex justify-content-center align-items-center status-text flex-grow-1 w-50 [@Item->StatusColor]">
-                                    [@Item->Status]
-                                </span>
+                                    <span
+                                        class=" py-2 px-3 text-center rounded-pill status-text  flex-nowrap [@Item->StatusColor] w-50">
+                                        [@Item->Status]
+                                    </span>
+
+                                    <i class="fa-solid fa-ellipsis-vertical"></i>
+
+                                </div>
                             </td>
                         </tr>
                         [endforeach]
@@ -268,27 +266,15 @@
                 <table class="table table-hover rounded-4 align-middle text-center mb-0 searchable-table">
                     <thead>
                         <tr class="p-2">
+
                             <th class="text-start py-3">
-                                <div class="search-wrapper d-flex align-items-center">
-                                    <i class="fa-brands fa-searchengin search-icon me-1 text-primary  bg-opacity rounded-3"
-                                        data-column="0" style="cursor:pointer;"></i>
-                                    <input type="text" class="search-input form-control form-control-sm"
-                                        placeholder="جستجو..." />
-                                    <span> کد ملی </span>
+                                <div class="d-inline-flex justify-content-center align-items-center px-4 w-50">
+                                    کاربر
                                 </div>
                             </th>
                             <th class="text-start py-3">
-                                <div class="search-wrapper d-flex align-items-center">
-                                    <i class="fa-brands fa-searchengin search-icon me-1 text-primary  bg-opacity rounded-3"
-                                        data-column="0" style="cursor:pointer;"></i>
-                                    <input type="text" class="search-input form-control form-control-sm"
-                                        placeholder="جستجو..." />
-                                    <span>شماره موبایل </span>
-                                </div>
-                            </th>
-                            <th class="text-start py-3">کاربر</th>
-                            <th class="text-start py-3">
-                                <div class="search-wrapper d-flex align-items-center">
+                                <div
+                                    class="search-wrapper d-inline-flex justify-content-start align-items-center px-4 w-50">
                                     <i class="fa-brands fa-searchengin search-icon me-1 text-primary  bg-opacity rounded-3"
                                         data-column="0" style="cursor:pointer;"></i>
                                     <input type="text" class="search-input form-control form-control-sm"
@@ -302,28 +288,29 @@
                     <tbody>
                         [foreach ([@Objects->bankAccount])]
                         <tr>
-                            <td class="text-start py-3">[@Item->nationalCode]</td>
-                            <td class="text-start py-4">[@Item->phoneNumber]</td>
-                            <td class="text-start fw-bold">
-                                <a href="[@settings->site]manage/[@Item->UserID]/"
-                                    class="d-inline-flex align-items-center text-decoration-none">
+
+                            <td class="text-start">
+                                <a href="[@settings->site]users/[@Item->UserID]/"
+                                    class="d-inline-flex justify-content-center align-items-center text-decoration-none border  rounded-pill py-2 px-3 w-50">
                                     <i class="[@Item->LevelIcon] me-1"></i>
                                     [@Item->User]
                                 </a>
                             </td>
                             <td class="text-start">
                                 <span>[@Item->bankInfo]</span>
-                                <img src="[@Item->BankImage]" alt="بانک" class="ms-3">
+                                <img src="[@Item->BankImage]" alt="بانک" class="ms-3" width="40" height="30">
                             </td>
                             <td class="text-start">
-                                <div class="d-flex justify-content-Start align-items-center gap-4">
-                                    <span class="px-3 py-2 rounded-pill text-success opacity-green">
+                                <div class="d-flex w-50  align-items-center gap-4">
+
+                                    <span class="px-3 py-2 w-50 text-center rounded-pill [@Item->detailsColor]">
                                         [@Item->details]
                                     </span>
                                     <div>
                                         <i class="fa-regular fa-circle-check text-success ms-2"></i>
                                         <i class="fa-regular fa-circle-xmark text-danger ms-1"></i>
                                     </div>
+
                                 </div>
                             </td>
                         </tr>
@@ -339,12 +326,8 @@
                     <thead class="bg-thead">
                         <tr>
                             <th class="text-start py-3">
-                                <div class="search-wrapper d-flex align-items-center">
-                                    <i class="fa-brands fa-searchengin search-icon me-1 text-primary  bg-opacity rounded-3"
-                                        data-column="0" style="cursor:pointer;"></i>
-                                    <input type="text" class="search-input form-control form-control-sm"
-                                        placeholder="جستجو..." />
-                                    <span>کد ملی </span>
+                                <div class="d-inline-flex justify-content-center align-items-center px-4 w-50">
+                                    کاربر
                                 </div>
                             </th>
                             <th class="text-start py-3">
@@ -356,8 +339,7 @@
                                     <span>شماره موبایل</span>
                                 </div>
                             </th>
-                            <th class="text-start py-3">کاربر</th>
-                            <th class="text-start py-3">مدارک <i class="fas fa-sort ms-1"></i></th>
+                            <th class="text-center py-3">مدارک <i class="fas fa-sort ms-1"></i></th>
                             <th class=" py-3">
                                 وضعیت
                                 <div class="dropdown d-inline">
@@ -383,17 +365,24 @@
                     <tbody>
                         [foreach ([@Objects->authentication])]
                         <tr>
-                            <td class="text-start py-4">[@Item->nationalCode]</td>
-                            <td class="text-start">[@Item->phoneNumber]
-                            </td>
-                            <td class="text-start fw-bold">
-                                <a href="[@settings->site]manage/[@Item->UserID]/"
-                                    class="d-inline-flex align-items-center text-decoration-none">
+
+                            <td class="text-start">
+                                <a href="[@settings->site]users/[@Item->UserID]/"
+                                    class="d-inline-flex justify-content-center align-items-center text-decoration-none border  rounded-pill py-2 px-3 w-50">
                                     <i class="[@Item->LevelIcon] me-1"></i>
                                     [@Item->User]
                                 </a>
                             </td>
-                            <td class="text-start fw-bold"><a href="#">[@Item->documents]</a></td>
+                            <td class="text-start">[@Item->phoneNumber]
+                            </td>
+                            <td class="text-center fw-bold">
+                                <button class="btn btn-outline-primary rounded-4 w-50" data-bs-toggle="modal"
+                                    data-bs-target="#modal_view_docs">
+                                    [@Item->documents] </button>
+
+
+
+                            </td>
                             <td class="text-center">
                                 <div class="d-flex justify-content-center align-items-center flex-fill">
                                     <span class="px-3 py-2   w-50 rounded-pill status-text [@Item->StatusColor]">

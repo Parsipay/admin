@@ -12,12 +12,19 @@ function ProcessRequest($request)
         "فعال"    => "fa-solid fa-circle-check text-success",
         default   => "fa-solid fa-user text-primary",
     };
-
-    $getStatusColor = fn($status) => match (trim($status)) {
-        "تایید شده", "موفق"  => "text-success opacity-green",
-        "در انتظار تایید"     => "text-warning bg-opacity-warning",
-        "تکمیل نشده"          => "text-primary bg-blue",
-        default               => "text-danger bg-red",
+    
+$getStatusColor = fn($status) => match (trim($status)) {
+    "تایید شده", "موفق"              => "text-success opacity-green",
+    "در انتظار تایید", "عدم تایید مدارک" => "text-warning bg-opacity-warning",
+    "تکمیل نشده", "در انتظار بررسی"     => "text-primary bg-blue",
+    "مسدود"                          => "text-danger bg-red",
+    default                           => "text-secondary bg-light",
+};
+    // -------- Details Color --------
+    $getDetailsColor = fn($details) => match (trim($details)) {
+        "تایید شده" => "text-success opacity-green",
+        "رد شده"    => "text-danger bg-red",
+        default     => "text-primary bg-blue",
     };
 
     $timeAgo = function ($timestamp) {
@@ -33,31 +40,38 @@ function ProcessRequest($request)
         return floor($diff / 31536000) . " سال پیش";
     };
 
-    $enrichList = function (
-        array &$list,
-        bool $withTime = false,
-        bool $withStatus = false
-    ) use ($getLevelIcon, $getStatusColor, $timeAgo) {
+   $enrichList = function (
+    array &$list,
+    bool $withTime = false,
+    bool $withStatus = false,
+    bool $withDetails = false
+) use ($getLevelIcon, $getStatusColor, $getDetailsColor, $timeAgo) {
 
-        foreach ($list as &$item) {
+    foreach ($list as &$item) {
 
-            // Level
-            if (isset($item["Level"])) {
-                $item["LevelIcon"] = $getLevelIcon($item["Level"]);
-            }
-
-            // Status
-            if ($withStatus && isset($item["Status"])) {
-                $item["StatusColor"] = $getStatusColor($item["Status"]);
-            }
-
-            // Time
-            if ($withTime && isset($item["UnixTimestamp"])) {
-                $item["lastActivity"] = $timeAgo($item["UnixTimestamp"]);
-            }
+        // Level
+        if (isset($item["Level"])) {
+            $item["LevelIcon"] = $getLevelIcon($item["Level"]);
         }
-        unset($item);
-    };
+
+        // Status
+        if ($withStatus && isset($item["Status"])) {
+            $item["StatusColor"] = $getStatusColor($item["Status"]);
+        }
+
+        // Details ✅
+        if ($withDetails && isset($item["details"])) {
+            $item["detailsColor"] = $getDetailsColor($item["details"]);
+        }
+
+        // Time
+        if ($withTime && isset($item["UnixTimestamp"])) {
+            $item["lastActivity"] = $timeAgo($item["UnixTimestamp"]);
+        }
+    }
+
+    unset($item);
+};
 
     /* =========================
        Build Page Data
@@ -110,7 +124,7 @@ function ProcessRequest($request)
             "UnixTimestamp" => time() - (60 * 86400),
             "lastActivityTimestamp" => time() - (14 * 86400),
             "PersianDate" => biiq_PersianDate::date("l j F Y - H:i", 896554121),
-            "Status" => "موفق",
+            "Status" => "تایید شده",
             "Level" => "طلایی",
         ],
         
@@ -122,7 +136,7 @@ function ProcessRequest($request)
             "UnixTimestamp" => time() - (45 * 86400),
             "lastActivityTimestamp" => time() - (2 * 86400),
             "PersianDate" => biiq_PersianDate::date("l j F Y - H:i", 568753525),
-            "Status" => "تکمیل نشده",
+            "Status" => "در انتظار بررسی",
             "Level" => "جدید",
         ],
         [
@@ -133,7 +147,18 @@ function ProcessRequest($request)
             "UnixTimestamp" => time() - (14 * 86400),
             "lastActivityTimestamp" => time() - (1 * 86400),
             "PersianDate" => biiq_PersianDate::date("l j F Y - H:i", 126545878),
-            "Status" => "موفق",
+            "Status" => "عدم تایید مدارک",
+            "Level" => "حرفه ای",
+        ],
+        [
+            "nationalCode" => "0013152343",
+            "phoneNumber" => "09128431937",
+            "User" => "سارا کریمی",
+            "UserID" => 3,
+            "UnixTimestamp" => time() - (14 * 86400),
+            "lastActivityTimestamp" => time() - (1 * 86400),
+            "PersianDate" => biiq_PersianDate::date("l j F Y - H:i", 126545878),
+            "Status" => " در انتظار ارسال مدارک",
             "Level" => "حرفه ای",
         ],
     ];
@@ -160,7 +185,7 @@ function ProcessRequest($request)
             "UserID" => 2,
             "bankInfo" => "IR940150000184370199152881",
             "BankImage" => "../assets/img/ansar.png",
-            "details" => "تایید شده",
+            "details" => "رد شده",
             "Level" => "طلایی",
         ],
         [
@@ -180,12 +205,12 @@ function ProcessRequest($request)
             "UserID" => 4,
             "bankInfo" => "IR940150000184370199152881",
             "BankImage" => "../assets/img/blu.png",
-            "details" => "تایید شده",
+            "details" => "در انتظار بررسی",
             "Level" => "جدید",
         ],
     ];
+    $enrichList($page->bankAccount, false, false, true);
 
-    $enrichList($page->bankAccount);
 
     // ---------------- Authentication ----------------
     $page->authentication = [
