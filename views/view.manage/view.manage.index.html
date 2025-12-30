@@ -232,7 +232,7 @@
                         <tr>
                             <td class="text-start">
                                 <a href="[@settings->site]users/[@Item->UserID]/"
-                                    class="d-inline-flex justify-content-center align-items-center text-decoration-none border  rounded-pill py-2 px-3 w-50">
+                                    class="d-inline-flex justify-content-center align-items-center text-decoration-none border  rounded-pill p-3 w-50">
                                     <i class="[@Item->LevelIcon] me-1"></i>
                                     [@Item->User]
                                 </a>
@@ -246,7 +246,7 @@
                                 <div class="d-flex align-items-center justify-content-between gap-2">
 
                                     <span
-                                        class=" py-2 px-3 text-center rounded-pill status-text  flex-nowrap [@Item->StatusColor] w-50">
+                                        class=" p-3 text-center rounded-pill status-text  flex-nowrap [@Item->StatusColor] w-50">
                                         [@Item->Status]
                                     </span>
 
@@ -288,10 +288,9 @@
                     <tbody>
                         [foreach ([@Objects->bankAccount])]
                         <tr>
-
                             <td class="text-start">
                                 <a href="[@settings->site]users/[@Item->UserID]/"
-                                    class="d-inline-flex justify-content-center align-items-center text-decoration-none border  rounded-pill py-2 px-3 w-50">
+                                    class="d-inline-flex justify-content-center align-items-center text-decoration-none border  rounded-pill p-3 w-50">
                                     <i class="[@Item->LevelIcon] me-1"></i>
                                     [@Item->User]
                                 </a>
@@ -300,17 +299,15 @@
                                 <span>[@Item->bankInfo]</span>
                                 <img src="[@Item->BankImage]" alt="بانک" class="ms-3" width="40" height="30">
                             </td>
-                            <td class="text-start">
+                            <td>
                                 <div class="d-flex w-50  align-items-center gap-4">
-
-                                    <span class="px-3 py-2 w-50 text-center rounded-pill [@Item->detailsColor]">
+                                    <span class="p-3 w-50 text-center rounded-pill [@Item->detailsColor]">
                                         [@Item->details]
                                     </span>
                                     <div>
                                         <i class="fa-regular fa-circle-check text-success ms-2"></i>
                                         <i class="fa-regular fa-circle-xmark text-danger ms-1"></i>
                                     </div>
-
                                 </div>
                             </td>
                         </tr>
@@ -368,7 +365,7 @@
 
                             <td class="text-start">
                                 <a href="[@settings->site]users/[@Item->UserID]/"
-                                    class="d-inline-flex justify-content-center align-items-center text-decoration-none border  rounded-pill py-2 px-3 w-50">
+                                    class="d-inline-flex justify-content-center align-items-center text-decoration-none border  rounded-pill p-3 w-50">
                                     <i class="[@Item->LevelIcon] me-1"></i>
                                     [@Item->User]
                                 </a>
@@ -376,7 +373,7 @@
                             <td class="text-start">[@Item->phoneNumber]
                             </td>
                             <td class="text-center fw-bold">
-                                <button class="btn btn-outline-primary rounded-4 w-50" data-bs-toggle="modal"
+                                <button class="btn btn-outline-primary rounded-pill w-50 p-2" data-bs-toggle="modal"
                                     data-bs-target="#modal_view_docs">
                                     [@Item->documents] </button>
 

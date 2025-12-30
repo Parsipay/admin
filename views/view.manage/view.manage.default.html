@@ -257,11 +257,12 @@
                     <tbody>
                         [foreach ([@Objects->orderList])]
                         <tr>
-                            <td class="text-start">
-                                <a href="[@settings->site]orders/[@Item->ID]/">
-                                    [@persian [@Item->ID]]
-                                </a>
-                            </td>
+                          <td class="text-start fw-bold ">
+                    <a href="[@settings->site]orders/[@Item->ID]/" class="border rounded-pill  px-3 py-2 ">
+                         [@Item->ID]
+                        <i class="fa-solid fa-tag text-purple ms-1 "></i>
+                    </a>
+                </td>
 
                             <td>[@persian [@money [@Item->price]]]</td>
                             <td class="text-center sortable" data-timestamp="[@Item->UnixTimestamp]">

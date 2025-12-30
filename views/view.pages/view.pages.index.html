@@ -6,12 +6,12 @@
       <div class="d-flex flex-column gap-3 h-100">
         [foreach ([@Objects->TopBox])]
         <div class="bg-col rounded-5">
-          <div class="d-flex flex-column justify-content-between py-2 px-3 text-center">
+          <div class="d-flex flex-column justify-content-between py-1  text-center">
             <a href="[@settings->site][@Item->Link]" class="nav-link text-dark">
               <i class="fa fa-[@Item->Icon] font-color me-2"></i>
               <span class="font-color">[@Item->Title]</span>
             </a>
-            <p class="text-primary mb-0 small mt-2 text-start ms-3">[@Item->Subtitle]</p>
+            <p class="text-primary mb-0 small text-start my-1 ms-3">[@Item->Subtitle]</p>
           </div>
         </div>
         [endforeach]

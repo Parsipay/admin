@@ -96,10 +96,10 @@ function ProcessRequest($request)
     // 👥 User list
     // -----------------------------
     $p->userList = [
-        ["User" => "یگانه علیزاده", "UserID" => 1, "UnixTimestamp" => 1690000000, "lastActivityTimestamp" => 1701656900, "PersianDate" => biiq_PersianDate::date("l j F Y - H:i", 1690000000)],
-        ["User" => "بنفشه ابراهیمی", "UserID" => 2, "UnixTimestamp" => 1690500000, "lastActivityTimestamp" => 1701653900, "PersianDate" => biiq_PersianDate::date("l j F Y - H:i", 1690500000)],
-        ["User" => "سارا کریمی", "UserID" => 3, "UnixTimestamp" => 1691000000, "lastActivityTimestamp" => 1701225500, "PersianDate" => biiq_PersianDate::date("l j F Y - H:i", 1691000000)],
-        ["User" => "علی تهرانی", "UserID" => 4, "UnixTimestamp" => 1691500000, "lastActivityTimestamp" => 1691500000, "PersianDate" => biiq_PersianDate::date("l j F Y - H:i", 1691500000)],
+        ["User" => "یگانه علیزاده", "UserID" => 1, "UnixTimestamp" => time() - 3600, "lastActivityTimestamp" => 1234567890, "PersianDate" => biiq_PersianDate::date("l j F Y - H:i", 1690000000),"Level" => "طلایی"],
+        ["User" => "بنفشه ابراهیمی", "UserID" => 2, "UnixTimestamp" => time() - (5 * 30 * 86400), "lastActivityTimestamp" => 1326547896, "PersianDate" => biiq_PersianDate::date("l j F Y - H:i", 1690500000),"Level" =>"فعال"],
+        ["User" => "سارا کریمی", "UserID" => 3, "UnixTimestamp" => time() - 60 * 86400, "lastActivityTimestamp" => 1478523698, "PersianDate" => biiq_PersianDate::date("l j F Y - H:i", 1691000000),"Level" => "حرفه ای"],
+        ["User" => "علی تهرانی", "UserID" => 4, "UnixTimestamp" => time() - 12 * 86400, "lastActivityTimestamp" => 1691500000, "PersianDate" => biiq_PersianDate::date("l j F Y - H:i", 1691500000),"Level" => "جدید"],
     ];
 
     // -----------------------------
@@ -131,7 +131,7 @@ function ProcessRequest($request)
             // Relative times
             if (isset($Item['UnixTimestamp'])) $Item['PersianDateRelative'] = timeAgo($Item['UnixTimestamp']);
             if (isset($Item['lastActivityTimestamp'])) $Item['akharin'] = timeAgo($Item['lastActivityTimestamp']);
-
+    
             // StatusColor
             $status = trim($Item['Status'] ?? '');
             if ($type === 'request') {
