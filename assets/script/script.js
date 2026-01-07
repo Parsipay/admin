@@ -404,10 +404,17 @@ $(document).ready(function () {
     reader.readAsDataURL(file);
   });
 
+
+  //baarye safhe mali safe tasfie checkbox ha
     $('#selectAllHeader').on('change', function() {
         let isChecked = $(this).prop('checked'); // true یا false
         $('.row-checkbox').prop('checked', isChecked);
     });
+
+
+    //////////
+
+
 });
 
 

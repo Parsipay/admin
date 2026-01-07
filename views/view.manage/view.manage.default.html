@@ -2,12 +2,10 @@
      MAIN CONTENT
 ============================== -->
 <div class="d-flex flex-column mt-3 w-100">
-
     <!-- ==============================
          MAIN ROW (PROFILE + DATA)
     ============================== -->
     <div class="d-flex flex-column flex-lg-row justify-content-center gap-3 my-5 w-100">
-
         <!-- ==============================
              PROFILE SIDE
         ============================== -->
@@ -21,19 +19,16 @@
                     <small class="text-muted">کاربر طلایی</small>
                 </div>
             </div>
-
             <!-- Registration status -->
             <div class="d-flex justify-content-start gap-5 mt-2 flex-wrap">
                 <span>وضعیت ثبت نام:</span>
                 <span class="text-danger">[@CurrentUser->Status]</span>
             </div>
-
             <!-- Identity verification status -->
             <div class="d-flex justify-content-start gap-4 my-2 flex-wrap">
                 <span>وضعیت احراز هویت:</span>
                 <span class="text-warning">[@CurrentUser->SelfieStatus]</span>
             </div>
-
             <!-- Purchase info box -->
             <div class="d-flex flex-column bg-white rounded p-2 mt-2">
                 <div class="d-flex justify-content-between">
@@ -58,7 +53,6 @@
                 </div>
             </div>
         </div>
-
         <!-- ==============================
              DATA SIDE
         ============================== -->
@@ -135,7 +129,6 @@
         </div>
     </div>
 </div>
-
 <!-- ==============================
     wallet address
 ============================== -->
@@ -173,8 +166,6 @@
     </div>
 </div>
 
-
-
 <!-- ==============================
      FINANCE TABS
 ============================== -->
@@ -207,7 +198,6 @@
 
     <!-- Tab Content -->
     <div class="tab-content">
-
         <!-- ==============================
              USER ORDER LIST
         ============================== -->
@@ -231,7 +221,7 @@
                                 <span data-order="desc" class="">زمان و تاریخ تراکنش</span>
                                 <i class="fas fa-sort sort-toggle ms-2" style="cursor:pointer"></i>
                             </th>
-                            <th class="py-3  text-start  ">
+                            <th class="py-3 text-center">
                                 وضعیت
                                 <div class="dropdown d-inline">
                                     <i class="fas fa-sort ms-1" data-bs-toggle="dropdown" style="cursor:pointer;"></i>
@@ -257,13 +247,12 @@
                     <tbody>
                         [foreach ([@Objects->orderList])]
                         <tr>
-                          <td class="text-start fw-bold ">
-                    <a href="[@settings->site]orders/[@Item->ID]/" class="border rounded-pill  px-3 py-2 ">
-                         [@Item->ID]
-                        <i class="fa-solid fa-tag text-purple ms-1 "></i>
-                    </a>
-                </td>
-
+                            <td class="text-start fw-bold ">
+                                <a href="[@settings->site]orders/[@Item->ID]/" class="border rounded-pill  px-3 py-2 ">
+                                    [@Item->ID]
+                                    <i class="fa-solid fa-tag text-purple ms-1 "></i>
+                                </a>
+                            </td>
                             <td>[@persian [@money [@Item->price]]]</td>
                             <td class="text-center sortable" data-timestamp="[@Item->UnixTimestamp]">
                                 <span class="d-inline-block" tabindex="0" data-bs-toggle="popover"
@@ -271,7 +260,6 @@
                                     [@Item->PersianDate]
                                 </span>
                             </td>
-
                             <td class="py-3">
                                 <span
                                     class="p-2  text-end rounded-pill d-flex justify-content-center align-items-center status-text flex-grow-1 w-50I [@Item->StatusColor]">
@@ -293,7 +281,7 @@
                 <table class="table table-hover align-middle text-center mb-0 searchable-table">
                     <thead>
                         <tr>
-                            <th class="text-start py-3">
+                            <th class="text-center py-3">
                                 <div class="search-wrapper d-flex align-items-center">
                                     <i class="fa-brands fa-searchengin search-icon me-1 text-primary  bg-opacity rounded-3"
                                         data-column="0" style="cursor:pointer;"></i>
@@ -310,8 +298,7 @@
                                         style="cursor:pointer"></i>
                                 </div>
                             </th>
-
-                            <th class="text-start py-3">توضیحات</th>
+                            <th class="text-center py-3">توضیحات</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -325,14 +312,13 @@
                                     [@Item->PersianDateRelative]
                                 </span>
                             </td>
-                            <td class="text-start">[@Item->description]</td>
+                            <td class="text-center">[@Item->description]</td>
                         </tr>
                         [endforeach]
                     </tbody>
                 </table>
             </div>
         </div>
-
         <!-- ==============================
              ACCOUNT INFO / SETTLEMENTS
         ============================== -->
@@ -387,7 +373,7 @@
                                 <div class="d-flex justify-content-between align-items-center gap-2">
                                     <span
                                         class="px-3 py-2 w-25 rounded-pill text-center d-inline-block status-text [@Item->StatusColor]">[@Item->details]</span>
-    
+
                                 </div>
                             </td>
                         </tr>
@@ -396,7 +382,6 @@
                 </table>
             </div>
         </div>
-
         <!-- ==============================
              IDENTITY DOCUMENTS
         ============================== -->
@@ -415,7 +400,8 @@
                         [foreach ([@Objects->identityDocuments])]
                         <tr>
                             <td class="text-start py-3">[@Item->description]</td>
-                            <td class="text-start py-3" data-timestamp="[@Item->UnixTimestamp]">[@Item->persianDate]</td>
+                            <td class="text-start py-3" data-timestamp="[@Item->UnixTimestamp]">[@Item->persianDate]
+                            </td>
                             <td class="text-start d-flex flex-fill  py-3">
                                 <span
                                     class="px-3 py-2 text-center w-50 rounded-pill d-inline-block status-text [@Item->StatusColor]">[@Item->status]</span>
@@ -431,6 +417,5 @@
                 </table>
             </div>
         </div>
-
     </div>
 </div>

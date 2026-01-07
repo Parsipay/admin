@@ -4,12 +4,10 @@
 // Utility Functions
 // ==============================================
 
-
 function separateThousands($number): string
 {
     return number_format((int)$number);
 }
-
 
 //sort desc and asc
 function sortByTimestamp(array &$list, string $order = 'desc'): void
@@ -20,7 +18,6 @@ function sortByTimestamp(array &$list, string $order = 'desc'): void
             : $b['UnixTimestamp'] <=> $a['UnixTimestamp'];
     });
 }
-
 
 //last seen time ago
 function timeAgo($unixTimestamp)
@@ -33,7 +30,6 @@ function timeAgo($unixTimestamp)
     if ($diff < 31104000) return floor($diff / 2592000) . " ماه پیش";
     return floor($diff / 31104000) . " سال پیش";
 }
-
 // ==============================================
 // Main Function
 // ==============================================
@@ -43,7 +39,7 @@ function ProcessRequest($request)
     $p = new stdClass();
 
     // -----------------------------
-    // 🧾 Order list
+    //  Order list
     // -----------------------------
     $p->orderList = [
         [
@@ -93,7 +89,7 @@ function ProcessRequest($request)
     ];
 
     // -----------------------------
-    // 👥 User list
+    //  User list
     // -----------------------------
     $p->userList = [
         ["User" => "یگانه علیزاده", "UserID" => 1, "UnixTimestamp" => time() - 3600, "lastActivityTimestamp" => 1234567890, "PersianDate" => biiq_PersianDate::date("l j F Y - H:i", 1690000000),"Level" => "طلایی"],
@@ -182,7 +178,7 @@ function ProcessRequest($request)
     $applyStatusAndLevel($p->userList);
 
     // -----------------------------
-    // 🔙 Final output
+    //  Final output
     // -----------------------------
     return [
         'content' => biiq_Template::Start('pages->index', true, ['Objects' => $p]),

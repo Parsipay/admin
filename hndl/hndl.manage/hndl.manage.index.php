@@ -12,14 +12,14 @@ function ProcessRequest($request)
         "فعال"    => "fa-solid fa-circle-check text-success",
         default   => "fa-solid fa-user text-primary",
     };
-    
-$getStatusColor = fn($status) => match (trim($status)) {
-    "تایید شده", "موفق"              => "text-success opacity-green",
-    "در انتظار تایید", "عدم تایید مدارک" => "text-warning bg-opacity-warning",
-    "تکمیل نشده", "در انتظار بررسی"     => "text-primary bg-blue",
-    "مسدود"                          => "text-danger bg-red",
-    default                           => "text-secondary bg-light",
-};
+
+    $getStatusColor = fn($status) => match (trim($status)) {
+        "تایید شده", "موفق"              => "text-success opacity-green",
+        "در انتظار تایید", "عدم تایید مدارک" => "text-warning bg-opacity-warning",
+        "تکمیل نشده", "در انتظار بررسی"     => "text-primary bg-blue",
+        "مسدود"                          => "text-danger bg-red",
+        default                           => "text-secondary bg-light",
+    };
     // -------- Details Color --------
     $getDetailsColor = fn($details) => match (trim($details)) {
         "تایید شده" => "text-success opacity-green",
@@ -40,38 +40,38 @@ $getStatusColor = fn($status) => match (trim($status)) {
         return floor($diff / 31536000) . " سال پیش";
     };
 
-   $enrichList = function (
-    array &$list,
-    bool $withTime = false,
-    bool $withStatus = false,
-    bool $withDetails = false
-) use ($getLevelIcon, $getStatusColor, $getDetailsColor, $timeAgo) {
+    $enrichList = function (
+        array &$list,
+        bool $withTime = false,
+        bool $withStatus = false,
+        bool $withDetails = false
+    ) use ($getLevelIcon, $getStatusColor, $getDetailsColor, $timeAgo) {
 
-    foreach ($list as &$item) {
+        foreach ($list as &$item) {
 
-        // Level
-        if (isset($item["Level"])) {
-            $item["LevelIcon"] = $getLevelIcon($item["Level"]);
+            // Level
+            if (isset($item["Level"])) {
+                $item["LevelIcon"] = $getLevelIcon($item["Level"]);
+            }
+
+            // Status
+            if ($withStatus && isset($item["Status"])) {
+                $item["StatusColor"] = $getStatusColor($item["Status"]);
+            }
+
+            // Details 
+            if ($withDetails && isset($item["details"])) {
+                $item["detailsColor"] = $getDetailsColor($item["details"]);
+            }
+
+            // Time
+            if ($withTime && isset($item["UnixTimestamp"])) {
+                $item["lastActivity"] = $timeAgo($item["UnixTimestamp"]);
+            }
         }
 
-        // Status
-        if ($withStatus && isset($item["Status"])) {
-            $item["StatusColor"] = $getStatusColor($item["Status"]);
-        }
-
-        // Details ✅
-        if ($withDetails && isset($item["details"])) {
-            $item["detailsColor"] = $getDetailsColor($item["details"]);
-        }
-
-        // Time
-        if ($withTime && isset($item["UnixTimestamp"])) {
-            $item["lastActivity"] = $timeAgo($item["UnixTimestamp"]);
-        }
-    }
-
-    unset($item);
-};
+        unset($item);
+    };
 
     /* =========================
        Build Page Data
@@ -127,7 +127,7 @@ $getStatusColor = fn($status) => match (trim($status)) {
             "Status" => "تایید شده",
             "Level" => "طلایی",
         ],
-        
+
         [
             "nationalCode" => "0013152343",
             "phoneNumber" => "09128431937",

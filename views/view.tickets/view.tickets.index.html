@@ -1,24 +1,29 @@
-
 <div class="py-5" style="min-height: 80vh;">
     <!-- Nav Pills -->
     <ul class="nav nav-pills nav-justified gap-1 pb-3 border-bottom border-muted" id="financeTab" role="tablist">
         <li class="nav-item" role="presentation">
-            <button class="nav-link text-purple active rounded-pill py-3" data-bs-toggle="pill" data-bs-target="#allMessages" type="button" role="tab">
-                پیغام‌ها <i class="fas fa-envelope-open ms-2"></i>
+            <button class="nav-link text-purple active rounded-pill py-3
+               d-flex align-items-center justify-content-center" data-bs-toggle="pill" data-bs-target="#allMessages"
+                type="button" role="tab">
+                <span>پیغام‌ها</span>
+                <i class="fas fa-envelope-open ms-2"></i>
             </button>
         </li>
         <li class="nav-item" role="presentation">
-            <button class="nav-link text-purple rounded-pill py-3" data-bs-toggle="pill" data-bs-target="#unread" type="button" role="tab">
+            <button class="nav-link text-purple rounded-pill py-3 d-flex align-items-center justify-content-center" data-bs-toggle="pill" data-bs-target="#unread"
+                type="button" role="tab">
                 خوانده نشده <i class="fas fa-envelope-open ms-2"></i>
             </button>
         </li>
         <li class="nav-item" role="presentation">
-            <button class="nav-link text-purple rounded-pill py-3" data-bs-toggle="pill" data-bs-target="#pending" type="button" role="tab">
+            <button class="nav-link text-purple rounded-pill py-3 d-flex align-items-center justify-content-center" data-bs-toggle="pill" data-bs-target="#pending"
+                type="button" role="tab">
                 در حال پیگیری <i class="fas fa-spinner fa-spin ms-2"></i>
             </button>
         </li>
         <li class="nav-item" role="presentation">
-            <button class="nav-link text-purple rounded-pill py-3" data-bs-toggle="pill" data-bs-target="#completed" type="button" role="tab">
+            <button class="nav-link text-purple rounded-pill py-3 d-flex align-items-center justify-content-center" data-bs-toggle="pill" data-bs-target="#completed"
+                type="button" role="tab">
                 تکمیل شده‌ها <i class="fas fa-check-circle ms-2"></i>
             </button>
         </li>
@@ -26,7 +31,6 @@
 
     <!-- Tab Content -->
     <div class="tab-content">
-        <!-- تب اول: همه پیام‌ها -->
         <div class="tab-pane fade show active" id="allMessages" role="tabpanel">
             <div class="d-flex flex-column bg-col gap-2 p-3 mt-4">
                 [foreach ([@Objects->users])]
@@ -51,7 +55,8 @@
                         <div class="d-flex justify-content-end mb-2">
                             <small class="text-muted">جمعه 24 اسفند 1403 | ساعت 18:21</small>
                         </div>
-                        <textarea class="form-control mb-2 bg-col border-0" rows="2" placeholder="پاسخ به کاربر..."></textarea>
+                        <textarea class="form-control mb-2 bg-col border-0" rows="2"
+                            placeholder="پاسخ به کاربر..."></textarea>
                         <div class="d-flex justify-content-between align-items-center">
                             <button class="btn btn-outline-secondary">ارسال پاسخ</button>
                             <div class="d-flex gap-2">
@@ -97,7 +102,8 @@
                         <div class="d-flex justify-content-end mb-2">
                             <small class="text-muted">جمعه 24 اسفند 1403 | ساعت 18:21</small>
                         </div>
-                        <textarea class="form-control mb-2 bg-col border-0" rows="2" placeholder="پاسخ به کاربر..."></textarea>
+                        <textarea class="form-control mb-2 bg-col border-0" rows="2"
+                            placeholder="پاسخ به کاربر..."></textarea>
                         <div class="d-flex justify-content-between align-items-center">
                             <button class="btn btn-outline-secondary">ارسال پاسخ</button>
                             <div class="d-flex gap-2">
@@ -143,7 +149,8 @@
                         <div class="d-flex justify-content-end mb-2">
                             <small class="text-muted">جمعه 24 اسفند 1403 | ساعت 18:21</small>
                         </div>
-                        <textarea class="form-control mb-2 bg-col border-0" rows="2" placeholder="پاسخ به کاربر..."></textarea>
+                        <textarea class="form-control mb-2 bg-col border-0" rows="2"
+                            placeholder="پاسخ به کاربر..."></textarea>
                         <div class="d-flex justify-content-between align-items-center">
                             <button class="btn btn-outline-secondary">ارسال پاسخ</button>
                             <div class="d-flex gap-2">
@@ -189,7 +196,8 @@
                         <div class="d-flex justify-content-end mb-2">
                             <small class="text-muted">جمعه 24 اسفند 1403 | ساعت 18:21</small>
                         </div>
-                        <textarea class="form-control mb-2 bg-col border-0" rows="2" placeholder="پاسخ به کاربر..."></textarea>
+                        <textarea class="form-control mb-2 bg-col border-0" rows="2"
+                            placeholder="پاسخ به کاربر..."></textarea>
                         <div class="d-flex justify-content-between align-items-center">
                             <button class="btn btn-outline-secondary">ارسال پاسخ</button>
                             <div class="d-flex gap-2">

@@ -1,8 +1,8 @@
 <?php
 function ProcessRequest($request)
 {
-    $page = new stdClass();    
-// Checking the input parameters
+    $page = new stdClass();
+    // Checking the input parameters
     if (!isset($request->Parameters) || !is_array($request->Parameters) || count($request->Parameters) == 0) {
         $GLOBALS['error']->Show(401);
         exit;
@@ -21,8 +21,8 @@ function ProcessRequest($request)
     //     exit;
     // }
 
-    
-// Function to format numbers with thousands separator
+
+    // Function to format numbers with thousands separator
     function separateThousands($number)
     {
         return number_format((int)$number);
@@ -56,8 +56,8 @@ function ProcessRequest($request)
     ];
 
 
-    
-// Item formatting function
+
+    // Item formatting function
     function applyFormatting(&$items, $type)
     {
         foreach ($items as &$item) {
@@ -88,7 +88,7 @@ function ProcessRequest($request)
                         ? "<b class='text-danger'>" . separateThousands($item["price"]) . "</b>"
                         : "<b class='text-green'>" . separateThousands($item["price"]) . "</b>";
                     $item["persianDate"] = "<div class='fw-bold'>" . timeAgo($item["UnixTimestamp"]) . "</div>" .
-                                           "<div class='mt-2'>" . biiq_PersianDate::date("l j F Y - H:i", $item["UnixTimestamp"]) . "</div>";
+                        "<div class='mt-2'>" . biiq_PersianDate::date("l j F Y - H:i", $item["UnixTimestamp"]) . "</div>";
                     $item["akharin"] = timeAgo($item["lastActivityTimestamp"]);
                     $item["PersianDateRelative"] = timeAgo($item["UnixTimestamp"]);
                     break;
@@ -128,41 +128,41 @@ function ProcessRequest($request)
         "timeLeft" => "14 دقیقه پیش"
     ];
     $page->addresslist = [
-        ["address"=>"TBLdjcbXLozzqp6YYvH6Z9HuFwCbzeKbFP","network"=>"TRC20","dateandtime"=>biiq_PersianDate::date("l j F Y - H:i",1266578),"desciption"=>"۲۰۲۳۲۷۳۸۰۳۰"],
-        ["address"=>"TBLdjcbXLozzqp6YYvH6Z9HuFwCbzeKbFP","network"=>"TRC20","dateandtime"=>biiq_PersianDate::date("l j F Y - H:i",1266578),"desciption"=>"۲۰۲۳۲۷۳۸۰۳۰"]
+        ["address" => "TBLdjcbXLozzqp6YYvH6Z9HuFwCbzeKbFP", "network" => "TRC20", "dateandtime" => biiq_PersianDate::date("l j F Y - H:i", 1266578), "desciption" => "۲۰۲۳۲۷۳۸۰۳۰"],
+        ["address" => "TBLdjcbXLozzqp6YYvH6Z9HuFwCbzeKbFP", "network" => "TRC20", "dateandtime" => biiq_PersianDate::date("l j F Y - H:i", 1266578), "desciption" => "۲۰۲۳۲۷۳۸۰۳۰"]
     ];
 
 
-      $page->orderList = [
-        ['ID'=>20232336263,"OrderDetails"=>'<div class="d-flex justify-content-start"><img src="../../assets/img/usdt.png" alt="btc" class="me-2" style="width:24px;height:24px;"><div class="d-flex flex-column"><span>19788</span><span>USDT (تتر)</span></div></div>',"UserID"=>16,"price"=>separateThousands(445609806),"UnixTimestamp"=>time()-(14*86400),"lastActivityTimestamp"=>time()-(1*86400),"PersianDate"=>biiq_PersianDate::date("l j F Y - H:i",126545878),"Status"=>"موفق","numberOrder"=>"20232336263# <span class='px-1 rounded-3'>فروش</span>"],
-        ['ID'=>12312313123,"OrderDetails"=>'<div class="d-flex justify-content-start"><img src="../../assets/img/usdt.png" alt="btc" class="me-2" style="width:24px;height:24px;"><div class="d-flex flex-column"><span>19788</span><span>USDT (تتر)</span></div></div>',"UserID"=>16,"price"=>separateThousands(445609806),"UnixTimestamp"=>time()-(5*30*86400),"lastActivityTimestamp"=>time()-(23*86400),"PersianDate"=>biiq_PersianDate::date("l j F Y - H:i",time()-(2*2*86400)),"Status"=>"در انتظار تایید","numberOrder"=>"12312313123# <span class='px-1 rounded-3'>خرید</span>"],
-        ['ID'=>65988978754,"OrderDetails"=>'<div class="d-flex justify-content-start"><img src="../../assets/img/usdt.png" alt="btc" class="me-2" style="width:24px;height:24px;"><div class="d-flex flex-column"><span>19788</span><span>USDT (تتر)</span></div></div>',"UserID"=>16,"price"=>separateThousands(445609806),"UnixTimestamp"=>time()-(5*30*86400),"lastActivityTimestamp"=>time()-(23*86400),"PersianDate"=>biiq_PersianDate::date("l j F Y - H:i",time()-(15*2*86400)),"Status"=>"نا موفق","numberOrder"=>"20232336263# <span class='px-1 rounded-3'>فروش</span>"],
+    $page->orderList = [
+        ['ID' => 20232336263, "OrderDetails" => '<div class="d-flex justify-content-start"><img src="../../assets/img/usdt.png" alt="btc" class="me-2" style="width:24px;height:24px;"><div class="d-flex flex-column"><span>19788</span><span>USDT (تتر)</span></div></div>', "UserID" => 16, "price" => separateThousands(445609806), "UnixTimestamp" => time() - (14 * 86400), "lastActivityTimestamp" => time() - (1 * 86400), "PersianDate" => biiq_PersianDate::date("l j F Y - H:i", 126545878), "Status" => "موفق", "numberOrder" => "20232336263# <span class='px-1 rounded-3'>فروش</span>"],
+        ['ID' => 12312313123, "OrderDetails" => '<div class="d-flex justify-content-start"><img src="../../assets/img/usdt.png" alt="btc" class="me-2" style="width:24px;height:24px;"><div class="d-flex flex-column"><span>19788</span><span>USDT (تتر)</span></div></div>', "UserID" => 16, "price" => separateThousands(445609806), "UnixTimestamp" => time() - (5 * 30 * 86400), "lastActivityTimestamp" => time() - (23 * 86400), "PersianDate" => biiq_PersianDate::date("l j F Y - H:i", time() - (2 * 2 * 86400)), "Status" => "در انتظار تایید", "numberOrder" => "12312313123# <span class='px-1 rounded-3'>خرید</span>"],
+        ['ID' => 65988978754, "OrderDetails" => '<div class="d-flex justify-content-start"><img src="../../assets/img/usdt.png" alt="btc" class="me-2" style="width:24px;height:24px;"><div class="d-flex flex-column"><span>19788</span><span>USDT (تتر)</span></div></div>', "UserID" => 16, "price" => separateThousands(445609806), "UnixTimestamp" => time() - (5 * 30 * 86400), "lastActivityTimestamp" => time() - (23 * 86400), "PersianDate" => biiq_PersianDate::date("l j F Y - H:i", time() - (15 * 2 * 86400)), "Status" => "نا موفق", "numberOrder" => "20232336263# <span class='px-1 rounded-3'>فروش</span>"],
     ];
 
-    usort($page->orderList, fn($a,$b)=>$b["UnixTimestamp"]<=>$a["UnixTimestamp"]);
-    applyFormatting($page->orderList,'orderList');
+    usort($page->orderList, fn($a, $b) => $b["UnixTimestamp"] <=> $a["UnixTimestamp"]);
+    applyFormatting($page->orderList, 'orderList');
 
     $page->transactions = [
-        ["request"=>'<span>154852#</span><span class="bg-blue text-primary ms-2 border border-primary p-1 rounded">درخواست تسویه - تسویه شده {IR360560611828005651602601}</span>',"UserID"=>19,"price"=>-445609806,"UnixTimestamp"=>time()-(14*86400),"lastActivityTimestamp"=>time()-(1*86400),"PersianDate"=>biiq_PersianDate::date("l j F Y - H:i",126545878),"description"=>"<span class='text-primary'>مشاهده رسید <span>"],
-        ["request"=>'<span>154852#</span><span class="bg-red text-danger ms-2 border border-danger p-1 rounded">درخواست تسویه - تسویه شده {IR360560611828005651602601}</span>',"UserID"=>19,"price"=>445609806,"UnixTimestamp"=>time()-(45*86400),"lastActivityTimestamp"=>time()-(2*86400),"PersianDate"=>biiq_PersianDate::date("l j F Y - H:i",568753525),"description"=>"<span class='text-primary'>۲۰۲۳۲۷۳۸۰۳۰</span>"],
-        ["request"=>'<span>154852#</span><span class="bg-opacity-green text-green ms-2 border border-success p-1 rounded">درخواست تسویه - تسویه شده {IR360560611828005651602601}</span>',"UserID"=>19,"price"=>-445609806,"UnixTimestamp"=>time()-(5*12*86400),"lastActivityTimestamp"=>time()-(14*86400),"PersianDate"=>biiq_PersianDate::date("l j F Y - H:i",896554121),"description"=>"<span class='text-'>1404041100032259426803</span>"]
+        ["request" => '<span>154852#</span><span class="bg-blue text-primary ms-2 border border-primary p-1 rounded">درخواست تسویه - تسویه شده {IR360560611828005651602601}</span>', "UserID" => 19, "price" => -445609806, "UnixTimestamp" => time() - (14 * 86400), "lastActivityTimestamp" => time() - (1 * 86400), "PersianDate" => biiq_PersianDate::date("l j F Y - H:i", 126545878), "description" => "<span class='text-primary'>مشاهده رسید <span>"],
+        ["request" => '<span>154852#</span><span class="bg-red text-danger ms-2 border border-danger p-1 rounded">درخواست تسویه - تسویه شده {IR360560611828005651602601}</span>', "UserID" => 19, "price" => 445609806, "UnixTimestamp" => time() - (45 * 86400), "lastActivityTimestamp" => time() - (2 * 86400), "PersianDate" => biiq_PersianDate::date("l j F Y - H:i", 568753525), "description" => "<span class='text-primary'>۲۰۲۳۲۷۳۸۰۳۰</span>"],
+        ["request" => '<span>154852#</span><span class="bg-opacity-green text-green ms-2 border border-success p-1 rounded">درخواست تسویه - تسویه شده {IR360560611828005651602601}</span>', "UserID" => 19, "price" => -445609806, "UnixTimestamp" => time() - (5 * 12 * 86400), "lastActivityTimestamp" => time() - (14 * 86400), "PersianDate" => biiq_PersianDate::date("l j F Y - H:i", 896554121), "description" => "<span class='text-'>1404041100032259426803</span>"]
     ];
-    usort($page->transactions, fn($a,$b)=>$b["UnixTimestamp"]<=>$a["UnixTimestamp"]);
-    applyFormatting($page->transactions,'transactions');
+    usort($page->transactions, fn($a, $b) => $b["UnixTimestamp"] <=> $a["UnixTimestamp"]);
+    applyFormatting($page->transactions, 'transactions');
 
     $page->accountInfo = [
-        ["id"=>"1","shebaNumber"=>"IR940150000184370199152881","cartNumber"=>"6273811170944968","UserID"=>22,"bank"=>"/assets/img/blu.png","UnixTimestamp"=>9999999999,"details"=>"تایید شده"],
-        ["id"=>"2","shebaNumber"=>"IR940150000184370199152881","cartNumber"=>"6273811170944968","UserID"=>22,"bank"=>"/assets/img/ansar.png","UnixTimestamp"=>9999999999,"persianDate"=>biiq_PersianDate::date("l j F Y - H:i",88888888),"details"=>"رد شده"],
-        ["id"=>"3","shebaNumber"=>"IR940150000184370199152881","cartNumber"=>"6273811170944968","UserID"=>22,"bank"=>"/assets/img/dey.png","UnixTimestamp"=>8888888888,"persianDate"=>biiq_PersianDate::date("l j F Y - H:i",88888888),"details"=>"تایید شده"]
+        ["id" => "1", "shebaNumber" => "IR940150000184370199152881", "cartNumber" => "6273811170944968", "UserID" => 22, "bank" => "/assets/img/blu.png", "UnixTimestamp" => 9999999999, "details" => "تایید شده"],
+        ["id" => "2", "shebaNumber" => "IR940150000184370199152881", "cartNumber" => "6273811170944968", "UserID" => 22, "bank" => "/assets/img/ansar.png", "UnixTimestamp" => 9999999999, "persianDate" => biiq_PersianDate::date("l j F Y - H:i", 88888888), "details" => "رد شده"],
+        ["id" => "3", "shebaNumber" => "IR940150000184370199152881", "cartNumber" => "6273811170944968", "UserID" => 22, "bank" => "/assets/img/dey.png", "UnixTimestamp" => 8888888888, "persianDate" => biiq_PersianDate::date("l j F Y - H:i", 88888888), "details" => "تایید شده"]
     ];
-    applyFormatting($page->accountInfo,'accountInfo');
+    applyFormatting($page->accountInfo, 'accountInfo');
 
     $page->identityDocuments = [
-        ["description"=>"<i class='fas fa-times-circle text-red me-1'></i> تصویر احراز هویت خود را با کیفیت بالاتری ارسال نمایید.","UserID"=>22,"UnixTimestamp"=>time()-600,"status"=>"در انتظار تایید","details"=>"  مشاهده مدارک"],
-        ["description"=>"<i class='fas fa-exclamation-circle text-warning me-1'></i> تصویر احراز هویت خود را با کیفیت بالاتری ارسال نمایید.","UserID"=>22,"UnixTimestamp"=>time()-3600,"status"=>"تایید شده","details"=>" مشاهده مدارک"],
-        ["description"=>"<i class='fas fa-check-circle text-green me-1'></i> تصویر احراز هویت خود را با کیفیت بالاتری ارسال نمایید.","UserID"=>22,"UnixTimestamp"=>time()-300,"status"=>"رد شده","details"=>" مشاهده مدارک"]
+        ["description" => "<i class='fas fa-times-circle text-red me-1'></i> تصویر احراز هویت خود را با کیفیت بالاتری ارسال نمایید.", "UserID" => 22, "UnixTimestamp" => time() - 600, "status" => "در انتظار تایید", "details" => "  مشاهده مدارک"],
+        ["description" => "<i class='fas fa-exclamation-circle text-warning me-1'></i> تصویر احراز هویت خود را با کیفیت بالاتری ارسال نمایید.", "UserID" => 22, "UnixTimestamp" => time() - 3600, "status" => "تایید شده", "details" => " مشاهده مدارک"],
+        ["description" => "<i class='fas fa-check-circle text-green me-1'></i> تصویر احراز هویت خود را با کیفیت بالاتری ارسال نمایید.", "UserID" => 22, "UnixTimestamp" => time() - 300, "status" => "رد شده", "details" => " مشاهده مدارک"]
     ];
-    applyFormatting($page->identityDocuments,'identityDocuments');
+    applyFormatting($page->identityDocuments, 'identityDocuments');
 
     $page->CurrentUser = [
         'Status' => "تایید شده",
@@ -182,7 +182,7 @@ function ProcessRequest($request)
         'Name' => 'یگانه علیزاده'
     ];
 
-    if($SelectedUserID == 2){
+    if ($SelectedUserID == 2) {
         $page->CurrentUser['Name'] = "جعفر";
     }
 

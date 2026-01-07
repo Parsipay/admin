@@ -1,9 +1,9 @@
 <?php
 
 // ==============================================
-// 📦 Utility Functions
+//  Utility Functions
 // ==============================================
-// ✅ Covering card numbers (masking)
+//  Covering card numbers (masking)
 function maskCard(string $num): string
 {
     $len = strlen($num);
@@ -11,12 +11,12 @@ function maskCard(string $num): string
     return substr($num, 0, 6) . str_repeat("*", $len - 10) . substr($num, -4);
 }
 
-// ✅ Separate thousands
+// Separate thousands
 function separateThousands($number): string
 {
     return number_format((int)$number);
 }
-// ✅ Sorting lists by UnixTimestamp
+// Sorting lists by UnixTimestamp
 function sortByTimestamp(array &$list, string $order = 'desc'): void
 {
     usort($list, function ($a, $b) use ($order) {
@@ -26,14 +26,14 @@ function sortByTimestamp(array &$list, string $order = 'desc'): void
     });
 }
 // ==============================================
-// 🧩 Main Function
+//  Main Function
 // ==============================================
 function ProcessRequest($request)
 {
     $p = new stdClass();
 
     // -----------------------------
-    // 📅 تاریخ و ساعت فعلی
+    //  تاریخ و ساعت فعلی
     // -----------------------------
     $today = new DateTime();
     $today->modify('+1 hour');
@@ -44,7 +44,7 @@ function ProcessRequest($request)
     ];
 
     // -----------------------------
-    // 🧾 Order list
+    // Order list
     // -----------------------------
     $p->orderList = [
         [
@@ -80,7 +80,7 @@ function ProcessRequest($request)
     ];
 
     // -----------------------------
-    // 👥 User list    
+    //  User list    
     // -----------------------------
 
     $p->userList = [
@@ -117,7 +117,7 @@ function ProcessRequest($request)
     ];
 
     // -----------------------------
-    // 💰 List of financial requests
+    //  List of financial requests
     // -----------------------------
     $p->requestList = [
         [
@@ -152,7 +152,7 @@ function ProcessRequest($request)
         ],
     ];
     // -----------------------------
-    // 🔝 Top dashboard items
+    //  Top dashboard items
     // -----------------------------
     $p->TopBox = [
         ['Link' => "#", "Icon" => "home", "Title" => "پیغام‌ها", "Subtitle" => "12 تیکت | 5 اتوماسیون"],
@@ -162,7 +162,7 @@ function ProcessRequest($request)
         ['Link' => "#", "Icon" => "id-card", "Title" => "مدارک احراز", "Subtitle" => "2 مورد در حال انتظار"],
     ];
     // -----------------------------
-    // 🎨 Status colors  
+    //  Status colors  
     // -----------------------------
     foreach ($p->orderList as &$Item) {
         $status = trim($Item["Status"]);

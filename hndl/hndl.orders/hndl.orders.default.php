@@ -37,7 +37,7 @@ function ProcessRequest($request)
     // -------------------------
     // Init
     // -------------------------
-     
+
     $page = new stdClass();
     $today = new DateTime();
     $page->date = biiq_PersianDate::date("l j F Y");
